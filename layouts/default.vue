@@ -81,7 +81,7 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Inicio',
           to: '/'
         },
         {
@@ -91,7 +91,7 @@ export default {
         }
       ],
       miniVariant: false,
-      right: true,
+      right: false,
       rightDrawer: false,
       title: 'Control Unity'
     }
