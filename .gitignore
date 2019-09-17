@@ -1,1 +1,5 @@
 node_modules
+.nuxt
+README.md
+yarn.lock
+LICENSE
