@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
-const api = require('./api/routes/index.js');
+const routes = require('./api/routes');
 // const session = require('express-session');
 const {
   Nuxt,
@@ -43,7 +43,7 @@ async function start() {
   }
 
   // Give nuxt middleware to express
-  app.use('/api', api)
+  app.use('/api', routes)
   app.use(nuxt.render)
   app.use(mongoSanitize())
   app.use(cors())

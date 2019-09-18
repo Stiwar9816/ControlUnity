@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const mapDuplicate = require('../helpers/mapDuplicate')
 
 const Users = new Schema({
-    cc:{type: Number, required:true, unique: true},
+    cc:{type: String, required:true, unique: true},
     name:{type: String, required:true},
     password:({type: String, required:true}),
     email:({type: String, required:true, lowercase:true}),

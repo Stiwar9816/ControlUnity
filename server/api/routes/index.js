@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const path = require('path')
-// require('./users.js')(router);
+require('./users.js')(router);
 // require('./boats.js')(router);
 // require('./listUsers.js')(router);
 const cors = require('cors');
