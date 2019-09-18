@@ -2,10 +2,7 @@
   <v-app>
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-        </v-list-item-avatar>
-        <v-list-item-title>John Leider</v-list-item-title>
+        <v-img src="/logo.png" class="logo" alt="Logo-uniclaretiana"></v-img>
       </v-list-item>
       <v-divider></v-divider>
       <v-list>
@@ -20,7 +17,9 @@
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn rounded text color="error"> <v-icon dark>mdi-power </v-icon></v-btn>
+          <v-btn rounded text color="error">
+            <v-icon dark>mdi-power</v-icon>
+          </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -62,12 +61,12 @@ export default {
         {
           icon: "mdi-school",
           title: "Salones",
-          to: "/inspire"
+          to: "/salones"
         },
         {
           icon: "mdi-folder",
           title: "Implementos",
-          to: ""
+          to: "/implementos"
         },
         {
           icon: "mdi-book",
@@ -81,7 +80,7 @@ export default {
         }
       ],
       miniVariant: false,
-      title: "Control Unity"
+      title: "CONTROL UNITY"
     };
   }
 };
@@ -93,5 +92,8 @@ a,
 span {
   text-decoration: none;
   color: black;
+}
+#logo {
+  text-align: left;
 }
 </style>
