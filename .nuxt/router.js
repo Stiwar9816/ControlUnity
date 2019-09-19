@@ -3,8 +3,8 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _71e948f8 = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
 const _42688718 = () => interopDefault(import('../pages/implementos/index.vue' /* webpackChunkName: "pages/implementos/index" */))
-const _2d3be63a = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
 const _ac5d6e50 = () => interopDefault(import('../pages/registro/index.vue' /* webpackChunkName: "pages/registro/index" */))
 const _591c3b08 = () => interopDefault(import('../pages/salones/index.vue' /* webpackChunkName: "pages/salones/index" */))
 const _2048dc40 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -19,13 +19,13 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+      path: "/home",
+      component: _71e948f8,
+      name: "home"
+    }, {
       path: "/implementos",
       component: _42688718,
       name: "implementos"
-    }, {
-      path: "/login",
-      component: _2d3be63a,
-      name: "login"
     }, {
       path: "/registro",
       component: _ac5d6e50,
@@ -36,7 +36,7 @@ export const routerOptions = {
       name: "salones"
     }, {
       path: "/",
-      component: _c27adbba,
+      component: _2048dc40,
       name: "index"
     }],
 

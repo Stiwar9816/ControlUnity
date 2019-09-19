@@ -5,3 +5,14 @@
         </v-flex>
     </v-layout>
 </template>
+
+<script>
+export default {
+    layout:"home",
+    data(){
+        return{
+            
+        }
+    }
+}
+</script>

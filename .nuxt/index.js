@@ -11,10 +11,10 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_workbox_71acbb77 from 'nuxt_plugin_workbox_71acbb77' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_nuxticons_4a5a810d from 'nuxt_plugin_nuxticons_4a5a810d' // Source: ./nuxt-icons.js (mode: 'all')
-import nuxt_plugin_plugin_029d4389 from 'nuxt_plugin_plugin_029d4389' // Source: ./vuetify/plugin.js (mode: 'all')
-import nuxt_plugin_axios_4760211b from 'nuxt_plugin_axios_4760211b' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_workbox_43b3b35a from 'nuxt_plugin_workbox_43b3b35a' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_nuxticons_63435a4a from 'nuxt_plugin_nuxticons_63435a4a' // Source: ./nuxt-icons.js (mode: 'all')
+import nuxt_plugin_plugin_5ccd3646 from 'nuxt_plugin_plugin_5ccd3646' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_axios_3979b5be from 'nuxt_plugin_axios_3979b5be' // Source: ./axios.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -144,20 +144,20 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_workbox_71acbb77 === 'function') {
-    await nuxt_plugin_workbox_71acbb77(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_43b3b35a === 'function') {
+    await nuxt_plugin_workbox_43b3b35a(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_nuxticons_4a5a810d === 'function') {
-    await nuxt_plugin_nuxticons_4a5a810d(app.context, inject)
+  if (typeof nuxt_plugin_nuxticons_63435a4a === 'function') {
+    await nuxt_plugin_nuxticons_63435a4a(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_029d4389 === 'function') {
-    await nuxt_plugin_plugin_029d4389(app.context, inject)
+  if (typeof nuxt_plugin_plugin_5ccd3646 === 'function') {
+    await nuxt_plugin_plugin_5ccd3646(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_4760211b === 'function') {
-    await nuxt_plugin_axios_4760211b(app.context, inject)
+  if (typeof nuxt_plugin_axios_3979b5be === 'function') {
+    await nuxt_plugin_axios_3979b5be(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

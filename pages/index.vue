@@ -1,70 +1,42 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
+  <v-layout>
+    <v-flex class="mt-4">
+      <v-card max-width="400" class="mx-auto login" outlined>
+        <v-img height="140" src="/logo.png" class="header_login"></v-img>
         <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          
+          <form>
+            <v-text-field v-model="cc" label="C.C" type="number" min="0" required></v-text-field>
+            <v-text-field v-model="password" label="CONTRASEÑA" type="password" required></v-text-field>
+          </form>
         </v-card-text>
         <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
+          <v-btn rounded block class="secondary" type="submit">Iniciar Sesión</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
 
-<script>
 
+<script>
 export default {
- 
-}
+  // layout:"",
+  data() {
+    return {
+      cc: "",
+      password: ""
+    };
+  }
+};
 </script>
+
+<style scoped>
+.header_login {
+  background-color: rgb(190, 189, 189);
+}
+.login{
+  margin-left: 420px;
+  margin-top: 100px;
+}
+</style>>
+    
