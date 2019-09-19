@@ -12,6 +12,9 @@
         <v-card-actions>
           <v-btn rounded block class="secondary" type="submit">Iniciar Sesión</v-btn>
         </v-card-actions>
+        <v-card-text class="text-center">
+          <n-link to="/registro">¿No tiene una cuenta? - ¡Registrate Aqui!</n-link>
+        </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
@@ -34,7 +37,15 @@ export default {
 .header_login {
   background-color: rgb(190, 189, 189);
 }
-.login{
+a {
+  color: #000;
+  font-size: 16px;
+  text-decoration: none;
+}
+a:hover {
+  color: gold;
+}
+.login {
   margin-left: 420px;
   margin-top: 100px;
 }
