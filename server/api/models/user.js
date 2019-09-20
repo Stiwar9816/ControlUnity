@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const mapDuplicate = require('../helpers/mapDuplicate')
 
 const Users = new Schema({
