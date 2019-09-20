@@ -17,15 +17,14 @@
       </v-list>
 
       <template v-slot:append>
-        <div class="pa-2">
-          <v-btn rounded text color="secondary" to="">
+        <div class="pa-2 mb-2" align="center">
+          <v-btn rounded text color="secondary" to>
             <v-icon dark>mdi-settings</v-icon>
           </v-btn>
           <v-btn rounded text color="error" to="/">
             <v-icon dark>mdi-power</v-icon>
           </v-btn>
-        </div> 
-        
+        </div>
       </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app flat>
