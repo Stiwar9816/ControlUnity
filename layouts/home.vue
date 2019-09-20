@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" color="appbar" fixed app>
-      <v-list-item>
+      <v-list-item >
         <v-img src="/logo.png" class="logo" alt="Logo-uniclaretiana"></v-img>
       </v-list-item>
       <v-divider></v-divider>
