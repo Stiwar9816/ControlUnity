@@ -18,7 +18,7 @@
           </form>
         </v-card-text>
         <v-card-actions>
-          <v-btn rounded block class="secondary" type="submit">Iniciar Sesión</v-btn>
+          <v-btn rounded block class="secondary" type="submit" to="/">Iniciar Sesión</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>

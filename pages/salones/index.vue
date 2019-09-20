@@ -2,18 +2,18 @@
   <v-layout>
     <v-flex>
       <h3 class="title mt-3">SALONES REGISTRADOS</h3>
-      <v-form>
         <v-container>
+      <v-form>
           <v-row cols="12" xs="12" sm="12" md="3">
             <!-- inputs -->
             <v-col>
-              <v-text-field label="Nombre Salon" required outlined></v-text-field>
+              <v-text-field label="Nombre Salon" required></v-text-field>
             </v-col>
             <v-col>
-              <v-text-field label="Capcidad" type="number" min="0" required outlined></v-text-field>
+              <v-text-field label="Capcidad" type="number" min="0" required></v-text-field>
             </v-col>
             <v-col>
-              <v-textarea outlined required rows="1" label="Descripción"></v-textarea>
+              <v-textarea required rows="1" label="Descripción"></v-textarea>
             </v-col>
             <v-col>
               <v-btn rounded color="primary">
@@ -21,21 +21,15 @@
               </v-btn>
             </v-col>
           </v-row>
+      </v-form>
           <!-- Tabla -->
           <v-row cols="12">
             <v-col md="4">
-              <v-text-field
-                v-model="search"
-                class="mb-5"
-                label="Buscar Salon"
-                single-line
-                hide-details
-              ></v-text-field>
+              <v-text-field v-model="search" class="mb-5" label="Buscar Salon" hide-details></v-text-field>
             </v-col>
           </v-row>
           <v-data-table :headers="headers" :items="items" :search="search"></v-data-table>
         </v-container>
-      </v-form>
     </v-flex>
   </v-layout>
 </template>
@@ -43,6 +37,7 @@
 
 <script>
 export default {
+  layout: "home",
   data() {
     return {
       search: "",
