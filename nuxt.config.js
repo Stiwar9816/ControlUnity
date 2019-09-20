@@ -64,11 +64,13 @@ module.exports = {
     theme: {
       dark: false,
       themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
+        light: {
+          primary: colors.amber.accent3,
+          secondary: colors.grey.lighten1,
+          accent: colors.grey.darken2,
+          info: colors.grey.darken4,
+          footer: colors.grey.lighten5,
+          appbar: colors.grey.lighten3,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
