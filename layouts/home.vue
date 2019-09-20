@@ -18,10 +18,14 @@
 
       <template v-slot:append>
         <div class="pa-2">
+          <v-btn rounded text color="secondary" to="">
+            <v-icon dark>mdi-settings</v-icon>
+          </v-btn>
           <v-btn rounded text color="error" to="/">
             <v-icon dark>mdi-power</v-icon>
           </v-btn>
-        </div>
+        </div> 
+        
       </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app flat>
@@ -51,7 +55,7 @@ export default {
   data() {
     return {
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       items: [
         {
@@ -70,9 +74,14 @@ export default {
           to: "/implementos"
         },
         {
+          icon: "mdi-calendar",
+          title: "Reservar",
+          to: "/reservar"
+        },
+        {
           icon: "mdi-book",
-          title: "Panel de reservas",
-          to: ""
+          title: "Control de reservas",
+          to: "/control_reservas"
         },
         {
           icon: "mdi-account-group",
