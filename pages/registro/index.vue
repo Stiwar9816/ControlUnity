@@ -7,8 +7,20 @@
           <form>
             <v-text-field v-model="cc" label="C.C" type="number" min="0" required></v-text-field>
             <v-text-field v-model="name" label="Nombre completo" required></v-text-field>
-            <v-text-field v-model="email" label="Correo electronico" type="email" required></v-text-field>
-            <v-text-field v-model="password" label="Contraseña" type="password" required></v-text-field>
+            <v-text-field
+              v-model="email"
+              :rules="emailRules"
+              label="Correo electronico"
+              type="email"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="password"
+              :rules="passRules"
+              label="Contraseña"
+              type="password"
+              required
+            ></v-text-field>
             <v-text-field
               v-model="confPassword"
               label="Confirmar contraseña"
@@ -34,7 +46,15 @@ export default {
       name: "",
       email: "",
       password: "",
-      confPassword:""
+      confPassword: "",
+      emailRules: [
+        v => !!v || "Email es requerido ",
+        v =>
+          /.+@.+/.test(v) ||
+          "Correo electronico no es valido, Verifiquelo nuevamente"
+      ],
+      passRules: [V1 => V1.length >= 6 || "Minimo 6 Digitos*"],
+      
     };
   }
 };
