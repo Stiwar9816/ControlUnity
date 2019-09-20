@@ -14,12 +14,13 @@ const {
   Builder
 } = require('nuxt')
 
-
+// Start of aplication
 const app = express()
-app.use(morgan('dev'))
-
 require('./db/database.js')
 require('./api/config/passport.js')
+// views stattus of methods
+app.use(morgan('dev'))
+
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
@@ -41,9 +42,9 @@ async function start() {
   } else {
     await nuxt.ready()
   }
-
-  // Give nuxt middleware to express
+// routes
   app.use('/api', routes)
+  // Give nuxt middleware to express
   app.use(nuxt.render)
   app.use(mongoSanitize())
   app.use(cors())

@@ -1,28 +1,34 @@
 const Users = require('../models/user');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt-nodejs');
 
-async function register(req, res, next) {
-    console.log('Hola Soy el registro')
-        const {cc, name, email, password} = req.body
-        debugger
-        await  bcrypt.hash(password, 15, (error, hash)=>{
+function register(req, res, next) {
+    const user = new Users({
+        cc: req.body.cc,
+        name: req.body.name,
+        email: req.body.email,
+        passwaord: req.body.password
+    })
+    debugger
+         bcrypt.hash(password, 15, (error, hash)=>{
             if(error){
                 res.status(500)
                 return res.json({Ok: false})
             }
-          Users.create({cc, name, email, password :hash})
-            .then(function (doc){
-                res.json({ok: true})
+           user.save({cc, name, email, password :hash})
+          .then(function (doc){
+              res.json({ok: true})
             })
             .catch(error =>{
                 debugger
+                res.send("Erro: " + error)
                 res.status(500)
                 res.json({Ok:false})
             })
         })
     }
-
- async function login(req, res, next){
+    
+    async function login(req, res, next){
+        console.log('Hola Soy el registro')
         await Users.findOne({
             cc: req.body.cc
         })

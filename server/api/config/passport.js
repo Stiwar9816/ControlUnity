@@ -1,15 +1,17 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy({
-  usernameField: 'cc'
-}, async (cc, password, done) => {
+passport.use('local-register',new LocalStrategy({
+  usernameField: 'cc',
+  passwordField: 'password',
+  passReqToCallback: true
+}, async (req ,cc, password, done) => {
   // Match cc's User
   const user = await Users.findOne({cc});
   if (!user) {
     return done(null, false, { message: 'Not User found.' });
   } else {
-    // Match Password's User
+    // Match Password's User 
     const match = await user.matchPassword(password);
     if(match) {
       return done(null, user);
