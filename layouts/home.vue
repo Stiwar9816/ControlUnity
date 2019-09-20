@@ -1,6 +1,3 @@
-
-
-
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
@@ -18,6 +15,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
       <template v-slot:append>
         <div class="pa-2">
           <v-btn rounded text color="error" to="/">
@@ -79,7 +77,7 @@ export default {
         {
           icon: "mdi-account-group",
           title: "Usuarios",
-          to: ""
+          to: "/usuarios"
         }
       ],
       miniVariant: false,
