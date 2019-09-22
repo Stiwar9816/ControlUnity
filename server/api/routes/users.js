@@ -1,19 +1,25 @@
-/* const express = require('express');
-const router = express.Router() */
-const UsersController = require('../controllers/users');
+const router = require('express-promise-router')();
+// const router = express.Router() */
+// const passport = require('passport');
+const {
+    // register,
+    login
+} = require('../controllers/users');
 
-function users(router) {
-    
-    router.post('/register', UsersController.register)
-    
-    router.post('/login',UsersController.login)
-    
-    // router.route('/logout')
-    //     .get(UsersController.logout)
-    
-    // router.route('/forgot')
-    //     .get(UsersController.forgot)
+// function users(router) {
 
-}
+// router.post('/register', register)
 
-module.exports = users
+router.get('/login', (req, res, next)=>{
+    res.json({success: true})
+})
+
+//     // router.route('/logout')
+//     //     .get(UsersController.logout)
+
+//     // router.route('/forgot')
+//     //     .get(UsersController.forgot)
+
+// }
+
+// module.exports = users

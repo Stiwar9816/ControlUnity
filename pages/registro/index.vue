@@ -4,22 +4,22 @@
       <v-card max-width="400" class="mx-auto" outlined>
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
         <v-card-text>
-          <form>
+          <form @submit.prevent="registro">   
             <v-text-field v-model="cc" label="C.C" type="number" min="0" required></v-text-field>
             <v-text-field v-model="name" label="Nombre completo" required></v-text-field>
             <v-text-field v-model="email" label="Correo electronico" type="email" required></v-text-field>
             <v-text-field v-model="password" label="Contraseña" type="password" required></v-text-field>
-            <v-text-field
+            <!-- <v-text-field
               v-model="confPassword"
               label="Confirmar contraseña"
               type="password"
               required
-            ></v-text-field>
+            ></v-text-field> -->
+        <v-card-actions>
+          <v-btn rounded block class="accent" type="submit">Iniciar Sesión</v-btn>
+        </v-card-actions>
           </form>
         </v-card-text>
-        <v-card-actions>
-          <v-btn rounded block class="accent" type="submit" to="/">Iniciar Sesión</v-btn>
-        </v-card-actions>
       </v-card>
     </v-flex>
   </v-layout>
@@ -27,6 +27,8 @@
 
 
 <script>
+import axios from '~/plugins/axios'
+
 export default {
   data() {
     return {
@@ -34,8 +36,25 @@ export default {
       name: "",
       email: "",
       password: "",
-      confPassword:""
+      // confPassword:""
     };
+  },
+ methods: {
+    async registro() {
+     await axios
+        .post("http://localhost:3000/api/registro", {
+          cc: this.cc,
+          name: this.name,
+          email: this.email,
+          password: this.password
+        })
+        .then(res => {
+          redirect('/')
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>

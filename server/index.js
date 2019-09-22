@@ -1,14 +1,14 @@
 const express = require('express')
 const consola = require('consola')
 const path = require('path');
-// const methodOverride = require('method-override');
+const methodOverride = require('method-override');
 const passport = require('passport');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
-const routes = require('./api/routes');
-// const session = require('express-session');
+const api = require('./api/routes');
+const session = require('express-session');
 const {
   Nuxt,
   Builder
@@ -17,10 +17,28 @@ const {
 // Start of aplication
 const app = express()
 require('./db/database.js')
-require('./api/config/passport.js')
+require('./api/config/passport')
 // views stattus of methods
 app.use(morgan('dev'))
 
+//middlewares
+app.use(mongoSanitize())
+app.use(cors())
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
+app.use(bodyParser.json())
+app.use(session({
+  secret: 'MySecretSesion',
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(methodOverride('_method'))
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Import API routes
+app.use(api)
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
@@ -42,19 +60,9 @@ async function start() {
   } else {
     await nuxt.ready()
   }
-// routes
-  app.use('/api', routes)
+
   // Give nuxt middleware to express
   app.use(nuxt.render)
-  app.use(mongoSanitize())
-  app.use(cors())
-  app.use(bodyParser.urlencoded({
-    extended: false
-  }))
-  app.use(bodyParser.json())
-  // app.use(methodOverride('_method'))
-  app.use(passport.initialize())
-  app.use(passport.session())
 
 // Static files
 app.use(express.static(path.join(__dirname, '../static/')))
@@ -65,5 +73,10 @@ app.use(express.static(path.join(__dirname, '../static/')))
     message: `Server listening on http://${host}:${port}`,
     badge: true
   })
+}
+
+module.exports ={
+  path: '/api',
+  handler: app
 }
 start()

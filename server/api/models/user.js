@@ -12,8 +12,12 @@ const Users = new Schema({
 })
 Users.post("save", mapDuplicate("Users"))
 
-Users.methods.matchPassword = async function (password){
-    return await bcrypt.compare(password, this.password)
+Users.methods.encryptPassword = function (password){
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+}
+
+Users.methods.comparePassword = function(password){
+    return bcrypt.compareSync(password, this.password)
 }
 
 Users.index({cc: 1})
