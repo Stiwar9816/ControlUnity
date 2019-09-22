@@ -24,7 +24,7 @@
       </v-list>
 
       <template v-slot:append>
-        <div class="pa-2 mb-2" align="center">
+        <div class="pa-1" align="center">
           <v-btn rounded text color="accent" to>
             <v-icon dark>mdi-settings</v-icon>
           </v-btn>

@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _dde45cfc = () => interopDefault(import('../pages/control_reservas/index.vue' /* webpackChunkName: "pages/control_reservas/index" */))
 const _71e948f8 = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
 const _42688718 = () => interopDefault(import('../pages/implementos/index.vue' /* webpackChunkName: "pages/implementos/index" */))
 const _ac5d6e50 = () => interopDefault(import('../pages/registro/index.vue' /* webpackChunkName: "pages/registro/index" */))
@@ -22,10 +21,6 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-      path: "/control_reservas",
-      component: _dde45cfc,
-      name: "control_reservas"
-    }, {
       path: "/home",
       component: _71e948f8,
       name: "home"
