@@ -1,13 +1,20 @@
 <template>
   <v-layout>
     <v-flex>
-      <h3 class="title mt-3">CREAR RESERVA</h3>
+      <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-row cols="12" xs="12" sm="12" md="3">
             <!-- inputs -->
             <v-col>
-              <v-text-field v-model="cc" :rules="ccRules" label="C.C" type="number" min="0" required></v-text-field>
+              <v-text-field
+                v-model="cc"
+                :rules="ccRules"
+                label="C.C"
+                type="number"
+                min="0"
+                required
+              ></v-text-field>
             </v-col>
             <v-col>
               <v-text-field v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
@@ -28,7 +35,12 @@
               ></v-text-field>
             </v-col>
             <v-col md="2">
-              <v-select v-model="salon" :rules="[v => !!v || 'Nombre del salon es requerido']" :items="salon" label="Salon"></v-select>
+              <v-autocomplete
+                v-model="salon"
+                :rules="[v => !!v || 'Nombre del salon es requerido']"
+                label="Salon"
+                :items="salon"
+              ></v-autocomplete>
             </v-col>
 
             <!--DatePicker  -->
@@ -43,7 +55,13 @@
                 min-width="290px"
               >
                 <template v-slot:activator="{ on }">
-                  <v-text-field v-model="date" :rules="dateRules" label="Fecha de reserva" readonly v-on="on"></v-text-field>
+                  <v-text-field
+                    v-model="date"
+                    :rules="dateRules"
+                    label="Fecha de reserva"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
                 </template>
                 <v-date-picker v-model="date" @input="DateModal = false"></v-date-picker>
               </v-menu>

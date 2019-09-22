@@ -1,7 +1,14 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" color="appbar" fixed app>
-      <v-list-item >
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      color="appbar"
+      fixed
+      app
+    >
+      <v-list-item>
         <v-img src="/logo.png" class="logo" alt="Logo-uniclaretiana"></v-img>
       </v-list-item>
       <v-divider></v-divider>
@@ -42,7 +49,10 @@
     <v-footer :fixed="fixed" color="appbar" app>
       <span>
         &copy; Control Unity 2019 - Created by:
-        <a href="https://twitter.com/AsprillaStiwar" target="_blank">Stiwar Asprilla</a> &
+        <a
+          href="https://twitter.com/AsprillaStiwar"
+          target="_blank"
+        >Stiwar Asprilla</a> &
         <a href="https://twitter.com/_JhonE17" target="_blank">Jhon E. Palacios</a>
       </span>
     </v-footer>
@@ -77,11 +87,7 @@ export default {
           title: "Reservar",
           to: "/reservar"
         },
-        {
-          icon: "mdi-book",
-          title: "Control de reservas",
-          to: "/control_reservas"
-        },
+
         {
           icon: "mdi-account-group",
           title: "Usuarios",

@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex>
-      <h3 class="title mt-3">SALONES REGISTRADOS</h3>
+      <v-subheader class="subtitle-1">SALONES REGISTRADOS</v-subheader>
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-row cols="12" xs="12" sm="12" md="3">
