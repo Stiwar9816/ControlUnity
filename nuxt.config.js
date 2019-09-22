@@ -83,7 +83,7 @@ module.exports = {
     'redirect-ssl',
 
     // Will register file from project api directory to handle /api/* requires
-    '~/server/index.js'
+    '~/api/index.js'
   ],
   /*
    ** Build configuration

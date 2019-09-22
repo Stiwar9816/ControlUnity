@@ -5,9 +5,9 @@
   "author": "Stiwar Asprilla &amp; Jhon E. Palacios",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "dev": "cross-env NODE_ENV=development nodemon api/index.js --watch api",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server/index.js",
+    "start": "cross-env NODE_ENV=production node api/index.js",
     "generate": "nuxt generate"
   },
   "dependencies": {

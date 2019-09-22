@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
-const api = require('./api/routes');
+const api = require('./routes');
 const session = require('express-session');
 const {
   Nuxt,
@@ -17,7 +17,7 @@ const {
 // Start of aplication
 const app = express()
 require('./db/database.js')
-require('./api/config/passport')
+require('./config/passport')
 // views stattus of methods
 app.use(morgan('dev'))
 
@@ -39,7 +39,10 @@ app.use(passport.session())
 
 // Import API routes
 app.use(api)
-
+module.exports ={
+  path: '/api',
+  handler: app
+}
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
@@ -75,8 +78,5 @@ app.use(express.static(path.join(__dirname, '../static/')))
   })
 }
 
-module.exports ={
-  path: '/api',
-  handler: app
-}
+
 start()
