@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex>
-      <h3 class="title mt-3">USUARIOS REGISTRADOS</h3>
+      <v-subheader class="subtitle-1">USUARIOS REGISTRADOS</v-subheader>
       <v-container>
         <!-- Tabla -->
         <v-row cols="12">

@@ -3,15 +3,28 @@
     <v-flex class="mt-4">
       <v-card max-width="400" class="mx-auto login" outlined>
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
-        <v-card-text>
-          <form>
-            <v-text-field v-model="cc" label="C.C" type="number" min="0" required></v-text-field>
-            <v-text-field v-model="password" label="CONTRASEÑA" type="password" required></v-text-field>
-          </form>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn rounded block class="accent" type="submit">Iniciar Sesión</v-btn>
-        </v-card-actions>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-card-text>
+            <v-text-field v-model="cc" :rules="ccRules" label="C.C" type="number" min="0" required></v-text-field>
+            <v-text-field
+              v-model="password"
+              :rules="passwordRules"
+              label="CONTRASEÑA"
+              type="password"
+              required
+            ></v-text-field>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              rounded
+              block
+              class="accent"
+              type="submit"
+              :disabled="!valid"
+              @click="validate"
+            >Iniciar Sesión</v-btn>
+          </v-card-actions>
+        </v-form>
         <v-card-text class="text-center">
           <n-link to="/registro">¿No tiene una cuenta? - ¡Registrate Aqui!</n-link>
         </v-card-text>
@@ -27,8 +40,18 @@ export default {
   data() {
     return {
       cc: "",
-      password: ""
+      password: "",
+      valid: true,
+      ccRules: [v => !!v || "Cedula de ciudadania es requerida"],
+      passwordRules: [v => !!v || "Contraseña es requerida"]
     };
+  },
+  methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
+    }
   }
 };
 </script>

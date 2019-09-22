@@ -1,35 +1,48 @@
 <template>
   <v-layout>
     <v-flex>
-      <h3 class="title mt-3">SALONES REGISTRADOS</h3>
-        <v-container>
-      <v-form>
+      <v-subheader class="subtitle-1">SALONES REGISTRADOS</v-subheader>
+      <v-container>
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-row cols="12" xs="12" sm="12" md="3">
             <!-- inputs -->
             <v-col>
-              <v-text-field label="Nombre Salon" required></v-text-field>
+              <v-text-field v-model="salon" :rules="salonRules" label="Nombre Salon" required></v-text-field>
             </v-col>
             <v-col>
-              <v-text-field label="Capcidad" type="number" min="0" required></v-text-field>
+              <v-text-field
+                v-model="capacity"
+                :rules="capacityRules"
+                label="Capcidad"
+                type="number"
+                min="0"
+                required
+              ></v-text-field>
             </v-col>
             <v-col>
-              <v-textarea required rows="1" label="Descripción"></v-textarea>
+              <v-textarea
+                v-model="description"
+                :rules="descriptionRules"
+                required
+                rows="1"
+                label="Descripción"
+              ></v-textarea>
             </v-col>
             <v-col>
-              <v-btn rounded color="primary">
+              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
                 <v-icon dark>mdi-plus</v-icon>Agregar
               </v-btn>
             </v-col>
           </v-row>
-      </v-form>
-          <!-- Tabla -->
-          <v-row cols="12">
-            <v-col md="4">
-              <v-text-field v-model="search" class="mb-5" label="Buscar Salon" hide-details></v-text-field>
-            </v-col>
-          </v-row>
-          <v-data-table :headers="headers" :items="items" :search="search"></v-data-table>
-        </v-container>
+        </v-form>
+        <!-- Tabla -->
+        <v-row cols="12">
+          <v-col md="4">
+            <v-text-field v-model="search" class="mb-5" label="Buscar Salon" hide-details></v-text-field>
+          </v-col>
+        </v-row>
+        <v-data-table :headers="headers" :items="items" :search="search"></v-data-table>
+      </v-container>
     </v-flex>
   </v-layout>
 </template>
@@ -41,6 +54,13 @@ export default {
   data() {
     return {
       search: "",
+      salon: "",
+      capacity: "",
+      description: "",
+      valid: true,
+      salonRules: [v => !!v || "Nombre del salon es requerido"],
+      capacityRules: [v => !!v || "Capacidad del salon es requerida"],
+      descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
         {
           text: "#",
@@ -126,6 +146,13 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
+    }
   }
 };
 </script>
