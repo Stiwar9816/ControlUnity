@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 const mapDuplicate = require('../helpers/mapDuplicate')
 
 const Users = new Schema({
@@ -12,12 +12,14 @@ const Users = new Schema({
 })
 Users.post("save", mapDuplicate("Users"))
 
-Users.methods.encryptPassword = function (password){
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+Users.methods.encryptPassword = async (password)=> {
+    const salt = await bcrypt.genSalt(10)
+    const hash = bcrypt.hash(password, salt)
+    return hash
 }
 
-Users.methods.comparePassword = function(password){
-    return bcrypt.compareSync(password, this.password)
+Users.methods.comparePassword = async function(password){
+    return await bcrypt.compare(password, this.password)
 }
 
 Users.index({cc: 1})
