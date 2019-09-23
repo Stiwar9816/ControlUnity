@@ -1,19 +1,43 @@
+// Import dependencies driver of errors
 const router = require('express-promise-router')();
-const {
-    allImplement,
-    newImplement,
-    getOneImplement,
-    // replaceImplement,
-    updateImplement,
-    deleteImplement
-} = require('../controllers/implements')
+// Import fucntions of operations crud
+const controllersImplements = require('../controllers/implements')
+const controllersUser = require('../controllers/users')
+const controllersBookings = require('../controllers/booking')
+const controllersRooms = require('../controllers/room')
 
-router.get('/implements', allImplement)
-router.get('/oneImplement/:id', getOneImplement)
-router.post('/newImplement', newImplement)
-router.put('/updateImplement/:id', updateImplement)
-router.delete('/deleteImplement/:id',deleteImplement)
+// Routes Users crud and login
+// router.post('/register', controllersUser.register)
+router.post('/login', controllersUser.login)
+// router.get('/logout', controllersUser.logout)
+// router.get('/forgot', controllersUser.forgot)
+router.get('user', controllersUser.allUser)
+router.get('user/:id', controllersUser.getOneUser)
+router.put('updateUser/:id', controllersUser.updateUser)
+router.delete('deleteUser/:id', controllersUser.deleteUser)
 
+// Routes Bookings Crud
+router.get('/booking', controllersBookings.allBooking)
+router.get('/booking/:id', controllersBookings.getOneBooking)
+router.post('/newBooking', controllersBookings.newBooking)
+router.put('/updateBooking/:id', controllersBookings.updateBooking)
+router.delete('/deleteBooking/:id', controllersBookings.deleteBooking)
+
+// Routes Rooms Crud
+router.get('/room', controllersRooms.allRoom)
+router.get('/room/:id', controllersRooms.getOneRoom)
+router.post('/newRoom', controllersRooms.newRoom)
+router.put('/updateRoom/:id', controllersRooms.updateRoom)
+router.delete('/deleteRoom/:id', controllersRooms.deleteRoom)
+
+// Routes Implements Crud
+router.get('/implement', controllersImplements.allImplement)
+router.get('/implement/:id', controllersImplements.getOneImplement)
+router.post('/newImplement', controllersImplements.newImplement)
+router.put('/updateImplement/:id', controllersImplements.updateImplement)
+router.delete('/deleteImplement/:id', controllersImplements.deleteImplement)
+
+// Apliaction of populate from data
 /* 
 router.get('/oneImplent/:id/room', getBookingRoom)
 router.post('/oneImplement/:id/room', newBookingRoom) */

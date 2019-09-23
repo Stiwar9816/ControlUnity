@@ -53,5 +53,37 @@ module.exports = {
         .catch(error=>{
             res.send('error: ' + error)
         })
+    },
+
+    // Crud from User
+
+    // Get all users
+    allUser: async (req, res, next) => {
+        const users = await Users.find({})
+        res.status(200).json(users)
+    },
+
+    // Get one implement from id
+    getOneUser: async (req, res, next) => {
+        const id = req.params.id
+        const user = await Users.findById(id)
+        res.status(200).json(user)
+    },
+
+    // Update one implement from id
+    updateUser: async (req, res, next) => {
+        const userId = req.params.id
+        const newUser = req.body
+        const oldUser = await Users.findByIdAndUpdate(userId, newUser)
+        res.status(200).json(oldUser)
+    },
+
+    // Delete one implement from id
+    deleteUser: async (req, res, next) => {
+        const userId = req.params.id
+        await Users.findOneAndRemove(userId)
+        res.status(204).json({
+            success: true
+        })
     }
 }

@@ -39,10 +39,6 @@ app.use(passport.session())
 
 // Import API routes
 app.use(api)
-module.exports ={
-  path: '/api',
-  handler: app
-}
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
@@ -67,8 +63,8 @@ async function start() {
   // Give nuxt middleware to express
   app.use(nuxt.render)
 
-// Static files
-app.use(express.static(path.join(__dirname, '../static/')))
+  // Static files
+  app.use(express.static(path.join(__dirname, '../static/')))
 
   // Listen the server
   app.listen(port, host)
@@ -77,6 +73,9 @@ app.use(express.static(path.join(__dirname, '../static/')))
     badge: true
   })
 }
-
-
 start()
+// Export API from are reading for serverMiddleware
+module.exports = {
+  path: '/api',
+  handler: app
+}
