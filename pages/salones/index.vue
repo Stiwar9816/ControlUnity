@@ -62,12 +62,6 @@ export default {
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
-        {
-          text: "#",
-          align: "center",
-          sortable: false,
-          value: "id"
-        },
         { text: "NOMBRE SALON", align: "center", value: "name_salon" },
         { text: "CAPACIDAD", align: "center", value: "fat" },
         { text: "DESCRIPCIÓN", align: "center", value: "carbs" },

@@ -31,10 +31,9 @@ export default {
       searchR: "",
       searchD: "",
       headers: [
-        { text: "#", align: "center", sortable: false },
         { text: "NOMBRE SALON", align: "center" },
         { text: "CAPACIDAD", align: "center", sortable: false },
-        { text: "DESCRIPCION", align: "center", sortable: false },
+        { text: "DESCRIPCIÓN", align: "center", sortable: false },
         { text: "ACCIONES", align: "center", sortable: false }
       ]
     };

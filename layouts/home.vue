@@ -25,7 +25,7 @@
 
       <template v-slot:append>
         <div class="pa-1" align="center">
-          <v-btn rounded text color="accent" to>
+          <v-btn rounded text color="accent" to="/configuraciones">
             <v-icon dark>mdi-settings</v-icon>
           </v-btn>
           <v-btn rounded text color="error" to="/">

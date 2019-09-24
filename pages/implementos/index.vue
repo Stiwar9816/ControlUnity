@@ -25,7 +25,7 @@
             <v-col>
               <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
             </v-col>
-            <v-col>
+            <v-col align="center">
               <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
                 <v-icon dark>mdi-plus</v-icon>Agregar
               </v-btn>
