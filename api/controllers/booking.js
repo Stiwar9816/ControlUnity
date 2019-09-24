@@ -44,5 +44,24 @@ module.exports = {
         res.status(204).json({
             success: true
         })
+    },
+
+    // Get data of rooms on booking
+   /*  getBookingRoom : async (req, req, next) =>{
+        const { id } = req.param.id
+        const booking  =  await Booking.findById(id).populate('Rooms')
+        res.status(200).json(booking)
+    }, */
+
+    // Created new booking with data booking and room
+    newBookingRoom: async (req, res ,next) =>{
+        const { id } = req.param.id
+        const newBooking = new Booking(req.body)
+        const room = await Room.findById(id)
+        newBooking.romm = room
+        await newBooking.save()
+        booking.room.push(newBooking);
+        await booking.save()
+        res.status(201).json(newBooking)
     }
 }
