@@ -1,7 +1,9 @@
-// Import dependencies driver of errors
+// Import dependencies driver of errors and authenticated passport
 const router = require('express-promise-router')();
 const passport = require('passport');
-const { isAuthenticated} = require('../helpers/auth')
+const auth = require('../config/auth')
+// const { isAuthenticated} = require('../helpers/auth')
+
 // Import fucntions of operations crud
 const controllersImplements = require('../controllers/implements')
 const controllersUser = require('../controllers/users')
@@ -10,37 +12,45 @@ const controllersRooms = require('../controllers/room')
 
 // Routes Users crud and login
 router.post('/register', controllersUser.register)
-router.post('/login', passport.authenticate('local',{
-    successRedirect: 'http://localhost:3000/home',
-    failureRedirect: 'http://localhost:3000'
-}))
-router.get('/logout', isAuthenticated,controllersUser.logout)
+router.post('/login', controllersUser.login)
+// router.post('/login', passport.authenticate('local',{
+//     successRedirect: 'http://localhost:3000/home',
+//     failureRedirect: 'http://localhost:3000'
+// }))
+
+// Authenticated using passport
+// router.use((req, res, next)=>{
+//     isAuthenticated(req, res, next)
+//     next()
+// })
+
+router.get('/logout', auth ,controllersUser.logout)
 // router.get('/forgot', controllersUser.forgot)
-router.get('user', isAuthenticated,controllersUser.allUser)
-router.get('user/:id', isAuthenticated,controllersUser.getOneUser)
-router.put('updateUser/:id', isAuthenticated,controllersUser.updateUser)
-router.delete('deleteUser/:id', isAuthenticated,controllersUser.deleteUser)
+router.get('user', auth,controllersUser.allUser)
+router.get('user/:id', auth,controllersUser.getOneUser)
+router.put('updateUser/:id', auth,controllersUser.updateUser)
+router.delete('deleteUser/:id', auth,controllersUser.deleteUser)
 
 // Routes Bookings Crud
-router.get('/booking', isAuthenticated,controllersBookings.allBooking)
-router.get('/booking/:id', isAuthenticated,controllersBookings.getOneBooking)
-router.post('/newBooking', isAuthenticated,controllersBookings.newBooking)
-router.put('/updateBooking/:id', isAuthenticated,controllersBookings.updateBooking)
-router.delete('/deleteBooking/:id', isAuthenticated,controllersBookings.deleteBooking)
+router.get('/booking', auth,controllersBookings.allBooking)
+router.get('/booking/:id', auth,controllersBookings.getOneBooking)
+router.post('/newBooking', auth,controllersBookings.newBooking)
+router.put('/updateBooking/:id', auth,controllersBookings.updateBooking)
+router.delete('/deleteBooking/:id', auth,controllersBookings.deleteBooking)
 
 // Routes Rooms Crud
-router.get('/room', isAuthenticated,controllersRooms.allRoom)
-router.get('/room/:id', isAuthenticated,controllersRooms.getOneRoom)
-router.post('/newRoom', isAuthenticated,controllersRooms.newRoom)
-router.put('/updateRoom/:id', isAuthenticated,controllersRooms.updateRoom)
-router.delete('/deleteRoom/:id', isAuthenticated,controllersRooms.deleteRoom)
+router.get('/room', auth,controllersRooms.allRoom)
+router.get('/room/:id', auth,controllersRooms.getOneRoom)
+router.post('/newRoom', auth,controllersRooms.newRoom)
+router.put('/updateRoom/:id', auth,controllersRooms.updateRoom)
+router.delete('/deleteRoom/:id', auth,controllersRooms.deleteRoom)
 
 // Routes Implements Crud
-router.get('/implement', isAuthenticated,controllersImplements.allImplement)
-router.get('/implement/:id', isAuthenticated,controllersImplements.getOneImplement)
-router.post('/newImplement', isAuthenticated,controllersImplements.newImplement)
-router.put('/updateImplement/:id', isAuthenticated,controllersImplements.updateImplement)
-router.delete('/deleteImplement/:id', isAuthenticated,controllersImplements.deleteImplement)
+router.get('/implement', auth,controllersImplements.allImplement)
+router.get('/implement/:id', auth,controllersImplements.getOneImplement)
+router.post('/newImplement', auth,controllersImplements.newImplement)
+router.put('/updateImplement/:id', auth,controllersImplements.updateImplement)
+router.delete('/deleteImplement/:id', auth,controllersImplements.deleteImplement)
 
 // Apliaction of populate from data
 /* 
