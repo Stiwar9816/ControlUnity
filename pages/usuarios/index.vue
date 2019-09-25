@@ -6,10 +6,20 @@
         <!-- Tabla -->
         <v-row cols="12">
           <v-col md="4">
-            <v-text-field v-model="search" class="mt-4 mb-5" label="Buscar usuarios" hide-details></v-text-field>
+            <v-text-field
+              prepend-icon="icon-search"
+              v-model="search"
+              class="mt-4 mb-5"
+              label="Buscar usuarios"
+              hide-details
+            ></v-text-field>
           </v-col>
         </v-row>
-        <v-data-table :headers="headers" :search="search"></v-data-table>
+        <v-data-table :headers="headers" :items="items" :search="search">
+          <template v-slot:item.icon="{ item }">
+            <v-icon color="error" small>icon-trash</v-icon>
+          </template>
+        </v-data-table>
       </v-container>
     </v-flex>
   </v-layout>
@@ -25,8 +35,9 @@ export default {
         { text: "CEDULA", align: "center", sortable: false },
         { text: "NOMBRE COMPLETO", align: "center" },
         { text: "CORREO ELECTRONICO", align: "center", sortable: false },
-        { text: "ACCIONES", align: "center", sortable: false }
-      ]
+        { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
+      ],
+      items: [{}]
     };
   }
 };

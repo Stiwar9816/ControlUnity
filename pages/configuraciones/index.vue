@@ -50,7 +50,7 @@
           <v-row>
             <v-col align="center">
               <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
-                <v-icon dark>mdi-plus</v-icon>Guardar cambios
+                <v-icon dark>icon-plus</v-icon> Guardar cambios
               </v-btn>
             </v-col>
           </v-row>

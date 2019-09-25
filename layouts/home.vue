@@ -26,10 +26,10 @@
       <template v-slot:append>
         <div class="pa-1" align="center">
           <v-btn rounded text color="accent" to="/configuraciones">
-            <v-icon dark>mdi-settings</v-icon>
+            <v-icon dark>icon-wrench</v-icon>
           </v-btn>
           <v-btn rounded text color="error" to="/">
-            <v-icon dark>mdi-power</v-icon>
+            <v-icon dark>icon-power-off</v-icon>
           </v-btn>
         </div>
       </template>
@@ -68,28 +68,28 @@ export default {
       fixed: false,
       items: [
         {
-          icon: "mdi-home",
+          icon: "icon-home",
           title: "Inicio",
           to: "/home"
         },
         {
-          icon: "mdi-school",
+          icon: "icon-graduation-cap",
           title: "Salones",
           to: "/salones"
         },
         {
-          icon: "mdi-folder",
+          icon: "icon-archive",
           title: "Implementos",
           to: "/implementos"
         },
         {
-          icon: "mdi-calendar",
+          icon: "icon-calendar",
           title: "Reservar",
           to: "/reservar"
         },
 
         {
-          icon: "mdi-account-group",
+          icon: "icon-users",
           title: "Usuarios",
           to: "/usuarios"
         }

@@ -4,7 +4,7 @@
       <v-subheader class="subtitle-1">SALONES REGISTRADOS</v-subheader>
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <v-row cols="12" xs="12" sm="12" md="3">
+          <v-row>
             <!-- inputs -->
             <v-col>
               <v-text-field v-model="salon" :rules="salonRules" label="Nombre Salon" required></v-text-field>
@@ -28,9 +28,11 @@
                 label="Descripción"
               ></v-textarea>
             </v-col>
-            <v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
               <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
-                <v-icon dark>mdi-plus</v-icon>Agregar
+                <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
           </v-row>
@@ -38,10 +40,22 @@
         <!-- Tabla -->
         <v-row cols="12">
           <v-col md="4">
-            <v-text-field v-model="search" class="mb-5" label="Buscar Salon" hide-details></v-text-field>
+            <v-text-field
+              prepend-icon="icon-search"
+              v-model="search"
+              class="mb-5"
+              label="Buscar Salon"
+              hide-details
+            ></v-text-field>
           </v-col>
         </v-row>
-        <v-data-table :headers="headers" :items="items" :search="search"></v-data-table>
+
+        <v-data-table :headers="headers" :items="items" :search="search">
+          <template v-slot:item.icon="{ item }">
+            <v-icon small color="edit" class="mr-2" >icon-pencil</v-icon>
+            <v-icon small color="error" >icon-trash</v-icon>
+          </template>
+        </v-data-table>
       </v-container>
     </v-flex>
   </v-layout>
@@ -73,7 +87,7 @@ export default {
           id: 159,
           fat: 6.0,
           carbs: 24,
-          icon: "mdi-folder"
+          icon: "icon-pencil"
         },
         {
           name_salon: "Ice cream sandwich",

@@ -92,7 +92,7 @@
           <!-- boton reservar -->
           <v-row justify="center">
             <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
-              <v-icon dark>mdi-plus</v-icon>Agregar
+              <v-icon dark>icon-plus</v-icon>Agregar
             </v-btn>
           </v-row>
           <!-- End Boton reservar -->

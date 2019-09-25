@@ -22,7 +22,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Nunito&display=swap'
+        href: 'https://fonts.googleapis.com/css?family=Montserrat&display=swap'
       }
     ]
   },
@@ -33,7 +33,10 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@assets/css/main.css',
+    '@assets/fontastic_icons.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -48,7 +51,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ],
   /*
    ** Axios module configuration
@@ -73,7 +76,8 @@ module.exports = {
           appbar: colors.grey.lighten3,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.green.accent3,
+          edit: colors.lightBlue.darken3,
         }
       }
     }

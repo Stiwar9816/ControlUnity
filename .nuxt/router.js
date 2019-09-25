@@ -6,6 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _f8d3a434 = () => interopDefault(import('../pages/configuraciones/index.vue' /* webpackChunkName: "pages/configuraciones/index" */))
 const _71e948f8 = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
 const _42688718 = () => interopDefault(import('../pages/implementos/index.vue' /* webpackChunkName: "pages/implementos/index" */))
+const _340f2d14 = () => interopDefault(import('../pages/prueba/index.vue' /* webpackChunkName: "pages/prueba/index" */))
 const _ac5d6e50 = () => interopDefault(import('../pages/registro/index.vue' /* webpackChunkName: "pages/registro/index" */))
 const _0c44669f = () => interopDefault(import('../pages/reservar/index.vue' /* webpackChunkName: "pages/reservar/index" */))
 const _591c3b08 = () => interopDefault(import('../pages/salones/index.vue' /* webpackChunkName: "pages/salones/index" */))
@@ -33,6 +34,10 @@ export const routerOptions = {
       path: "/implementos",
       component: _42688718,
       name: "implementos"
+    }, {
+      path: "/prueba",
+      component: _340f2d14,
+      name: "prueba"
     }, {
       path: "/registro",
       component: _ac5d6e50,
