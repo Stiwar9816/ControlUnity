@@ -1,6 +1,6 @@
 // Import dependencies driver of errors and authenticated passport
 const router = require('express-promise-router')();
-const passport = require('passport');
+// const passport = require('passport');
 const auth = require('../config/auth')
 // const { isAuthenticated} = require('../helpers/auth')
 
