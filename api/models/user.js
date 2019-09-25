@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const {
     Schema
 } = mongoose;
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 const mapDuplicate = require('../helpers/mapDuplicate')
+// SALT_WORK_FACTOR = 10;
 
 const Users = new Schema({
     cc: {
@@ -36,33 +37,41 @@ const Users = new Schema({
 })
 Users.post("save", mapDuplicate("Users"))
 
-//Usando bcrypt-nodejs para haserar el password 
-Users.pre('save', (next) => {
-    let user = this
-    // if (!user.isModified('password')) return next()
+// Users.pre('save', function(next){
+//     // if (!user.isModified('password')) return next();
 
-    bcrypt.genSalt(10, (err, salt) => {
-        if (err) return next(err)
+//     const user = this;
 
-        bcrypt.hash(user.password, salt, null, (err, hash) => {
-            if (err) return next(err)
+//     bcrypt.genSalt(10, function(err, salt){
+//         if (err){ return next(err) }
 
-            user.password = hash 
-            next()
-        })
-    })
-})
+//         bcrypt.hash(user.password, salt, null, function(err, hash){
+//             if(err){return next(err)}
+
+//             user.password = hash;
+//             next();
+//         })
+//    })
+// });
+
+// Users.methods.comparePassword = function(candidatePassword, cb) {
+//     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+//         if (err) return cb(err);
+//         cb(null, isMatch);
+//     });
+// };
+
 
 //En caso que se utilice Passport como metodo de autentificacion usando depencenia bcryptjs
-// Users.methods.encryptPassword = async (password)=> {
-//     const salt = await bcrypt.genSalt(15)
-//     const hash = bcrypt.hash(password, salt)
-//     return hash
-// }
+Users.methods.encryptPassword = async (password)=> {
+    const salt = await bcrypt.genSalt(10)
+    const hash = bcrypt.hash(password, salt)
+    return hash
+}
 
-// Users.methods.comparePassword = async function(password){
-//     return await bcrypt.compare(password, this.password)
-// }
+Users.methods.comparePassword = async function(password){
+    return await bcrypt.compare(password, this.password)
+}
 
 Users.index({
     cc: 1

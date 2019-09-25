@@ -18,11 +18,6 @@ router.post('/login', controllersUser.login)
 //     failureRedirect: 'http://localhost:3000'
 // }))
 
-// Authenticated using passport
-// router.use((req, res, next)=>{
-//     isAuthenticated(req, res, next)
-//     next()
-// })
 
 router.get('/logout', auth ,controllersUser.logout)
 // router.get('/forgot', controllersUser.forgot)
