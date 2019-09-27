@@ -21,7 +21,7 @@
               class="accent"
               type="submit"
               :disabled="!valid"
-              @click="validate"
+              @click="validate, login"
             >Iniciar Sesión</v-btn>
           </v-card-actions>
         </v-form>
@@ -35,12 +35,14 @@
 
 
 <script>
+import axios from 'axios';
 export default {
   // layout:"",
   data() {
     return {
       cc: "",
       password: "",
+      error: null,
       valid: true,
       ccRules: [v => !!v || "Cedula de ciudadania es requerida"],
       passwordRules: [v => !!v || "Contraseña es requerida"]
@@ -51,6 +53,21 @@ export default {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
       }
+    },
+    async login(){
+      await axios.post('/api/login',{
+        cc: this.password,
+        password: this. password
+      }).then((res)=>{
+        let data = res.data
+        console.log(data);
+          this.$store.commit('setIsUserAuthenticated', true)
+          this.$router.replace('/home')
+        }
+      ).catch((error)=>{
+        console.log(error);
+        
+      })
     }
   }
 };

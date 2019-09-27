@@ -35,12 +35,18 @@
         <!-- Tabla -->
         <v-row cols="12">
           <v-col md="4">
-            <v-text-field prepend-icon="icon-search" v-model="search" class="mt-4 mb-5" label="Buscar implemento" hide-details></v-text-field>
+            <v-text-field
+              prepend-icon="icon-search"
+              v-model="search"
+              class="mt-4 mb-5"
+              label="Buscar implemento"
+              hide-details
+            ></v-text-field>
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :search="search">
           <template v-slot:item.icon="{ item }">
-            <v-icon small color="edit" class="mr-2" >icon-pencil</v-icon>
+            <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
             <v-icon small color="error">icon-trash</v-icon>
           </template>
         </v-data-table>
@@ -79,6 +85,12 @@ export default {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
       }
+    },
+    async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+       let {data} = axios
+          .get('/api/implement')
+          return {item: data.data.implement}
+      
     }
   }
 };

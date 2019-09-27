@@ -36,8 +36,8 @@
               class="accent"
               type="submit"
               :disabled="!valid"
-              @click.prevent="validate"
-              to="/"
+              @click.prevent="registro"
+              
             >Iniciar Sesión</v-btn>
           </v-card-actions>
         </v-form>
@@ -49,6 +49,7 @@
 
 <script>
 import axios from '~/plugins/axios'
+import { async } from 'q';
 
 export default {
   data() {
@@ -73,29 +74,29 @@ export default {
       ]
     };
   },
- async asyncData() {
-    let { data } = await axios.get('/api/implements') 
-      return {implements : data}
+//  async asyncData() {
+//     let { data } = await axios.get('/api/implements') 
+//       return {implements : data}
+//     }
+  // }
+ methods: {
+   async registro(){
+      axios
+        .post("/api/register", {
+          cc: this.cc,
+          name: this.name,
+          email: this.email,
+          password: this.password
+        })
+        .then(res => {
+          this.$router.replace('/')
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
-//  methods: {
-//     async registro() {
-//      await axios
-//         .post("http://localhost:3000/api/register", {
-//           cc: this.cc,
-//           name: this.name,
-//           email: this.email,
-//           password: this.password
-//         })
-//         .then(res => {
-//           redirect('/')
-//         })
-//         .catch(err => {
-//           console.log(err);
-//         });
-//     }
-//   }
-
+}
 </script>
 
 <style scoped>
