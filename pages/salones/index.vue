@@ -52,8 +52,8 @@
 
         <v-data-table :headers="headers" :items="items" :search="search">
           <template v-slot:item.icon="{ item }">
-            <v-icon small color="edit" class="mr-2" >icon-pencil</v-icon>
-            <v-icon small color="error" >icon-trash</v-icon>
+            <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
+            <v-icon small color="error">icon-trash</v-icon>
           </template>
         </v-data-table>
       </v-container>
@@ -63,6 +63,7 @@
 
 
 <script>
+import axios from '~/plugins/axios'
 export default {
   layout: "home",
   data() {
@@ -81,79 +82,17 @@ export default {
         { text: "DESCRIPCIÓN", align: "center", value: "carbs" },
         { text: "ACCIONES", align: "center", value: "icon" }
       ],
-      items: [
-        {
-          name_salon: "Frozen Yogurt",
-          id: 159,
-          fat: 6.0,
-          carbs: 24,
-          icon: "icon-pencil"
-        },
-        {
-          name_salon: "Ice cream sandwich",
-          id: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3
-        },
-        {
-          name_salon: "Eclair",
-          id: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0
-        },
-        {
-          name_salon: "Cupcake",
-          id: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3
-        },
-        {
-          name_salon: "Gingerbread",
-          id: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9
-        },
-        {
-          name_salon: "Jelly bean",
-          id: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0
-        },
-        {
-          name_salon: "Lollipop",
-          id: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0
-        },
-        {
-          name_salon: "Honeycomb",
-          id: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5
-        },
-        {
-          name_salon: "Donut",
-          id: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9
-        },
-        {
-          name_salon: "KitKat",
-          id: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7
-        }
-      ]
+      items: []
     };
+  },
+  async created(){
+    try {
+      const res = await axios.get("/api/room");
+      console.log(res.data);
+      this.items = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   },
   methods: {
     validate() {

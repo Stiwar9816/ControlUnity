@@ -40,7 +40,7 @@ module.exports = {
             req.user = user
             res.status(200).send({
                 message: 'Te has logeado correctamente',
-                token: service.createToken(user)
+                token: service.createToken(user) 
             })
         })
         const passwordValidate = await user.comparePassword(password) 

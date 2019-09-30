@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from "~/plugins/axios";
 export default {
   layout: "home",
   data() {
@@ -37,8 +38,17 @@ export default {
         { text: "DESCRIPCIÓN", align: "center", sortable: false },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: [{}]
+      items: []
     };
+  },
+  async created() {
+    try {
+      const res = await axios.get("/api/booking");
+      console.log(res.data);
+      this.items = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>

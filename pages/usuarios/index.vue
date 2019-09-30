@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios';
 export default {
   layout: "home",
   data() {
@@ -37,8 +38,17 @@ export default {
         { text: "CORREO ELECTRONICO", align: "center", sortable: false },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: [{}]
+      items: []
     };
+  },
+  async created(){
+    try {
+      const res = await axios.get("/api/user");
+      console.log("usuarios:",res.data);
+      this.items = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>

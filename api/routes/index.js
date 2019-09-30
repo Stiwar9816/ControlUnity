@@ -21,27 +21,27 @@ router.post('/login', controllersUser.login)
 
 router.get('/logout', auth ,controllersUser.logout)
 // router.get('/forgot', controllersUser.forgot)
-router.get('user', auth,controllersUser.allUser)
-router.get('user/:id', auth,controllersUser.getOneUser)
-router.put('updateUser/:id', auth,controllersUser.updateUser)
-router.delete('deleteUser/:id', auth,controllersUser.deleteUser)
+router.get('/user', controllersUser.allUser)
+router.get('/user/:id', auth,controllersUser.getOneUser)
+router.put('/updateUser/:id', auth,controllersUser.updateUser)
+router.delete('/deleteUser/:id', auth,controllersUser.deleteUser)
 
 // Routes Bookings Crud
-router.get('/booking', auth,controllersBookings.allBooking)
+router.get('/booking', controllersBookings.allBooking)
 router.get('/booking/:id', auth,controllersBookings.getOneBooking)
 router.post('/newBooking', auth,controllersBookings.newBooking)
 router.put('/updateBooking/:id', auth,controllersBookings.updateBooking)
 router.delete('/deleteBooking/:id', auth,controllersBookings.deleteBooking)
 
 // Routes Rooms Crud
-router.get('/room', auth,controllersRooms.allRoom)
+router.get('/room', controllersRooms.allRoom)
 router.get('/room/:id', auth,controllersRooms.getOneRoom)
 router.post('/newRoom', auth,controllersRooms.newRoom)
 router.put('/updateRoom/:id', auth,controllersRooms.updateRoom)
 router.delete('/deleteRoom/:id', auth,controllersRooms.deleteRoom)
 
 // Routes Implements Crud
-router.get('/implement', auth,controllersImplements.allImplement)
+router.get('/implement', controllersImplements.allImplement)
 router.get('/implement/:id', auth,controllersImplements.getOneImplement)
 router.post('/newImplement', auth,controllersImplements.newImplement)
 router.put('/updateImplement/:id', auth,controllersImplements.updateImplement)

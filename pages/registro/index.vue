@@ -49,7 +49,7 @@
 
 <script>
 import axios from '~/plugins/axios'
-import { async } from 'q';
+// import { async } from 'q';
 
 export default {
   data() {
@@ -81,7 +81,7 @@ export default {
   // }
  methods: {
    async registro(){
-      axios
+     await axios
         .post("/api/register", {
           cc: this.cc,
           name: this.name,

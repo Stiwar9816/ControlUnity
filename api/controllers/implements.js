@@ -5,7 +5,7 @@ module.exports = {
     // Get all implements
     allImplement: async (req, res, next) => {
         const implements = await Implement.find({})
-        res.status(200).json(implements)
+        res.status(200).json({implement:  implements})
     },
 
     // Created new implement

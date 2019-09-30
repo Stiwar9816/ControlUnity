@@ -45,6 +45,10 @@
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :search="search">
+          <template slot="[serial]" slot-scope="data">{{items.serial}}</template>
+          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
+          <template slot="[stock]" slot-scope="data">{{data.item.stock}}</template>
+          <template slot="[mark]" slot-scope="data">{{data.item.mark}}</template>
           <template v-slot:item.icon="{ item }">
             <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
             <v-icon small color="error">icon-trash</v-icon>
@@ -56,6 +60,7 @@
 </template>
 
 <script>
+import axios from "~/plugins/axios";
 export default {
   layout: "home",
   data() {
@@ -71,26 +76,29 @@ export default {
       stockRules: [v => !!v || "Stock del implemento es requerido"],
       markRules: [v => !!v || "Marca del implemento es requerido"],
       headers: [
-        { text: "SERIAL", align: "center", sortable: false },
-        { text: "IMPLEMENTO", align: "center" },
-        { text: "STOCK", align: "center", sortable: false },
-        { text: "MARCA", align: "center" },
-        { text: "ACCIONES", align: "center", sortable: false, value:"icon" }
+        { text: "SERIAL", align: "center", sortable: false, key: "serial" },
+        { text: "IMPLEMENTO", align: "center", key: "name" },
+        { text: "STOCK", align: "center", sortable: false, key: "stock" },
+        { text: "MARCA", align: "center", key: "mark" },
+        { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items:[{}]
+      items: []
     };
+  },
+  async created() {
+    try {
+      const res = await axios.get("api/implement");
+      this.items = res.data.implement;
+      console.log("Implementos:", this.items.serial);
+    } catch (error) {
+      console.log(error);
+    }
   },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
       }
-    },
-    async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-       let {data} = axios
-          .get('/api/implement')
-          return {item: data.data.implement}
-      
     }
   }
 };
