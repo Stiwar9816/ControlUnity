@@ -43,7 +43,7 @@ router.delete('/deleteRoom/:id', auth,controllersRooms.deleteRoom)
 // Routes Implements Crud
 router.get('/implement', controllersImplements.allImplement)
 router.get('/implement/:id', auth,controllersImplements.getOneImplement)
-router.post('/newImplement', auth,controllersImplements.newImplement)
+router.post('/newImplement',controllersImplements.newImplement)
 router.put('/updateImplement/:id', auth,controllersImplements.updateImplement)
 router.delete('/deleteImplement/:id', auth,controllersImplements.deleteImplement)
 

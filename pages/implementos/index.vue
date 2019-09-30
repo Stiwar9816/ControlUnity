@@ -45,11 +45,11 @@
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :search="search">
-          <template slot="[serial]" slot-scope="data">{{items.serial}}</template>
+          <template slot="[serial]" slot-scope="data">{{data.item.serial}}</template>
           <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
           <template slot="[stock]" slot-scope="data">{{data.item.stock}}</template>
           <template slot="[mark]" slot-scope="data">{{data.item.mark}}</template>
-          <template v-slot:item.icon="{ item }">
+          <template v-slot:item.icon="{ items }">
             <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
             <v-icon small color="error">icon-trash</v-icon>
           </template>
@@ -76,20 +76,21 @@ export default {
       stockRules: [v => !!v || "Stock del implemento es requerido"],
       markRules: [v => !!v || "Marca del implemento es requerido"],
       headers: [
-        { text: "SERIAL", align: "center", sortable: false, key: "serial" },
-        { text: "IMPLEMENTO", align: "center", key: "name" },
-        { text: "STOCK", align: "center", sortable: false, key: "stock" },
-        { text: "MARCA", align: "center", key: "mark" },
+        { text: "SERIAL", align: "center", sortable: false, value: "serial" },
+        { text: "IMPLEMENTO", align: "center", value: "name" },
+        { text: "STOCK", align: "center", sortable: false, value: "stock" },
+        { text: "MARCA", align: "center", value: "mark" },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: []
+
+      items:[]
     };
   },
   async created() {
     try {
       const res = await axios.get("api/implement");
-      this.items = res.data.implement;
-      console.log("Implementos:", this.items.serial);
+      this.items = await res.data.implement;
+      console.log("Implementos:", this.items);
     } catch (error) {
       console.log(error);
     }
