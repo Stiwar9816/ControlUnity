@@ -12,7 +12,7 @@ module.exports = {
     newRoom: async (req, res, next) => {
         const newRoom = new Room(req.body)
         const Room = await newRoom.save()
-        res.status(200).json(Room)
+        res.status(200).json({Room: Room})
     },
 
     // Get one Room from id

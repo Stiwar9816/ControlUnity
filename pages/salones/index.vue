@@ -3,11 +3,11 @@
     <v-flex>
       <v-subheader class="subtitle-1">SALONES REGISTRADOS</v-subheader>
       <v-container>
-        <v-form ref="form" v-model="valid" lazy-validation>
+        <v-form ref="form" v-model="valid" v-on:submit="newRoom" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col>
-              <v-text-field v-model="salon" :rules="salonRules" label="Nombre Salon" required></v-text-field>
+              <v-text-field v-model="name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
             </v-col>
             <v-col>
               <v-text-field
@@ -31,7 +31,7 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
+              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="newRoom">
                 <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -52,6 +52,7 @@
 
         <v-data-table :headers="headers" :items="items" :search="search">
           <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
+          <template slot="[capacity]" slot-scope="data">{{data.item.capacity}}</template>
           <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
           <template v-slot:item.icon="{ item }">
             <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
@@ -71,7 +72,7 @@ export default {
   data() {
     return {
       search: "",
-      salon: "",
+      name: "",
       capacity: "",
       description: "",
       valid: true,
@@ -80,9 +81,9 @@ export default {
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
         { text: "NOMBRE SALON", align: "center", value: "name" },
-        { text: "CAPACIDAD", align: "center" },
-        { text: "DESCRIPCIÓN", align: "center", value: "description" },
-        { text: "ACCIONES", align: "center", value: "icon" }
+        { text: "CAPACIDAD", align: "center", sortable:false },
+        { text: "DESCRIPCIÓN", align: "center", sortable:false, value: "description" },
+        { text: "ACCIONES", align: "center", sortable:false, value: "icon" }
       ],
       items: []
     };
@@ -100,6 +101,18 @@ export default {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
       }
+    },
+    async newRoom() {
+      await axios
+        .post("newRoom", {
+          name: this.name,
+          capacity: this.capacity,
+          description: this.description
+        })
+        .then(res => {
+          this.$router.push({ name: "salones" });
+        })
+        .catch(err => console.error(err));
     }
   }
 };
