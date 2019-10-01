@@ -31,7 +31,7 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="newRoom">
+              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="NewRoom">
                 <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -55,7 +55,7 @@
           <template slot="[capacity]" slot-scope="data">{{data.item.capacity}}</template>
           <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
           <template v-slot:item.icon="{ item }">
-            <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
+            <v-icon small color="edit">icon-pencil</v-icon>
             <v-icon small color="error">icon-trash</v-icon>
           </template>
         </v-data-table>
@@ -102,7 +102,7 @@ export default {
         this.snackbar = true;
       }
     },
-    async newRoom() {
+    async NewRoom() {
       await axios
         .post("newRoom", {
           name: this.name,

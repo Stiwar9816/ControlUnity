@@ -63,11 +63,11 @@
           <template slot="[stock]" slot-scope="data">{{data.item.stock}}</template>
           <template slot="[mark]" slot-scope="data">{{data.item.mark}}</template>
           <template v-slot-scope="data" v-slot:item.icon="{ items }">
-            <v-btn icon class="mx-0">
-            <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
+            <v-btn icon>
+              <v-icon small color="edit">icon-pencil</v-icon>
             </v-btn>
-            <v-btn icon class="mx-0" @click.prevent="deleteImplement(data.item._id)">
-            <v-icon small color="error">icon-trash</v-icon>
+            <v-btn icon v-on:click="deleteImplement(data.item._id)">
+              <v-icon small color="error">icon-trash</v-icon>
             </v-btn>
           </template>
         </v-data-table>
@@ -78,6 +78,7 @@
 
 <script>
 import axios from "~/plugins/axios";
+// import { async } from "q";
 export default {
   layout: "home",
   data() {
@@ -137,6 +138,21 @@ export default {
           this.$router.push({ name: "implementos" });
         })
         .catch(err => console.error(err));
+    },
+    deleteImplement(id) {
+      const response = confirm("Esta seguro de eliminar este implemento?");
+      if (response) {
+        const eliminar = axios
+          .delete("deleteImplement/" + id)
+          .then(res => {
+            this.items.splice(eliminar, 1);
+            console.log("Implement Delete: ", eliminar);
+          })
+          .catch(e => {
+            console.log("Unable to clear the boat", e);
+          });
+      }
+      return;
     }
   }
 };
