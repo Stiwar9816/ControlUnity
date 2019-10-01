@@ -126,15 +126,15 @@ export default {
       }
     },
     async NewImplement() {
-      await axios
-        .post("newImplement", {
+     const implement =  await axios
+        .post('newImplement', {
           serial: this.serial,
           name: this.implement,
           stock: this.stock,
           mark: this.mark,
           description: this.description
         })
-        .then(res => {
+        .then(implement => {
           this.$router.push({ name: "implementos" });
         })
         .catch(err => console.error(err));
