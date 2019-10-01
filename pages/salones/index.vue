@@ -51,6 +51,8 @@
         </v-row>
 
         <v-data-table :headers="headers" :items="items" :search="search">
+          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
+          <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
           <template v-slot:item.icon="{ item }">
             <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
             <v-icon small color="error">icon-trash</v-icon>
@@ -63,7 +65,7 @@
 
 
 <script>
-import axios from '~/plugins/axios'
+import axios from "~/plugins/axios";
 export default {
   layout: "home",
   data() {
@@ -77,19 +79,18 @@ export default {
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
-        { text: "NOMBRE SALON", align: "center", value: "name_salon" },
-        { text: "CAPACIDAD", align: "center", value: "fat" },
-        { text: "DESCRIPCIÓN", align: "center", value: "carbs" },
+        { text: "NOMBRE SALON", align: "center", value: "name" },
+        { text: "CAPACIDAD", align: "center" },
+        { text: "DESCRIPCIÓN", align: "center", value: "description" },
         { text: "ACCIONES", align: "center", value: "icon" }
       ],
       items: []
     };
   },
-  async created(){
+  async created() {
     try {
-      const res = await axios.get("/api/room");
-      console.log(res.data);
-      this.items = res.data;
+      const res = await axios.get("room");
+      this.items = await res.data.Rooms;
     } catch (error) {
       console.log(error);
     }

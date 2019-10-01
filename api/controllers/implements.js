@@ -12,7 +12,7 @@ module.exports = {
     newImplement: async (req, res, next) => {
         const newImplement = new Implement(req.body)
         const implement = await newImplement.save()
-        res.status(200).json(implement)
+        res.status(200).json({implement: implement})
     },
 
     // Get one implement from id

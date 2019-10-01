@@ -5,7 +5,7 @@ module.exports = {
     // Get all Rooms
     allRoom: async (req, res, next) => {
         const Rooms = await Room.find({})
-        res.status(200).json(Rooms)
+        res.status(200).json({Rooms: Rooms})
     },
 
     // Created new Room
