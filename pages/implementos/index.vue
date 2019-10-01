@@ -51,7 +51,7 @@
             <v-text-field
               prepend-icon="icon-search"
               v-model="search"
-              class="mt-1 mb-5"
+              class="mb-5"
               label="Buscar implemento"
               hide-details
             ></v-text-field>
@@ -78,7 +78,6 @@
 
 <script>
 import axios from "~/plugins/axios";
-// import { async } from "q";
 export default {
   layout: "home",
   data() {
@@ -125,9 +124,10 @@ export default {
         this.snackbar = true;
       }
     },
+    //Add New Salon
     async NewImplement() {
-     const implement =  await axios
-        .post('newImplement', {
+      const implement = await axios
+        .post("newImplement", {
           serial: this.serial,
           name: this.implement,
           stock: this.stock,
@@ -139,6 +139,7 @@ export default {
         })
         .catch(err => console.error(err));
     },
+    //Delete Salon
     deleteImplement(id) {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {

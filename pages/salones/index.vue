@@ -31,7 +31,7 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click.prevent="newRoom">
+              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="NewRoom">
                 <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -55,8 +55,12 @@
           <template slot="[capacity]" slot-scope="data">{{data.item.capacity}}</template>
           <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
           <template v-slot:item.icon="{ item }">
+            <v-btn icon>
             <v-icon small color="edit">icon-pencil</v-icon>
+            </v-btn>
+            <v-btn icon>
             <v-icon small color="error">icon-trash</v-icon>
+            </v-btn>
           </template>
         </v-data-table>
       </v-container>

@@ -20,7 +20,9 @@
           <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
           <template slot="[email]" slot-scope="data">{{data.item.email}}</template>
           <template v-slot:item.icon="{ item }">
-            <v-icon color="error" small>icon-trash</v-icon>
+            <v-btn icon>
+              <v-icon color="error" small>icon-trash</v-icon>
+            </v-btn>
           </template>
         </v-data-table>
       </v-container>
@@ -29,22 +31,27 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios';
+import axios from "~/plugins/axios";
 export default {
   layout: "home",
   data() {
     return {
       search: "",
       headers: [
-        { text: "CEDULA", align: "center", sortable: false, value:"cc" },
-        { text: "NOMBRE COMPLETO", align: "center", value:"name" },
-        { text: "CORREO ELECTRONICO", align: "center", sortable: false, value:"email" },
+        { text: "CEDULA", align: "center", sortable: false, value: "cc" },
+        { text: "NOMBRE COMPLETO", align: "center", value: "name" },
+        {
+          text: "CORREO ELECTRONICO",
+          align: "center",
+          sortable: false,
+          value: "email"
+        },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: []
     };
   },
-  async created(){
+  async created() {
     try {
       const res = await axios.get("user");
       this.items = await res.data.users;

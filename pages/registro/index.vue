@@ -82,7 +82,7 @@ export default {
  methods: {
    async registro(){
      await axios
-        .post("/api/register", {
+        .post("register", {
           cc: this.cc,
           name: this.name,
           email: this.email,
