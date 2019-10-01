@@ -62,10 +62,13 @@
           <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
           <template slot="[stock]" slot-scope="data">{{data.item.stock}}</template>
           <template slot="[mark]" slot-scope="data">{{data.item.mark}}</template>
-          <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
-          <template v-slot:item.icon="{ items }">
+          <template v-slot-scope="data" v-slot:item.icon="{ items }">
+            <v-btn icon class="mx-0">
             <v-icon small color="edit" class="mr-2">icon-pencil</v-icon>
+            </v-btn>
+            <v-btn icon class="mx-0" @click.prevent="deleteImplement(data.item._id)">
             <v-icon small color="error">icon-trash</v-icon>
+            </v-btn>
           </template>
         </v-data-table>
       </v-container>

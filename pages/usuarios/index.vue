@@ -16,6 +16,9 @@
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :search="search">
+          <template slot="[cc]" slot-scope="data">{{data.item.cc}}</template>
+          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
+          <template slot="[email]" slot-scope="data">{{data.item.email}}</template>
           <template v-slot:item.icon="{ item }">
             <v-icon color="error" small>icon-trash</v-icon>
           </template>

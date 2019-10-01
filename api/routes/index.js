@@ -45,7 +45,7 @@ router.get('/implement', controllersImplements.allImplement)
 router.get('/implement/:id', auth,controllersImplements.getOneImplement)
 router.post('/newImplement',controllersImplements.newImplement)
 router.put('/updateImplement/:id', auth,controllersImplements.updateImplement)
-router.delete('/deleteImplement/:id', auth,controllersImplements.deleteImplement)
+router.delete('/deleteImplement/:id',controllersImplements.deleteImplement)
 
 // Apliaction of populate from data
 /* 

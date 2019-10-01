@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const Rooms = new Schema({
     name:{type: String, required:true},
-    capacity: {type: String, required:true},
+    capacity: {type: Number, required:true},
     description:{type: String, required:true, unique: true}
 })
 
