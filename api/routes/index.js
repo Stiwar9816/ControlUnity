@@ -36,7 +36,7 @@ router.delete('/deleteBooking/:id', auth,controllersBookings.deleteBooking)
 // Routes Rooms Crud
 router.get('/room', controllersRooms.allRoom)
 router.get('/room/:id', auth,controllersRooms.getOneRoom)
-router.post('/newRoom', auth,controllersRooms.newRoom)
+router.post('/newRoom',controllersRooms.newRoom)
 router.put('/updateRoom/:id', auth,controllersRooms.updateRoom)
 router.delete('/deleteRoom/:id', auth,controllersRooms.deleteRoom)
 

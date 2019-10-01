@@ -31,7 +31,7 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="newRoom">
+              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click.prevent="newRoom">
                 <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -81,7 +81,7 @@ export default {
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
         { text: "NOMBRE SALON", align: "center", value: "name" },
-        { text: "CAPACIDAD", align: "center", sortable:false },
+        { text: "CAPACIDAD", align: "center", sortable:false, value: "capacity"},
         { text: "DESCRIPCIÓN", align: "center", sortable:false, value: "description" },
         { text: "ACCIONES", align: "center", sortable:false, value: "icon" }
       ],
