@@ -36,9 +36,9 @@ export default {
     return {
       search: "",
       headers: [
-        { text: "CEDULA", align: "center",value: "cc", sortable: false },
-        { text: "NOMBRE COMPLETO", align: "center",value: "name"  },
-        { text: "CORREO ELECTRONICO", align: "center",value: "email", sortable: false },
+        { text: "CEDULA", align: "center", sortable: false, value:"cc" },
+        { text: "NOMBRE COMPLETO", align: "center", value:"name" },
+        { text: "CORREO ELECTRONICO", align: "center", sortable: false, value:"email" },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: []
@@ -46,9 +46,8 @@ export default {
   },
   async created(){
     try {
-      const res = await axios.get("/api/user");
-      console.log("usuarios:",res.data);
-      this.items = res.data;
+      const res = await axios.get("user");
+      this.items = await res.data.users;
     } catch (error) {
       console.log(error);
     }

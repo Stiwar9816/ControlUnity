@@ -16,6 +16,9 @@
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :search="search">
+          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
+          <template slot="[capacity]" slot-scope="data">{{data.item.capacity}}</template>
+          <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
           <template v-slot:item.icon="{ item }">
             <v-icon color="green" small>icon-check-square-o</v-icon>
           </template>
@@ -33,9 +36,19 @@ export default {
     return {
       search: "",
       headers: [
-        { text: "NOMBRE SALON", align: "center" },
-        { text: "CAPACIDAD", align: "center", sortable: false },
-        { text: "DESCRIPCIÓN", align: "center", sortable: false },
+        { text: "NOMBRE SALON", align: "center", value: "name" },
+        {
+          text: "CAPACIDAD",
+          align: "center",
+          sortable: false,
+          value: "capacity"
+        },
+        {
+          text: "DESCRIPCIÓN",
+          align: "center",
+          sortable: false,
+          value: "description"
+        },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: []
@@ -43,9 +56,8 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("/api/booking");
-      console.log(res.data);
-      this.items = res.data;
+      const res = await axios.get("booking");
+      this.items = await res.data.Bookings;
     } catch (error) {
       console.log(error);
     }

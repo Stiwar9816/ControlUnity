@@ -5,7 +5,7 @@ module.exports = {
     // Get all Bookings
     allBooking: async (req, res, next) => {
         const Bookings = await Booking.find({})
-        res.status(200).json(Bookings)
+        res.status(200).json({Bookings: Bookings})
     },
 
     // Created new Booking

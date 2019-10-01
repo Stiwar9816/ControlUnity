@@ -60,7 +60,7 @@ module.exports = {
     // Get all users
     allUser: async (req, res, next) => {
         const users = await Users.find({})
-        res.status(200).json(users)
+        res.status(200).json({users: users})
     },
 
     // Get one implement from id

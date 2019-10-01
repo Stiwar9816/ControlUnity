@@ -87,14 +87,13 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
 
-      items:[]
+      items: []
     };
   },
   async created() {
     try {
-      const res = await axios.get("api/implement");
+      const res = await axios.get("implement");
       this.items = await res.data.implement;
-      console.log("Implementos:", this.items);
     } catch (error) {
       console.log(error);
     }
