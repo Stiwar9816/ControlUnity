@@ -3,7 +3,7 @@
     <v-flex>
       <v-subheader class="subtitle-1">IMPLEMENTOS REGISTRADOS</v-subheader>
       <v-container>
-        <v-form ref="form" v-model="valid" v-on:submit="NewImplement" lazy-validation>
+        <v-form ref="form" v-model="valid" @submit="NewImplement" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col>
@@ -57,7 +57,13 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-data-table :headers="headers" :items="items" :search="search">
+        <v-data-table
+          :headers="headers"
+          :items="items"
+          :items-per-page="5"
+          :search="search"
+          class="elevation-1"
+        >
           <template slot="items" slot-scope="data" />
           <template v-slot:item.icon>
             <v-btn icon>
@@ -66,6 +72,12 @@
             <v-btn icon v-on:click="deleteImplement(data.item._id)">
               <v-icon small color="error">icon-trash</v-icon>
             </v-btn>
+          </template>
+          <template v-slot:no-results>
+            <span>No se encontraron coincidencias</span>
+          </template>
+          <template v-slot:no-data>
+            <span>No hay información registrada</span>
           </template>
         </v-data-table>
       </v-container>
@@ -122,7 +134,7 @@ export default {
       }
     },
     //Add New Salon
-    async NewImplement() {
+    async NewImplement(event) {
       const implement = await axios
         .post("newImplement", {
           serial: this.serial,
@@ -133,6 +145,7 @@ export default {
         })
         .then(implement => {
           this.$router.push({ name: "implementos" });
+          alert("Implemento agregado")
         })
         .catch(err => console.error(err));
     },
@@ -140,7 +153,7 @@ export default {
     deleteImplement(id) {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
-          axios
+        axios
           .delete("http://localhost:3000/deleteImplement/" + id)
           .then(res => {
             this.items.splice(id, 1);

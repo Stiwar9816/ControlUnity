@@ -15,7 +15,13 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-data-table :headers="headers" :items="items" :search="search">
+        <v-data-table
+          :headers="headers"
+          :items="items"
+          :items-per-page="5"
+          :search="search"
+          class="elevation-1"
+        >
           <template slot="[cc]" slot-scope="data">{{data.item.cc}}</template>
           <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
           <template slot="[email]" slot-scope="data">{{data.item.email}}</template>
@@ -23,6 +29,12 @@
             <v-btn icon>
               <v-icon color="error" small>icon-trash</v-icon>
             </v-btn>
+          </template>
+          <template v-slot:no-results>
+            <span>No se encontraron coincidencias</span>
+          </template>
+          <template v-slot:no-data>
+            <span>No hay información registrada</span>
           </template>
         </v-data-table>
       </v-container>
