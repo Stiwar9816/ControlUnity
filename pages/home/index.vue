@@ -22,7 +22,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data" />
+          <template slot="items"/>
           <template v-slot:item.icon>
             <v-icon color="green" small>icon-check-square-o</v-icon>
           </template>

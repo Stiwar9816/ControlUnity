@@ -22,10 +22,8 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="[cc]" slot-scope="data">{{data.item.cc}}</template>
-          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
-          <template slot="[email]" slot-scope="data">{{data.item.email}}</template>
-          <template v-slot:item.icon="{ item }">
+          <template slot="items" ></template>
+          <template v-slot:item.icon>
             <v-btn icon>
               <v-icon color="error" small>icon-trash</v-icon>
             </v-btn>

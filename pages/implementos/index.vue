@@ -64,7 +64,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data" />
+          <template slot="items"/>
           <template v-slot:item.icon>
             <v-btn icon>
               <v-icon small color="edit">icon-pencil</v-icon>
