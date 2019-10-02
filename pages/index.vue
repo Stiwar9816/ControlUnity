@@ -3,7 +3,7 @@
     <v-flex class="mt-4">
       <v-card max-width="400" class="mx-auto login" outlined>
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
-        <v-form ref="form" v-model="valid" lazy-validation>
+        <v-form ref="form" v-model="valid" v-on:submit="login" lazy-validation>
           <v-card-text>
             <v-text-field v-model="cc" :rules="ccRules" label="C.C" type="number" min="0" required></v-text-field>
             <v-text-field
@@ -21,7 +21,7 @@
               class="accent"
               type="submit"
               :disabled="!valid"
-              @click="validate, login"
+              @click="login"
             >Iniciar Sesión</v-btn>
           </v-card-actions>
         </v-form>
@@ -35,7 +35,7 @@
 
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   // layout:"",
   data() {
@@ -54,20 +54,21 @@ export default {
         this.snackbar = true;
       }
     },
-    async login(){
-      await axios.post('/api/login',{
-        cc: this.password,
-        password: this. password
-      }).then((res)=>{
-        let data = res.data
-        console.log(data);
-          this.$store.commit('setIsUserAuthenticated', true)
-          this.$router.replace('/home')
-        }
-      ).catch((error)=>{
-        console.log(error);
-        
-      })
+    async login() {
+      await axios
+        .post("login", {
+          cc: this.password,
+          password: this.password
+        })
+        .then(res => {
+          let data = res.data;
+          console.log(data);
+          this.$store.commit("setIsUserAuthenticated", true);
+          this.$router.push("/home");
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

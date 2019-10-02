@@ -8,7 +8,7 @@ const mapDuplicate = require('../helpers/mapDuplicate')
 
 const Users = new Schema({
     cc: {
-        type: String,
+        type: Number,
         required: true,
         unique: true
     },

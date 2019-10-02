@@ -51,15 +51,13 @@
         </v-row>
 
         <v-data-table :headers="headers" :items="items" :search="search">
-          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
-          <template slot="[capacity]" slot-scope="data">{{data.item.capacity}}</template>
-          <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
-          <template v-slot:item.icon="{ item }">
+          <template slot="items" slot-scope="data" />
+          <template v-slot:item.icon>
             <v-btn icon>
-            <v-icon small color="edit">icon-pencil</v-icon>
+              <v-icon small color="edit">icon-pencil</v-icon>
             </v-btn>
             <v-btn icon>
-            <v-icon small color="error">icon-trash</v-icon>
+              <v-icon small color="error">icon-trash</v-icon>
             </v-btn>
           </template>
         </v-data-table>
@@ -85,9 +83,19 @@ export default {
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
         { text: "NOMBRE SALON", align: "center", value: "name" },
-        { text: "CAPACIDAD", align: "center", sortable:false, value: "capacity"},
-        { text: "DESCRIPCIÓN", align: "center", sortable:false, value: "description" },
-        { text: "ACCIONES", align: "center", sortable:false, value: "icon" }
+        {
+          text: "CAPACIDAD",
+          align: "center",
+          sortable: false,
+          value: "capacity"
+        },
+        {
+          text: "DESCRIPCIÓN",
+          align: "center",
+          sortable: false,
+          value: "description"
+        },
+        { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: []
     };

@@ -58,11 +58,8 @@
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :search="search">
-          <template slot="[serial]" slot-scope="data">{{data.item.serial}}</template>
-          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
-          <template slot="[stock]" slot-scope="data">{{data.item.stock}}</template>
-          <template slot="[mark]" slot-scope="data">{{data.item.mark}}</template>
-          <template v-slot-scope="data" v-slot:item.icon="{ items }">
+          <template slot="items" slot-scope="data" />
+          <template v-slot:item.icon>
             <v-btn icon>
               <v-icon small color="edit">icon-pencil</v-icon>
             </v-btn>
@@ -143,11 +140,11 @@ export default {
     deleteImplement(id) {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
-        const eliminar = axios
-          .delete("deleteImplement/" + id)
+          axios
+          .delete("http://localhost:3000/deleteImplement/" + id)
           .then(res => {
-            this.items.splice(eliminar, 1);
-            console.log("Implement Delete: ", eliminar);
+            this.items.splice(id, 1);
+            console.log("Implement Delete: ", id);
           })
           .catch(e => {
             console.log("Unable to clear the boat", e);

@@ -16,10 +16,8 @@
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :search="search">
-          <template slot="[name]" slot-scope="data">{{data.item.name}}</template>
-          <template slot="[capacity]" slot-scope="data">{{data.item.capacity}}</template>
-          <template slot="[description]" slot-scope="data">{{data.item.description}}</template>
-          <template v-slot:item.icon="{ item }">
+          <template slot="items" slot-scope="data" />
+          <template v-slot:item.icon>
             <v-icon color="green" small>icon-check-square-o</v-icon>
           </template>
         </v-data-table>

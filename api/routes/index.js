@@ -29,7 +29,7 @@ router.delete('/deleteUser/:id', auth,controllersUser.deleteUser)
 // Routes Bookings Crud
 router.get('/booking', controllersBookings.allBooking)
 router.get('/booking/:id', auth,controllersBookings.getOneBooking)
-router.post('/newBooking', auth,controllersBookings.newBooking)
+router.post('/newBooking', controllersBookings.newBooking)
 router.put('/updateBooking/:id', auth,controllersBookings.updateBooking)
 router.delete('/deleteBooking/:id', auth,controllersBookings.deleteBooking)
 
