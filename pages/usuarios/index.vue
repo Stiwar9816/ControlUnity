@@ -22,7 +22,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" ></template>
+          <template slot="items" slot-scope="data"></template>
           <template v-slot:item.icon>
             <v-btn icon>
               <v-icon color="error" small>icon-trash</v-icon>
