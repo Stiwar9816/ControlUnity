@@ -25,18 +25,18 @@
 
       <template v-slot:append>
         <div class="pa-1" align="center">
-          <v-btn rounded text color="accent" to="/configuraciones">
+          <v-btn rounded text color="accent" to="/configuraciones" aria-label="Action menu">
             <v-icon dark>icon-wrench</v-icon>
           </v-btn>
-          <v-btn rounded text color="error" to="/">
+          <v-btn rounded text color="error" to="/" aria-label="Action menu">
             <v-icon dark>icon-power-off</v-icon>
           </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" color="appbar" fixed app flat>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" aria-label="Action menu" />
+      <v-btn aria-label="Action navigation" icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
@@ -52,8 +52,15 @@
         <a
           href="https://twitter.com/AsprillaStiwar"
           target="_blank"
+          rel="noreferrer"
+          aria-label="Contactanos"
         >Stiwar Asprilla</a> &
-        <a href="https://twitter.com/_JhonE17" target="_blank">Jhon E. Palacios</a>
+        <a
+          href="https://twitter.com/_JhonE17"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Contactanos"
+        >Jhon E. Palacios</a>
       </span>
     </v-footer>
   </v-app>

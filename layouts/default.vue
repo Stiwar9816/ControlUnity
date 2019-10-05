@@ -8,8 +8,18 @@
             <v-footer :fixed="fixed" app>
               <span>
                 &copy; Control Unity 2019 - Created by:
-                <a href target="__blank">Stiwar Asprilla</a> &
-                <a href target="__blank">Jhon E. Palacios</a>
+                <a
+                  href
+                  target="__blank"
+                  rel="noreferrer"
+                  aria-label="Contactanos"
+                >Stiwar Asprilla</a> &
+                <a
+                  href
+                  target="__blank"
+                  rel="noreferrer"
+                  aria-label="Contactanos"
+                >Jhon E. Palacios</a>
               </span>
             </v-footer>
           </v-container>

@@ -27,10 +27,10 @@
             <v-icon color="green" small>icon-check-square-o</v-icon>
           </template>
           <template v-slot:no-results>
-            <span>No se encontraron coincidencias</span>
+            <span class="font-weight-regular black--text">No se encontraron coincidencias</span>
           </template>
           <template v-slot:no-data>
-            <span>No hay información registrada</span>
+            <span class="font-weight-regular black--text">No hay información registrada</span>
           </template>
         </v-data-table>
       </v-container>
