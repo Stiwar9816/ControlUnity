@@ -4,7 +4,6 @@ const {
 } = mongoose;
 const bcrypt = require('bcryptjs');
 const mapDuplicate = require('../helpers/mapDuplicate')
-// SALT_WORK_FACTOR = 10;
 
 const Users = new Schema({
     cc: {
@@ -29,12 +28,8 @@ const Users = new Schema({
     }),
     lastLogin: ({
         type: Date
-    }),
-    date: ({
-        type: Date,
-        default: Date.now
-    }),
-})
+    })
+}, {timestamps: true})
 Users.post("save", mapDuplicate("Users"))
 
 // Users.pre('save', function(next){
