@@ -3,7 +3,7 @@
     <v-flex>
       <v-subheader class="subtitle-1">SALONES REGISTRADOS</v-subheader>
       <v-container>
-        <v-form ref="form" v-model="valid" v-on:submit="newRoom" lazy-validation>
+        <v-form ref="form" v-model="valid" v-on:submit="NewRoom" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col>
