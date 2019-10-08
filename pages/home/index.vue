@@ -22,9 +22,11 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data"/>
+          <template slot="items" slot-scope="data" />
           <template v-slot:item.icon>
-            <v-icon color="green" small>icon-check-square-o</v-icon>
+            <v-btn icon aria-label="check">
+              <v-icon color="green" small>icon-check-square-o</v-icon>
+            </v-btn>
           </template>
           <template v-slot:no-results>
             <span class="font-weight-regular black--text">No se encontraron coincidencias</span>

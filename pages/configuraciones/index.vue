@@ -49,7 +49,7 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
+              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="validate">
                 <v-icon dark>icon-plus</v-icon> Guardar cambios
               </v-btn>
             </v-col>

@@ -91,7 +91,7 @@
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
-            <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="validate">
+            <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="validate" aria-label="add">
               <v-icon dark>icon-plus</v-icon>Agregar
             </v-btn>
           </v-row>

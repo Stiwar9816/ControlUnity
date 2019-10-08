@@ -24,7 +24,7 @@
         >
           <template slot="items" slot-scope="data"></template>
           <template v-slot:item.icon>
-            <v-btn icon>
+            <v-btn icon aria-label="delete">
               <v-icon color="error" small>icon-trash</v-icon>
             </v-btn>
           </template>

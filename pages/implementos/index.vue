@@ -39,7 +39,7 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="NewImplement">
+              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="NewImplement">
                 <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -66,10 +66,10 @@
         >
           <template slot="items" slot-scope="data"/>
           <template v-slot:item.icon>
-            <v-btn icon>
+            <v-btn icon aria-label="edit">
               <v-icon small color="edit">icon-pencil</v-icon>
             </v-btn>
-            <v-btn icon v-on:click="deleteImplement(data.item._id)">
+            <v-btn icon v-on:click="deleteImplement(data.item._id)" aria-label="delete">
               <v-icon small color="error">icon-trash</v-icon>
             </v-btn>
           </template>

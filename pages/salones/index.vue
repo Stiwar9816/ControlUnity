@@ -34,7 +34,13 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary" type="submit" :disabled="!valid" @click="NewRoom">
+              <v-btn
+                rounded
+                color="primary black--text"
+                type="submit"
+                :disabled="!valid"
+                @click="NewRoom"
+              >
                 <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -56,16 +62,18 @@
         <v-data-table
           :headers="headers"
           :items="items"
-          :items-per-page="5"
+          :items-per-page="10"
+          :sort-by="['name']"
+          :sort-desc="[false]"
           :search="search"
           class="elevation-1"
         >
           <template slot="items" slot-scope="data" />
           <template v-slot:item.icon>
-            <v-btn icon>
+            <v-btn icon aria-label="edit">
               <v-icon small color="edit">icon-pencil</v-icon>
             </v-btn>
-            <v-btn icon>
+            <v-btn icon aria-label="delete">
               <v-icon small color="error">icon-trash</v-icon>
             </v-btn>
           </template>
