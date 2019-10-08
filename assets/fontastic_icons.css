@@ -2,7 +2,6 @@
 
 @font-face {
   font-family: "controlunity";
-  font-display: auto;
   src:url("fonts/controlunity.eot");
   src:url("fonts/controlunity.eot?#iefix") format("embedded-opentype"),
     url("fonts/controlunity.woff") format("woff"),
@@ -10,6 +9,7 @@
     url("fonts/controlunity.svg#controlunity") format("svg");
   font-weight: normal;
   font-style: normal;
+
 }
 
 [data-icon]:before {
@@ -91,4 +91,13 @@
 }
 .icon-search:before {
   content: "\72";
+}
+.icon-angle-left:before {
+  content: "\73";
+}
+.icon-angle-right:before {
+  content: "\74";
+}
+.icon-bars:before {
+  content: "\75";
 }

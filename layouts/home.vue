@@ -35,9 +35,11 @@
       </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" color="appbar" fixed app flat>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" aria-label="Action menu" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" aria-label="Action menu">
+        <v-icon>icon-bars</v-icon>
+      </v-app-bar-nav-icon>
       <v-btn aria-label="Action navigation" icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+        <v-icon>icon-{{ `angle-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
     </v-app-bar>
