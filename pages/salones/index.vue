@@ -101,7 +101,7 @@ export default {
       location: "",
       capacity: "",
       description: "",
-      valid: true,
+      valid: false,
       salonRules: [v => !!v || "Nombre del salon es requerido"],
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       locationRules: [v => !!v || "Capacidad del salon es requerida"],

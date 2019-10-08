@@ -6,8 +6,8 @@ module.exports = {
    */
   head: {
     titleTemplate:
-      "Control Unity | Sistema de reservas de aulas e implementos" ||
-      "Sistema de reservas de aulas e implementos",
+      "Control Unity | Sistema de gestión de aulas e implementos" ||
+      "Sistema de gestión de aulas e implementos",
     title: process.env.npm_package_name || "",
     meta: [
       { charset: "utf-8" },
