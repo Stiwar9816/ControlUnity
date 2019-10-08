@@ -10,6 +10,9 @@
               <v-text-field v-model="name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
             </v-col>
             <v-col>
+              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
+            </v-col>
+            <v-col>
               <v-text-field
                 v-model="capacity"
                 :rules="capacityRules"
@@ -57,7 +60,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data"/>
+          <template slot="items" slot-scope="data" />
           <template v-slot:item.icon>
             <v-btn icon>
               <v-icon small color="edit">icon-pencil</v-icon>
@@ -87,14 +90,22 @@ export default {
     return {
       search: "",
       name: "",
+      location: "",
       capacity: "",
       description: "",
       valid: true,
       salonRules: [v => !!v || "Nombre del salon es requerido"],
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
+      locationRules: [v => !!v || "Capacidad del salon es requerida"],
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
         { text: "NOMBRE SALON", align: "center", value: "name" },
+        {
+          text: "UBICACIÓN",
+          align: "center",
+          sortable: false,
+          value: "location"
+        },
         {
           text: "CAPACIDAD",
           align: "center",
@@ -130,6 +141,7 @@ export default {
       await axios
         .post("newRoom", {
           name: this.name,
+          location: this.location,
           capacity: this.capacity,
           description: this.description
         })
