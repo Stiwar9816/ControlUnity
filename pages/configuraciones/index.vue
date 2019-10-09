@@ -23,7 +23,10 @@
               <v-text-field
                 v-model="password"
                 :rules="passRules"
-                type="password"
+                :append-icon="show1 ? 'icon-eye' : 'icon-eye-slash'"
+                :type="show1 ? 'text' : 'password'"
+                @click:append="show1 = !show1"
+                counter
                 label="Contraseña actual"
                 required
               ></v-text-field>
@@ -32,7 +35,10 @@
               <v-text-field
                 v-model="passwordNew"
                 :rules="passRules"
-                type="password"
+                :append-icon="show1 ? 'icon-eye' : 'icon-eye-slash'"
+                :type="show1 ? 'text' : 'password'"
+                @click:append="show1 = !show1"
+                counter
                 label="Nueva contraseña"
                 required
               ></v-text-field>
@@ -41,7 +47,10 @@
               <v-text-field
                 v-model="passwordNewConf"
                 :rules="passRules"
-                type="password"
+                :append-icon="show1 ? 'icon-eye' : 'icon-eye-slash'"
+                :type="show1 ? 'text' : 'password'"
+                @click:append="show1 = !show1"
+                counter
                 label="Confirmar nueva contraseña"
                 required
               ></v-text-field>
@@ -49,8 +58,14 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="validate">
-                <v-icon dark>icon-plus</v-icon> Guardar cambios
+              <v-btn
+                rounded
+                color="primary black--text"
+                type="submit"
+                :disabled="!valid"
+                @click="validate"
+              >
+                <v-icon dark>icon-plus</v-icon>Guardar cambios
               </v-btn>
             </v-col>
           </v-row>
@@ -66,6 +81,7 @@ export default {
   data() {
     return {
       valid: true,
+      show1: false,
       name: "",
       email: "",
       password: "",
@@ -75,7 +91,7 @@ export default {
       emailRules: [
         v => !!v || "Correo electronico es requerido ",
         v =>
-          /.+@.+/.test(v) ||
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) ||
           "Correo electronico no es valido, Verifiquelo nuevamente"
       ],
       passRules: [

@@ -31,8 +31,10 @@
               <v-textarea
                 v-model="description"
                 :rules="descriptionRules"
+                autoGrow
                 required
                 rows="1"
+                row-height="20"
                 label="Descripción"
               ></v-textarea>
             </v-col>
@@ -98,6 +100,7 @@ export default {
       mark: "",
       description: "",
       valid: true,
+      
       serialRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
       stockRules: [v => !!v || "Stock del implemento es requerido"],

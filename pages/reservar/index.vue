@@ -42,7 +42,15 @@
                 :items="salons"
                 item-text="name"
                 item-value="name"
-              ></v-autocomplete>
+                flat
+                clearable
+              >
+                <template v-slot:no-data>
+                  <v-list-item>
+                    <v-list-item-title>No existe coincidencias</v-list-item-title>
+                  </v-list-item>
+                </template>
+              </v-autocomplete>
             </v-col>
             <!--DatePicker  -->
             <v-col>
@@ -64,7 +72,7 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="date" @input="DateModal = false"></v-date-picker>
+                <v-date-picker v-model="date" @input="DateModal = false" locale="es-co"></v-date-picker>
               </v-menu>
             </v-col>
             <!-- End DatePicker -->
@@ -82,7 +90,7 @@
                 <template v-slot:activator="{ on }">
                   <v-text-field v-model="time" :rules="timeRules" label="Hora de reserva" v-on="on"></v-text-field>
                 </template>
-                <v-time-picker v-if="TimeModal" v-model="time" full-width>
+                <v-time-picker v-if="TimeModal" v-model="time" full-width ampm-in-title format="ampm">
                   <div class="flex-grow-1"></div>
                   <v-btn text color="primary" @click="$refs.dialog.save(time)">Aceptar</v-btn>
                 </v-time-picker>
@@ -147,7 +155,6 @@ export default {
     try {
       const res = await axios.get("room");
       this.salons = await res.data.Rooms;
-      console.log(this.salons);
     } catch (error) {
       console.log(error);
     }

@@ -26,8 +26,10 @@
               <v-textarea
                 v-model="description"
                 :rules="descriptionRules"
+                autoGrow
                 required
                 rows="1"
+                row-height="20"
                 label="Descripción"
               ></v-textarea>
             </v-col>

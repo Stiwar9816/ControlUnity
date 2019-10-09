@@ -17,8 +17,10 @@
             <v-text-field
               v-model="password"
               :rules="passRules"
+              :append-icon="show1 ? 'icon-eye' : 'icon-eye-slash'"
+              :type="show1 ? 'text' : 'password'"
+              @click:append="show1 = !show1"
               label="Contraseña"
-              type="password"
               required
             ></v-text-field>
           </v-card-text>
@@ -50,13 +52,15 @@ export default {
       email: "",
       password: "",
       valid: true,
+      show1: false,
       ccRules: [v => !!v || "Cedula de ciudadania es requerida"],
       nameRules: [v => !!v || "Nombre de usuario es requerido"],
       emailRules: [
         v => !!v || "Correo electronico es requerido ",
         v =>
-          /.+@.+/.test(v) ||
-          "Correo electronico no es valido, Verifiquelo nuevamente"
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            v
+          ) || "Correo electronico no es valido, Verifiquelo nuevamente"
       ],
       passRules: [
         v => !!v || "Contraseña es requerida ",
