@@ -41,7 +41,13 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="NewImplement">
+              <v-btn
+                rounded
+                color="primary black--text"
+                type="submit"
+                :disabled="!valid"
+                @click="NewImplement"
+              >
                 <v-icon dark>icon-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -66,7 +72,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data"/>
+          <template slot="items" slot-scope="data" />
           <template v-slot:item.icon>
             <v-btn icon aria-label="edit">
               <v-icon small color="edit">icon-pencil</v-icon>
@@ -100,7 +106,7 @@ export default {
       mark: "",
       description: "",
       valid: true,
-      
+
       serialRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
       stockRules: [v => !!v || "Stock del implemento es requerido"],
@@ -148,7 +154,7 @@ export default {
         })
         .then(implement => {
           this.$router.push({ name: "implementos" });
-          alert("Implemento agregado")
+          alert("Implemento agregado");
         })
         .catch(err => console.error(err));
     },

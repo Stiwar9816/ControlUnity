@@ -90,7 +90,13 @@
                 <template v-slot:activator="{ on }">
                   <v-text-field v-model="time" :rules="timeRules" label="Hora de reserva" v-on="on"></v-text-field>
                 </template>
-                <v-time-picker v-if="TimeModal" v-model="time" full-width ampm-in-title format="ampm">
+                <v-time-picker
+                  v-if="TimeModal"
+                  v-model="time"
+                  full-width
+                  ampm-in-title
+                  format="ampm"
+                >
                   <div class="flex-grow-1"></div>
                   <v-btn text color="primary" @click="$refs.dialog.save(time)">Aceptar</v-btn>
                 </v-time-picker>
