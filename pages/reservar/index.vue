@@ -39,10 +39,11 @@
                 v-model="salon"
                 :rules="[v => !!v || 'Nombre del salon es requerido']"
                 label="Salon"
-                :items="salon"
+                :items="salons"
+                item-text="name"
+                item-value="name"
               ></v-autocomplete>
             </v-col>
-
             <!--DatePicker  -->
             <v-col>
               <v-menu
@@ -91,7 +92,14 @@
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
-            <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="validate" aria-label="add">
+            <v-btn
+              rounded
+              color="primary black--text"
+              type="submit"
+              :disabled="!valid"
+              @click="validate"
+              aria-label="add"
+            >
               <v-icon dark>icon-plus</v-icon>Agregar
             </v-btn>
           </v-row>
@@ -103,6 +111,7 @@
 </template>
 
 <script>
+import axios from "~/plugins/axios";
 export default {
   layout: "home",
   data() {
@@ -131,8 +140,17 @@ export default {
         { text: "MARCA", align: "center" },
         { text: "ACCIONES", align: "center", sortable: false }
       ],
-      salon: ["Salon 102", "Salon 302"]
+      salons: []
     };
+  },
+  async created() {
+    try {
+      const res = await axios.get("room");
+      this.salons = await res.data.Rooms;
+      console.log(this.salons);
+    } catch (error) {
+      console.log(error);
+    }
   },
   methods: {
     validate() {
