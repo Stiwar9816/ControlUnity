@@ -43,7 +43,7 @@
                 :disabled="!valid"
                 @click="NewRoom"
               >
-                <v-icon dark>icon-plus</v-icon>Agregar
+                <v-icon dark>fa fa-plus</v-icon>Agregar
               </v-btn>
             </v-col>
           </v-row>
@@ -52,7 +52,7 @@
         <v-row cols="12">
           <v-col md="4">
             <v-text-field
-              prepend-icon="icon-search"
+              prepend-icon="fa fa-search"
               v-model="search"
               class="mb-5"
               label="Buscar Salon"
@@ -73,10 +73,10 @@
           <template slot="items" slot-scope="data" />
           <template v-slot:item.icon>
             <v-btn icon aria-label="edit">
-              <v-icon small color="edit">icon-pencil</v-icon>
+              <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
             <v-btn icon aria-label="delete">
-              <v-icon small color="error">icon-trash</v-icon>
+              <v-icon small color="error">fa fa-trash</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>

@@ -23,7 +23,7 @@
               <v-text-field
                 v-model="password"
                 :rules="passRules"
-                :append-icon="show1 ? 'icon-eye' : 'icon-eye-slash'"
+                :append-icon="show1 ? 'fa fa-eye' : 'fa fa-eye-slash'"
                 :type="show1 ? 'text' : 'password'"
                 @click:append="show1 = !show1"
                 counter
@@ -35,7 +35,7 @@
               <v-text-field
                 v-model="passwordNew"
                 :rules="passRules"
-                :append-icon="show1 ? 'icon-eye' : 'icon-eye-slash'"
+                :append-icon="show1 ? 'fa fa-eye' : 'fa fa-eye-slash'"
                 :type="show1 ? 'text' : 'password'"
                 @click:append="show1 = !show1"
                 counter
@@ -47,7 +47,7 @@
               <v-text-field
                 v-model="passwordNewConf"
                 :rules="passRules"
-                :append-icon="show1 ? 'icon-eye' : 'icon-eye-slash'"
+                :append-icon="show1 ? 'fa fa-eye' : 'fa fa-eye-slash'"
                 :type="show1 ? 'text' : 'password'"
                 @click:append="show1 = !show1"
                 counter
@@ -65,7 +65,7 @@
                 :disabled="!valid"
                 @click="validate"
               >
-                <v-icon dark>icon-plus</v-icon>Guardar cambios
+                <v-icon dark>fa fa-plus</v-icon>Guardar cambios
               </v-btn>
             </v-col>
           </v-row>

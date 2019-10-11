@@ -26,20 +26,20 @@
       <template v-slot:append>
         <div class="pa-1" align="center">
           <v-btn rounded text color="accent" to="/configuraciones" aria-label="Action menu">
-            <v-icon dark>icon-wrench</v-icon>
+            <v-icon dark>fa fa-wrench</v-icon>
           </v-btn>
           <v-btn rounded text color="error" to="/" aria-label="Action menu">
-            <v-icon dark>icon-power-off</v-icon>
+            <v-icon dark>fa fa-power-off</v-icon>
           </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" color="appbar" fixed app flat>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" aria-label="Action menu">
-        <v-icon>icon-bars</v-icon>
+        <v-icon>fa fa-bars</v-icon>
       </v-app-bar-nav-icon>
       <v-btn aria-label="Action navigation" icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>icon-{{ `angle-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+        <v-icon>fa-{{ `angle-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
     </v-app-bar>
@@ -75,36 +75,36 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
+      miniVariant: true,
+      title: "CONTROL UNITY",
       items: [
         {
-          icon: "icon-home",
+          icon: "fa fa-home",
           title: "Inicio",
           to: "/home"
         },
         {
-          icon: "icon-graduation-cap",
+          icon: "fa fa-graduation-cap",
           title: "Salones",
           to: "/salones"
         },
         {
-          icon: "icon-archive",
+          icon: "fa fa-archive",
           title: "Implementos",
           to: "/implementos"
         },
         {
-          icon: "icon-calendar",
+          icon: "fa fa-calendar",
           title: "Reservar",
           to: "/reservar"
         },
 
         {
-          icon: "icon-users",
+          icon: "fa fa-users",
           title: "Usuarios",
           to: "/usuarios"
         }
-      ],
-      miniVariant: false,
-      title: "CONTROL UNITY"
+      ]
     };
   }
 };

@@ -114,7 +114,7 @@
               @click="validate"
               aria-label="add"
             >
-              <v-icon dark>icon-plus</v-icon>Agregar
+              <v-icon dark>fa fa-plus</v-icon>Agregar
             </v-btn>
           </v-row>
           <!-- End Boton reservar -->

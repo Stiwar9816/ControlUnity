@@ -4,7 +4,7 @@ import NuxtLoading from './components/nuxt-loading.vue'
 
 import '../assets/css/main.css'
 
-import '../assets/fontastic_icons.css'
+import '../node_modules/font-awesome/css/font-awesome.css'
 
 import '../node_modules/vuetify/dist/vuetify.css'
 

@@ -7,7 +7,7 @@
           <v-col md="4">
             <v-subheader class="subtitle-1">DEVOLUCIONES PENDIENTES</v-subheader>
             <v-text-field
-              prepend-icon="icon-search"
+              prepend-icon="fa fa-search"
               v-model="search"
               class="mt-4 mb-5"
               label="Buscar"
@@ -25,7 +25,7 @@
           <template slot="items" slot-scope="data" />
           <template v-slot:item.icon>
             <v-btn icon aria-label="check">
-              <v-icon color="green" small>icon-check-square-o</v-icon>
+              <v-icon color="green" small>fa fa-check-square-o</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>

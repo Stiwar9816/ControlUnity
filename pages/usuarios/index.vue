@@ -7,7 +7,7 @@
         <v-row cols="12">
           <v-col md="4">
             <v-text-field
-              prepend-icon="icon-search"
+              prepend-icon="fa fa-search"
               v-model="search"
               class="mt-4 mb-5"
               label="Buscar usuarios"
@@ -25,7 +25,7 @@
           <template slot="items" slot-scope="data"></template>
           <template v-slot:item.icon>
             <v-btn icon aria-label="delete">
-              <v-icon color="error" small>icon-trash</v-icon>
+              <v-icon color="error" small>fa fa-trash</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
@@ -49,7 +49,7 @@ export default {
       search: "",
       headers: [
         { text: "CEDULA", align: "center", sortable: false, value: "cc" },
-        { text: "NOMBRE COMPLETO", align: "center", value: "name" },
+        { text: "NOMBRE COMPLETO", align: "center", value: "name", sortable:false },
         {
           text: "CORREO ELECTRONICO",
           align: "center",

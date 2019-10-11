@@ -33,7 +33,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ["@assets/css/main.css", "@assets/fontastic_icons.css"],
+  css: ["@assets/css/main.css"],
   /*
    ** Plugins to load before mounting the App
    */
@@ -48,7 +48,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
-    "@nuxtjs/pwa"
+    "@nuxtjs/pwa",
+    "@nuxtjs/font-awesome"
   ],
   /*
    ** Axios module configuration
@@ -89,7 +90,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-     vendor: ["axios"],
+    vendor: ["axios"],
     /*
      ** You can extend webpack config here
      */
