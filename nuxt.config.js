@@ -5,10 +5,9 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    titleTemplate:
+    title:
       "Control Unity | Sistema de gestión de aulas e implementos" ||
       "Sistema de gestión de aulas e implementos",
-    title: process.env.npm_package_name || "",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -22,7 +21,7 @@ module.exports = {
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+        href: "https://fonts.googleapis.com/css?family=Montserrat&display=auto"
       }
     ]
   },
@@ -61,7 +60,6 @@ module.exports = {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ["~/assets/variables.scss"],
     theme: {
       dark: false,
       themes: {
@@ -90,7 +88,6 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ["axios"],
     /*
      ** You can extend webpack config here
      */
