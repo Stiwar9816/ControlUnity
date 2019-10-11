@@ -3,34 +3,38 @@
     <v-flex>
       <v-subheader class="subtitle-1">IMPLEMENTOS REGISTRADOS</v-subheader>
       <v-container>
-        <v-form ref="form" v-model="valid" @submit="NewImplement" lazy-validation>
+        <v-form ref="form" v-model="valid" v-on:submit="NewImplement" lazy-validation>
           <v-row>
             <!-- inputs -->
-            <v-col>
-              <v-text-field v-model="serial" :rules="serialRules" label="Serial" required></v-text-field>
+            <v-col sm="12" md="2">
+              <v-text-field v-model="serial" :rules="validateRules" label="Serial" required></v-text-field>
             </v-col>
-            <v-col>
-              <v-text-field v-model="implement" :rules="implementRules" label="Implemento" required></v-text-field>
+            <v-col sm="12" md="3">
+              <v-text-field v-model="implement" :rules="validateRules" label="Implemento" required></v-text-field>
             </v-col>
-            <v-col>
-              <v-text-field
-                v-model="stock"
-                :rules="stockRules"
-                label="Stock"
-                type="number"
-                min="0"
-                required
-              ></v-text-field>
+            <v-col sm="12" md="3">
+              <v-text-field v-model="mark" :rules="validateRules" label="Marca" required></v-text-field>
+            </v-col>
+            <v-col sm="12" md="2">
+              <v-text-field v-model="type" :rules="validateRules" label="Tipo" required></v-text-field>
+            </v-col>
+            <v-col sm="12" md="2">
+              <v-text-field v-model="model" :rules="validateRules" label="Modelo" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
-              <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
+            <v-col sm="12" md="2">
+              <v-text-field v-model="location" :rules="validateRules" label="Ubicación" required></v-text-field>
             </v-col>
-            <v-col>
+            <v-col sm="12" md="2">
+              <v-text-field v-model="user" :rules="validateRules" label="Respondable" required></v-text-field>
+            </v-col>
+            <v-col sm="12" md="3">
+              <v-text-field v-model="state" :rules="validateRules" label="Estado" required></v-text-field>
+            </v-col>
+            <v-col sm="12" md="5">
               <v-textarea
                 v-model="description"
-                :rules="descriptionRules"
                 autoGrow
                 required
                 rows="1"
@@ -68,7 +72,9 @@
         <v-data-table
           :headers="headers"
           :items="items"
-          :items-per-page="5"
+          :items-per-page="10"
+          :sort-by="['type']"
+          :sort-desc="[true]"
           :search="search"
           class="elevation-1"
         >
@@ -104,25 +110,39 @@ export default {
       implement: "",
       stock: "",
       mark: "",
+      type: "",
+      model: "",
+      location: "",
+      user: "",
       description: "",
-      valid: true,
-
-      serialRules: [v => !!v || "Serial del implemento es requerido"],
-      implementRules: [v => !!v || "Nombre del implemento es requerido"],
-      stockRules: [v => !!v || "Stock del implemento es requerido"],
-      markRules: [v => !!v || "Marca del implemento es requerido"],
-      descriptionRules: [v => !!v || "Descripción del salon es requerida"],
+      state: "",
+      valid: false,
+      validateRules: [v => !!v || "Serial del implemento es requerido"],
       headers: [
         { text: "SERIAL", align: "center", sortable: false, value: "serial" },
-        { text: "IMPLEMENTO", align: "center", value: "name" },
-        { text: "STOCK", align: "center", sortable: false, value: "stock" },
-        { text: "MARCA", align: "center", value: "mark" },
+        { text: "IMPLEMENTO", align: "center", value: "name", sortable: false, },
+        { text: "MARCA", align: "center", value: "mark", sortable: false, },
+        { text: "TIPO", align: "center", value: "type" },
+        { text: "MODELO", align: "center", value: "model", sortable: false },
+        {
+          text: "UBICACIÓN",
+          align: "center",
+          value: "location",
+          sortable: false
+        },
+        {
+          text: "RESPONSABLE",
+          align: "center",
+          value: "user",
+          sortable: false
+        },
         {
           text: "DESCRIPCIÓN",
           align: "center",
           sortable: false,
           value: "description"
         },
+        { text: "ESTADO", align: "center", value: "state" },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: []
@@ -148,13 +168,16 @@ export default {
         .post("newImplement", {
           serial: this.serial,
           name: this.implement,
-          stock: this.stock,
           mark: this.mark,
-          description: this.description
+          type: this.type,
+          model: this.model,
+          location: this.location,
+          user: this.user,
+          description: this.description,
+          state: this.state
         })
         .then(implement => {
           this.$router.push({ name: "implementos" });
-          alert("Implemento agregado");
         })
         .catch(err => console.error(err));
     },

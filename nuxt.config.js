@@ -89,7 +89,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ["axios"],
+     vendor: ["axios"],
     /*
      ** You can extend webpack config here
      */

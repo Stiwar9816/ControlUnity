@@ -2,14 +2,13 @@
 
 @font-face {
   font-family: "controlunity";
-  src:url("fonts/controlunity.eot");
-  src:url("fonts/controlunity.eot?#iefix") format("embedded-opentype"),
+  src: url("fonts/controlunity.eot");
+  src: url("fonts/controlunity.eot?#iefix") format("embedded-opentype"),
     url("fonts/controlunity.woff") format("woff"),
     url("fonts/controlunity.ttf") format("truetype"),
     url("fonts/controlunity.svg#controlunity") format("svg");
   font-weight: normal;
   font-style: normal;
-
 }
 
 [data-icon]:before {
