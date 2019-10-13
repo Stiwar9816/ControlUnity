@@ -79,8 +79,8 @@
           class="elevation-1"
         >
           <template slot="items" slot-scope="data" />
-          <template v-slot:item.icon>
-            <v-btn icon aria-label="edit">
+        <template slot="item.icon" slot-scope="data">
+            <v-btn  icon aria-label="edit">
               <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
             <v-btn icon v-on:click="deleteImplement(data.item._id)" aria-label="delete">
