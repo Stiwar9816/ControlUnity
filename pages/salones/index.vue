@@ -6,13 +6,13 @@
         <v-form ref="form" v-model="valid" v-on:submit="NewRoom" lazy-validation>
           <v-row>
             <!-- inputs -->
-            <v-col>
+            <v-col sm="4" md="3">
               <v-text-field v-model="name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
             </v-col>
-            <v-col>
+            <v-col sm="4" md="2">
               <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
             </v-col>
-            <v-col>
+            <v-col sm="4" md="2">
               <v-text-field
                 v-model="capacity"
                 :rules="capacityRules"
@@ -22,7 +22,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col sm="12" md="5">
               <v-textarea
                 v-model="description"
                 :rules="descriptionRules"

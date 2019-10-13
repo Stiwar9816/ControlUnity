@@ -4,9 +4,9 @@
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <v-row cols="12" xs="12" sm="12" md="3">
+          <v-row >
             <!-- inputs -->
-            <v-col>
+            <v-col sm="4" md="2">
               <v-text-field
                 v-model="cc"
                 :rules="ccRules"
@@ -16,15 +16,15 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col sm="4" md="5">
               <v-text-field v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
             </v-col>
-            <v-col>
+            <v-col sm="4" md="5">
               <v-text-field v-model="event" :rules="eventRules" label="Materia o evento" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col md="2">
+            <v-col sm="6" md="2">
               <v-text-field
                 v-model="capacitySalon"
                 :rules="capacitySalonRules"
@@ -34,7 +34,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col md="2">
+            <v-col sm="6" md="2">
               <v-autocomplete
                 v-model="salon"
                 :rules="[v => !!v || 'Nombre del salon es requerido']"
@@ -53,7 +53,7 @@
               </v-autocomplete>
             </v-col>
             <!--DatePicker  -->
-            <v-col>
+            <v-col sm="6" md="4">
               <v-menu
                 v-model="DateModal"
                 :close-on-content-click="false"
@@ -78,7 +78,7 @@
             <!-- End DatePicker -->
 
             <!-- TimePicker -->
-            <v-col>
+            <v-col sm="6" md="4">
               <v-dialog
                 ref="dialog"
                 v-model="TimeModal"

@@ -6,30 +6,30 @@
         <v-form ref="form" v-model="valid" v-on:submit="NewImplement" lazy-validation>
           <v-row>
             <!-- inputs -->
-            <v-col sm="12" md="2">
+            <v-col sm="5" md="2">
               <v-text-field v-model="serial" :rules="serailRules" label="Serial" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="3">
+            <v-col sm="7" md="3">
               <v-text-field v-model="implement" :rules="implementRules" label="Implemento" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="3">
+            <v-col sm="4" md="3">
               <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="2">
+            <v-col sm="4" md="2">
               <v-text-field v-model="type" :rules="typeRules" label="Tipo" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="2">
+            <v-col sm="4" md="2">
               <v-text-field v-model="model" :rules="modelRules" label="Modelo" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col sm="12" md="2">
+            <v-col sm="4" md="2">
               <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="2">
+            <v-col sm="5" md="2">
               <v-text-field v-model="user" :rules="userRules" label="Respondable" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="3">
+            <v-col sm="3" md="3">
               <v-text-field v-model="state" :rules="stateRules" label="Estado" required></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
