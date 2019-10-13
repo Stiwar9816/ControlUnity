@@ -81,7 +81,7 @@ module.exports = {
     // Delete one implement from id
     deleteUser: async (req, res, next) => {
         const userId = req.params.id
-        await Users.findOneAndRemove(userId)
+        await Users.findOneAndDelete(userId)
         res.status(204).json({
             success: true
         })

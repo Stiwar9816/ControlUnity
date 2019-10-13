@@ -32,7 +32,7 @@
               type="submit"
               :disabled="!valid"
               @click.prevent="registro"
-            >Iniciar Sesión</v-btn>
+            >Registrar</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>

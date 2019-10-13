@@ -23,8 +23,8 @@
           class="elevation-1"
         >
           <template slot="items" slot-scope="data"></template>
-          <template v-slot:item.icon>
-            <v-btn icon aria-label="delete">
+          <template slot="item.icon" slot-scope="data">
+            <v-btn icon v-on:click="deleteUser(data.item._id)" aria-label="delete">
               <v-icon color="error" small>fa fa-trash</v-icon>
             </v-btn>
           </template>
@@ -49,7 +49,12 @@ export default {
       search: "",
       headers: [
         { text: "CEDULA", align: "center", sortable: false, value: "cc" },
-        { text: "NOMBRE COMPLETO", align: "center", value: "name", sortable:false },
+        {
+          text: "NOMBRE COMPLETO",
+          align: "center",
+          value: "name",
+          sortable: false
+        },
         {
           text: "CORREO ELECTRONICO",
           align: "center",
@@ -67,6 +72,24 @@ export default {
       this.items = await res.data.users;
     } catch (error) {
       console.log(error);
+    }
+  },
+  methods: {
+    //Delete User
+    deleteUser(id) {
+      const response = confirm("Esta seguro de eliminar este usuario?");
+      if (response) {
+        axios
+          .delete("deleteUser/" + id)
+          .then(res => {
+            this.items.splice(id, 1);
+            console.log("User Delete: ", id);
+          })
+          .catch(e => {
+            console.log("Unable to clear the user", e);
+          });
+      }
+      return;
     }
   }
 };

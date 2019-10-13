@@ -3,15 +3,14 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _be1b6fae = () => interopDefault(import('../pages/configuraciones/index.vue' /* webpackChunkName: "pages/configuraciones/index" */))
-const _7a4de5be = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
-const _3b1a3adb = () => interopDefault(import('../pages/implementos/index.vue' /* webpackChunkName: "pages/implementos/index" */))
-const _83fa3816 = () => interopDefault(import('../pages/registro/index.vue' /* webpackChunkName: "pages/registro/index" */))
-const _207601bc = () => interopDefault(import('../pages/reservar/index.vue' /* webpackChunkName: "pages/reservar/index" */))
-const _7941efbf = () => interopDefault(import('../pages/salones/index.vue' /* webpackChunkName: "pages/salones/index" */))
-const _17204847 = () => interopDefault(import('../pages/usuarios/index.vue' /* webpackChunkName: "pages/usuarios/index" */))
-const _161f3803 = () => interopDefault(import('../pages/implementos/_id.vue' /* webpackChunkName: "pages/implementos/_id" */))
-const _c27adbba = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _f8d3a434 = () => interopDefault(import('../pages/configuraciones/index.vue' /* webpackChunkName: "pages/configuraciones/index" */))
+const _71e948f8 = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
+const _42688718 = () => interopDefault(import('../pages/implementos/index.vue' /* webpackChunkName: "pages/implementos/index" */))
+const _ac5d6e50 = () => interopDefault(import('../pages/registro/index.vue' /* webpackChunkName: "pages/registro/index" */))
+const _0c44669f = () => interopDefault(import('../pages/reservar/index.vue' /* webpackChunkName: "pages/reservar/index" */))
+const _591c3b08 = () => interopDefault(import('../pages/salones/index.vue' /* webpackChunkName: "pages/salones/index" */))
+const _02eead2a = () => interopDefault(import('../pages/usuarios/index.vue' /* webpackChunkName: "pages/usuarios/index" */))
+const _2048dc40 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -24,39 +23,35 @@ export const routerOptions = {
 
   routes: [{
       path: "/configuraciones",
-      component: _be1b6fae,
+      component: _f8d3a434,
       name: "configuraciones"
     }, {
       path: "/home",
-      component: _7a4de5be,
+      component: _71e948f8,
       name: "home"
     }, {
       path: "/implementos",
-      component: _3b1a3adb,
+      component: _42688718,
       name: "implementos"
     }, {
       path: "/registro",
-      component: _83fa3816,
+      component: _ac5d6e50,
       name: "registro"
     }, {
       path: "/reservar",
-      component: _207601bc,
+      component: _0c44669f,
       name: "reservar"
     }, {
       path: "/salones",
-      component: _7941efbf,
+      component: _591c3b08,
       name: "salones"
     }, {
       path: "/usuarios",
-      component: _17204847,
+      component: _02eead2a,
       name: "usuarios"
     }, {
-      path: "/implementos/:id",
-      component: _161f3803,
-      name: "implementos-id"
-    }, {
       path: "/",
-      component: _c27adbba,
+      component: _2048dc40,
       name: "index"
     }],
 

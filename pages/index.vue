@@ -61,7 +61,7 @@ export default {
     async login() {
       await axios
         .post("login", {
-          cc: this.password,
+          cc: this.cc,
           password: this.password
         })
         .then(res => {

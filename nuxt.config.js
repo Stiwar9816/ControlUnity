@@ -37,6 +37,29 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [],
+
+  /*
+   ** PWA Manifest.json
+   */
+  manifest: {
+    background_color: "#0CA1CB",
+    description: "Sistema de gestión de aulas e implementos.",
+    display: "standalone",
+    lang: "es",
+    icons: [
+      {
+        src: "static/logo.png",
+        sizes: "144x144",
+        type: "image/png"
+      }
+    ],
+    name: "Control unity",
+    short_name: "Control Unity",
+    start_url: "/",
+    scope: "/",
+    related_applications: [],
+    prefer_related_applications: false
+  },
   /*
    ** Nuxt.js dev-modules
    */

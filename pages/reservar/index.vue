@@ -112,7 +112,7 @@
               type="submit"
               :disabled="!valid"
               @click="validate"
-              aria-label="add"
+              aria-label="New booking"
             >
               <v-icon dark>fa fa-plus</v-icon>Agregar
             </v-btn>

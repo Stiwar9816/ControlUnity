@@ -71,11 +71,11 @@
           class="elevation-1"
         >
           <template slot="items" slot-scope="data" />
-          <template v-slot:item.icon>
+          <template slot="item.icon" slot-scope="data">
             <v-btn icon aria-label="edit">
               <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
-            <v-btn icon aria-label="delete">
+            <v-btn icon v-on:click="deleteRoom(data.item._id)" aria-label="delete">
               <v-icon small color="error">fa fa-trash</v-icon>
             </v-btn>
           </template>
@@ -106,7 +106,7 @@ export default {
       valid: false,
       salonRules: [v => !!v || "Nombre del salon es requerido"],
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
-      locationRules: [v => !!v || "Capacidad del salon es requerida"],
+      locationRules: [v => !!v || "Ubicación del salon es requerido"],
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       headers: [
         { text: "NOMBRE SALON", align: "center", value: "name" },
@@ -147,6 +147,7 @@ export default {
         this.snackbar = true;
       }
     },
+    //New Salon
     async NewRoom() {
       await axios
         .post("newRoom", {
@@ -159,6 +160,22 @@ export default {
           this.$router.push({ name: "salones" });
         })
         .catch(err => console.error(err));
+    },
+    //Delete Salon
+    deleteRoom(id) {
+      const response = confirm("Esta seguro de eliminar este salon?");
+      if (response) {
+        axios
+          .delete("deleteRoom/" + id)
+          .then(res => {
+            this.items.splice(id, 1);
+            console.log("Room Delete: ", id);
+          })
+          .catch(e => {
+            console.log("Unable to clear the room", e);
+          });
+      }
+      return;
     }
   }
 };

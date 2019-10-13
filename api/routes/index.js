@@ -24,7 +24,7 @@ router.get('/logout', auth ,controllersUser.logout)
 router.get('/user', controllersUser.allUser)
 router.get('/user/:id', auth,controllersUser.getOneUser)
 router.put('/updateUser/:id', auth,controllersUser.updateUser)
-router.delete('/deleteUser/:id', auth,controllersUser.deleteUser)
+router.delete('/deleteUser/:id', controllersUser.deleteUser)
 
 // Routes Bookings Crud
 router.get('/booking', controllersBookings.allBooking)
@@ -38,7 +38,7 @@ router.get('/room', controllersRooms.allRoom)
 router.get('/room/:id', auth,controllersRooms.getOneRoom)
 router.post('/newRoom',controllersRooms.newRoom)
 router.put('/updateRoom/:id', auth,controllersRooms.updateRoom)
-router.delete('/deleteRoom/:id', auth,controllersRooms.deleteRoom)
+router.delete('/deleteRoom/:id', controllersRooms.deleteRoom)
 
 // Routes Implements Crud
 router.get('/implement', controllersImplements.allImplement)

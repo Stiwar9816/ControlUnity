@@ -7,30 +7,30 @@
           <v-row>
             <!-- inputs -->
             <v-col sm="12" md="2">
-              <v-text-field v-model="serial" :rules="validateRules" label="Serial" required></v-text-field>
+              <v-text-field v-model="serial" :rules="serailRules" label="Serial" required></v-text-field>
             </v-col>
             <v-col sm="12" md="3">
-              <v-text-field v-model="implement" :rules="validateRules" label="Implemento" required></v-text-field>
+              <v-text-field v-model="implement" :rules="implementRules" label="Implemento" required></v-text-field>
             </v-col>
             <v-col sm="12" md="3">
-              <v-text-field v-model="mark" :rules="validateRules" label="Marca" required></v-text-field>
+              <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
             </v-col>
             <v-col sm="12" md="2">
-              <v-text-field v-model="type" :rules="validateRules" label="Tipo" required></v-text-field>
+              <v-text-field v-model="type" :rules="typeRules" label="Tipo" required></v-text-field>
             </v-col>
             <v-col sm="12" md="2">
-              <v-text-field v-model="model" :rules="validateRules" label="Modelo" required></v-text-field>
+              <v-text-field v-model="model" :rules="modelRules" label="Modelo" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col sm="12" md="2">
-              <v-text-field v-model="location" :rules="validateRules" label="Ubicación" required></v-text-field>
+              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
             </v-col>
             <v-col sm="12" md="2">
-              <v-text-field v-model="user" :rules="validateRules" label="Respondable" required></v-text-field>
+              <v-text-field v-model="user" :rules="userRules" label="Respondable" required></v-text-field>
             </v-col>
             <v-col sm="12" md="3">
-              <v-text-field v-model="state" :rules="validateRules" label="Estado" required></v-text-field>
+              <v-text-field v-model="state" :rules="stateRules" label="Estado" required></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
@@ -79,8 +79,8 @@
           class="elevation-1"
         >
           <template slot="items" slot-scope="data" />
-        <template slot="item.icon" slot-scope="data">
-            <v-btn  icon aria-label="edit">
+          <template slot="item.icon" slot-scope="data">
+            <v-btn icon aria-label="edit">
               <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
             <v-btn icon v-on:click="deleteImplement(data.item._id)" aria-label="delete">
@@ -108,7 +108,6 @@ export default {
       search: "",
       serial: "",
       implement: "",
-      stock: "",
       mark: "",
       type: "",
       model: "",
@@ -116,8 +115,17 @@ export default {
       user: "",
       description: "",
       state: "",
-      valid: false,
-      validateRules: [v => !!v || "Serial del implemento es requerido"],
+      valid: true,
+      serailRules: [v => !!v || "Serial del implemento es requerido"],
+      implementRules: [v => !!v || "Nombre del implemento es requerido"],
+      markRules: [v => !!v || "Marca del implemento es requerida"],
+      typeRules: [v => !!v || "Tipo de implemento es requerido"],
+      modelRules: [v => !!v || "Modelo del implemento es requerido"],
+      locationRules: [v => !!v || "Ubicación del implemento es requerido"],
+      userRules: [
+        v => !!v || "Usuario responsable del implemento es requerido"
+      ],
+      stateRules: [v => !!v || "Estado del implemento es requerido"],
       headers: [
         { text: "SERIAL", align: "center", sortable: false, value: "serial" },
         { text: "IMPLEMENTO", align: "center", value: "name", sortable: false },
@@ -186,13 +194,13 @@ export default {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
         axios
-          .delete("http://localhost:3000/deleteImplement/" + id)
+          .delete("deleteImplement/" + id)
           .then(res => {
             this.items.splice(id, 1);
             console.log("Implement Delete: ", id);
           })
           .catch(e => {
-            console.log("Unable to clear the boat", e);
+            console.log("Unable to clear the implement", e);
           });
       }
       return;
