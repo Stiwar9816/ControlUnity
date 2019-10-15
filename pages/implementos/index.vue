@@ -7,34 +7,34 @@
           <v-row>
             <!-- inputs -->
             <v-col sm="5" md="2">
-              <v-text-field v-model="serial" :rules="serailRules" label="Serial" required></v-text-field>
+              <v-text-field v-model="implements.serial" :rules="serailRules" label="Serial" required></v-text-field>
             </v-col>
             <v-col sm="7" md="3">
-              <v-text-field v-model="implement" :rules="implementRules" label="Implemento" required></v-text-field>
+              <v-text-field v-model="implements.name" :rules="implementRules" label="Implemento" required></v-text-field>
             </v-col>
             <v-col sm="4" md="3">
-              <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
+              <v-text-field v-model="implements.mark" :rules="markRules" label="Marca" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="type" :rules="typeRules" label="Tipo" required></v-text-field>
+              <v-text-field v-model="implements.type" :rules="typeRules" label="Tipo" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="model" :rules="modelRules" label="Modelo" required></v-text-field>
+              <v-text-field v-model="implements.model" :rules="modelRules" label="Modelo" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col sm="4" md="2">
-              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
+              <v-text-field v-model="implements.location" :rules="locationRules" label="Ubicación" required></v-text-field>
             </v-col>
             <v-col sm="5" md="2">
-              <v-text-field v-model="user" :rules="userRules" label="Respondable" required></v-text-field>
+              <v-text-field v-model="implements.user" :rules="userRules" label="Respondable" required></v-text-field>
             </v-col>
             <v-col sm="3" md="3">
-              <v-text-field v-model="state" :rules="stateRules" label="Estado" required></v-text-field>
+              <v-text-field v-model="implements.state" :rules="stateRules" label="Estado" required></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
-                v-model="description"
+                v-model="implements.description"
                 autoGrow
                 required
                 rows="1"
@@ -106,15 +106,15 @@ export default {
   data() {
     return {
       search: "",
-      serial: "",
-      implement: "",
-      mark: "",
-      type: "",
-      model: "",
-      location: "",
-      user: "",
-      description: "",
-      state: "",
+      // serial: "",
+      // implement: "",
+      // mark: "",
+      // type: "",
+      // model: "",
+      // location: "",
+      // user: "",
+      // description: "",
+      // state: "",
       valid: true,
       serailRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
@@ -153,7 +153,18 @@ export default {
         { text: "ESTADO", align: "center", value: "state" },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: []
+      items: [],
+      implements: {
+        serial: "",
+        name: "",
+        mark: "",
+        type: "",
+        model: "",
+        location: "",
+        user: "",
+        description: "",
+        state: ""
+      }
     };
   },
   async created() {
@@ -174,15 +185,15 @@ export default {
     async NewImplement(event) {
       const implement = await axios
         .post("newImplement", {
-          serial: this.serial,
-          name: this.implement,
-          mark: this.mark,
-          type: this.type,
-          model: this.model,
-          location: this.location,
-          user: this.user,
-          description: this.description,
-          state: this.state
+          serial: this.implements.serial,
+          name: this.implements.name,
+          mark: this.implements.mark,
+          type: this.implements.type,
+          model: this.implements.model,
+          location: this.implements.location,
+          user: this.implements.user,
+          description: this.implements.description,
+          state: this.implements.state
         })
         .then(implement => {
           this.$router.push({ name: "implementos" });

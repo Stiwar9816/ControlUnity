@@ -5,9 +5,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title:
-      "Control Unity | Sistema de gestión de aulas e implementos" ||
-      "Sistema de gestión de aulas e implementos",
+    title: "Control Unity | Sistema de gestión de aulas e implementos",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -41,25 +39,25 @@ module.exports = {
   /*
    ** PWA Manifest.json
    */
-  manifest: {
-    background_color: "#0CA1CB",
-    description: "Sistema de gestión de aulas e implementos.",
-    display: "standalone",
-    lang: "es",
-    icons: [
-      {
-        src: "static/logo.png",
-        sizes: "144x144",
-        type: "image/png"
-      }
-    ],
-    name: "Control unity",
-    short_name: "Control Unity",
-    start_url: "/",
-    scope: "/",
-    related_applications: [],
-    prefer_related_applications: false
-  },
+  // manifest: {
+  //   background_color: "#0CA1CB",
+  //   description: "Sistema de gestión de aulas e implementos.",
+  //   display: "standalone",
+  //   lang: "es",
+  //   icons: [
+  //     {
+  //       src: "/logo.png",
+  //       sizes: "144x144",
+  //       type: "image/png"
+  //     }
+  //   ],
+  //   name: "Control unity",
+  //   short_name: "Control Unity",
+  //   start_url: "/",
+  //   scope: "/",
+  //   related_applications: [],
+  //   prefer_related_applications: false
+  // },
   /*
    ** Nuxt.js dev-modules
    */
