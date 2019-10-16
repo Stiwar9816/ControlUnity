@@ -7,14 +7,14 @@
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="3">
-              <v-text-field v-model="name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
+              <v-text-field v-model="room.name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
+              <v-text-field v-model="room.location" :rules="locationRules" label="Ubicación" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
               <v-text-field
-                v-model="capacity"
+                v-model="room.capacity"
                 :rules="capacityRules"
                 label="Capcidad"
                 type="number"
@@ -24,7 +24,7 @@
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
-                v-model="description"
+                v-model="room.description"
                 :rules="descriptionRules"
                 autoGrow
                 required
@@ -99,11 +99,11 @@ export default {
   data() {
     return {
       search: "",
-      name: "",
-      location: "",
-      capacity: "",
-      description: "",
-      valid: false,
+      // name: "",
+      // location: "",
+      // capacity: "",
+      // description: "",
+      valid: true,
       salonRules: [v => !!v || "Nombre del salon es requerido"],
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       locationRules: [v => !!v || "Ubicación del salon es requerido"],
@@ -130,7 +130,13 @@ export default {
         },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: []
+      items: [],
+      room:{
+        name:"",
+        location:"",
+        capacity:"",
+        description:""
+      }
     };
   },
   async created() {
@@ -151,10 +157,10 @@ export default {
     async NewRoom() {
       await axios
         .post("newRoom", {
-          name: this.name,
-          location: this.location,
-          capacity: this.capacity,
-          description: this.description
+          name: this.room.name,
+          location: this.room.location,
+          capacity: this.room.capacity,
+          description: this.room.description
         })
         .then(res => {
           this.$router.push({ name: "salones" });

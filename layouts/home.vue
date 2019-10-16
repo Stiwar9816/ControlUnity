@@ -13,7 +13,14 @@
       </v-list-item>
       <v-divider></v-divider>
       <v-list>
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact aria-label="main menu">
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+          aria-label="main menu"
+        >
           <v-list-item-action>
             <v-icon text color="accent">{{ item.icon }}</v-icon>
           </v-list-item-action>
