@@ -7,7 +7,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit.prevent="editImplement(editImplements)"
+          v-on:submit="editImplement(editImplements)"
           v-if="edit"
           lazy-validation
         >
@@ -320,7 +320,7 @@ export default {
           this.items[index].user = res.data.user
           this.items[index].description = res.data.description
           this.items[index].state = res.data.state
-          
+          this.$router.replace({name: "implementos"})
           this.edit = false
         })
     },
