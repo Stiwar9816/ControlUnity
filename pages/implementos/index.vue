@@ -320,7 +320,7 @@ export default {
           this.items[index].user = res.data.user
           this.items[index].description = res.data.description
           this.items[index].state = res.data.state
-          this.items.push(item)
+          
           this.edit = false
         })
     },
@@ -333,7 +333,6 @@ export default {
           .then(res => {
             // const index = this.items.findIndex(item => item._id === res.data._id)
             this.items.splice(id, 1);
-            console.log("Here", )
             console.log("Implement Delete: ", id);
           })
           .catch(e => {
