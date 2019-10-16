@@ -42,13 +42,13 @@ router.delete('/deleteRoom/:id', controllersRooms.deleteRoom)
 
 // Routes Implements Crud
 router.get('/implement', controllersImplements.allImplement)
-router.get('/implement/:id', auth,controllersImplements.getOneImplement)
+router.get('/implement/:id',controllersImplements.getOneImplement)
 router.post('/newImplement',controllersImplements.newImplement)
-router.put('/updateImplement/:id', auth,controllersImplements.updateImplement)
+router.put('/updateImplement/:id',controllersImplements.updateImplement)
 router.delete('/deleteImplement/:id',controllersImplements.deleteImplement)
 
 // Apliaction of populate from data
 /* 
 router.get('/oneImplent/:id/room', getBookingRoom)
 router.post('/oneImplement/:id/room', newBookingRoom) */
-module.exports = router
+module.exports = router;

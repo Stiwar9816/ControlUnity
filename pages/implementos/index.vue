@@ -3,38 +3,122 @@
     <v-flex>
       <v-subheader class="subtitle-1">IMPLEMENTOS REGISTRADOS</v-subheader>
       <v-container>
-        <v-form ref="form" v-model="valid" v-on:submit="NewImplement" lazy-validation>
+        <!-- Editar Datos de implemento -->
+        <v-form
+          ref="form"
+          v-model="valid"
+          v-on:submit.prevent="editImplement(editImplements)"
+          v-if="edit"
+          lazy-validation
+        >
           <v-row>
             <!-- inputs -->
             <v-col sm="5" md="2">
-              <v-text-field v-model="serial" :rules="serailRules" label="Serial" required></v-text-field>
+              <v-text-field v-model="editImplements.serial" :rules="serailRules" label="Serial" required></v-text-field>
             </v-col>
             <v-col sm="7" md="3">
-              <v-text-field v-model="implement" :rules="implementRules" label="Implemento" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.name"
+                :rules="implementRules"
+                label="Implemento"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="3">
-              <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
+              <v-text-field v-model="editImplements.mark" :rules="markRules" label="Marca" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="type" :rules="typeRules" label="Tipo" required></v-text-field>
+              <v-text-field v-model="editImplements.type" :rules="typeRules" label="Tipo" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="model" :rules="modelRules" label="Modelo" required></v-text-field>
+              <v-text-field v-model="editImplements.model" :rules="modelRules" label="Modelo" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col sm="4" md="2">
-              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.location"
+                :rules="locationRules"
+                label="Ubicación"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="5" md="2">
-              <v-text-field v-model="user" :rules="userRules" label="Respondable" required></v-text-field>
+              <v-text-field v-model="editImplements.user" :rules="userRules" label="Respondable" required></v-text-field>
             </v-col>
             <v-col sm="3" md="3">
-              <v-text-field v-model="state" :rules="stateRules" label="Estado" required></v-text-field>
+              <v-text-field v-model="editImplements.state" :rules="stateRules" label="Estado" required></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
-                v-model="description"
+                v-model="editImplements.description"
+                autoGrow
+                required
+                rows="1"
+                row-height="20"
+                label="Descripción"
+              ></v-textarea>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
+                <v-icon dark>fa fa-plus</v-icon>Editar
+              </v-btn>
+              <v-btn rounded color="error black--text" type="submit" @click="edit = false" :disabled="!valid">
+                <v-icon dark>fa fa-plus</v-icon>Cancelar
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
+        <!-- Crear nuevo impliento -->
+        <v-form ref="form" v-model="valid" v-on:submit.prevent="NewImplement()" v-if="!edit" lazy-validation>
+          <v-row>
+            <!-- inputs -->
+            <v-col sm="5" md="2">
+              <v-text-field v-model="newData.serial" :rules="serailRules" label="Serial" required></v-text-field>
+            </v-col>
+            <v-col sm="7" md="3">
+              <v-text-field
+                v-model="newData.name"
+                :rules="implementRules"
+                label="Implemento"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col sm="4" md="3">
+              <v-text-field v-model="newData.mark" :rules="markRules" label="Marca" required></v-text-field>
+            </v-col>
+            <v-col sm="4" md="2">
+              <v-text-field v-model="newData.type" :rules="typeRules" label="Tipo" required></v-text-field>
+            </v-col>
+            <v-col sm="4" md="2">
+              <v-text-field v-model="newData.model" :rules="modelRules" label="Modelo" required></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col sm="4" md="2">
+              <v-text-field
+                v-model="newData.location"
+                :rules="locationRules"
+                label="Ubicación"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col sm="5" md="2">
+              <v-text-field
+                v-model="newData.user"
+                :rules="userRules"
+                label="Respondable"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col sm="3" md="3">
+              <v-text-field v-model="newData.state" :rules="stateRules" label="Estado" required></v-text-field>
+            </v-col>
+            <v-col sm="12" md="5">
+              <v-textarea
+                v-model="newData.description"
                 autoGrow
                 required
                 rows="1"
@@ -50,7 +134,6 @@
                 color="primary black--text"
                 type="submit"
                 :disabled="!valid"
-                @click="NewImplement"
               >
                 <v-icon dark>fa fa-plus</v-icon>Agregar
               </v-btn>
@@ -80,7 +163,7 @@
         >
           <template slot="items" slot-scope="data" />
           <template slot="item.icon" slot-scope="data">
-            <v-btn icon aria-label="edit">
+            <v-btn icon v-on:click="onlyImplement(data.item._id)" aria-label="edit">
               <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
             <v-btn icon v-on:click="deleteImplement(data.item._id)" aria-label="delete">
@@ -105,16 +188,17 @@ export default {
   layout: "home",
   data() {
     return {
+      edit: false,
       search: "",
-      serial: "",
-      implement: "",
-      mark: "",
-      type: "",
-      model: "",
-      location: "",
-      user: "",
-      description: "",
-      state: "",
+      // serial: "",
+      // name: "",
+      // mark: "",
+      // type: "",
+      // model: "",
+      // location: "",
+      // user: "",
+      // description: "",
+      // state: "",
       valid: true,
       serailRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
@@ -130,7 +214,7 @@ export default {
         { text: "SERIAL", align: "center", sortable: false, value: "serial" },
         { text: "IMPLEMENTO", align: "center", value: "name", sortable: false },
         { text: "MARCA", align: "center", value: "mark", sortable: false },
-        { text: "TIPO", align: "center", value: "type" },
+        { text: "TIPO", align: "center", value: "type", sortable: false },
         { text: "MODELO", align: "center", value: "model", sortable: false },
         {
           text: "UBICACIÓN",
@@ -153,12 +237,14 @@ export default {
         { text: "ESTADO", align: "center", value: "state" },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: []
+      items: [],
+      newData: {serial:"",name:"", mark:"",   type:"", model:"", location:"", user:"", description:"", state:""},
+      editImplements: {}
     };
   },
   async created() {
     try {
-      const res = await axios.get("implement");
+      const res = await axios.get(`implement`);
       this.items = await res.data.implement;
     } catch (error) {
       console.log(error);
@@ -171,32 +257,83 @@ export default {
       }
     },
     //Add New Salon
-    async NewImplement(event) {
-      const implement = await axios
-        .post("newImplement", {
-          serial: this.serial,
-          name: this.implement,
-          mark: this.mark,
-          type: this.type,
-          model: this.model,
-          location: this.location,
-          user: this.user,
-          description: this.description,
-          state: this.state
-        })
-        .then(implement => {
-          this.$router.push({ name: "implementos" });
-        })
-        .catch(err => console.error(err));
+    async NewImplement() {
+      // console.log(this.newData);
+     axios.post('newImplement', this.newData)
+      .then(res=>{
+        this.items.push(res.data.implement)
+        this.newData.serial= ''
+        this.newData.name= ''
+        this.newData.mark= ''
+        this.newData.type='',
+        this.newData.model= '',
+        this.newData.location='',
+        this.newData.user='',
+        this.newData.description='',
+        this.newData.state=''
+      })
+      .catch(e=>{
+        console.log(e)
+      })
+
+      // const implement = await axios
+      //   .post("newImplement", {
+      //     serial: this.serial,
+      //     name: this.implement,
+      //     mark: this.mark,
+      //     type: this.type,
+      //     model: this.model,
+      //     location: this.location,
+      //     user: this.user,
+      //     description: this.description,
+      //     state: this.state
+      //   })
+      //   .then(implement => {
+      //     this.$router.push({ name: "implementos" });
+      //   })
+      //   .catch(e => console.error(e));
     },
-    //Delete Salon
+
+    onlyImplement(id) {
+      this.edit = true;
+      console.log(id);
+      axios.get(`implement/${id}`)
+      .then(res=>{
+         this.editImplements = res.data
+      })
+      .catch(e=>{
+        console.log(e)
+      })
+    },
+    // Edit Implement
+    editImplement(item) {
+      axios
+        .put(`updateImplement/${item._id}`, item)
+        .then(res => {
+          const index = this.items.findIndex(n => n._id === res.data._id)
+          this.items[index].serial = res.data.serial
+          this.items[index].name = res.data.name
+          this.items[index].mark = res.data.mark
+          this.items[index].type = res.data.type
+          this.items[index].model = res.data.model
+          this.items[index].location = res.data.location
+          this.items[index].user = res.data.user
+          this.items[index].description = res.data.description
+          this.items[index].state = res.data.state
+          this.items.push(item)
+          this.edit = false
+        })
+    },
+    //Delete Implement
     deleteImplement(id) {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
         axios
-          .delete("deleteImplement/" + id)
+          .delete(`deleteImplement/`+ id)
           .then(res => {
+            // const index = this.items.findIndex(item => item._id === res.data._id)
             this.items.splice(id, 1);
+            console.log("Here", )
             console.log("Implement Delete: ", id);
           })
           .catch(e => {
