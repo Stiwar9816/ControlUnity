@@ -8,13 +8,18 @@
           ref="form"
           v-model="valid"
           v-on:submit="editImplement(editImplements)"
-          v-if="edit"
+          v-if="!edit"
           lazy-validation
         >
           <v-row>
             <!-- inputs -->
             <v-col sm="5" md="2">
-              <v-text-field v-model="editImplements.serial" :rules="serailRules" label="Serial" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.serial"
+                :rules="serailRules"
+                label="Serial"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="7" md="3">
               <v-text-field
@@ -31,7 +36,12 @@
               <v-text-field v-model="editImplements.type" :rules="typeRules" label="Tipo" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="editImplements.model" :rules="modelRules" label="Modelo" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.model"
+                :rules="modelRules"
+                label="Modelo"
+                required
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
@@ -44,10 +54,20 @@
               ></v-text-field>
             </v-col>
             <v-col sm="5" md="2">
-              <v-text-field v-model="editImplements.user" :rules="userRules" label="Respondable" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.user"
+                :rules="userRules"
+                label="Respondable"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="3" md="3">
-              <v-text-field v-model="editImplements.state" :rules="stateRules" label="Estado" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.state"
+                :rules="stateRules"
+                label="Estado"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
@@ -62,17 +82,23 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
-                <v-icon dark>fa fa-plus</v-icon>Editar
+              <v-btn rounded color="success black--text mr-2" type="submit" :disabled="!valid">
+                <v-icon dark>fa fa-check</v-icon>Confirmar
               </v-btn>
-              <v-btn rounded color="error black--text" type="submit" @click="edit = false" :disabled="!valid">
-                <v-icon dark>fa fa-plus</v-icon>Cancelar
+              <v-btn rounded color="error black--text" @click="edit = true">
+                <v-icon dark>fa fa-ban</v-icon>Cancelar
               </v-btn>
             </v-col>
           </v-row>
         </v-form>
         <!-- Crear nuevo impliento -->
-        <v-form ref="form" v-model="valid" v-on:submit.prevent="NewImplement()" v-if="!edit" lazy-validation>
+        <v-form
+          ref="form"
+          v-model="valid"
+          v-on:submit.prevent="NewImplement()"
+          v-if="edit"
+          lazy-validation
+        >
           <v-row>
             <!-- inputs -->
             <v-col sm="5" md="2">
@@ -106,12 +132,7 @@
               ></v-text-field>
             </v-col>
             <v-col sm="5" md="2">
-              <v-text-field
-                v-model="newData.user"
-                :rules="userRules"
-                label="Respondable"
-                required
-              ></v-text-field>
+              <v-text-field v-model="newData.user" :rules="userRules" label="Respondable" required></v-text-field>
             </v-col>
             <v-col sm="3" md="3">
               <v-text-field v-model="newData.state" :rules="stateRules" label="Estado" required></v-text-field>
@@ -129,12 +150,7 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn
-                rounded
-                color="primary black--text"
-                type="submit"
-                :disabled="!valid"
-              >
+              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
                 <v-icon dark>fa fa-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -188,18 +204,9 @@ export default {
   layout: "home",
   data() {
     return {
-      edit: false,
       search: "",
-      // serial: "",
-      // name: "",
-      // mark: "",
-      // type: "",
-      // model: "",
-      // location: "",
-      // user: "",
-      // description: "",
-      // state: "",
       valid: true,
+      edit: true,
       serailRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
       markRules: [v => !!v || "Marca del implemento es requerida"],
@@ -238,7 +245,17 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
-      newData: {serial:"",name:"", mark:"",   type:"", model:"", location:"", user:"", description:"", state:""},
+      newData: {
+        serial: "",
+        name: "",
+        mark: "",
+        type: "",
+        model: "",
+        location: "",
+        user: "",
+        description: "",
+        state: ""
+      },
       editImplements: {}
     };
   },
@@ -258,80 +275,60 @@ export default {
     },
     //Add New Salon
     async NewImplement() {
-      // console.log(this.newData);
-     axios.post('newImplement', this.newData)
-      .then(res=>{
-        this.items.push(res.data.implement)
-        this.newData.serial= ''
-        this.newData.name= ''
-        this.newData.mark= ''
-        this.newData.type='',
-        this.newData.model= '',
-        this.newData.location='',
-        this.newData.user='',
-        this.newData.description='',
-        this.newData.state=''
-      })
-      .catch(e=>{
-        console.log(e)
-      })
-
-      // const implement = await axios
-      //   .post("newImplement", {
-      //     serial: this.serial,
-      //     name: this.implement,
-      //     mark: this.mark,
-      //     type: this.type,
-      //     model: this.model,
-      //     location: this.location,
-      //     user: this.user,
-      //     description: this.description,
-      //     state: this.state
-      //   })
-      //   .then(implement => {
-      //     this.$router.push({ name: "implementos" });
-      //   })
-      //   .catch(e => console.error(e));
+      axios
+        .post("newImplement", this.newData)
+        .then(res => {
+          this.items.push(res.data.implement);
+          this.newData.serial = "";
+          this.newData.name = "";
+          this.newData.mark = "";
+          (this.newData.type = ""),
+            (this.newData.model = ""),
+            (this.newData.location = ""),
+            (this.newData.user = ""),
+            (this.newData.description = ""),
+            (this.newData.state = "");
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
-
+    // Only Implement (Pasa un solo dato de la tabla para hacer el update)
     onlyImplement(id) {
-      this.edit = true;
-      console.log(id);
-      axios.get(`implement/${id}`)
-      .then(res=>{
-         this.editImplements = res.data
-      })
-      .catch(e=>{
-        console.log(e)
-      })
+      this.edit = false;
+      axios
+        .get(`implement/${id}`)
+        .then(res => {
+          this.editImplements = res.data;
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
     // Edit Implement
     editImplement(item) {
-      axios
-        .put(`updateImplement/${item._id}`, item)
-        .then(res => {
-          const index = this.items.findIndex(n => n._id === res.data._id)
-          this.items[index].serial = res.data.serial
-          this.items[index].name = res.data.name
-          this.items[index].mark = res.data.mark
-          this.items[index].type = res.data.type
-          this.items[index].model = res.data.model
-          this.items[index].location = res.data.location
-          this.items[index].user = res.data.user
-          this.items[index].description = res.data.description
-          this.items[index].state = res.data.state
-          this.$router.replace({name: "implementos"})
-          this.edit = false
-        })
+      axios.put(`updateImplement/${item._id}`, item).then(res => {
+        const index = this.items.findIndex(n => n._id === res.data._id);
+        this.items[index].serial = res.data.serial;
+        this.items[index].name = res.data.name;
+        this.items[index].mark = res.data.mark;
+        this.items[index].type = res.data.type;
+        this.items[index].model = res.data.model;
+        this.items[index].location = res.data.location;
+        this.items[index].user = res.data.user;
+        this.items[index].description = res.data.description;
+        this.items[index].state = res.data.state;
+        this.$router.replace({ name: "implementos" });
+        this.edit = false;
+      });
     },
     //Delete Implement
     deleteImplement(id) {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
         axios
-          .delete(`deleteImplement/`+ id)
+          .delete(`deleteImplement/` + id)
           .then(res => {
-            // const index = this.items.findIndex(item => item._id === res.data._id)
             this.items.splice(id, 1);
             console.log("Implement Delete: ", id);
           })

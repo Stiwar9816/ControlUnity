@@ -33,7 +33,7 @@ module.exports = {
     updateImplement: async (req, res, next) => {
         const implementId = req.params.id
         const newImplement = req.body
-        const oldImplement = await Implement.findByIdAndUpdate(implementId, newImplement)
+        const oldImplement = await Implement.findOneAndUpdate(implementId, newImplement)
         res.status(200).json(oldImplement)
     },
 
