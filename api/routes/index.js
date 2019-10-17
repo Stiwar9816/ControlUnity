@@ -22,8 +22,8 @@ router.post('/login', controllersUser.login)
 router.get('/logout', auth ,controllersUser.logout)
 // router.get('/forgot', controllersUser.forgot)
 router.get('/user', controllersUser.allUser)
-router.get('/user/:id', auth,controllersUser.getOneUser)
-router.put('/updateUser/:id', auth,controllersUser.updateUser)
+router.get('/user/:id', controllersUser.getOneUser)
+router.put('/updateUser/:id', controllersUser.updateUser)
 router.delete('/deleteUser/:id', controllersUser.deleteUser)
 
 // Routes Bookings Crud
@@ -35,9 +35,9 @@ router.delete('/deleteBooking/:id', auth,controllersBookings.deleteBooking)
 
 // Routes Rooms Crud
 router.get('/room', controllersRooms.allRoom)
-router.get('/room/:id', auth,controllersRooms.getOneRoom)
+router.get('/room/:id', controllersRooms.getOneRoom)
 router.post('/newRoom',controllersRooms.newRoom)
-router.put('/updateRoom/:id', auth,controllersRooms.updateRoom)
+router.put('/updateRoom/:id', controllersRooms.updateRoom)
 router.delete('/deleteRoom/:id', controllersRooms.deleteRoom)
 
 // Routes Implements Crud

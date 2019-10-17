@@ -221,7 +221,7 @@ export default {
         { text: "SERIAL", align: "center", sortable: false, value: "serial" },
         { text: "IMPLEMENTO", align: "center", value: "name", sortable: false },
         { text: "MARCA", align: "center", value: "mark", sortable: false },
-        { text: "TIPO", align: "center", value: "type", sortable: false },
+        { text: "TIPO", align: "center", value: "type", sortable: true },
         { text: "MODELO", align: "center", value: "model", sortable: false },
         {
           text: "UBICACIÓN",
@@ -256,7 +256,17 @@ export default {
         description: "",
         state: ""
       },
-      editImplements: {}
+      editImplements: {
+        serial: "",
+        name: "",
+        mark: "",
+        type: "",
+        model: "",
+        location: "",
+        user: "",
+        description: "",
+        state: ""
+      }
     };
   },
   async created() {
@@ -318,7 +328,7 @@ export default {
         this.items[index].user = res.data.user;
         this.items[index].description = res.data.description;
         this.items[index].state = res.data.state;
-        this.$router.replace({ name: "implementos" });
+        this.$router.push({ name: "implementos" });
         this.edit = false;
       });
     },
@@ -329,8 +339,11 @@ export default {
         axios
           .delete(`deleteImplement/` + id)
           .then(res => {
-            const index = this.items.findIndex(item => item._id === res.data._id)
+            const index = this.items.findIndex(
+              item => item._id === res.data._id
+            );
             this.items.splice(index, 1);
+            this.$router.push({ name: "implementos" });
             console.log("Implement Delete: ", id);
           })
           .catch(e => {
