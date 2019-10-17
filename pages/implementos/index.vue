@@ -331,8 +331,8 @@ export default {
         axios
           .delete(`deleteImplement/`+ id)
           .then(res => {
-            // const index = this.items.findIndex(item => item._id === res.data._id)
-            this.items.splice(id, 1);
+            const index = this.items.findIndex(item => item._id === res.data._id)
+            this.items.splice(index, 1);
             console.log("Implement Delete: ", id);
           })
           .catch(e => {
