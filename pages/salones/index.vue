@@ -3,18 +3,35 @@
     <v-flex>
       <v-subheader class="subtitle-1">SALONES REGISTRADOS</v-subheader>
       <v-container>
-        <v-form ref="form" v-model="valid" v-on:submit="NewRoom" lazy-validation>
+        <!-- Edit Of Room -->
+        <v-form
+          ref="form"
+          v-model="valid"
+          v-on:submit="editRoom(editRooms)"
+          v-if="edit"
+          lazy-validation
+        >
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="3">
-              <v-text-field v-model="room.name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
-            </v-col>
-            <v-col sm="4" md="2">
-              <v-text-field v-model="room.location" :rules="locationRules" label="Ubicación" required></v-text-field>
+              <v-text-field
+                v-model="editRooms.name"
+                :rules="salonRules"
+                label="Nombre Salon"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
               <v-text-field
-                v-model="room.capacity"
+                v-model="editRooms.location"
+                :rules="locationRules"
+                label="Ubicación"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col sm="4" md="2">
+              <v-text-field
+                v-model="editRooms.capacity"
                 :rules="capacityRules"
                 label="Capcidad"
                 type="number"
@@ -24,7 +41,7 @@
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
-                v-model="room.description"
+                v-model="editRooms.description"
                 :rules="descriptionRules"
                 autoGrow
                 required
@@ -36,13 +53,72 @@
           </v-row>
           <v-row>
             <v-col align="center">
+              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
+                <v-icon dark>fa fa-plus</v-icon>Editar
+              </v-btn>
               <v-btn
                 rounded
-                color="primary black--text"
+                color="error black--text"
                 type="submit"
+                @click="edit = false"
                 :disabled="!valid"
-                @click="NewRoom"
               >
+                <v-icon dark>fa fa-plus</v-icon>Cancelar
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
+        <!-- Form Of New Room -->
+        <v-form
+          ref="form"
+          v-model="valid"
+          v-on:submit.prevent="NewRoom()"
+          v-if="!edit"
+          lazy-validation
+        >
+          <v-row>
+            <!-- inputs -->
+            <v-col sm="4" md="3">
+              <v-text-field
+                v-model="newData.name"
+                :rules="salonRules"
+                label="Nombre Salon"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col sm="4" md="2">
+              <v-text-field
+                v-model="newData.location"
+                :rules="locationRules"
+                label="Ubicación"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col sm="4" md="2">
+              <v-text-field
+                v-model="newData.capacity"
+                :rules="capacityRules"
+                label="Capcidad"
+                type="number"
+                min="0"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col sm="12" md="5">
+              <v-textarea
+                v-model="newData.description"
+                :rules="descriptionRules"
+                autoGrow
+                required
+                rows="1"
+                row-height="20"
+                label="Descripción"
+              ></v-textarea>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
                 <v-icon dark>fa fa-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -72,7 +148,7 @@
         >
           <template slot="items" slot-scope="data" />
           <template slot="item.icon" slot-scope="data">
-            <v-btn icon aria-label="edit">
+            <v-btn icon v-on:click="onlyRoom(data.item._id)" aria-label="edit">
               <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
             <v-btn icon v-on:click="deleteRoom(data.item._id)" aria-label="delete">
@@ -98,6 +174,7 @@ export default {
   layout: "home",
   data() {
     return {
+      edit: false,
       search: "",
       // name: "",
       // location: "",
@@ -131,18 +208,20 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
-      room:{
-        name:"",
-        location:"",
-        capacity:"",
-        description:""
-      }
+      newData: {
+        name: "",
+        location: "",
+        capacity: "",
+        description: ""
+      },
+      editRooms: {}
     };
   },
   async created() {
     try {
       const res = await axios.get("room");
       this.items = await res.data.Rooms;
+      console.log(this.items);
     } catch (error) {
       console.log(error);
     }
@@ -155,17 +234,42 @@ export default {
     },
     //New Salon
     async NewRoom() {
-      await axios
-        .post("newRoom", {
-          name: this.room.name,
-          location: this.room.location,
-          capacity: this.room.capacity,
-          description: this.room.description
-        })
+      axios
+        .post("api/newRoom", this.newData)
         .then(res => {
-          this.$router.push({ name: "salones" });
+          this.items.push(res.data.Room);
+          this.newData.name = "";
+          this.newData.location = "";
+          this.newData.capacity = "";
+          this.newData.description = "";
+          console.log(newData);
         })
-        .catch(err => console.error(err));
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    onlyRoom(id) {
+      this.edit = true;
+      console.log(id);
+      axios
+        .get(`api/room/${id}`)
+        .then(res => {
+          this.editRooms = res.data;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    editRoom(item) {
+      axios.put(`updateRoom/${item._id}`, item).then(res => {
+        const index = this.items.findIndex(n => n._id === res.data._id);
+        this.items[index].name = res.data.name;
+        this.items[index].location = res.data.location;
+        this.items[index].capacity = res.data.capacity;
+        this.items[index].description = res.data.description;
+        this.$router.replace({name: "salones"})
+          this.edit = false
+      });
     },
     //Delete Salon
     deleteRoom(id) {
@@ -174,7 +278,8 @@ export default {
         axios
           .delete("deleteRoom/" + id)
           .then(res => {
-            this.items.splice(id, 1);
+            const index = this.items.findIndex(item => item._id === res.data._id)
+            this.items.splice(index, 1);
             console.log("Room Delete: ", id);
           })
           .catch(e => {
