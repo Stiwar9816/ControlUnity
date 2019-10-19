@@ -268,7 +268,8 @@ export default {
         this.items[index].capacity = res.data.capacity;
         this.items[index].description = res.data.description;
         this.$router.replace({name: "salones"})
-          this.edit = false
+          this.edit = false 
+          
       });
     },
     //Delete Salon
