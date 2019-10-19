@@ -27,7 +27,7 @@
                 :rules="implementRules"
                 label="Implemento"
                 required
-              ></v-text-field>
+              ></v-text-field> 
             </v-col>
             <v-col sm="4" md="3">
               <v-text-field v-model="editImplements.mark" :rules="markRules" label="Marca" required></v-text-field>
