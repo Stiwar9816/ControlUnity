@@ -53,17 +53,11 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
-                <v-icon dark>fa fa-plus</v-icon>Editar
+              <v-btn rounded color="success black--text mr-2" type="submit" :disabled="!valid">
+                <v-icon dark>fa fa-check</v-icon>Editar
               </v-btn>
-              <v-btn
-                rounded
-                color="error black--text"
-                type="submit"
-                @click="edit = false"
-                :disabled="!valid"
-              >
-                <v-icon dark>fa fa-plus</v-icon>Cancelar
+              <v-btn rounded color="error black--text" @click="edit = false">
+                <v-icon dark>fa fa-ban</v-icon>Cancelar
               </v-btn>
             </v-col>
           </v-row>
@@ -176,11 +170,8 @@ export default {
     return {
       edit: false,
       search: "",
-      // name: "",
-      // location: "",
-      // capacity: "",
-      // description: "",
       valid: true,
+      edit: false,
       salonRules: [v => !!v || "Nombre del salon es requerido"],
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       locationRules: [v => !!v || "Ubicación del salon es requerido"],
@@ -214,7 +205,7 @@ export default {
         capacity: "",
         description: ""
       },
-      editRooms: {}
+      editRooms: { name: "", location: "", capacity: "", description: "" }
     };
   },
   async created() {
@@ -252,7 +243,7 @@ export default {
       this.edit = true;
       console.log(id);
       axios
-        .get(`api/room/${id}`)
+        .get(`room/${id}`)
         .then(res => {
           this.editRooms = res.data;
         })
@@ -279,7 +270,9 @@ export default {
         axios
           .delete("deleteRoom/" + id)
           .then(res => {
-            const index = this.items.findIndex(item => item._id === res.data._id)
+            const index = this.items.findIndex(
+              item => item._id === res.data._id
+            );
             this.items.splice(index, 1);
             console.log("Room Delete: ", id);
           })
