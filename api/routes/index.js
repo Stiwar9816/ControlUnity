@@ -28,10 +28,11 @@ router.delete('/deleteUser/:id', controllersUser.deleteUser)
 
 // Routes Bookings Crud
 router.get('/booking', controllersBookings.allBooking)
-router.get('/booking/:id', controllersBookings.getOneBooking)
-router.post('/newBooking', controllersBookings.newBooking)
+// router.get('/booking/:id', controllersBookings.getBookingImplements)
+router.post('/newBooking/:id/implements', controllersBookings.newBookingImplements)
 router.put('/updateBooking/:id', controllersBookings.updateBooking)
 router.delete('/deleteBooking/:id', auth, controllersBookings.deleteBooking)
+router.get('/:id/implements', controllersBookings.getBookingImplements)
 
 // Routes Rooms Crud
 router.get('/room', controllersRooms.allRoom)

@@ -337,12 +337,12 @@ export default {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
         axios
-          .delete(`deleteImplement/` + id)
+          .delete(`deleteImplement/${id}`)
           .then(res => {
-            const index = this.items.findIndex(
-              item => item._id === res.data._id
-            );
-            this.items.splice(index, 1);
+            // const index = this.items.findIndex(
+            //   item => item._id === res.data._id
+            // );
+            this.items.splice(id, 1);
             this.$router.push({ name: "implementos" });
             console.log("Implement Delete: ", id);
           })
