@@ -40,7 +40,7 @@ module.exports = {
     // Delete one implement from id
     deleteImplement: async (req, res, next) => {
         const implementId = req.params.id
-        await Implement.findOneAndDelete(implementId)
+        await Implement.findByIdAndRemove(implementId)
         res.status(204).json({
             success: true
         })

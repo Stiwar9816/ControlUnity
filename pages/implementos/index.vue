@@ -10,6 +10,8 @@
           v-on:submit="editImplement(editImplements)"
           v-if="!edit"
           lazy-validation
+          novalidate
+          aria-autocomplete="off"
         >
           <v-row>
             <!-- inputs -->
@@ -27,7 +29,7 @@
                 :rules="implementRules"
                 label="Implemento"
                 required
-              ></v-text-field> 
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="3">
               <v-text-field v-model="editImplements.mark" :rules="markRules" label="Marca" required></v-text-field>
@@ -95,51 +97,53 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit.prevent="NewImplement()"
+          v-on:submit="NewImplement()"
           v-if="edit"
           lazy-validation
+          novalidate
+          aria-autocomplete="off"
         >
           <v-row>
             <!-- inputs -->
             <v-col sm="5" md="2">
-              <v-text-field v-model="newData.serial" :rules="serailRules" label="Serial" required></v-text-field>
+              <v-text-field v-model="serial" :rules="serailRules" label="Serial" required></v-text-field>
             </v-col>
             <v-col sm="7" md="3">
               <v-text-field
-                v-model="newData.name"
+                v-model="name"
                 :rules="implementRules"
                 label="Implemento"
                 required
               ></v-text-field>
             </v-col>
             <v-col sm="4" md="3">
-              <v-text-field v-model="newData.mark" :rules="markRules" label="Marca" required></v-text-field>
+              <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="newData.type" :rules="typeRules" label="Tipo" required></v-text-field>
+              <v-text-field v-model="type" :rules="typeRules" label="Tipo" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="newData.model" :rules="modelRules" label="Modelo" required></v-text-field>
+              <v-text-field v-model="model" :rules="modelRules" label="Modelo" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col sm="4" md="2">
               <v-text-field
-                v-model="newData.location"
+                v-model="location"
                 :rules="locationRules"
                 label="Ubicación"
                 required
               ></v-text-field>
             </v-col>
             <v-col sm="5" md="2">
-              <v-text-field v-model="newData.user" :rules="userRules" label="Respondable" required></v-text-field>
+              <v-text-field v-model="user" :rules="userRules" label="Respondable" required></v-text-field>
             </v-col>
             <v-col sm="3" md="3">
-              <v-text-field v-model="newData.state" :rules="stateRules" label="Estado" required></v-text-field>
+              <v-text-field v-model="state" :rules="stateRules" label="Estado" required></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
-                v-model="newData.description"
+                v-model="description"
                 autoGrow
                 required
                 rows="1"
@@ -207,6 +211,15 @@ export default {
       search: "",
       valid: true,
       edit: true,
+      serial: "",
+      name: "",
+      mark: "",
+      type: "",
+      model: "",
+      location: "",
+      user: "",
+      description: "",
+      state: "",
       serailRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
       markRules: [v => !!v || "Marca del implemento es requerida"],
@@ -245,28 +258,7 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
-      newData: {
-        serial: "",
-        name: "",
-        mark: "",
-        type: "",
-        model: "",
-        location: "",
-        user: "",
-        description: "",
-        state: ""
-      },
-      editImplements: {
-        serial: "",
-        name: "",
-        mark: "",
-        type: "",
-        model: "",
-        location: "",
-        user: "",
-        description: "",
-        state: ""
-      }
+      editImplements: {}
     };
   },
   async created() {
@@ -286,18 +278,19 @@ export default {
     //Add New Salon
     async NewImplement() {
       axios
-        .post("newImplement", this.newData)
+        .post("newImplement", {
+          serial: this.serial,
+          name: this.name,
+          mark: this.mark,
+          type: this.type,
+          model: this.model,
+          location: this.location,
+          user: this.user,
+          description: this.description,
+          state: this.state
+        })
         .then(res => {
-          this.items.push(res.data.implement);
-          this.newData.serial = "";
-          this.newData.name = "";
-          this.newData.mark = "";
-          (this.newData.type = ""),
-            (this.newData.model = ""),
-            (this.newData.location = ""),
-            (this.newData.user = ""),
-            (this.newData.description = ""),
-            (this.newData.state = "");
+          this.implement;
         })
         .catch(e => {
           console.log(e);
@@ -337,14 +330,11 @@ export default {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
         axios
-          .delete(`deleteImplement/` + id)
+          .delete("deleteImplement/" + id)
           .then(res => {
-            const index = this.items.findIndex(
-              item => item._id === res.data._id
-            );
-            this.items.splice(index, 1);
-            this.$router.push({ name: "implementos" });
             console.log("Implement Delete: ", id);
+            this.items.splice(id, 1);
+            this.$router.go()
           })
           .catch(e => {
             console.log("Unable to clear the implement", e);

@@ -40,7 +40,7 @@ module.exports = {
     // Delete one Room from id
     deleteRoom: async (req, res, next) => {
         const RoomId = req.params.id
-        await Rooms.findOneAndDelete(RoomId)
+        await Rooms.findByIdAndRemove(RoomId)
         res.status(204).json({
             success: true
         })

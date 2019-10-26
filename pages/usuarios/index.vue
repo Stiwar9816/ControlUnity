@@ -82,6 +82,7 @@ export default {
         axios
           .delete("deleteUser/" + id)
           .then(res => {
+            this.$router.go();
             this.items.splice(id, 1);
             console.log("User Delete: ", id);
           })

@@ -66,31 +66,23 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit.prevent="NewRoom()"
+          v-on:submit="NewRoom()"
           v-if="!edit"
           lazy-validation
+          novalidate
+          aria-autocomplete="off"
         >
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="3">
-              <v-text-field
-                v-model="newData.name"
-                :rules="salonRules"
-                label="Nombre Salon"
-                required
-              ></v-text-field>
+              <v-text-field v-model="name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
+            </v-col>
+            <v-col sm="4" md="2">
+              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
               <v-text-field
-                v-model="newData.location"
-                :rules="locationRules"
-                label="Ubicación"
-                required
-              ></v-text-field>
-            </v-col>
-            <v-col sm="4" md="2">
-              <v-text-field
-                v-model="newData.capacity"
+                v-model="capacity"
                 :rules="capacityRules"
                 label="Capcidad"
                 type="number"
@@ -100,7 +92,7 @@
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
-                v-model="newData.description"
+                v-model="description"
                 :rules="descriptionRules"
                 autoGrow
                 required
@@ -172,6 +164,10 @@ export default {
       search: "",
       valid: true,
       edit: false,
+      name: "",
+      location: "",
+      capacity: "",
+      description: "",
       salonRules: [v => !!v || "Nombre del salon es requerido"],
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       locationRules: [v => !!v || "Ubicación del salon es requerido"],
@@ -199,13 +195,7 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
-      newData: {
-        name: "",
-        location: "",
-        capacity: "",
-        description: ""
-      },
-      editRooms: { name: "", location: "", capacity: "", description: "" }
+      editRooms: {}
     };
   },
   async created() {
@@ -226,14 +216,14 @@ export default {
     //New Salon
     async NewRoom() {
       axios
-        .post("api/newRoom", this.newData)
+        .post("newRoom", {
+          name: this.name,
+          location: this.location,
+          capacity: this.capacity,
+          description: this.description
+        })
         .then(res => {
-          this.items.push(res.data.Room);
-          this.newData.name = "";
-          this.newData.location = "";
-          this.newData.capacity = "";
-          this.newData.description = "";
-          console.log(newData);
+          this.salon;
         })
         .catch(e => {
           console.log(e);
@@ -258,9 +248,8 @@ export default {
         this.items[index].location = res.data.location;
         this.items[index].capacity = res.data.capacity;
         this.items[index].description = res.data.description;
-        this.$router.replace({name: "salones"})
-          this.edit = false 
-          
+        this.$router.replace({ name: "salones" });
+        this.edit = false;
       });
     },
     //Delete Salon
@@ -273,6 +262,7 @@ export default {
             const index = this.items.findIndex(
               item => item._id === res.data._id
             );
+            this.$router.go();
             this.items.splice(index, 1);
             console.log("Room Delete: ", id);
           })
