@@ -1,4 +1,5 @@
 const Booking = require('../models/booking.js');
+const Implements = require('../models/implements')
 
 module.exports = {
 
@@ -9,17 +10,26 @@ module.exports = {
     },
 
     // Created new Booking
-    newBooking: async (req, res, next) => {
+    // newBooking: async (req, res, next) => {
+    //     const newBooking = new Booking(req.body)
+    //     const Bookings = await newBooking.save()
+    //     res.status(200).json(Bookings)
+    newBookingImplements: async (req, res ,next) =>{
+        const { id } = req.params 
         const newBooking = new Booking(req.body)
-        const Booking = await newBooking.save()
-        res.status(200).json(Booking)
+        const implements = await Implements.findById(id)
+        newBooking.implements = implements
+        await newBooking.save()
+        booking.implements.push(newBooking);
+        await booking.save()
+        res.status(201).json(newBooking)
     },
 
     // Get one Booking from id
-    getOneBooking: async (req, res, next) => {
-        const id = req.params.id
-        const Booking = await Booking.findById(id)
-        res.status(200).json(Booking)
+    getBookingImplements : async (req, res, next) =>{
+        const {id}  = req.params
+        const booking  =  await Booking.findById(id).populate('Implements')
+        res.status(200).json(booking)
     },
 
     // replaceBooking: async (req, res, next)=>{
@@ -54,14 +64,14 @@ module.exports = {
     }, */
 
     // Created new booking with data booking and room
-    newBookingRoom: async (req, res ,next) =>{
-        const { id } = req.param.id
-        const newBooking = new Booking(req.body)
-        const room = await Room.findById(id)
-        newBooking.romm = room
-        await newBooking.save()
-        booking.room.push(newBooking);
-        await booking.save()
-        res.status(201).json(newBooking)
-    }
+    // newBookingRoom: async (req, res ,next) =>{
+    //     const { id } = req.param.id
+    //     const newBooking = new Booking(req.body)
+    //     const room = await Room.findById(id)
+    //     newBooking.romm = room
+    //     await newBooking.save()
+    //     booking.room.push(newBooking);
+    //     await booking.save()
+    //     res.status(201).json(newBooking)
+    // }
 }
