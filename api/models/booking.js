@@ -7,7 +7,7 @@ const Bookings = new Schema({
     event:({type: String, required:true}),
     // timeIn:({type: Date, required:true}),
     // timeOut:({type: Date, required:true}),
-    room:{type: Schema.Types.ObjectId, ref:"Room"},
+    room:{type: Schema.Types.ObjectId, ref:"Rooms"},
     implements:[{type: Schema.Types.ObjectId, ref:"Implements"}],
     capacity:{type: Number, required:true},
     // delivered:({type: Date}),
