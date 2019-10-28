@@ -4,7 +4,7 @@
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <v-row >
+          <v-row>
             <!-- inputs -->
             <v-col sm="4" md="2">
               <v-text-field
@@ -43,7 +43,11 @@
                 item-text="name"
                 item-value="name"
                 flat
-                clearable
+                chips
+                small-chips
+                deletable-chips
+                hide-selected
+                hide-details
               >
                 <template v-slot:no-data>
                   <v-list-item>
@@ -53,7 +57,7 @@
               </v-autocomplete>
             </v-col>
             <!--DatePicker  -->
-            <v-col sm="6" md="4">
+            <v-col sm="6" md="2">
               <v-menu
                 v-model="DateModal"
                 :close-on-content-click="false"
@@ -76,9 +80,8 @@
               </v-menu>
             </v-col>
             <!-- End DatePicker -->
-
             <!-- TimePicker -->
-            <v-col sm="6" md="4">
+            <v-col sm="6" md="2">
               <v-dialog
                 ref="dialog"
                 v-model="TimeModal"
@@ -103,6 +106,33 @@
               </v-dialog>
             </v-col>
             <!-- End TimePicker -->
+            <!-- Implementos -->
+            <v-col sm="6" md="4">
+              <v-combobox
+                v-model="implement"
+                :items="implements"
+                item-text="name"
+                item-value="name"
+                label="Implementos"
+                placeholder="Eliga los implementos necesarios"
+                chips
+                small-chips
+                deletable-chips
+                multiple
+                hide-selected
+                hide-details
+                clearable
+                flat
+                rounded
+              >
+                <template v-slot:no-data>
+                  <v-list-item>
+                    <v-list-item-title>No hay registros</v-list-item-title>
+                  </v-list-item>
+                </template>
+              </v-combobox>
+            </v-col>
+            <!-- End implementos -->
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
@@ -138,6 +168,7 @@ export default {
       event: "",
       capacitySalon: "",
       salon: "",
+      implement: "",
       TimeModal: false,
       DateModal: false,
       valid: true,
@@ -154,22 +185,39 @@ export default {
         { text: "MARCA", align: "center" },
         { text: "ACCIONES", align: "center", sortable: false }
       ],
-      salons: []
+      salons: [],
+      implements: []
     };
   },
-  async created() {
-    try {
-      const res = await axios.get("room");
-      this.salons = await res.data.Rooms;
-    } catch (error) {
-      console.log(error);
-    }
+  created() {
+    this.getSalon();
+    this.getImplements();
   },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
       }
+    },
+    getSalon() {
+      axios
+        .get("room")
+        .then(res => {
+          this.salons = res.data.Rooms;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getImplements() {
+      axios
+        .get("implement")
+        .then(res => {
+          this.implements = res.data.implement;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };
