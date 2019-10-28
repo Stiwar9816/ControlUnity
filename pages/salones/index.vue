@@ -63,15 +63,7 @@
           </v-row>
         </v-form>
         <!-- Form Of New Room -->
-        <v-form
-          ref="form"
-          v-model="valid"
-          v-on:submit="NewRoom()"
-          v-if="!edit"
-          lazy-validation
-          novalidate
-          aria-autocomplete="off"
-        >
+        <v-form ref="form" v-model="valid" v-on:submit="NewRoom()" v-if="!edit" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="3">
@@ -202,7 +194,6 @@ export default {
     try {
       const res = await axios.get("room");
       this.items = await res.data.Rooms;
-      console.log(this.items);
     } catch (error) {
       console.log(error);
     }
@@ -215,7 +206,7 @@ export default {
     },
     //New Salon
     async NewRoom() {
-      axios
+      await axios
         .post("newRoom", {
           name: this.name,
           location: this.location,
