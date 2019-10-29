@@ -3,7 +3,7 @@
     <v-flex>
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
       <v-container>
-        <v-form ref="form" v-model="valid" lazy-validation>
+        <v-form ref="form" v-on:submit.prevent="newBooking()" v-model="valid" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="2">
@@ -26,7 +26,7 @@
           <v-row>
             <v-col sm="6" md="2">
               <v-text-field
-                v-model="capacitySalon"
+                v-model="capacity"
                 :rules="capacitySalonRules"
                 label="Capacidad salon"
                 type="number"
@@ -36,7 +36,7 @@
             </v-col>
             <v-col sm="6" md="2">
               <v-autocomplete
-                v-model="salon"
+                v-model="room"
                 :rules="[v => !!v || 'Nombre del salon es requerido']"
                 label="Salon"
                 :items="salons"
@@ -164,8 +164,8 @@ export default {
       cc: "",
       name: "",
       event: "",
-      capacitySalon: "",
-      salon: "",
+      capacity: "",
+      room: "",
       implement: "",
       TimeModal: false,
       DateModal: false,
@@ -184,7 +184,8 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false }
       ],
       salons: [],
-      implements: []
+      implements: [],
+      bookings:[]
     };
   },
   created() {
@@ -219,6 +220,15 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    newBooking(){
+      axios.post("newBooking", {cc: this.cc ,name: this.name, event: this.event, capacity: this.capacity, room: this.room, date:this.date, time:this.time, implement: this.implement})
+      .then(res=>{
+        this.bookings = res.data.bookings
+      })
+      .catch(e =>{
+        console.log(e);
+      })
     }
   }
 };
