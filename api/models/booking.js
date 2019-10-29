@@ -8,7 +8,8 @@ const Bookings = new Schema({
     capacity:{type: Number, required:true},
     room:{type: String, required:true},
     implement: {type: Array},
-    // delivered:({type: Date}),
+    date:({type: Date}),
+    time:({type:Date}),
     received:({type: Date, default: Date.now})
 })
 
