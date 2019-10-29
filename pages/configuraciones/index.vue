@@ -101,6 +101,9 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.valid = false;
+  },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {

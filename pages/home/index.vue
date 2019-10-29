@@ -70,6 +70,7 @@ export default {
     try {
       const res = await axios.get("booking");
       this.items = await res.data.Bookings;
+      
     } catch (error) {
       console.log(error);
     }

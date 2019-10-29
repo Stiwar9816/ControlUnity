@@ -109,12 +109,7 @@
               <v-text-field v-model="serial" :rules="serailRules" label="Serial" required></v-text-field>
             </v-col>
             <v-col sm="7" md="3">
-              <v-text-field
-                v-model="name"
-                :rules="implementRules"
-                label="Implemento"
-                required
-              ></v-text-field>
+              <v-text-field v-model="name" :rules="implementRules" label="Implemento" required></v-text-field>
             </v-col>
             <v-col sm="4" md="3">
               <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
@@ -128,12 +123,7 @@
           </v-row>
           <v-row>
             <v-col sm="4" md="2">
-              <v-text-field
-                v-model="location"
-                :rules="locationRules"
-                label="Ubicación"
-                required
-              ></v-text-field>
+              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
             </v-col>
             <v-col sm="5" md="2">
               <v-text-field v-model="user" :rules="userRules" label="Respondable" required></v-text-field>
@@ -269,6 +259,9 @@ export default {
       console.log(error);
     }
   },
+  mounted() {
+    this.valid = false;
+  },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
@@ -334,7 +327,7 @@ export default {
           .then(res => {
             console.log("Implement Delete: ", id);
             this.items.splice(id, 1);
-            this.$router.go()
+            this.$router.go();
           })
           .catch(e => {
             console.log("Unable to clear the implement", e);

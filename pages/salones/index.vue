@@ -76,7 +76,7 @@
               <v-text-field
                 v-model="capacity"
                 :rules="capacityRules"
-                label="Capcidad"
+                label="Capacidad"
                 type="number"
                 min="0"
                 required
@@ -197,6 +197,9 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  mounted() {
+    this.valid = false;
   },
   methods: {
     validate() {
