@@ -64,7 +64,6 @@
                 :nudge-right="40"
                 transition="scale-transition"
                 offset-y
-                full-width
                 min-width="290px"
               >
                 <template v-slot:activator="{ on }">
@@ -76,7 +75,12 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="date" @input="DateModal = false" locale="es-co"></v-date-picker>
+                <v-date-picker
+                  v-model="date"
+                  @input="DateModal = false"
+                  locale="es-co"
+                  first-day-of-week="1"
+                ></v-date-picker>
               </v-menu>
             </v-col>
             <!-- End DatePicker -->
@@ -87,19 +91,12 @@
                 v-model="TimeModal"
                 :return-value.sync="time"
                 transition="scale-transition"
-                full-width
-                width="250px"
+                width="290px"
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field v-model="time" :rules="timeRules" label="Hora de reserva" v-on="on"></v-text-field>
                 </template>
-                <v-time-picker
-                  v-if="TimeModal"
-                  v-model="time"
-                  full-width
-                  ampm-in-title
-                  format="ampm"
-                >
+                <v-time-picker v-if="TimeModal" v-model="time" ampm-in-title format="ampm">
                   <div class="flex-grow-1"></div>
                   <v-btn text color="primary" @click="$refs.dialog.save(time)">Aceptar</v-btn>
                 </v-time-picker>
@@ -111,7 +108,7 @@
               <v-combobox
                 v-model="implement"
                 :items="implements"
-                item-text="name"
+                item-text="name "
                 item-value="name"
                 label="Implementos"
                 placeholder="Eliga los implementos necesarios"
@@ -127,7 +124,7 @@
               >
                 <template v-slot:no-data>
                   <v-list-item>
-                    <v-list-item-title>No hay registros</v-list-item-title>
+                    <v-list-item-title>No hay información registrada</v-list-item-title>
                   </v-list-item>
                 </template>
               </v-combobox>
@@ -143,6 +140,7 @@
               :disabled="!valid"
               @click="validate"
               aria-label="New booking"
+              class="mt-5"
             >
               <v-icon dark>fa fa-plus</v-icon>Agregar
             </v-btn>
@@ -193,6 +191,9 @@ export default {
   created() {
     this.getSalon();
     this.getImplements();
+  },
+  mounted() {
+    this.valid = false;
   },
   methods: {
     validate() {
