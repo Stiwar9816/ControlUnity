@@ -48,7 +48,7 @@ export default {
     return {
       search: "",
       headers: [
-        { text: "NOMBRE SALON", align: "center", value: "name" },
+        { text: "NOMBRE SALON", align: "center", value: "room" },
         {
           text: "CAPACIDAD",
           align: "center",
@@ -56,21 +56,38 @@ export default {
           value: "capacity"
         },
         {
-          text: "DESCRIPCIÓN",
+          text: "MATERIA O EVENTO",
           align: "center",
           sortable: false,
-          value: "description"
+          value: "event"
+        },
+        {
+          text: "IMPLEMENTOS",
+          align: "center",
+          sortable:false,
+          value:"implement"
+        },
+        {
+          text: "FECHA DE LA RESERVA",
+          align: "center",
+          sortable:false,
+          value:"implement"
+        },
+        {
+          text: "HORA DE LA RESERVA",
+          align: "center",
+          sortable:false,
+          value:"implement"
         },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: []
+      items: [],
     };
   },
   async created() {
     try {
       const res = await axios.get("booking");
       this.items = await res.data.Bookings;
-      
     } catch (error) {
       console.log(error);
     }

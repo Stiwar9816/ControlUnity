@@ -3,7 +3,7 @@
     <v-flex>
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
       <v-container>
-        <v-form ref="form" v-on:submit.prevent="newBooking()" v-model="valid" lazy-validation>
+        <v-form ref="form" v-on:submit="newBooking()" v-model="valid" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="2">
@@ -108,7 +108,7 @@
               <v-combobox
                 v-model="implement"
                 :items="implements"
-                item-text="name "
+                item-text="name"
                 item-value="name"
                 label="Implementos"
                 placeholder="Eliga los implementos necesarios"
