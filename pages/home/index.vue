@@ -18,7 +18,7 @@
         <v-data-table
           :headers="headers"
           :items="items"
-          :items-per-page="5"
+          :items-per-page="10"
           :search="search"
           class="elevation-1"
         >
@@ -48,13 +48,8 @@ export default {
     return {
       search: "",
       headers: [
-        { text: "NOMBRE SALON", align: "center", value: "room" },
-        {
-          text: "CAPACIDAD",
-          align: "center",
-          sortable: false,
-          value: "capacity"
-        },
+        { text: "RESPONSABLE", align: "center", value: "name", sortable: false },
+        { text: "NOMBRE SALON", align: "center", value: "room", sortable: false },
         {
           text: "MATERIA O EVENTO",
           align: "center",
@@ -64,24 +59,18 @@ export default {
         {
           text: "IMPLEMENTOS",
           align: "center",
-          sortable:false,
-          value:"implement"
+          sortable: false,
+          value: "implement"
         },
         {
           text: "FECHA DE LA RESERVA",
           align: "center",
-          sortable:false,
-          value:"implement"
-        },
-        {
-          text: "HORA DE LA RESERVA",
-          align: "center",
-          sortable:false,
-          value:"implement"
+          sortable: false,
+          value: "date"
         },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
-      items: [],
+      items: []
     };
   },
   async created() {

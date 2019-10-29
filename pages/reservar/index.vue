@@ -25,14 +25,17 @@
           </v-row>
           <v-row>
             <v-col sm="6" md="2">
-              <v-text-field
-                v-model="capacity"
-                :rules="capacitySalonRules"
+              <v-autocomplete
+                v-model="room"
                 label="Capacidad salon"
-                type="number"
-                min="0"
-                required
-              ></v-text-field>
+                :items="salons"
+                item-text="capacity"
+                item-value="name"
+                flat
+                chips
+                small-chips
+                disabled
+              ></v-autocomplete>
             </v-col>
             <v-col sm="6" md="2">
               <v-autocomplete
@@ -57,7 +60,7 @@
               </v-autocomplete>
             </v-col>
             <!--DatePicker  -->
-            <v-col sm="6" md="2">
+            <!-- <v-col sm="6" md="2">
               <v-menu
                 v-model="DateModal"
                 :close-on-content-click="false"
@@ -82,11 +85,11 @@
                   first-day-of-week="1"
                 ></v-date-picker>
               </v-menu>
-            </v-col>
+            </v-col> -->
             <!-- End DatePicker -->
             <!-- TimePicker -->
             <v-col sm="6" md="2">
-              <v-dialog
+              <!-- <v-dialog
                 ref="dialog"
                 v-model="TimeModal"
                 :return-value.sync="time"
@@ -100,7 +103,8 @@
                   <div class="flex-grow-1"></div>
                   <v-btn text color="primary" @click="$refs.dialog.save(time)">Aceptar</v-btn>
                 </v-time-picker>
-              </v-dialog>
+              </v-dialog>-->
+              <v-text-field v-model="date" type="datetime-local" label="Fecha y Hora de reserva"></v-text-field>
             </v-col>
             <!-- End TimePicker -->
             <!-- Implementos -->
@@ -173,7 +177,6 @@ export default {
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
       nameRules: [v => !!v || "Nombre del usuario es requerido"],
       eventRules: [v => !!v || "Nombre de la materia o evento es requerido"],
-      capacitySalonRules: [v => !!v || "Capacidad del salon es requerido"],
       dateRules: [v => !!v || "Fecha de la reserva es requerida"],
       timeRules: [v => !!v || "Hora de la reserva es requerida"],
       headers: [
@@ -185,7 +188,7 @@ export default {
       ],
       salons: [],
       implements: [],
-      bookings:[]
+      bookings: []
     };
   },
   created() {
@@ -221,14 +224,22 @@ export default {
           console.log(error);
         });
     },
-    newBooking(){
-      axios.post("newBooking", {cc: this.cc ,name: this.name, event: this.event, capacity: this.capacity, room: this.room, date:this.date, time:this.time, implement: this.implement})
-      .then(res=>{
-        this.bookings = res.data.bookings
-      })
-      .catch(e =>{
-        console.log(e);
-      })
+    newBooking() {
+      axios
+        .post("newBooking", {
+          cc: this.cc,
+          name: this.name,
+          event: this.event,
+          room: this.room,
+          date: this.date,
+          implement: this.implement
+        })
+        .then(res => {
+          this.bookings = res.data.bookings;
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   }
 };
