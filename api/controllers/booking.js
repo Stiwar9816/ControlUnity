@@ -10,25 +10,25 @@ module.exports = {
     },
 
     // Created new Booking
-    // newBooking: async (req, res, next) => {
-    //     const newBooking = new Booking(req.body)
-    //     const Bookings = await newBooking.save()
-    //     res.status(200).json(Bookings)
-    newBookingImplements: async (req, res ,next) =>{
-        const { id } = req.params 
+    newBooking: async (req, res, next) => {
         const newBooking = new Booking(req.body)
-        const implements = await Implements.findById(id)
-        newBooking.implements = implements
-        await newBooking.save()
-        booking.implements.push(newBooking);
-        await booking.save()
-        res.status(201).json(newBooking)
+        const Bookings = await newBooking.save()
+        res.status(200).json(Bookings)
+    // newBookingImplements: async (req, res ,next) =>{
+    //     const { id } = req.params 
+    //     const newBooking = new Booking(req.body)
+    //     const implements = await Implements.findById(id)
+    //     newBooking.implements = implements
+    //     await newBooking.save()
+    //     booking.implements.push(newBooking);
+    //     await booking.save()
+    //     res.status(201).json(newBooking)
     },
 
     // Get one Booking from id
-    getBookingImplements : async (req, res, next) =>{
+    getBooking : async (req, res, next) =>{
         const {id}  = req.params
-        const booking  =  await Booking.findById(id).populate('Implements')
+        const booking  =  await Booking.findById(id)
         res.status(200).json(booking)
     },
 
@@ -63,15 +63,4 @@ module.exports = {
         res.status(200).json(booking)
     }, */
 
-    // Created new booking with data booking and room
-    // newBookingRoom: async (req, res ,next) =>{
-    //     const { id } = req.param.id
-    //     const newBooking = new Booking(req.body)
-    //     const room = await Room.findById(id)
-    //     newBooking.romm = room
-    //     await newBooking.save()
-    //     booking.room.push(newBooking);
-    //     await booking.save()
-    //     res.status(201).json(newBooking)
-    // }
 }
