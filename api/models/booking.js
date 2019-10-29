@@ -10,7 +10,7 @@ const Bookings = new Schema({
     // room:{type: Schema.Types.ObjectId, ref:"Rooms"},
     // implements:[{type: Schema.Types.ObjectId, ref:"Implements"}],
     capacity:{type: Number, required:true},
-    room:{type: Number, required:true},
+    room:{type: String, required:true},
     implement: {type: Array},
     // delivered:({type: Date}),
     received:({type: Date, default: Date.now})
