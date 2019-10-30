@@ -22,7 +22,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data" />
+          <template v-slot:items/>
           <template v-slot:item.icon>
             <v-btn icon aria-label="check">
               <v-icon color="green" small>fa fa-check-square-o</v-icon>
@@ -57,12 +57,6 @@ export default {
           value: "event"
         },
         {
-          text: "IMPLEMENTOS",
-          align: "center",
-          sortable: false,
-          value: "implement"
-        },
-        {
           text: "FECHA DE LA RESERVA",
           align: "center",
           sortable: false,
@@ -77,9 +71,10 @@ export default {
     try {
       const res = await axios.get("booking");
       this.items = await res.data.Bookings;
+      // console.log(this.items)
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 };
 </script>
