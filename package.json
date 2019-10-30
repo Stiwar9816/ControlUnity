@@ -1,4 +1,4 @@
- {
+{
   "name": "control-unity",
   "version": "1.0.0",
   "description": "Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana",
@@ -13,7 +13,6 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/font-awesome": "^1.0.4",
-    "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
