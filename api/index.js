@@ -7,14 +7,15 @@ const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const api = require("./routes");
 const { Nuxt, Builder } = require("nuxt");
+// const auth = require("./config/auth");
 // Start of aplication
 const app = express();
 require("./db/database.js");
-require("./config/passport");
 // views stattus of methods
 app.use(morgan("dev"));
 
 //middlewares
+// app.use(auth);
 app.use(mongoSanitize());
 app.use(cors());
 app.use(

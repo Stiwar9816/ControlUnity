@@ -17,7 +17,7 @@
               ></v-text-field>
             </v-col>
             <v-col sm="4" md="5">
-              <v-text-field v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
+              <v-text-field v-model="name" :rules="nameRules" label="Nombre de la persona responsable" required></v-text-field>
             </v-col>
             <v-col sm="4" md="5">
               <v-text-field v-model="event" :rules="eventRules" label="Materia o evento" required></v-text-field>
@@ -25,7 +25,7 @@
           </v-row>
           <v-row>
             <v-col sm="6" md="2">
-              <v-autocomplete
+              <v-select
                 v-model="room"
                 label="Capacidad salon"
                 :items="salons"
@@ -35,13 +35,14 @@
                 chips
                 small-chips
                 disabled
-              ></v-autocomplete>
+                id="capacity"
+              ></v-select>
             </v-col>
             <v-col sm="6" md="2">
               <v-autocomplete
                 v-model="room"
                 :rules="[v => !!v || 'Nombre del salon es requerido']"
-                label="Salon"
+                label="Eliga un salon"
                 :items="salons"
                 item-text="name"
                 item-value="name"
@@ -59,63 +60,19 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <!--DatePicker  -->
-            <!-- <v-col sm="6" md="2">
-              <v-menu
-                v-model="DateModal"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="date"
-                    :rules="dateRules"
-                    label="Fecha de reserva"
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="date"
-                  @input="DateModal = false"
-                  locale="es-co"
-                  first-day-of-week="1"
-                ></v-date-picker>
-              </v-menu>
-            </v-col> -->
-            <!-- End DatePicker -->
-            <!-- TimePicker -->
-            <v-col sm="6" md="2">
-              <!-- <v-dialog
-                ref="dialog"
-                v-model="TimeModal"
-                :return-value.sync="time"
-                transition="scale-transition"
-                width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field v-model="time" :rules="timeRules" label="Hora de reserva" v-on="on"></v-text-field>
-                </template>
-                <v-time-picker v-if="TimeModal" v-model="time" ampm-in-title format="ampm">
-                  <div class="flex-grow-1"></div>
-                  <v-btn text color="primary" @click="$refs.dialog.save(time)">Aceptar</v-btn>
-                </v-time-picker>
-              </v-dialog>-->
+            <!-- DateTimePicker -->
+            <v-col sm="6" md="3">
               <v-text-field v-model="date" type="datetime-local" label="Fecha y Hora de reserva"></v-text-field>
             </v-col>
-            <!-- End TimePicker -->
+            <!-- End DateTimePicker -->
             <!-- Implementos -->
-            <v-col sm="6" md="4">
+            <v-col sm="6" md="5">
               <v-combobox
                 v-model="implement"
                 :items="implements"
                 item-text="name"
                 item-value="name"
-                label="Implementos"
-                placeholder="Eliga los implementos necesarios"
+                label="Eliga los implementos necesarios"
                 chips
                 small-chips
                 deletable-chips

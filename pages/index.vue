@@ -52,6 +52,9 @@ export default {
       passwordRules: [v => !!v || "Contraseña es requerida"]
     };
   },
+  mounted() {
+    this.valid = false;
+  },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {

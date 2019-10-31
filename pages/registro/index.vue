@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex class="mt-10">
-      <v-card  max-width="400" class="mx-auto elevation-3" outlined>
+      <v-card max-width="400" class="mx-auto elevation-3" outlined>
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
         <v-form v-on:submit.prevent="registro" ref="form" v-model="valid" lazy-validation>
           <v-card-text>
@@ -31,8 +31,7 @@
               class="accent"
               type="submit"
               :disabled="!valid"
-              @click.prevent="registro"
-            >Registrate </v-btn>
+            >Registrate</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -68,6 +67,9 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.valid = false;
+  },
   methods: {
     async registro() {
       await axios
@@ -92,8 +94,8 @@ export default {
 .header_login {
   background-color: rgb(190, 189, 189);
 }
-.register{
+.register {
   padding-top: 40px;
-  }
+}
 </style>>
     
