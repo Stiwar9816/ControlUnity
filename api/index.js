@@ -6,10 +6,7 @@ const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const api = require("./routes");
-<<<<<<< HEAD
 const authToken = require('./middleware/authToken.js')
-=======
->>>>>>> 1d500cc7c51c25b664fca6beb9bcd1617ab5236d
 const { Nuxt, Builder } = require("nuxt");
 // const auth = require("./config/auth");
 // Start of aplication
