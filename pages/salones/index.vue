@@ -123,7 +123,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data" />
+          <template v-slot:items/>
           <template slot="item.icon" slot-scope="data">
             <v-btn icon v-on:click="onlyRoom(data.item._id)" aria-label="edit">
               <v-icon small color="edit">fa fa-pencil</v-icon>
