@@ -6,8 +6,12 @@ const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const api = require("./routes");
+<<<<<<< HEAD
 const authToken = require('./middleware/authToken.js')
+=======
+>>>>>>> 1d500cc7c51c25b664fca6beb9bcd1617ab5236d
 const { Nuxt, Builder } = require("nuxt");
+// const auth = require("./config/auth");
 // Start of aplication
 const app = express();
 require("./db/database.js");
@@ -15,6 +19,7 @@ require("./db/database.js");
 app.use(morgan("dev"));
 
 //middlewares
+// app.use(auth);
 app.use(mongoSanitize());
 app.use(cors());
 app.use(
@@ -23,7 +28,6 @@ app.use(
   })
   );
   app.use(bodyParser.json());
-
 
 // Import and Set Nuxt.js options
 const config = require("../nuxt.config.js");

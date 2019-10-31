@@ -5,15 +5,16 @@ const {
 const bcrypt = require('bcrypt');
 const mapDuplicate = require('../helpers/mapDuplicate')
 
-const Users = new Schema({
+const Users = new Schema(
+  {
     cc: {
-        type: Number,
-        required: true,
-        unique: true
+      type: Number,
+      required: true,
+      unique: true
     },
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     email: ({
         type: String,
@@ -53,7 +54,7 @@ Users.pre('save', function (next) {
 
 
 Users.index({
-    cc: 1
-})
+  cc: 1
+});
 
-module.exports = global.Users = mongoose.model('Users', Users);
+module.exports = global.Users = mongoose.model("Users", Users);
