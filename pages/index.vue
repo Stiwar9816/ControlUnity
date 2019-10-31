@@ -3,7 +3,7 @@
     <v-flex class="mt-4">
       <v-card max-width="400" class="mx-auto login elevation-3" outlined>
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
-        <v-form ref="form" v-model="valid" v-on:submit="login" lazy-validation>
+        <v-form ref="form" v-model="valid" v-on:submit="login()" lazy-validation>
           <v-card-text>
             <v-text-field v-model="cc" :rules="ccRules" label="C.C" type="number" min="0" required></v-text-field>
             <v-text-field
@@ -24,7 +24,6 @@
               class="accent"
               type="submit"
               :disabled="!valid"
-              @click="login"
             >Iniciar Sesión</v-btn>
           </v-card-actions>
         </v-form>
@@ -60,15 +59,15 @@ export default {
     },
     async login() {
       await axios
-        .post("login", {
+        .post("/api/login", {
           cc: this.cc,
           password: this.password
         })
         .then(res => {
           let data = res.data;
           console.log(data);
-          this.$store.commit("setIsUserAuthenticated", true);
-          this.$router.push("/home");
+          // this.$store.commit("setIsUserAuthenticated", true);
+          this.$router.replace({ name: "home" });
         })
         .catch(error => {
           console.log(error);

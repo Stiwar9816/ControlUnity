@@ -1,4 +1,4 @@
- {
+{
   "name": "control-unity",
   "version": "1.0.0",
   "description": "Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana",
@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_ENV=development nodemon api/index.js --watch api",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node api/index.js",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "debug": "node --inspect ./api/index.js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -21,6 +22,7 @@
     "express": "^4.16.4",
     "express-mongo-sanitize": "^1.3.2",
     "express-promise-router": "^3.0.3",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",

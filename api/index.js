@@ -1,19 +1,16 @@
 const express = require("express");
 const consola = require("consola");
 const path = require("path");
-// const methodOverride = require("method-override");
-// const passport = require("passport");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const api = require("./routes");
-// const session = require("express-session");
+const authToken = require('./middleware/authToken.js')
 const { Nuxt, Builder } = require("nuxt");
 // Start of aplication
 const app = express();
 require("./db/database.js");
-require("./config/passport");
 // views stattus of methods
 app.use(morgan("dev"));
 
@@ -24,21 +21,10 @@ app.use(
   bodyParser.urlencoded({
     extended: false
   })
-);
-app.use(bodyParser.json());
-// app.use(
-//   session({
-//     secret: "MySecretSesion",
-//     resave: false,
-//     saveUninitialized: false
-//   })
-// );
-// app.use(methodOverride("_method"));
-// app.use(passport.initialize());
-// app.use(passport.session());
+  );
+  app.use(bodyParser.json());
 
-// Import API routes
-app.use(api);
+
 // Import and Set Nuxt.js options
 const config = require("../nuxt.config.js");
 config.dev = process.env.NODE_ENV !== "production";
@@ -59,7 +45,9 @@ async function start() {
 
   // Give nuxt middleware to express
   app.use(nuxt.render);
-
+  app.use(authToken);
+  // Import API routes
+app.use('/api',api);
   // Static files
   app.use(express.static(path.join(__dirname, "../static/")));
 

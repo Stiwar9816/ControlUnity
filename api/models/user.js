@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {
     Schema
 } = mongoose;
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const mapDuplicate = require('../helpers/mapDuplicate')
 
 const Users = new Schema({
@@ -21,52 +21,36 @@ const Users = new Schema({
         unique: true,
         lowercase: true
     }),
+    role: ({
+        type: String,
+        default: 'user',
+        enum: ['user', 'admin', 'suAdmin']
+    }),
     password: ({
         type: String,
-        required: true,
-        select: false
+        required: true
+    }),
+    singUp: ({
+        type: Date,
+        default: Date.now
     }),
     lastLogin: ({
-        type: Date
+        type: Date,
+        default: Date.now
     })
-}, {timestamps: true})
+});
 Users.post("save", mapDuplicate("Users"))
 
-// Users.pre('save', function(next){
-//     // if (!user.isModified('password')) return next();
-
-//     const user = this;
-
-//     bcrypt.genSalt(10, function(err, salt){
-//         if (err){ return next(err) }
-
-//         bcrypt.hash(user.password, salt, null, function(err, hash){
-//             if(err){return next(err)}
-
-//             user.password = hash;
-//             next();
-//         })
-//    })
-// });
-
-// Users.methods.comparePassword = function(candidatePassword, cb) {
-//     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-//         if (err) return cb(err);
-//         cb(null, isMatch);
-//     });
-// };
+Users.pre('save', function (next) {
+    bcrypt.genSalt(10).then(salt => {
+        bcrypt.hash(this.password, salt).then(hash => {
+            this.password = hash;
+            next();
+        }).catch(error => next(error))
+    }).catch(error => next(error))
+});
 
 
-//En caso que se utilice Passport como metodo de autentificacion usando depencenia bcryptjs
-Users.methods.encryptPassword = async (password)=> {
-    const salt = await bcrypt.genSalt(10)
-    const hash = bcrypt.hash(password, salt)
-    return hash
-}
-
-Users.methods.comparePassword = async function(password){
-    return await bcrypt.compare(password, this.password)
-}
 
 Users.index({
     cc: 1

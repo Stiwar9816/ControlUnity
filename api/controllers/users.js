@@ -1,5 +1,9 @@
 const Users = require('../models/user');
-const service = require('../services')
+const bcrypt = require('bcrypt');
+const CONFIG = require('../config/config.js')
+
+const jwt = require('jsonwebtoken')
+// const service = require('../services')
 
 module.exports = {
 
@@ -7,46 +11,57 @@ module.exports = {
 
     // Register user add one token unique
     register: async (req, res, next) => {
-        const user = new Users({
-            cc: req.body.cc,
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
-        })
-        user.password =  await user.encryptPassword(user.password)
-        user.save((err) => {
-            if (err) res.status(500).send({
-                message: `Error al crear el usuario: ${err}`
-            })
-            return res.status(200).send({
-                token: service.createToken(user)
-            })
+        const newUser = new Users(req.body)
+        const User = await newUser.save()
+        res.status(200).json({
+            User: User
         })
     },
 
     // Login user decoding token, permited access to pages authenticated
     login: async (req, res, next) => {
-        const {cc, password} = req.body;
-        Users.find({
-            cc: cc
-        }, (err, user) => {
-            if (err) return res.status(500).send({
-                message: err
-            })
-            if (!user) return res.status(404).send({
-                message: 'No existe el usuario'
-            })
-            
-            req.user = user
-            res.status(200).send({
-                message: 'Te has logeado correctamente',
-                token: service.createToken(user) 
-            })
-        })
-        const passwordValidate = await user.comparePassword(password) 
-        if(!passwordValidate){
-            res.status(401).send({message: 'Constraseña invalida', token: null})
-        }
+        let cc = req.body.cc;
+        let password = req.body.password;
+        Users.findOne({cc})
+            .then(user => {
+                if (!user) return res.status(404).send({
+                    message: "Usuario Incorrecto"
+                });
+                // debugger
+                bcrypt.compare(password, user.password)
+                    .then(match => {
+                        if (match) {
+                            payload ={
+                                cc: user.cc,
+                                name: user.name,
+                                email: user.email,
+                                role: user.role
+                            }
+                            //Acceso
+                            jwt.sign(payload, CONFIG.SECRET_TOKEN, function(error,token){
+                                if(error){
+                                    res.status(500).send({error})
+                                }else{
+                                    res.status(200).send({message:'Usuario Logueado', token})
+                                }
+                            })
+                        }else{
+                             res.status(200).send({
+                                message: 'Contraseña Incorrecta'
+                            }) // No Acceso
+                        }
+                    }).catch(error => {
+                        console.log(error)
+                        res.status(500).send({
+                            error
+                        })
+                    })
+            }).catch(error => {
+                console.log(error);
+                res.status(500).send({
+                    error
+                });
+            });
     },
 
     //Destroy token deleting acess to pages 
@@ -60,7 +75,9 @@ module.exports = {
     // Get all users
     allUser: async (req, res, next) => {
         const users = await Users.find({})
-        res.status(200).json({users: users})
+        res.status(200).json({
+            users: users
+        })
     },
 
     // Get one implement from id

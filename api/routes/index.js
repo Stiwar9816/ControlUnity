@@ -1,8 +1,5 @@
 // Import dependencies driver of errors and authenticated passport
 const router = require('express-promise-router')();
-// const passport = require('passport');
-const auth = require('../config/auth')
-// const { isAuthenticated} = require('../helpers/auth')
 
 // Import fucntions of operations crud
 const controllersImplements = require('../controllers/implements')
@@ -13,13 +10,7 @@ const controllersRooms = require('../controllers/room')
 // Routes Users crud and login
 router.post('/register', controllersUser.register)
 router.post('/login', controllersUser.login)
-// router.post('/login', passport.authenticate('local',{
-//     successRedirect: 'http://localhost:3000/home',
-//     failureRedirect: 'http://localhost:3000'
-// }))
-
-
-router.get('/logout', auth, controllersUser.logout)
+router.get('/logout', controllersUser.logout)
 // router.get('/forgot', controllersUser.forgot)
 router.get('/user', controllersUser.allUser)
 router.get('/user/:id', controllersUser.getOneUser)
@@ -31,7 +22,7 @@ router.get('/booking', controllersBookings.allBooking)
 // router.get('/booking/:id', controllersBookings.getBookingImplements)
 router.post('/newBooking', controllersBookings.newBooking)
 router.put('/updateBooking/:id', controllersBookings.updateBooking)
-router.delete('/deleteBooking/:id', auth, controllersBookings.deleteBooking)
+router.delete('/deleteBooking/:id',controllersBookings.deleteBooking)
 router.get('/booking/:id', controllersBookings.getBooking)
 
 // Routes Rooms Crud
@@ -48,8 +39,4 @@ router.post('/newImplement', controllersImplements.newImplement)
 router.put('/updateImplement/:id', controllersImplements.updateImplement)
 router.delete('/deleteImplement/:id', controllersImplements.deleteImplement)
 
-// Apliaction of populate from data
-/* 
-router.get('/oneImplent/:id/room', getBookingRoom)
-router.post('/oneImplement/:id/room', newBookingRoom) */
 module.exports = router;
