@@ -253,7 +253,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get(`implement`);
+      const res = await axios.get(`api/implement`);
       this.items = await res.data.implement;
     } catch (error) {
       console.log(error);
@@ -271,7 +271,7 @@ export default {
     //Add New Salon
     async NewImplement() {
       axios
-        .post("newImplement", {
+        .post("api/newImplement", {
           serial: this.serial,
           name: this.name,
           mark: this.mark,
@@ -293,7 +293,7 @@ export default {
     onlyImplement(id) {
       this.edit = false;
       axios
-        .get(`implement/${id}`)
+        .get(`api/implement/${id}`)
         .then(res => {
           this.editImplements = res.data;
         })
@@ -303,7 +303,7 @@ export default {
     },
     // Edit Implement
     editImplement(item) {
-      axios.put(`updateImplement/${item._id}`, item).then(res => {
+      axios.put(`api/updateImplement/${item._id}`, item).then(res => {
         const index = this.items.findIndex(n => n._id === res.data._id);
         this.items[index].serial = res.data.serial;
         this.items[index].name = res.data.name;
@@ -314,7 +314,7 @@ export default {
         this.items[index].user = res.data.user;
         this.items[index].description = res.data.description;
         this.items[index].state = res.data.state;
-        this.$router.push({ name: "implementos" });
+        this.$router.push({ name: "api/implementos" });
         this.edit = false;
       });
     },
@@ -323,7 +323,7 @@ export default {
       const response = confirm("Esta seguro de eliminar este implemento?");
       if (response) {
         axios
-          .delete("deleteImplement/" + id)
+          .delete("api/deleteImplement/" + id)
           .then(res => {
             console.log("Implement Delete: ", id);
             this.items.splice(id, 1);

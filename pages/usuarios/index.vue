@@ -68,7 +68,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("user");
+      const res = await axios.get("api/user");
       this.items = await res.data.users;
     } catch (error) {
       console.log(error);
@@ -80,7 +80,7 @@ export default {
       const response = confirm("Esta seguro de eliminar este usuario?");
       if (response) {
         axios
-          .delete("deleteUser/" + id)
+          .delete("api/deleteUser/" + id)
           .then(res => {
             this.$router.go();
             this.items.splice(id, 1);

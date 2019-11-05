@@ -69,7 +69,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("booking");
+      const res = await axios.get("api/booking");
       this.items = await res.data.Bookings;
       // console.log(this.items)
     } catch (error) {

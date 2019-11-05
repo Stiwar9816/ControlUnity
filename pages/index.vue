@@ -18,13 +18,7 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-              rounded
-              block
-              class="accent"
-              type="submit"
-              :disabled="!valid"
-            >Iniciar Sesión</v-btn>
+            <v-btn rounded block class="accent" type="submit" :disabled="!valid">Iniciar Sesión</v-btn>
           </v-card-actions>
         </v-form>
         <v-card-text class="text-center">
@@ -62,20 +56,19 @@ export default {
     },
     async login() {
       await axios
-        .post("/api/login", {
+        .post("api/login", {
           cc: this.cc,
           password: this.password
         })
         .then(res => {
           let data = res.data;
-          console.log(data);
           // this.$store.commit("setIsUserAuthenticated", true);
-          this.$router.replace({ name: "home" });
+          this.$router.push({ name: "home" });
         })
         .catch(error => {
           console.log(error);
         });
-    }
+    },
   }
 };
 </script>

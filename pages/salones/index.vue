@@ -191,7 +191,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("room");
+      const res = await axios.get("api/room");
       this.items = await res.data.Rooms;
     } catch (error) {
       console.log(error);
@@ -209,7 +209,7 @@ export default {
     //New Salon
     async NewRoom() {
       await axios
-        .post("newRoom", {
+        .post("api/newRoom", {
           name: this.name,
           location: this.location,
           capacity: this.capacity,
@@ -226,7 +226,7 @@ export default {
       this.edit = true;
       console.log(id);
       axios
-        .get(`room/${id}`)
+        .get(`api/room/${id}`)
         .then(res => {
           this.editRooms = res.data;
         })
@@ -235,7 +235,7 @@ export default {
         });
     },
     editRoom(item) {
-      axios.put(`updateRoom/${item._id}`, item).then(res => {
+      axios.put(`api/updateRoom/${item._id}`, item).then(res => {
         const index = this.items.findIndex(n => n._id === res.data._id);
         this.items[index].name = res.data.name;
         this.items[index].location = res.data.location;
@@ -250,7 +250,7 @@ export default {
       const response = confirm("Esta seguro de eliminar este salon?");
       if (response) {
         axios
-          .delete("deleteRoom/" + id)
+          .delete("api/deleteRoom/" + id)
           .then(res => {
             const index = this.items.findIndex(
               item => item._id === res.data._id

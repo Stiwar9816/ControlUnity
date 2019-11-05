@@ -17,7 +17,12 @@
               ></v-text-field>
             </v-col>
             <v-col sm="4" md="5">
-              <v-text-field v-model="name" :rules="nameRules" label="Nombre de la persona responsable" required></v-text-field>
+              <v-text-field
+                v-model="name"
+                :rules="nameRules"
+                label="Nombre de la persona responsable"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="5">
               <v-text-field v-model="event" :rules="eventRules" label="Materia o evento" required></v-text-field>
@@ -34,8 +39,7 @@
                 flat
                 chips
                 small-chips
-                disabled
-                id="capacity"
+                readonly
               ></v-select>
             </v-col>
             <v-col sm="6" md="2">
@@ -62,7 +66,13 @@
             </v-col>
             <!-- DateTimePicker -->
             <v-col sm="6" md="3">
-              <v-text-field v-model="date" type="datetime-local" label="Fecha y Hora de reserva"></v-text-field>
+              <v-text-field
+                v-model="date"
+                type="datetime-local"
+                min="2019-11-04T00:00"
+                label="Fecha y Hora de reserva"
+                required
+              ></v-text-field>
             </v-col>
             <!-- End DateTimePicker -->
             <!-- Implementos -->
@@ -161,9 +171,10 @@ export default {
         this.snackbar = true;
       }
     },
+
     getSalon() {
       axios
-        .get("room")
+        .get("api/room")
         .then(res => {
           this.salons = res.data.Rooms;
         })
@@ -173,7 +184,7 @@ export default {
     },
     getImplements() {
       axios
-        .get("implement")
+        .get("api/implement")
         .then(res => {
           this.implements = res.data.implement;
         })
@@ -183,7 +194,7 @@ export default {
     },
     newBooking() {
       axios
-        .post("newBooking", {
+        .post("api/newBooking", {
           cc: this.cc,
           name: this.name,
           event: this.event,
