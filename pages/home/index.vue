@@ -71,7 +71,6 @@ export default {
     try {
       const res = await axios.get("api/booking");
       this.items = await res.data.Bookings;
-      // console.log(this.items)
     } catch (error) {
       console.log(error);
     }

@@ -3,9 +3,21 @@
     <v-flex class="mt-4">
       <v-card max-width="400" class="mx-auto login elevation-3" outlined>
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
-        <v-form ref="form" v-model="valid" v-on:submit="login()" lazy-validation>
+        <v-form
+          ref="form"
+          v-model="valid"
+          v-on:submit="login()"
+          lazy-validation
+        >
           <v-card-text>
-            <v-text-field v-model="cc" :rules="ccRules" label="C.C" type="number" min="0" required></v-text-field>
+            <v-text-field
+              v-model="cc"
+              :rules="ccRules"
+              label="C.C"
+              type="number"
+              min="0"
+              required
+            ></v-text-field>
             <v-text-field
               v-model="password"
               :rules="passwordRules"
@@ -18,17 +30,20 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn rounded block class="accent" type="submit" :disabled="!valid">Iniciar Sesión</v-btn>
+            <v-btn rounded block class="accent" type="submit" :disabled="!valid"
+              >Iniciar Sesión</v-btn
+            >
           </v-card-actions>
         </v-form>
         <v-card-text class="text-center">
-          <n-link to="/registro">¿No tiene una cuenta? - ¡Registrate Aqui!</n-link>
+          <n-link to="/registro"
+            >¿No tiene una cuenta? - ¡Registrate Aqui!</n-link
+          >
         </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -54,21 +69,7 @@ export default {
         this.snackbar = true;
       }
     },
-    async login() {
-      await axios
-        .post("api/login", {
-          cc: this.cc,
-          password: this.password
-        })
-        .then(res => {
-          let data = res.data;
-          // this.$store.commit("setIsUserAuthenticated", true);
-          this.$router.push({ name: "home" });
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
+    async login() {}
   }
 };
 </script>
@@ -88,6 +89,5 @@ a:hover {
 .login {
   margin-left: 420px;
   margin-top: 100px;
-}
-</style>>
-    
+}</style
+>>

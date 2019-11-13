@@ -2,8 +2,14 @@
   <v-layout>
     <v-flex>
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
+
       <v-container>
-        <v-form ref="form" v-on:submit="newBooking()" v-model="valid" lazy-validation>
+        <v-form
+          ref="form"
+          v-on:submit="newBooking()"
+          v-model="valid"
+          lazy-validation
+        >
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="2">
@@ -25,7 +31,12 @@
               ></v-text-field>
             </v-col>
             <v-col sm="4" md="5">
-              <v-text-field v-model="event" :rules="eventRules" label="Materia o evento" required></v-text-field>
+              <v-text-field
+                v-model="event"
+                :rules="eventRules"
+                label="Materia o evento"
+                required
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
@@ -59,20 +70,25 @@
               >
                 <template v-slot:no-data>
                   <v-list-item>
-                    <v-list-item-title>No existe coincidencias</v-list-item-title>
+                    <v-list-item-title
+                      >No existe coincidencias</v-list-item-title
+                    >
                   </v-list-item>
                 </template>
               </v-autocomplete>
             </v-col>
             <!-- DateTimePicker -->
             <v-col sm="6" md="3">
-              <v-text-field
+              <v-datetime-picker
+                label="Fecha y hora de reserva"
                 v-model="date"
-                type="datetime-local"
-                min="2019-11-04T00:00"
-                label="Fecha y Hora de reserva"
                 required
-              ></v-text-field>
+                timeFormat="HH:mm"
+                dateFormat="dd-MM-yyyy"
+                clearText="Cancelar"
+                okText="Confirmar"
+              >
+              </v-datetime-picker>
             </v-col>
             <!-- End DateTimePicker -->
             <!-- Implementos -->
@@ -95,7 +111,9 @@
               >
                 <template v-slot:no-data>
                   <v-list-item>
-                    <v-list-item-title>No hay información registrada</v-list-item-title>
+                    <v-list-item-title
+                      >No hay información registrada</v-list-item-title
+                    >
                   </v-list-item>
                 </template>
               </v-combobox>
@@ -125,6 +143,7 @@
 
 <script>
 import axios from "~/plugins/axios";
+
 export default {
   layout: "home",
   data() {
@@ -141,6 +160,7 @@ export default {
       TimeModal: false,
       DateModal: false,
       valid: true,
+
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
       nameRules: [v => !!v || "Nombre del usuario es requerido"],
       eventRules: [v => !!v || "Nombre de la materia o evento es requerido"],
@@ -186,7 +206,7 @@ export default {
       axios
         .get("api/implement")
         .then(res => {
-          this.implements = res.data.implement;
+          this.implements = res.data.implement.name;
         })
         .catch(error => {
           console.log(error);

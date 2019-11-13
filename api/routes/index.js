@@ -1,6 +1,6 @@
 // Import dependencies driver of errors and authenticated passport
 const router = require('express-promise-router')();
-// const auth = require('../middleware/authToken')
+
 // Import fucntions of operations crud
 const controllersImplements = require('../controllers/implements')
 const controllersUser = require('../controllers/users')
