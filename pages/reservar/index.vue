@@ -206,7 +206,7 @@ export default {
       axios
         .get("api/implement")
         .then(res => {
-          this.implements = res.data.implement.name;
+          this.implements = res.data.implement;
         })
         .catch(error => {
           console.log(error);
