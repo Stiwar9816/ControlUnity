@@ -1,8 +1,8 @@
 const Users = require('../models/user');
 const bcrypt = require('bcrypt');
-const CONFIG = require('../config/config.js')
+// const CONFIG = require('../config/config.js')
 
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 // const service = require('../services')
 
 module.exports = {
@@ -31,21 +31,21 @@ module.exports = {
                 bcrypt.compare(password, user.password)
                     .then(match => {
                         if (match) {
-                            payload ={
-                                cc: user.cc,
-                                name: user.name,
-                                email: user.email,
-                                role: user.role
-                            }
+                            // payload ={
+                            //     cc: user.cc,
+                            //     name: user.name,
+                            //     email: user.email,
+                            //     role: user.role
+                            // }
                             //Acceso
-                            jwt.sign(payload, CONFIG.SECRET_TOKEN, function(error,token){
-                                if(error){
-                                    res.status(500).send({error})
-                                }else{
-                                    res.status(200).send({message:'Usuario Logueado', token})
+                            // jwt.sign(payload, CONFIG.SECRET_TOKEN, function(error,token){
+                            //     if(error){
+                            //         res.status(500).send({error})
+                            //     }else{
+                                res.status(200).send({message:'Usuario Logueado'})
                                 }
-                            })
-                        }else{
+                            // })
+                        else{
                              res.status(200).send({
                                 message: 'Contraseña Incorrecta'
                             }) // No Acceso

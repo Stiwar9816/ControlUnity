@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const api = require("./routes");
-const authToken = require('./middleware/authToken.js')
+// const authToken = require('./middleware/authToken.js')
 const { Nuxt, Builder } = require("nuxt");
 // const auth = require("./config/auth");
 // Start of aplication
@@ -16,15 +16,18 @@ require("./db/database.js");
 app.use(morgan("dev"));
 
 //middlewares
-// app.use(auth);
 app.use(mongoSanitize());
-app.use(cors());
-app.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-  );
-  app.use(bodyParser.json());
+  app.use(cors());
+  app.use(
+    bodyParser.urlencoded({
+      extended: false
+    })
+    );
+    app.use(bodyParser.json());
+    // app.use(authToken);
+    app.use('/api',api);
+// app.use(auth);
+
 
 // Import and Set Nuxt.js options
 const config = require("../nuxt.config.js");
@@ -45,10 +48,9 @@ async function start() {
   }
 
   // Give nuxt middleware to express
-  app.use(nuxt.render);
-  app.use(authToken);
   // Import API routes
-app.use('/api',api);
+  
+    app.use(nuxt.render);
   // Static files
   app.use(express.static(path.join(__dirname, "../static/")));
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const Bookings = new Schema({
-    cc:{type: Number, required:true, unique: true},
+    cc:{type: Number, required:true},
     name:{type: String, required:true},
     event:({type: String, required:true}),
     room:{type: String, required:true},
