@@ -23,9 +23,9 @@
           class="elevation-1"
         >
           <template v-slot:items/>
-          <template v-slot:item.icon>
-            <v-btn icon aria-label="check">
-              <v-icon color="green" small>fa fa-check-square-o</v-icon>
+          <template slot="item.icon" slot-scope="data">
+            <v-btn icon aria-label="check" v-on:click="deleteBooking(data.item._id)">
+              <v-icon small color="green" small>fa fa-check-square-o</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
@@ -75,5 +75,28 @@ export default {
       console.log(error);
     }
   },
+  methods:{
+    //Delete Salon
+    deleteBooking(id) {
+      const response = confirm("Ya fueron devueltos los implementos prestados?");
+      if (response) {
+        axios
+          .delete("api/deleteBooking/" + id)
+          .then(res => {
+            const index = this.items.findIndex(
+              item => item._id === res.data._id
+            );
+            this.$router.go();
+            this.items.splice(index, 1);
+            console.log("Booking Delete: ", id);
+          })
+          .catch(e => {
+            console.log("Unable to clear the booking", e);
+          });
+      }
+      return;
+    }
+  }
+  
 };
 </script>
