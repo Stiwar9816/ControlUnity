@@ -83,7 +83,8 @@
                 label="Fecha y hora de reserva"
                 v-model="date"
                 required
-                timeFormat="HH:mm"
+                
+                timeFormat="hh:mm"
                 dateFormat="dd-MM-yyyy"
                 clearText="Cancelar"
                 okText="Confirmar"

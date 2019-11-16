@@ -68,7 +68,8 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("api/user");
+      const token = sessionStorage.getItem('token')
+      const res = await axios.get(`/api/user?token=${token}`);
       this.items = await res.data.users;
     } catch (error) {
       console.log(error);
