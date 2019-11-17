@@ -53,7 +53,12 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="success black--text mr-2" type="submit" :disabled="!valid">
+              <v-btn
+                rounded
+                color="success black--text mr-2"
+                type="submit"
+                :disabled="!valid"
+              >
                 <v-icon dark>fa fa-check</v-icon>Editar
               </v-btn>
               <v-btn rounded color="error black--text" @click="edit = false">
@@ -63,14 +68,30 @@
           </v-row>
         </v-form>
         <!-- Form Of New Room -->
-        <v-form ref="form" v-model="valid" v-on:submit="NewRoom()" v-if="!edit" lazy-validation>
+        <v-form
+          ref="form"
+          v-model="valid"
+          v-on:submit="NewRoom()"
+          v-if="!edit"
+          lazy-validation
+        >
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="3">
-              <v-text-field v-model="name" :rules="salonRules" label="Nombre Salon" required></v-text-field>
+              <v-text-field
+                v-model="name"
+                :rules="salonRules"
+                label="Nombre Salon"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
+              <v-text-field
+                v-model="location"
+                :rules="locationRules"
+                label="Ubicación"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
               <v-text-field
@@ -96,7 +117,12 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
+              <v-btn
+                rounded
+                color="primary black--text"
+                type="submit"
+                :disabled="!valid"
+              >
                 <v-icon dark>fa fa-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -123,27 +149,34 @@
           :search="search"
           class="elevation-1"
         >
-          <template v-slot:items/>
+          <template v-slot:items />
           <template slot="item.icon" slot-scope="data">
             <v-btn icon v-on:click="onlyRoom(data.item._id)" aria-label="edit">
               <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
-            <v-btn icon v-on:click="deleteRoom(data.item._id)" aria-label="delete">
+            <v-btn
+              icon
+              v-on:click="deleteRoom(data.item._id)"
+              aria-label="delete"
+            >
               <v-icon small color="error">fa fa-trash</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
-            <span class="font-weight-regular black--text">No se encontraron coincidencias</span>
+            <span class="font-weight-regular black--text"
+              >No se encontraron coincidencias</span
+            >
           </template>
           <template v-slot:no-data>
-            <span class="font-weight-regular black--text">No hay información registrada</span>
+            <span class="font-weight-regular black--text"
+              >No hay información registrada</span
+            >
           </template>
         </v-data-table>
       </v-container>
     </v-flex>
   </v-layout>
 </template>
-
 
 <script>
 import axios from "~/plugins/axios";
@@ -206,6 +239,7 @@ export default {
         this.snackbar = true;
       }
     },
+
     //New Salon
     async NewRoom() {
       await axios
