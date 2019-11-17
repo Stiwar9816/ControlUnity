@@ -34,7 +34,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/datetime'],
+  plugins: ["~/plugins/datetime"],
   /*
    ** Nuxt.js dev-modules
    */
@@ -47,7 +47,6 @@ module.exports = {
     "@nuxtjs/axios",
     "@nuxtjs/font-awesome"
   ],
-
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -90,6 +89,6 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    transpile: ['datetime']
+    transpile: ["datetime"]
   }
 };
