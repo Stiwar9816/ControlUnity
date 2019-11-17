@@ -98,7 +98,8 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("api/booking");
+      const token = sessionStorage.getItem('token')
+      const res = await axios.get(`/api/booking/?token=${token}`);
       this.items = await res.data.Bookings;
     } catch (error) {
       console.log(error);
@@ -107,12 +108,11 @@ export default {
   methods: {
     //Delete Salon
     deleteBooking(id) {
-      const response = confirm(
-        "Ya fueron devueltos los implementos prestados?"
-      );
+      const token = sessionStorage.getItem('token')
+      const response = confirm("Ya fueron devueltos los implementos prestados?");
       if (response) {
         axios
-          .delete("api/deleteBooking/" + id)
+          .delete(`api/deleteBooking/${id}/${token}`)
           .then(res => {
             const index = this.items.findIndex(
               item => item._id === res.data._id

@@ -6,7 +6,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit="login()"
+          v-on:submit.prevent="login()"
           lazy-validation
         >
           <v-card-text>
@@ -57,7 +57,7 @@ export default {
       valid: true,
       show1: false,
       ccRules: [v => !!v || "Cedula de ciudadania es requerida"],
-      passwordRules: [v => !!v || "Contraseña es requerida"]
+      passwordRules: [v => !!v || "Contraseña es requerida"],
     };
   },
   mounted() {
@@ -69,8 +69,28 @@ export default {
         this.snackbar = true;
       }
     },
-    async login() {}
-  }
+    async login() {
+      const { cc, password } = this;
+      const data = { cc, password };
+      const URL = '/api/login'
+      axios({ method: 'post',
+        url: URL,
+        headers: {
+          Accept: 'application/json',
+          Content: 'application/json'
+        },
+        data: data})
+        .then(res => {
+          sessionStorage.setItem('token', res.data.token)
+          this.$router.push('/home')
+          })
+        .catch(err => {
+          alert('Wrong email/password')
+          // eslint-disable-next-line
+          console.log(err)
+        })
+    },
+  },
 };
 </script>
 

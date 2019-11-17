@@ -224,7 +224,8 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("api/room");
+      const token = sessionStorage.getItem('token')
+      const res = await axios.get(`/api/room/?token=${token}`);
       this.items = await res.data.Rooms;
     } catch (error) {
       console.log(error);

@@ -1,8 +1,8 @@
 const Users = require('../models/user');
 const bcrypt = require('bcrypt');
-// const CONFIG = require('../config/config.js')
+const CONFIG = require('../config/config.js')
 
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 // const service = require('../services')
 
 module.exports = {
@@ -11,11 +11,15 @@ module.exports = {
 
     // Register user add one token unique
     register: async (req, res, next) => {
-        const newUser = new Users(req.body)
-        const User = await newUser.save()
-        res.status(200).json({
-            User: User
-        })
+        const {cc, name, email, password} = req.body;
+      const ccUser = await Users.findOne({cc:cc})
+        if(ccUser){
+            res.status(404).send({message: 'Este usuario ya existe!'})
+        }else{
+            const newUser = new Users({cc,name,email,password})
+            const User = await newUser.save()
+            res.status(200).json({newUser: User})
+        }   
     },
 
     // Login user decoding token, permited access to pages authenticated
@@ -31,21 +35,21 @@ module.exports = {
                 bcrypt.compare(password, user.password)
                     .then(match => {
                         if (match) {
-                            // payload ={
-                            //     cc: user.cc,
-                            //     name: user.name,
-                            //     email: user.email,
-                            //     role: user.role
-                            // }
-                            //Acceso
-                            // jwt.sign(payload, CONFIG.SECRET_TOKEN, function(error,token){
-                            //     if(error){
-                            //         res.status(500).send({error})
-                            //     }else{
-                                res.status(200).send({message:'Usuario Logueado'})
+                            payload ={
+                                cc: user.cc,
+                                name: user.name,
+                                email: user.email,
+                                role: user.role
+                            }
+                            // Acceso
+                            jwt.sign(payload, CONFIG.SECRET_TOKEN, function(error,token){
+                                if(error){
+                                    res.status(500).send({error})
+                                }else{
+                                res.status(200).send({token:token})
                                 }
-                            // })
-                        else{
+                            })
+                        }else{
                              res.status(200).send({
                                 message: 'Contraseña Incorrecta'
                             }) // No Acceso
