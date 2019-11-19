@@ -243,8 +243,9 @@ export default {
 
     //New Salon
     async NewRoom() {
+      const token = sessionStorage.getItem('token')
       await axios
-        .post("api/newRoom", {
+        .post(`/api/newRoom/?token=${token}`, {
           name: this.name,
           location: this.location,
           capacity: this.capacity,

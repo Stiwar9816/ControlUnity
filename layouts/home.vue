@@ -32,9 +32,9 @@
 
       <template v-slot:append>
         <div class="pa-1" align="center">
-          <v-btn rounded text color="accent" to="/configuraciones" aria-label="Action menu">
+          <!-- <v-btn rounded text color="accent" to="/configuraciones" aria-label="Action menu">
             <v-icon dark>fa fa-wrench</v-icon>
-          </v-btn>
+          </v-btn> -->
           <v-btn rounded text color="error" to="/" aria-label="Action menu">
             <v-icon dark>fa fa-power-off</v-icon>
           </v-btn>
