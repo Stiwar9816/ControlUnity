@@ -85,7 +85,7 @@ export default {
           this.$router.push('/home')
           })
         .catch(err => {
-          alert('Wrong email/password')
+          alert('Usuario Incorrecto y/o contraseña')
           // eslint-disable-next-line
           console.log(err)
         })
