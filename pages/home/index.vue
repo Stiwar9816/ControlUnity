@@ -99,7 +99,7 @@ export default {
   async created() {
     try {
       const token = sessionStorage.getItem('token')
-      const res = await axios.get(`/api/booking/?token=${token}`);
+      const res = await axios.get(`/api/booking`);
       this.items = await res.data.Bookings;
     } catch (error) {
       console.log(error);
@@ -112,7 +112,7 @@ export default {
       const response = confirm("Ya fueron devueltos los implementos prestados?");
       if (response) {
         axios
-          .delete(`api/deleteBooking/${id}/${token}`)
+          .delete(`api/deleteBooking/${id}`)
           .then(res => {
             const index = this.items.findIndex(
               item => item._id === res.data._id

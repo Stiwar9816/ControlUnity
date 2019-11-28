@@ -81,7 +81,7 @@ export default {
       const response = confirm("Esta seguro de eliminar este usuario?");
       if (response) {
         axios
-          .delete("api/deleteUser/" + id)
+          .delete("/api/deleteUser/" + id)
           .then(res => {
             this.$router.go();
             this.items.splice(id, 1);

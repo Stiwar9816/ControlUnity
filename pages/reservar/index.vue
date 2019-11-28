@@ -83,8 +83,8 @@
                 label="Fecha y hora de reserva"
                 v-model="date"
                 required
-                
-                timeFormat="hh:mm"
+                min="2019-11-27T05:00:00"
+                timeFormat="HH:mm"
                 dateFormat="dd-MM-yyyy"
                 clearText="Cancelar"
                 okText="Confirmar"
@@ -149,6 +149,7 @@ export default {
   layout: "home",
   data() {
     return {
+      date: '2019-11-27',
       search: "",
       time: "",
       date: "",
