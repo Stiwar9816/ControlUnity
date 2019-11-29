@@ -79,19 +79,59 @@
             </v-col>
             <!-- DateTimePicker -->
             <v-col sm="6" md="3">
-              <v-datetime-picker
-                label="Fecha y hora de reserva"
-                v-model="date"
-                required
-                min="2019-11-27T05:00:00"
-                timeFormat="HH:mm"
-                dateFormat="dd-MM-yyyy"
-                clearText="Cancelar"
-                okText="Confirmar"
-              >
-              </v-datetime-picker>
+              <v-menu
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        :return-value.sync="date"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Fecha"
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker v-model="date" min="2019-11-29" multiple no-title scrollable>
+          <v-spacer></v-spacer>
+          <v-btn text color="primary" @click="menu = false">Cancelar</v-btn>
+          <v-btn text color="primary" @click:date="$refs.menu.save(date)">OK</v-btn>
+        </v-date-picker>
+      </v-menu>
             </v-col>
             <!-- End DateTimePicker -->
+            <!-- Time Picker -->
+            <v-col sm="6" md="5">
+              <v-menu
+        ref="menu"
+        v-model="menu2"
+        :close-on-content-click="false"
+        :nudge-right="40"
+        :return-value.sync="time"
+        transition="scale-transition"
+        offset-y
+        max-width="290px"
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="time"
+            label="Hora"
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-time-picker
+          v-if="menu2"
+          v-model="time"
+          full-width
+          @click:minute="$refs.menu.save(time)"
+        ></v-time-picker>
+      </v-menu>
+            </v-col>
+            <!-- End Time Picker -->
             <!-- Implementos -->
             <v-col sm="6" md="5">
               <v-combobox
@@ -149,10 +189,10 @@ export default {
   layout: "home",
   data() {
     return {
-      date: '2019-11-27',
+      // date: '2019-11-27',
       search: "",
       time: "",
-      date: "",
+      // date: "",
       cc: "",
       name: "",
       event: "",
@@ -162,7 +202,11 @@ export default {
       TimeModal: false,
       DateModal: false,
       valid: true,
-
+      date:[],
+        // date: new Date().toISOString().substr(0, 10),
+      menu: false,
+      time: null,
+        menu2: false,
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
       nameRules: [v => !!v || "Nombre del usuario es requerido"],
       eventRules: [v => !!v || "Nombre de la materia o evento es requerido"],
