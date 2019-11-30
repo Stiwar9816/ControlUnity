@@ -139,11 +139,11 @@
               </v-combobox>
             </v-col>
             <!-- End implementos -->
-            <v-col style="width: 290px; flex: 2 1 auto;">
+            <v-col style="width: 290px; flex: 17 1 auto;">
               <p>Hora de inicio:</p>
               <v-time-picker v-model="start" :max="end"></v-time-picker>
             </v-col>
-            <v-col style="width: 290px; flex: 0 1 auto;">
+            <v-col style="width: 290px; flex: 1 1 auto;">
               <p>Hora de finalazación:</p>
               <v-time-picker v-model="end" :min="start"></v-time-picker>
             </v-col>
