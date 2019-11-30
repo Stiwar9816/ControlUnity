@@ -77,21 +77,40 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <!-- DateTimePicker -->
-            <v-col sm="6" md="3">
-              <v-datetime-picker
-                label="Fecha y hora de reserva"
-                v-model="date"
-                required
-                min="2019-11-27T05:00:00"
-                timeFormat="HH:mm"
-                dateFormat="dd-MM-yyyy"
-                clearText="Cancelar"
-                okText="Confirmar"
+            <!-- DatePicker -->
+            <v-col sm="4" md="3">
+              <v-dialog
+                ref="dialog"
+                v-model="DateModal"
+                :return-value.sync="date"
+                width="290px"
               >
-              </v-datetime-picker>
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="date"
+                    label="Fecha de reserva"
+                    v-on="on"
+                    flat
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="date"
+                  scrollable
+                  locale="es"
+                  first-day-of-week="1"
+                  multiple
+                >
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="DateModal = false"
+                    >Cancelar</v-btn
+                  >
+                  <v-btn text color="primary" @click="$refs.dialog.save(date)"
+                    >OK</v-btn
+                  >
+                </v-date-picker>
+              </v-dialog>
             </v-col>
-            <!-- End DateTimePicker -->
+            <!-- End DatePicker -->
             <!-- Implementos -->
             <v-col sm="6" md="5">
               <v-combobox
@@ -120,6 +139,20 @@
               </v-combobox>
             </v-col>
             <!-- End implementos -->
+            <v-col style="width: 290px; flex: 2 1 auto;">
+              <p>Hora de inicio:</p>
+              <v-time-picker
+                v-model="start"
+                :max="end"
+              ></v-time-picker>
+            </v-col>
+            <v-col style="width: 290px; flex: 0 1 auto;">
+              <p>Hora de finalazación:</p>
+              <v-time-picker
+                v-model="end"
+                :min="start"
+              ></v-time-picker>
+            </v-col>
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
@@ -149,20 +182,20 @@ export default {
   layout: "home",
   data() {
     return {
-      date: '2019-11-27',
       search: "",
       time: "",
-      date: "",
+      date: [],
       cc: "",
       name: "",
       event: "",
       capacity: "",
       room: "",
       implement: "",
-      TimeModal: false,
       DateModal: false,
       valid: true,
-
+      start: "",
+      end: "",
+      Time:[this.start,this.end],
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
       nameRules: [v => !!v || "Nombre del usuario es requerido"],
       eventRules: [v => !!v || "Nombre de la materia o evento es requerido"],
