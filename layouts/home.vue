@@ -55,23 +55,6 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" color="appbar" app>
-      <span>
-        &copy; Control Unity 2019 - Created by:
-        <a
-          href="https://twitter.com/AsprillaStiwar"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Contactanos"
-        >Stiwar Asprilla</a> &
-        <a
-          href="https://twitter.com/_JhonE17"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Contactanos"
-        >Jhon E. Palacios</a>
-      </span>
-    </v-footer>
   </v-app>
 </template>
 
