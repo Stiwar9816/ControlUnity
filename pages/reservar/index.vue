@@ -141,17 +141,11 @@
             <!-- End implementos -->
             <v-col style="width: 290px; flex: 2 1 auto;">
               <p>Hora de inicio:</p>
-              <v-time-picker
-                v-model="start"
-                :max="end"
-              ></v-time-picker>
+              <v-time-picker v-model="start" :max="end"></v-time-picker>
             </v-col>
             <v-col style="width: 290px; flex: 0 1 auto;">
               <p>Hora de finalazación:</p>
-              <v-time-picker
-                v-model="end"
-                :min="start"
-              ></v-time-picker>
+              <v-time-picker v-model="end" :min="start"></v-time-picker>
             </v-col>
           </v-row>
           <!-- boton reservar -->
@@ -195,7 +189,6 @@ export default {
       valid: true,
       start: "",
       end: "",
-      Time:[this.start,this.end],
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
       nameRules: [v => !!v || "Nombre del usuario es requerido"],
       eventRules: [v => !!v || "Nombre de la materia o evento es requerido"],
@@ -226,7 +219,6 @@ export default {
         this.snackbar = true;
       }
     },
-
     getSalon() {
       axios
         .get("api/room")

@@ -7,8 +7,9 @@ const Bookings = new Schema({
     event:({type: String, required:true}),
     room:{type: String, required:true, unique:true},
     implement: {type: Array},
-    date:({type: Date}),
-    time:({type:Date}),
+    date:({type: Array}),
+    start:({type:String}),
+    end:({type:String}),
     received:({type: Date})
 })
 
