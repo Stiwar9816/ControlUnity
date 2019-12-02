@@ -177,7 +177,7 @@ export default {
   data() {
     return {
       search: "",
-      time: "",
+      // time: "",
       date: [],
       cc: "",
       name: "",
@@ -247,6 +247,8 @@ export default {
           event: this.event,
           room: this.room,
           date: this.date,
+          start: this.start,
+          end: this.end,
           implement: this.implement
         })
         .then(res => {

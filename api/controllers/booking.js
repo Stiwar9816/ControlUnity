@@ -11,10 +11,12 @@ module.exports = {
 
     // Created new Booking
     newBooking: async (req, res, next) => {
-        const {cc, name,event, room, implement, date,time, received} = req.body
-        const booking = await Booking.find({date})
-            if(booking === date){ res.status(403).send({message:"Cruce de horarios"})}else{
-                const newBooking = new Booking({cc, name,event, room, implement, date,time, received})
+        const {cc, name,event, room, implement, date,start,end, received} = req.body
+        const cruce = await Booking.findOne({date:end})
+            if(cruce){ 
+                res.status(404).send({message:"Cruce de horarios"})
+            }else{
+                const newBooking = new Booking({cc, name,event, room, implement, date,start,end, received})
                 const Bookings = await newBooking.save()
                 res.status(200).json(Bookings)
             }
