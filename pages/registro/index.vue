@@ -83,6 +83,7 @@ export default {
           this.$router.replace("/");
         })
         .catch(err => {
+          alert(err.message)
           console.log(err);
         });
     }

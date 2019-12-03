@@ -269,7 +269,7 @@ export default {
           alert("¡Su solicitud de reserva se realizo correctamente!")
         })
         .catch(e => {
-          alert("Hubo un error, Por favor intente nuevamente", e)
+          alert(e.message)
           console.log(e);
         });
     }

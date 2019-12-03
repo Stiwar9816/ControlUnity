@@ -95,7 +95,7 @@ export default {
             this.$router.go();
           })
           .catch(e => {
-            alert("¡Hubo un error, por favor intente nuevamente!", e)
+            alert(e.message)
             console.log("Unable to clear the user", e);
           });
       }

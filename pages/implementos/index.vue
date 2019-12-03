@@ -343,6 +343,7 @@ export default {
       const res = await axios.get(`/api/implement`);
       this.items = await res.data.implement;
     } catch (error) {
+      alert(error.message)
       console.log(error);
     }
   },
@@ -374,7 +375,7 @@ export default {
           alert("¡Nuevo implemento agregado con exito!");
         })
         .catch(e => {
-          alert("Hubo Un error, Por favor intentelo nuevamente", e);
+          alert(e.message)
           console.log(e);
         });
     },
@@ -388,7 +389,7 @@ export default {
           this.$refs.serial.focus()
         })
         .catch(e => {
-          alert("Hubo Un error, Por favor intentelo nuevamente", e);
+          alert(e.message)
           console.log(e);
         });
     },
@@ -423,7 +424,7 @@ export default {
             this.$router.go();
           })
           .catch(e => {
-            alert("Hubo Un error, Por favor intentelo nuevamente", e);
+            alert(e.message)
             console.log("Unable to clear the implement", e);
           });
       }

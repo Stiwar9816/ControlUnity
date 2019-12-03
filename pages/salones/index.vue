@@ -74,7 +74,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit="NewRoom()"
+          v-on:submit.prevent="NewRoom()"
           v-if="!edit"
           lazy-validation
         >
@@ -259,7 +259,8 @@ export default {
           alert("¡Salon agregado con exito!")
         })
         .catch(e => {
-          alert("Hubo un error, Por favor intente nuevamente", e)
+          // alert("Hubo un error, Por favor intente nuevamente", e.message)
+          alert(e.message)
           console.log(e);
         });
     },
@@ -304,7 +305,8 @@ export default {
             this.$router.go();
           })
           .catch(e => {
-            alert("¡Hubo un error, Por favor intente nuevamente!")
+            // alert("¡Hubo un error, Por favor intente nuevamente!")
+            alert(e.message)
             console.log("Unable to clear the room", e);
           });
       }

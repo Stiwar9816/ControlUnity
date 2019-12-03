@@ -450,7 +450,7 @@ export default {
             console.log("Booking Delete: ", id);
           })
           .catch(e => {
-            
+            alert(e.message)
             console.log("Unable to clear the booking", e);
           });
       }
