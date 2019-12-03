@@ -82,7 +82,7 @@
               </v-autocomplete>
             </v-col>
             <!-- DatePicker -->
-            <v-col sm="4" md="3">
+            <v-col sm="4" md="4">
               <v-dialog
                 ref="dialog"
                 v-model="DateModal"
@@ -117,7 +117,7 @@
             </v-col>
             <!-- End DatePicker -->
             <!-- Implementos -->
-            <v-col sm="6" md="5">
+            <v-col sm="6" md="4">
               <v-combobox
                 v-model="implement"
                 :items="implements"
@@ -144,13 +144,27 @@
               </v-combobox>
             </v-col>
             <!-- End implementos -->
-            <v-col style="width: 290px; flex: 17 1 auto;">
-              <p>Hora de inicio:</p>
-              <v-time-picker v-model="start" :max="end"></v-time-picker>
+            <v-col sm="4" md="3">
+              <v-select
+                v-model="start"
+                label="Hora de inicio"
+                :items="clock"
+                item-text="clock"
+                item-value="clock"
+                chips
+              >
+              </v-select>
             </v-col>
-            <v-col style="width: 290px; flex: 1 1 auto;">
-              <p>Hora de finalazación:</p>
-              <v-time-picker v-model="end" :min="start"></v-time-picker>
+            <v-col sm="4" md="3">
+              <v-select
+                v-model="end"
+                label="Hora de finalización"
+                :items="clock"
+                item-text="clock"
+                item-value="clock"
+                chips
+              >
+              </v-select>
             </v-col>
           </v-row>
           <!-- boton reservar -->
@@ -195,16 +209,14 @@ export default {
       start: "",
       end: "",
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
-      nameRules: [v => !!v || "Nombre del usuario es requerido",
-      v =>
-          /[a-zA-Z]+$/.test(
-            v
-          ) || "Este campo no admite numeros"],
-      eventRules: [v => !!v || "Nombre de la materia o evento es requerido",
-      v =>
-          /[a-zA-Z]+$/.test(
-            v
-          ) || "Este campo no admite numeros"],
+      nameRules: [
+        v => !!v || "Nombre del usuario es requerido",
+        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+      ],
+      eventRules: [
+        v => !!v || "Nombre de la materia o evento es requerido",
+        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+      ],
       dateRules: [v => !!v || "Fecha de la reserva es requerida"],
       timeRules: [v => !!v || "Hora de la reserva es requerida"],
       headers: [
@@ -216,7 +228,41 @@ export default {
       ],
       salons: [],
       implements: [],
-      bookings: []
+      bookings: [],
+      clock: [
+        { clock: "06:00 A.M" },
+        { clock: "06:30 A.M" },
+        { clock: "07:00 A.M" },
+        { clock: "07:30 A.M" },
+        { clock: "08:00 A.M" },
+        { clock: "08:30 A.M" },
+        { clock: "09:00 A.M" },
+        { clock: "09:30 A.M" },
+        { clock: "10:00 A.M" },
+        { clock: "10:30 A.M" },
+        { clock: "11:00 A.M" },
+        { clock: "11:30 A.M" },
+        { clock: "12:00 P.M" },
+        { clock: "12:30 P.M" },
+        { clock: "01:30 P.M" },
+        { clock: "02:00 P.M" },
+        { clock: "02:30 P.M" },
+        { clock: "03:00 P.M" },
+        { clock: "03:30 P.M" },
+        { clock: "04:00 P.M" },
+        { clock: "04:30 P.M" },
+        { clock: "05:00 P.M" },
+        { clock: "05:30 P.M" },
+        { clock: "06:00 P.M" },
+        { clock: "06:30 P.M" },
+        { clock: "07:00 P.M" },
+        { clock: "07:30 P.M" },
+        { clock: "08:00 P.M" },
+        { clock: "08:30 P.M" },
+        { clock: "09:00 P.M" },
+        { clock: "09:30 P.M" },
+        { clock: "10:00 P.M" }
+      ]
     };
   },
   created() {
@@ -266,10 +312,10 @@ export default {
         })
         .then(res => {
           this.bookings = res.data.bookings;
-          alert("¡Su solicitud de reserva se realizo correctamente!")
+          alert("¡Su solicitud de reserva se realizo correctamente!");
         })
         .catch(e => {
-          alert(e.message)
+          alert(e.message);
           console.log(e);
         });
     }

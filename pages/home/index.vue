@@ -168,6 +168,12 @@ export default {
           sortable: false
         },
         {
+          text: "CC",
+          align: "center",
+          value: "cc",
+          sortable: false
+        },
+        {
           text: "NOMBRE SALON",
           align: "center",
           value: "room",
