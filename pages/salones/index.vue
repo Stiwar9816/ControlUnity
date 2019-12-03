@@ -100,6 +100,7 @@
                 label="Capacidad"
                 type="number"
                 min="0"
+                max="45"
                 required
               ></v-text-field>
             </v-col>

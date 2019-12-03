@@ -449,6 +449,7 @@ export default {
             console.log("Booking Delete: ", id);
           })
           .catch(e => {
+            
             console.log("Unable to clear the booking", e);
           });
       }
