@@ -96,6 +96,7 @@
                 <v-date-picker
                   v-model="date"
                   scrollable
+                  min="2019-12-02"
                   locale="es"
                   first-day-of-week="1"
                   multiple
@@ -253,6 +254,9 @@ export default {
         })
         .then(res => {
           this.bookings = res.data.bookings;
+          if (this.end === this.bookings.end) {
+            alert("Cruce de horarios")
+          }
         })
         .catch(e => {
           console.log(e);
