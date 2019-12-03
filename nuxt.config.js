@@ -34,7 +34,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["~/plugins/datetime"],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
@@ -88,7 +88,6 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
-    transpile: ["datetime"]
+    extend(config, ctx) {}
   }
 };

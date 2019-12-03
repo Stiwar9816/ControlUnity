@@ -32,10 +32,20 @@
               ></v-text-field>
             </v-col>
             <v-col sm="4" md="3">
-              <v-text-field v-model="editImplements.mark" :rules="markRules" label="Marca" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.mark"
+                :rules="markRules"
+                label="Marca"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="editImplements.type" :rules="typeRules" label="Tipo" required></v-text-field>
+              <v-text-field
+                v-model="editImplements.type"
+                :rules="typeRules"
+                label="Tipo"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
               <v-text-field
@@ -84,7 +94,12 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="success black--text mr-2" type="submit" :disabled="!valid">
+              <v-btn
+                rounded
+                color="success black--text mr-2"
+                type="submit"
+                :disabled="!valid"
+              >
                 <v-icon dark>fa fa-check</v-icon>Confirmar
               </v-btn>
               <v-btn rounded color="error black--text" @click="edit = true">
@@ -106,30 +121,70 @@
           <v-row>
             <!-- inputs -->
             <v-col sm="5" md="2">
-              <v-text-field v-model="serial" :rules="serailRules" label="Serial" required></v-text-field>
+              <v-text-field
+                v-model="serial"
+                :rules="serailRules"
+                label="Serial"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="7" md="3">
-              <v-text-field v-model="name" :rules="implementRules" label="Implemento" required></v-text-field>
+              <v-text-field
+                v-model="name"
+                :rules="implementRules"
+                label="Nombre del implemento"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="3">
-              <v-text-field v-model="mark" :rules="markRules" label="Marca" required></v-text-field>
+              <v-text-field
+                v-model="mark"
+                :rules="markRules"
+                label="Marca"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="type" :rules="typeRules" label="Tipo" required></v-text-field>
+              <v-text-field
+                v-model="type"
+                :rules="typeRules"
+                label="Tipo"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="4" md="2">
-              <v-text-field v-model="model" :rules="modelRules" label="Modelo" required></v-text-field>
+              <v-text-field
+                v-model="model"
+                :rules="modelRules"
+                label="Modelo"
+                required
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col sm="4" md="2">
-              <v-text-field v-model="location" :rules="locationRules" label="Ubicación" required></v-text-field>
+              <v-text-field
+                v-model="location"
+                :rules="locationRules"
+                label="Ubicación"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="5" md="2">
-              <v-text-field v-model="user" :rules="userRules" label="Respondable" required></v-text-field>
+              <v-text-field
+                v-model="user"
+                :rules="userRules"
+                label="Respondable"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="3" md="3">
-              <v-text-field v-model="state" :rules="stateRules" label="Estado" required></v-text-field>
+              <v-text-field
+                v-model="state"
+                :rules="stateRules"
+                label="Estado del implemento"
+                required
+              ></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
               <v-textarea
@@ -138,13 +193,18 @@
                 required
                 rows="1"
                 row-height="20"
-                label="Descripción"
+                label="Descripción acerca del estado del implemento"
               ></v-textarea>
             </v-col>
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="primary black--text" type="submit" :disabled="!valid">
+              <v-btn
+                rounded
+                color="primary black--text"
+                type="submit"
+                :disabled="!valid"
+              >
                 <v-icon dark>fa fa-plus</v-icon>Agregar
               </v-btn>
             </v-col>
@@ -173,18 +233,30 @@
         >
           <template v-slot:items />
           <template slot="item.icon" slot-scope="data">
-            <v-btn icon v-on:click="onlyImplement(data.item._id)" aria-label="edit">
+            <v-btn
+              icon
+              v-on:click="onlyImplement(data.item._id)"
+              aria-label="edit"
+            >
               <v-icon small color="edit">fa fa-pencil</v-icon>
             </v-btn>
-            <v-btn icon v-on:click="deleteImplement(data.item._id)" aria-label="delete">
+            <v-btn
+              icon
+              v-on:click="deleteImplement(data.item._id)"
+              aria-label="delete"
+            >
               <v-icon small color="error">fa fa-trash</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
-            <span class="font-weight-regular black--text">No se encontraron coincidencias</span>
+            <span class="font-weight-regular black--text"
+              >No se encontraron coincidencias</span
+            >
           </template>
           <template v-slot:no-data>
-            <span class="font-weight-regular black--text">No hay información registrada</span>
+            <span class="font-weight-regular black--text"
+              >No hay información registrada</span
+            >
           </template>
         </v-data-table>
       </v-container>
@@ -212,14 +284,27 @@ export default {
       state: "",
       serailRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
-      markRules: [v => !!v || "Marca del implemento es requerida"],
-      typeRules: [v => !!v || "Tipo de implemento es requerido"],
-      modelRules: [v => !!v || "Modelo del implemento es requerido"],
-      locationRules: [v => !!v || "Ubicación del implemento es requerido"],
-      userRules: [
-        v => !!v || "Usuario responsable del implemento es requerido"
+      markRules: [
+        v => !!v || "Marca del implemento es requerida",
+        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
       ],
-      stateRules: [v => !!v || "Estado del implemento es requerido"],
+      typeRules: [
+        v => !!v || "Tipo de implemento es requerido",
+        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+      ],
+      modelRules: [v => !!v || "Modelo del implemento es requerido"],
+      locationRules: [
+        v => !!v || "Ubicación del implemento es requerido",
+        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+      ],
+      userRules: [
+        v => !!v || "Usuario responsable del implemento es requerido",
+        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+      ],
+      stateRules: [
+        v => !!v || "Estado del implemento es requerido",
+        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+      ],
       headers: [
         { text: "SERIAL", align: "center", sortable: false, value: "serial" },
         { text: "IMPLEMENTO", align: "center", value: "name", sortable: false },

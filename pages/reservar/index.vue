@@ -26,6 +26,7 @@
               <v-text-field
                 v-model="name"
                 :rules="nameRules"
+                type="text"
                 label="Nombre de la persona responsable"
                 required
               ></v-text-field>
@@ -190,8 +191,16 @@ export default {
       start: "",
       end: "",
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
-      nameRules: [v => !!v || "Nombre del usuario es requerido"],
-      eventRules: [v => !!v || "Nombre de la materia o evento es requerido"],
+      nameRules: [v => !!v || "Nombre del usuario es requerido",
+      v =>
+          /[a-zA-Z]+$/.test(
+            v
+          ) || "Este campo no admite numeros"],
+      eventRules: [v => !!v || "Nombre de la materia o evento es requerido",
+      v =>
+          /[a-zA-Z]+$/.test(
+            v
+          ) || "Este campo no admite numeros"],
       dateRules: [v => !!v || "Fecha de la reserva es requerida"],
       timeRules: [v => !!v || "Hora de la reserva es requerida"],
       headers: [
