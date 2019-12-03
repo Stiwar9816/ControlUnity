@@ -369,8 +369,10 @@ export default {
         })
         .then(res => {
           this.implement;
+          alert("¡Nuevo implemento agregado con exito!");
         })
         .catch(e => {
+          alert("Hubo Un error, Por favor intentelo nuevamente", e);
           console.log(e);
         });
     },
@@ -381,8 +383,10 @@ export default {
         .get(`/api/implement/${id}`)
         .then(res => {
           this.editImplements = res.data;
+          
         })
         .catch(e => {
+          alert("Hubo Un error, Por favor intentelo nuevamente", e);
           console.log(e);
         });
     },
@@ -401,6 +405,7 @@ export default {
         this.items[index].state = res.data.state;
         this.$router.push({ name: "/api/implementos" });
         this.edit = false;
+        alert("¡Datos del implemento actualizados correctamente!")
       });
     },
     //Delete Implement
@@ -412,9 +417,11 @@ export default {
           .then(res => {
             console.log("Implement Delete: ", id);
             this.items.splice(id, 1);
+            alert("¡Implemento eliminado exitosamente!")
             this.$router.go();
           })
           .catch(e => {
+            alert("Hubo Un error, Por favor intentelo nuevamente", e);
             console.log("Unable to clear the implement", e);
           });
       }

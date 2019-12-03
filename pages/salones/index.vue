@@ -37,6 +37,7 @@
                 type="number"
                 min="0"
                 required
+                id="capacity"
               ></v-text-field>
             </v-col>
             <v-col sm="12" md="5">
@@ -99,8 +100,8 @@
                 :rules="capacityRules"
                 label="Capacidad"
                 type="number"
-                min="0"
-                max="45"
+                min="1"
+                max="70"
                 required
               ></v-text-field>
             </v-col>
@@ -254,8 +255,10 @@ export default {
         })
         .then(res => {
           this.salon;
+          alert("¡Salon agregado con exito!")
         })
         .catch(e => {
+          alert("Hubo un error, Por favor intente nuevamente", e)
           console.log(e);
         });
     },
@@ -280,6 +283,7 @@ export default {
         this.items[index].description = res.data.description;
         this.$router.replace({ name: "salones" });
         this.edit = false;
+        alert("¡Salon editado correctamente!")
       });
     },
     //Delete Salon
@@ -292,11 +296,13 @@ export default {
             const index = this.items.findIndex(
               item => item._id === res.data._id
             );
-            this.$router.go();
-            this.items.splice(index, 1);
             console.log("Room Delete: ", id);
+            this.items.splice(index, 1);
+            alert("¡Salon eliminado corretamente!")
+            this.$router.go();
           })
           .catch(e => {
+            alert("¡Hubo un error, Por favor intente nuevamente!")
             console.log("Unable to clear the room", e);
           });
       }

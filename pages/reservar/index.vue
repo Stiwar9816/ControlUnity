@@ -262,8 +262,10 @@ export default {
         })
         .then(res => {
           this.bookings = res.data.bookings;
+          alert("¡Su solicitud de reserva se realizo correctamente!")
         })
         .catch(e => {
+          alert("Hubo un error, Por favor intente nuevamente", e)
           console.log(e);
         });
     }

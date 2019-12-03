@@ -445,7 +445,8 @@ export default {
               item => item._id === res.data._id
             );
             this.items.splice(index, 1);
-             this.$router.go();
+            alert("¡Elementos devueltos con exito!")
+            this.$router.go();
             console.log("Booking Delete: ", id);
           })
           .catch(e => {

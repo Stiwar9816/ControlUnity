@@ -55,6 +55,12 @@ export default {
           value: "name",
           sortable: false
         },
+         {
+          text: "CARGO",
+          align: "center",
+          value: "role",
+          sortable: false
+        },
         {
           text: "CORREO ELECTRONICO",
           align: "center",
@@ -83,11 +89,13 @@ export default {
         axios
           .delete("/api/deleteUser/" + id)
           .then(res => {
-            this.$router.go();
-            this.items.splice(id, 1);
             console.log("User Delete: ", id);
+            this.items.splice(id, 1);
+            alert("¡Usuario eliminado con exito!")
+            this.$router.go();
           })
           .catch(e => {
+            alert("¡Hubo un error, por favor intente nuevamente!", e)
             console.log("Unable to clear the user", e);
           });
       }
