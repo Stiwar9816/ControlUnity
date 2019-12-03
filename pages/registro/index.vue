@@ -5,7 +5,7 @@
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
         <v-form v-on:submit.prevent="registro" ref="form" v-model="valid" lazy-validation>
           <v-card-text>
-            <v-text-field v-model="cc" :rules="ccRules" label="C.C" type="number" min="0" required></v-text-field>
+            <v-text-field v-model="cc" :rules="ccRules" autofocus label="C.C" type="number" min="0" required></v-text-field>
             <v-text-field v-model="name" :rules="nameRules" label="Nombre completo" required></v-text-field>
             <v-text-field
               v-model="email"

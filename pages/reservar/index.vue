@@ -16,6 +16,7 @@
               <v-text-field
                 v-model="cc"
                 :rules="ccRules"
+                autofocus
                 label="C.C"
                 type="number"
                 min="0"
@@ -27,6 +28,8 @@
                 v-model="name"
                 :rules="nameRules"
                 type="text"
+                pattern="[A-Za-z\s]"
+                maxlength="45"
                 label="Nombre de la persona responsable"
                 required
               ></v-text-field>

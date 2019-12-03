@@ -5,7 +5,7 @@ const Rooms = new Schema({
   name: { type: String, required: true, unique: true },
   location: { type: String, required: true },
   capacity: { type: Number, required: true },
-  description: { type: String, required: true }
+  description: { type: String}
 });
 
 Rooms.index({ name: 1 });
