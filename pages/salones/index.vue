@@ -74,7 +74,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit.prevent="NewRoom()"
+          v-on:submit="NewRoom()"
           v-if="!edit"
           lazy-validation
         >
