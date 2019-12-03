@@ -17,6 +17,7 @@
             <!-- inputs -->
             <v-col sm="5" md="2">
               <v-text-field
+                ref="serial"
                 v-model="editImplements.serial"
                 :rules="serailRules"
                 label="Serial"
@@ -122,6 +123,7 @@
             <!-- inputs -->
             <v-col sm="5" md="2">
               <v-text-field
+                autofocus
                 v-model="serial"
                 :rules="serailRules"
                 label="Serial"
@@ -383,7 +385,7 @@ export default {
         .get(`/api/implement/${id}`)
         .then(res => {
           this.editImplements = res.data;
-          
+          this.$refs.serial.focus()
         })
         .catch(e => {
           alert("Hubo Un error, Por favor intentelo nuevamente", e);

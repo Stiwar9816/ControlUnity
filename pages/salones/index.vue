@@ -17,6 +17,7 @@
               <v-text-field
                 v-model="editRooms.name"
                 :rules="salonRules"
+                ref="name"
                 label="Nombre Salon"
                 required
               ></v-text-field>
@@ -36,6 +37,7 @@
                 label="Capcidad"
                 type="number"
                 min="0"
+                maxlength="70"
                 required
                 id="capacity"
               ></v-text-field>
@@ -62,7 +64,7 @@
               >
                 <v-icon dark>fa fa-check</v-icon>Editar
               </v-btn>
-              <v-btn rounded color="error black--text" @click="edit = false">
+              <v-btn rounded color="error black--text" @click="edit = false" >
                 <v-icon dark>fa fa-ban</v-icon>Cancelar
               </v-btn>
             </v-col>
@@ -80,6 +82,7 @@
             <!-- inputs -->
             <v-col sm="4" md="3">
               <v-text-field
+                autofocus
                 v-model="name"
                 :rules="salonRules"
                 label="Nombre Salon"
@@ -110,7 +113,6 @@
                 v-model="description"
                 :rules="descriptionRules"
                 autoGrow
-                required
                 rows="1"
                 row-height="20"
                 label="Descripción"
@@ -245,9 +247,8 @@ export default {
 
     //New Salon
     async NewRoom() {
-      const token = sessionStorage.getItem('token')
       await axios
-        .post(`/api/newRoom/?token=${token}`, {
+        .post(`/api/newRoom/`, {
           name: this.name,
           location: this.location,
           capacity: this.capacity,
@@ -269,6 +270,7 @@ export default {
         .get(`api/room/${id}`)
         .then(res => {
           this.editRooms = res.data;
+          this.$refs.name.focus();
         })
         .catch(e => {
           console.log(e);
