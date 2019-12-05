@@ -261,6 +261,11 @@
             >
           </template>
         </v-data-table>
+        <!-- Alerta -->
+        <v-snackbar v-model="snackbar" :color="color">
+          {{ text }}
+        </v-snackbar>
+        <!-- End Alerta -->
       </v-container>
     </v-flex>
   </v-layout>
@@ -284,6 +289,9 @@ export default {
       user: "",
       description: "",
       state: "",
+      snackbar: false,
+      text: "",
+      color: "",
       serailRules: [v => !!v || "Serial del implemento es requerido"],
       implementRules: [v => !!v || "Nombre del implemento es requerido"],
       markRules: [
@@ -343,7 +351,9 @@ export default {
       const res = await axios.get(`/api/implement`);
       this.items = await res.data.implement;
     } catch (error) {
-      alert(error.message)
+      this.snackbar = true;
+      this.color = "error";
+      this.text = error.message;
       console.log(error);
     }
   },
@@ -371,11 +381,15 @@ export default {
           state: this.state
         })
         .then(res => {
+          this.snackbar = true;
+          this.color = "success";
+          this.text = "¡Nuevo implemento agregado con exito!";
           this.implement;
-          alert("¡Nuevo implemento agregado con exito!");
         })
         .catch(e => {
-          alert(e.message)
+          this.snackbar = true;
+          this.color = "error";
+          this.text = e.message;
           console.log(e);
         });
     },
@@ -386,10 +400,12 @@ export default {
         .get(`/api/implement/${id}`)
         .then(res => {
           this.editImplements = res.data;
-          this.$refs.serial.focus()
+          this.$refs.serial.focus();
         })
         .catch(e => {
-          alert(e.message)
+          this.snackbar = true;
+          this.color = "error";
+          this.text = e.message;
           console.log(e);
         });
     },
@@ -408,7 +424,9 @@ export default {
         this.items[index].state = res.data.state;
         this.$router.push({ name: "/api/implementos" });
         this.edit = false;
-        alert("¡Datos del implemento actualizados correctamente!")
+        this.snackbar = true;
+        this.color = "success";
+        this.text = "¡Datos del implemento actualizados correctamente!";
       });
     },
     //Delete Implement
@@ -420,11 +438,15 @@ export default {
           .then(res => {
             console.log("Implement Delete: ", id);
             this.items.splice(id, 1);
-            alert("¡Implemento eliminado exitosamente!")
+            this.snackbar = true;
+            this.color = "success";
+            this.text = "¡Implemento eliminado exitosamente!";
             this.$router.go();
           })
           .catch(e => {
-            alert(e.message)
+            this.snackbar = true;
+            this.color = "error";
+            this.text = e.message;
             console.log("Unable to clear the implement", e);
           });
       }

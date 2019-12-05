@@ -64,7 +64,7 @@
               >
                 <v-icon dark>fa fa-check</v-icon>Editar
               </v-btn>
-              <v-btn rounded color="error black--text" @click="edit = false" >
+              <v-btn rounded color="error black--text" @click="edit = false">
                 <v-icon dark>fa fa-ban</v-icon>Cancelar
               </v-btn>
             </v-col>
@@ -177,6 +177,11 @@
             >
           </template>
         </v-data-table>
+        <!-- Alerta -->
+        <v-snackbar v-model="snackbar" :color="color">
+          {{ text }}
+        </v-snackbar>
+        <!-- End Alerta -->
       </v-container>
     </v-flex>
   </v-layout>
@@ -223,15 +228,21 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
-      editRooms: {}
+      editRooms: {},
+      snackbar: false,
+      text: "",
+      color:""
     };
   },
   async created() {
     try {
-      const token = sessionStorage.getItem('token')
+      const token = sessionStorage.getItem("token");
       const res = await axios.get(`/api/room/?token=${token}`);
       this.items = await res.data.Rooms;
     } catch (error) {
+      this.snackbar = true;
+      this.color = "error";
+      this.text = error.message;
       console.log(error);
     }
   },
@@ -256,11 +267,14 @@ export default {
         })
         .then(res => {
           this.salon;
-          alert("¡Salon agregado con exito!")
+          this.snackbar = true;
+          this.color = "success"
+          this.text = "¡Salon agregado con exito!";
         })
         .catch(e => {
-          // alert("Hubo un error, Por favor intente nuevamente", e.message)
-          alert(e.message)
+          this.snackbar = true;
+          this.color = "error";
+          this.text = e.message;
           console.log(e);
         });
     },
@@ -274,6 +288,9 @@ export default {
           this.$refs.name.focus();
         })
         .catch(e => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = e.message;
           console.log(e);
         });
     },
@@ -286,7 +303,9 @@ export default {
         this.items[index].description = res.data.description;
         this.$router.replace({ name: "salones" });
         this.edit = false;
-        alert("¡Salon editado correctamente!")
+        this.snackbar = true;
+        this.color = "success"
+        this.text = "¡Salon Editado con exito!";
       });
     },
     //Delete Salon
@@ -301,12 +320,15 @@ export default {
             );
             console.log("Room Delete: ", id);
             this.items.splice(index, 1);
-            alert("¡Salon eliminado corretamente!")
+            this.snackbar = true;
+            this.color = "success"
+            this.text = "¡Salon eliminado con exito!";
             this.$router.go();
           })
           .catch(e => {
-            // alert("¡Hubo un error, Por favor intente nuevamente!")
-            alert(e.message)
+            this.snackbar = true;
+            this.color = "error";
+            this.text = e.message;
             console.log("Unable to clear the room", e);
           });
       }

@@ -24,17 +24,30 @@
         >
           <template slot="items" slot-scope="data"></template>
           <template slot="item.icon" slot-scope="data">
-            <v-btn icon v-on:click="deleteUser(data.item._id)" aria-label="delete">
+            <v-btn
+              icon
+              v-on:click="deleteUser(data.item._id)"
+              aria-label="delete"
+            >
               <v-icon color="error" small>fa fa-trash</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
-            <span class="font-weight-regular black--text">No se encontraron coincidencias</span>
+            <span class="font-weight-regular black--text"
+              >No se encontraron coincidencias</span
+            >
           </template>
           <template v-slot:no-data>
-            <span class="font-weight-regular black--text">No hay información registrada</span>
+            <span class="font-weight-regular black--text"
+              >No hay información registrada</span
+            >
           </template>
         </v-data-table>
+        <!-- Alerta -->
+        <v-snackbar v-model="snackbar" :color="color">
+          {{ text }}
+        </v-snackbar>
+        <!-- End Alerta -->
       </v-container>
     </v-flex>
   </v-layout>
@@ -47,6 +60,9 @@ export default {
   data() {
     return {
       search: "",
+      snackbar: false,
+      text: "",
+      color: "",
       headers: [
         { text: "CEDULA", align: "center", sortable: false, value: "cc" },
         {
@@ -55,7 +71,7 @@ export default {
           value: "name",
           sortable: false
         },
-         {
+        {
           text: "CARGO",
           align: "center",
           value: "role",
@@ -74,10 +90,12 @@ export default {
   },
   async created() {
     try {
-      const token = sessionStorage.getItem('token')
+      const token = sessionStorage.getItem("token");
       const res = await axios.get(`/api/user?token=${token}`);
       this.items = await res.data.users;
     } catch (error) {
+      this.snackbar = true;
+      this.text = error.message;
       console.log(error);
     }
   },
@@ -91,11 +109,15 @@ export default {
           .then(res => {
             console.log("User Delete: ", id);
             this.items.splice(id, 1);
-            alert("¡Usuario eliminado con exito!")
+            this.snackbar = true;
+            this.color = "success";
+            this.text = "¡Usuario eliminado con exito!";
             this.$router.go();
           })
           .catch(e => {
-            alert(e.message)
+            this.snackbar = true;
+            this.color = "error";
+            this.text = e.message;
             console.log("Unable to clear the user", e);
           });
       }

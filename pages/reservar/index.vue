@@ -152,6 +152,7 @@
                 item-text="clock"
                 item-value="clock"
                 chips
+                flat
               >
               </v-select>
             </v-col>
@@ -163,6 +164,7 @@
                 item-text="clock"
                 item-value="clock"
                 chips
+                flat
               >
               </v-select>
             </v-col>
@@ -183,6 +185,11 @@
           </v-row>
           <!-- End Boton reservar -->
         </v-form>
+        <!-- Alerta -->
+        <v-snackbar v-model="snackbar" :color="color">
+          {{ text }}
+        </v-snackbar>
+        <!-- End Alerta -->
       </v-container>
     </v-flex>
   </v-layout>
@@ -196,7 +203,6 @@ export default {
   data() {
     return {
       search: "",
-      // time: "",
       date: [],
       cc: "",
       name: "",
@@ -208,6 +214,10 @@ export default {
       valid: true,
       start: "",
       end: "",
+      snackbar: false,
+      text: "",
+      color: "",
+      //Validaciones de campos
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
       nameRules: [
         v => !!v || "Nombre del usuario es requerido",
@@ -219,6 +229,7 @@ export default {
       ],
       dateRules: [v => !!v || "Fecha de la reserva es requerida"],
       timeRules: [v => !!v || "Hora de la reserva es requerida"],
+      // Headers de la tabla
       headers: [
         { text: "SERIAL", align: "center", sortable: false },
         { text: "IMPLEMENTO", align: "center" },
@@ -230,38 +241,39 @@ export default {
       implements: [],
       bookings: [],
       clock: [
-        { clock: "06:00 A.M" },
-        { clock: "06:30 A.M" },
-        { clock: "07:00 A.M" },
-        { clock: "07:30 A.M" },
-        { clock: "08:00 A.M" },
-        { clock: "08:30 A.M" },
-        { clock: "09:00 A.M" },
-        { clock: "09:30 A.M" },
-        { clock: "10:00 A.M" },
-        { clock: "10:30 A.M" },
-        { clock: "11:00 A.M" },
-        { clock: "11:30 A.M" },
-        { clock: "12:00 P.M" },
-        { clock: "12:30 P.M" },
-        { clock: "01:30 P.M" },
-        { clock: "02:00 P.M" },
-        { clock: "02:30 P.M" },
-        { clock: "03:00 P.M" },
-        { clock: "03:30 P.M" },
-        { clock: "04:00 P.M" },
-        { clock: "04:30 P.M" },
-        { clock: "05:00 P.M" },
-        { clock: "05:30 P.M" },
-        { clock: "06:00 P.M" },
-        { clock: "06:30 P.M" },
-        { clock: "07:00 P.M" },
-        { clock: "07:30 P.M" },
-        { clock: "08:00 P.M" },
-        { clock: "08:30 P.M" },
-        { clock: "09:00 P.M" },
-        { clock: "09:30 P.M" },
-        { clock: "10:00 P.M" }
+        { clock: "06:00" },
+        { clock: "06:30" },
+        { clock: "07:00" },
+        { clock: "07:30" },
+        { clock: "08:00" },
+        { clock: "08:30" },
+        { clock: "09:00" },
+        { clock: "09:30" },
+        { clock: "10:00" },
+        { clock: "10:30" },
+        { clock: "11:00" },
+        { clock: "11:30" },
+        { clock: "12:00" },
+        { clock: "12:30" },
+        { clock: "13:00" },
+        { clock: "13:30" },
+        { clock: "14:00" },
+        { clock: "14:30" },
+        { clock: "15:00" },
+        { clock: "15:30" },
+        { clock: "16:00" },
+        { clock: "16:30" },
+        { clock: "17:00" },
+        { clock: "17:30" },
+        { clock: "18:00" },
+        { clock: "18:30" },
+        { clock: "19:00" },
+        { clock: "19:30" },
+        { clock: "20:00" },
+        { clock: "20:30" },
+        { clock: "21:00" },
+        { clock: "21:30" },
+        { clock: "22:00" }
       ]
     };
   },
@@ -285,6 +297,9 @@ export default {
           this.salons = res.data.Rooms;
         })
         .catch(error => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = error.message;
           console.log(error);
         });
     },
@@ -295,6 +310,9 @@ export default {
           this.implements = res.data.implement;
         })
         .catch(error => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = error.message;
           console.log(error);
         });
     },
@@ -312,10 +330,14 @@ export default {
         })
         .then(res => {
           this.bookings = res.data.bookings;
-          alert("¡Su solicitud de reserva se realizo correctamente!");
+          this.snackbar = true;
+          this.color = "success";
+          this.text = "¡Su solicitud de reserva se realizo correctamente!";
         })
         .catch(e => {
-          alert(e.message);
+          this.snackbar = true;
+          this.color = "error";
+          this.text = e.message;
           console.log(e);
         });
     }

@@ -17,10 +17,10 @@
             ></v-text-field>
           </v-col>
         </v-row>
-                <!-- Calendar events -->
+        <!-- Calendar events -->
         <!-- <v-row class="fill-height">
           <v-col> -->
-            <!-- <v-sheet height="64">
+        <!-- <v-sheet height="64">
               <v-toolbar flat color="white">
                 <v-btn outlined class="mr-4" @click="setToday">
                   Hoy
@@ -107,7 +107,7 @@
                 </v-card>
               </v-menu>
             </v-sheet> -->
-          <!-- </v-col>
+        <!-- </v-col>
         </v-row> -->
         <!-- End Calendar events -->
         <v-data-table
@@ -144,7 +144,11 @@
             >
           </template>
         </v-data-table>
-
+        <!-- Alerta -->
+        <v-snackbar v-model="snackbar" :color="color">
+          {{ text }}
+        </v-snackbar>
+        <!-- End Alerta -->
       </v-container>
     </v-flex>
   </v-layout>
@@ -158,7 +162,8 @@ export default {
     return {
       search: "",
       snackbar: false,
-      text: "¡Devolución exitosa!",
+      text: "",
+      color: "",
       timeout: 3000,
       headers: [
         {
@@ -206,17 +211,17 @@ export default {
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
-      today: '2019-12-01',
-      focus: '2019-12-01',
-      type: 'month',
+      today: "2019-12-01",
+      focus: "2019-12-01",
+      type: "month",
       typeToLabel: {
-        month: 'Mes',
-        week: 'Semana',
-        day: 'Día',
-        '4day': '4 Días',
+        month: "Mes",
+        week: "Semana",
+        day: "Día",
+        "4day": "4 Días"
       },
       start: null,
-      end: null,
+      end: null
       // selectedEvent: {},
       // selectedElement: null,
       // selectedOpen: false,
@@ -353,6 +358,9 @@ export default {
       const res = await axios.get(`/api/booking`);
       this.items = await res.data.Bookings;
     } catch (error) {
+      this.snackbar = true;
+      this.color = "error"
+      this.text = error.message;
       console.log(error);
     }
   },
@@ -451,17 +459,21 @@ export default {
               item => item._id === res.data._id
             );
             this.items.splice(index, 1);
-            alert("¡Elementos devueltos con exito!")
+            this.snackbar = true;
+            this.color = "success";
+            this.text = "¡Elementos devueltos con exito!";
             this.$router.go();
             console.log("Booking Delete: ", id);
           })
           .catch(e => {
-            alert(e.message)
+            this.snackbar = true;
+            this.color = "error";
+            this.text = e.message;
             console.log("Unable to clear the booking", e);
           });
       }
       return;
     }
   }
-}
+};
 </script>

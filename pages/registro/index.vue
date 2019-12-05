@@ -3,10 +3,28 @@
     <v-flex class="mt-10">
       <v-card max-width="400" class="mx-auto elevation-3" outlined>
         <v-img height="140" src="/logo.png" class="header_login"></v-img>
-        <v-form v-on:submit.prevent="registro" ref="form" v-model="valid" lazy-validation>
+        <v-form
+          v-on:submit.prevent="registro"
+          ref="form"
+          v-model="valid"
+          lazy-validation
+        >
           <v-card-text>
-            <v-text-field v-model="cc" :rules="ccRules" autofocus label="C.C" type="number" min="0" required></v-text-field>
-            <v-text-field v-model="name" :rules="nameRules" label="Nombre completo" required></v-text-field>
+            <v-text-field
+              v-model="cc"
+              :rules="ccRules"
+              autofocus
+              label="C.C"
+              type="number"
+              min="0"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="name"
+              :rules="nameRules"
+              label="Nombre completo"
+              required
+            ></v-text-field>
             <v-text-field
               v-model="email"
               :rules="emailRules"
@@ -25,20 +43,20 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-              rounded
-              block
-              class="accent"
-              type="submit"
-              :disabled="!valid"
-            >Registrate</v-btn>
+            <v-btn rounded block class="accent" type="submit" :disabled="!valid"
+              >Registrate</v-btn
+            >
           </v-card-actions>
         </v-form>
+        <!-- Alerta -->
+        <v-snackbar v-model="snackbar" :color="color">
+          {{ text }}
+        </v-snackbar>
+        <!-- End Alerta -->
       </v-card>
     </v-flex>
   </v-layout>
 </template>
-
 
 <script>
 import axios from "~/plugins/axios";
@@ -52,6 +70,9 @@ export default {
       password: "",
       valid: true,
       show1: false,
+      snackbar: false,
+      text: "",
+      color:"",
       ccRules: [v => !!v || "Cedula de ciudadania es requerida"],
       nameRules: [v => !!v || "Nombre de usuario es requerido"],
       emailRules: [
@@ -83,7 +104,9 @@ export default {
           this.$router.replace("/");
         })
         .catch(err => {
-          alert(err.message)
+          this.snackbar = true;
+          this.color = "error"
+          this.text = err.message;
           console.log(err);
         });
     }
@@ -97,6 +120,5 @@ export default {
 }
 .register {
   padding-top: 40px;
-}
-</style>>
-    
+}</style
+>>
