@@ -7,6 +7,7 @@ const controllersImplements = require('../controllers/implements')
 const controllersUser = require('../controllers/users')
 const controllersBookings = require('../controllers/booking')
 const controllersRooms = require('../controllers/room')
+const controllersTeachers = require('../controllers/teacher')
 
 // Routes Users crud and login
 router.post('/register', controllersUser.register)
@@ -32,6 +33,13 @@ router.get('/room/:id', controllersRooms.getOneRoom)
 router.post('/newRoom', controllersRooms.newRoom)
 router.put('/updateRoom/:id', controllersRooms.updateRoom)
 router.delete('/deleteRoom/:id', controllersRooms.deleteRoom)
+
+// Routes Teachers Crud
+router.get('/teacher', controllersTeachers.allTeacher)
+router.get('/teacher/:id', controllersTeachers.getOneTeacher)
+router.post('/newTeacher', controllersTeachers.newTeacher)
+router.put('/updateTeacher/:id', controllersTeachers.updateTeacher)
+router.delete('/deleteTeacher/:id', controllersTeachers.deleteTeacher)
 
 // Routes Implements Crud
 router.get('/implement', controllersImplements.allImplement)
