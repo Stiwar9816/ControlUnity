@@ -422,11 +422,10 @@ export default {
         this.items[index].user = res.data.user;
         this.items[index].description = res.data.description;
         this.items[index].state = res.data.state;
-        this.$router.push({ name: "/api/implementos" });
-        this.edit = false;
         this.snackbar = true;
         this.color = "success";
         this.text = "¡Datos del implemento actualizados correctamente!";
+        this.edit = false;
       });
     },
     //Delete Implement

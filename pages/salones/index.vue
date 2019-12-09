@@ -301,11 +301,11 @@ export default {
         this.items[index].location = res.data.location;
         this.items[index].capacity = res.data.capacity;
         this.items[index].description = res.data.description;
-        this.$router.replace({ name: "salones" });
-        this.edit = false;
         this.snackbar = true;
         this.color = "success"
         this.text = "¡Salon Editado con exito!";
+        this.edit = false;
+        // this.$router.replace({ name: "salones" });
       });
     },
     //Delete Salon
