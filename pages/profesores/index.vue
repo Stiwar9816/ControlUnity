@@ -16,7 +16,9 @@
             <v-col sm="4" md="2">
               <v-text-field
                 autofocus
-                v-model="cc"
+                min="0"
+                type="number"
+                v-model="editTeachers.cc"
                 :rules="ccRules"
                 label="Cedula de ciudadania"
                 required
@@ -24,15 +26,15 @@
             </v-col>
             <v-col sm="4" md="4">
               <v-text-field
-                v-model="name"
+                v-model="editTeachers.name"
                 :rules="nameRules"
                 label="Nombre completo"
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col sm="4" md="4">
               <v-text-field
-                v-model="email"
+                v-model="editTeachers.email"
                 :rules="emailRules"
                 label="Email"
                 type="email"
@@ -41,12 +43,15 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="12" md="3">
+            <v-col sm="12" md="2">
               <v-select
-                v-model="lessons"
-                :rules="lessonsRules"
+                v-model="editTeachers.status"
+                :rules="statusRules"
+                :items="items"
+                item-text="status"
+                item-value="status"
                 multiple
-                label="Materias"
+                label="Estado"
               ></v-select>
             </v-col>
           </v-row>
@@ -73,9 +78,11 @@
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="4" md="2">
+            <v-col sm="4" md="4">
               <v-text-field
                 autofocus
+                min="0"
+                type="number"
                 v-model="cc"
                 :rules="ccRules"
                 label="Cedula de ciudadania"
@@ -90,7 +97,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col sm="4" md="4">
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -100,14 +107,6 @@
                 max="70"
                 required
               ></v-text-field>
-            </v-col>
-            <v-col sm="12" md="3">
-              <v-select
-                v-model="lessons"
-                :rules="lessonsRules"
-                multiple
-                label="Materias"
-              ></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -196,6 +195,7 @@ export default {
       cc: "",
       email: "",
       lessons: "",
+      status: "",
       ccRules: [v => !!v || "Nombre del salon es requerido"],
       nameRules: [
         v => !!v || "Estado del implemento es requerido",
@@ -209,6 +209,7 @@ export default {
             v
           ) || "Correo electronico no es valido, Verifiquelo nuevamente"
       ],
+      statusRules: [v => !!v || "Ubicación del salon es requerido"],
       headers: [
         { text: "C.C", align: "center", value: "cc" },
         {
@@ -270,16 +271,16 @@ export default {
     async NewTeacher() {
       await axios
         .post(`/api/newTeacher/`, {
+          cc: this.cc,
           name: this.name,
-          location: this.location,
-          capacity: this.capacity,
-          description: this.description
+          email: this.email,
+          lessons: this.lessons
         })
         .then(res => {
           this.salon;
           this.snackbar = true;
           this.color = "success";
-          this.text = "¡Salon agregado con exito!";
+          this.text = "¡Profesor agregado con exito!";
         })
         .catch(e => {
           this.snackbar = true;
@@ -295,7 +296,6 @@ export default {
         .get(`api/teacher/${id}`)
         .then(res => {
           this.editTeachers = res.data;
-          this.$refs.name.focus();
         })
         .catch(e => {
           this.snackbar = true;
@@ -307,20 +307,20 @@ export default {
     editTeacher(item) {
       axios.put(`api/updateTeacher/${item._id}`, item).then(res => {
         const index = this.items.findIndex(n => n._id === res.data._id);
+        this.items[index].cc = res.data.cc;
         this.items[index].name = res.data.name;
-        this.items[index].location = res.data.location;
-        this.items[index].capacity = res.data.capacity;
-        this.items[index].description = res.data.description;
-        this.$router.replace({ name: "salones" });
+        this.items[index].email = res.data.email;
+        this.items[index].lessons = res.data.lessons;
+        this.items[index].status = res.data.status;
         this.edit = false;
         this.snackbar = true;
         this.color = "success";
-        this.text = "¡Salon Editado con exito!";
+        this.text = "¡Profesor Editado con exito!";
       });
     },
     //Delete Salon
     deleteTeacher(id) {
-      const response = confirm("Esta seguro de eliminar este salon?");
+      const response = confirm("Esta seguro de eliminar este profesor?");
       if (response) {
         axios
           .delete("api/deleteTeacher/" + id)
@@ -332,7 +332,7 @@ export default {
             this.items.splice(index, 1);
             this.snackbar = true;
             this.color = "success";
-            this.text = "¡Salon eliminado con exito!";
+            this.text = "¡Profesor eliminado con exito!";
             this.$router.go();
           })
           .catch(e => {

@@ -24,15 +24,15 @@ export const routerOptions = {
 
   routes: [{
       path: "/configuraciones",
-      component: _be1b6fae,
+      component: _f8d3a434,
       name: "configuraciones"
     }, {
       path: "/home",
-      component: _7a4de5be,
+      component: _71e948f8,
       name: "home"
     }, {
       path: "/implementos",
-      component: _3b1a3adb,
+      component: _42688718,
       name: "implementos"
     }, {
       path: "/profesores",
@@ -40,23 +40,23 @@ export const routerOptions = {
       name: "profesores"
     }, {
       path: "/registro",
-      component: _83fa3816,
+      component: _ac5d6e50,
       name: "registro"
     }, {
       path: "/reservar",
-      component: _207601bc,
+      component: _0c44669f,
       name: "reservar"
     }, {
       path: "/salones",
-      component: _7941efbf,
+      component: _591c3b08,
       name: "salones"
     }, {
       path: "/usuarios",
-      component: _17204847,
+      component: _02eead2a,
       name: "usuarios"
     }, {
       path: "/",
-      component: _c27adbba,
+      component: _2048dc40,
       name: "index"
     }],
 
