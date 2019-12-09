@@ -47,10 +47,7 @@
               <v-select
                 v-model="editTeachers.status"
                 :rules="statusRules"
-                :items="items"
-                item-text="status"
-                item-value="status"
-                multiple
+                :items="status"
                 label="Estado"
               ></v-select>
             </v-col>
@@ -195,7 +192,7 @@ export default {
       cc: "",
       email: "",
       lessons: "",
-      status: "",
+      status: ["Activo", "Inactivo"],
       ccRules: [v => !!v || "Nombre del salon es requerido"],
       nameRules: [
         v => !!v || "Estado del implemento es requerido",
@@ -223,12 +220,6 @@ export default {
           align: "center",
           sortable: false,
           value: "email"
-        },
-        {
-          text: "MATERIAS",
-          align: "center",
-          sortable: false,
-          value: "lessons"
         },
         {
           text: "ESTADO",
