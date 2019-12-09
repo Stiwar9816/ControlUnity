@@ -74,6 +74,11 @@ export default {
           to: "/home"
         },
         {
+          icon: "fa fa-user",
+          title: "Profesores",
+          to: "/profesores"
+        },
+        {
           icon: "fa fa-graduation-cap",
           title: "Salones",
           to: "/salones"
@@ -88,7 +93,11 @@ export default {
           title: "Reservar",
           to: "/reservar"
         },
-
+        {
+          icon: "fa fa-book",
+          title: "Malla curricular",
+          to: "/malla_curricular"
+        },
         {
           icon: "fa fa-users",
           title: "Usuarios",
