@@ -24,7 +24,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="4">
+            <v-col sm="4" md="3">
               <v-text-field
                 v-model="editTeachers.name"
                 :rules="nameRules"
@@ -32,7 +32,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="4">
+            <v-col sm="4" md="3">
               <v-text-field
                 v-model="editTeachers.email"
                 :rules="emailRules"
@@ -51,16 +51,28 @@
                 label="Estado"
               ></v-select>
             </v-col>
+            <v-col sm="12" md="2">
+              <v-textarea
+                v-model="editTeachers.observation"
+                autoGrow
+                rows="1"
+                row-height="20"
+                label="Observación"
+              ></v-textarea>
+            </v-col>
           </v-row>
           <v-row>
             <v-col align="center">
               <v-btn
                 rounded
-                color="primary black--text"
+                color="success black--text mr-2"
                 type="submit"
                 :disabled="!valid"
               >
-                <v-icon dark>fa fa-plus</v-icon>Agregar
+                <v-icon dark>fa fa-check</v-icon>Editar
+              </v-btn>
+              <v-btn rounded color="error black--text" @click="edit = false">
+                <v-icon dark>fa fa-ban</v-icon>Cancelar
               </v-btn>
             </v-col>
           </v-row>
@@ -75,7 +87,7 @@
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="4" md="4">
+            <v-col sm="4" md="2">
               <v-text-field
                 autofocus
                 min="0"
@@ -86,7 +98,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="4">
+            <v-col sm="4" md="3">
               <v-text-field
                 v-model="name"
                 :rules="nameRules"
@@ -94,7 +106,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="4">
+            <v-col sm="4" md="3">
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -104,6 +116,15 @@
                 max="70"
                 required
               ></v-text-field>
+            </v-col>
+            <v-col sm="12" md="4">
+              <v-textarea
+                v-model="observation"
+                autoGrow
+                rows="1"
+                row-height="20"
+                label="Observación"
+              ></v-textarea>
             </v-col>
           </v-row>
           <v-row>
@@ -139,6 +160,8 @@
           :sort-desc="[false]"
           :search="search"
           class="elevation-1"
+          calculate-widths="true"
+          locale="es"
         >
           <template v-slot:items />
           <template slot="item.icon" slot-scope="data">
@@ -192,6 +215,7 @@ export default {
       cc: "",
       email: "",
       lessons: "",
+      observation: "",
       status: ["Activo", "Inactivo"],
       ccRules: [v => !!v || "Nombre del salon es requerido"],
       nameRules: [
@@ -227,6 +251,12 @@ export default {
           sortable: false,
           value: "status"
         },
+        {
+          text: "OBSERVACIONES",
+          align: "center",
+          sortable: false,
+          value: "observation"
+        },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
@@ -257,7 +287,6 @@ export default {
         this.snackbar = true;
       }
     },
-
     //New Salon
     async NewTeacher() {
       await axios
