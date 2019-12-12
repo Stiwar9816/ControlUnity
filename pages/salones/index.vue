@@ -143,6 +143,25 @@
               hide-details
             ></v-text-field>
           </v-col>
+          <v-spacer></v-spacer>
+          <v-col md="4">
+            <v-file-input
+              :rules="fileRules"
+              accept="image/png, image/jpeg, image/bmp"
+              counter
+              show-size
+              small-chips
+              flat
+              prepend-icon="fa fa-folder-open"
+              label="Importar Salones"
+            >
+              <template v-slot:selection="{ text }">
+                <v-chip small label color="accent">
+                  {{ text }}
+                </v-chip>
+              </template>
+            </v-file-input>
+          </v-col>
         </v-row>
         <v-data-table
           :headers="headers"
@@ -205,6 +224,12 @@ export default {
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       locationRules: [v => !!v || "Ubicación del salon es requerido"],
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
+      filerules: [
+        value =>
+          !value ||
+          value.size < 2000000 ||
+          "El tamaño del archivo debe ser menor a 2 MB!"
+      ],
       headers: [
         { text: "NOMBRE SALON", align: "center", value: "name" },
         {
@@ -231,7 +256,7 @@ export default {
       editRooms: {},
       snackbar: false,
       text: "",
-      color:""
+      color: ""
     };
   },
   async created() {
@@ -268,7 +293,7 @@ export default {
         .then(res => {
           this.salon;
           this.snackbar = true;
-          this.color = "success"
+          this.color = "success";
           this.text = "¡Salon agregado con exito!";
         })
         .catch(e => {
@@ -302,7 +327,7 @@ export default {
         this.items[index].capacity = res.data.capacity;
         this.items[index].description = res.data.description;
         this.snackbar = true;
-        this.color = "success"
+        this.color = "success";
         this.text = "¡Salon Editado con exito!";
         this.edit = false;
         // this.$router.replace({ name: "salones" });
@@ -321,7 +346,7 @@ export default {
             console.log("Room Delete: ", id);
             this.items.splice(index, 1);
             this.snackbar = true;
-            this.color = "success"
+            this.color = "success";
             this.text = "¡Salon eliminado con exito!";
             this.$router.go();
           })
