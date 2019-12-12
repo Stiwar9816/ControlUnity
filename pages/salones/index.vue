@@ -143,17 +143,19 @@
               hide-details
             ></v-text-field>
           </v-col>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-col md="4">
             <v-file-input
-              :rules="fileRules"
-              accept="image/png, image/jpeg, image/bmp"
+              :rules="filerules"
+              accept=".XLSX, .CSV"
               counter
               show-size
               small-chips
               flat
               prepend-icon="fa fa-folder-open"
               label="Importar Salones"
+              ref="file"
+              v-on:change="handleFileUpload()"
             >
               <template v-slot:selection="{ text }">
                 <v-chip small label color="accent">
@@ -161,6 +163,20 @@
                 </v-chip>
               </template>
             </v-file-input>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col align="right">
+            <v-btn
+              class="mx-2"
+              dark
+              small
+              text
+              color="accent"
+              v-on:click="EventSubir()"
+            >
+              Subir Archivo<v-icon dark>fa fa-upload </v-icon>
+            </v-btn>
           </v-col>
         </v-row>
         <v-data-table
@@ -220,14 +236,15 @@ export default {
       location: "",
       capacity: "",
       description: "",
+      file: "",
       salonRules: [v => !!v || "Nombre del salon es requerido"],
       capacityRules: [v => !!v || "Capacidad del salon es requerida"],
       locationRules: [v => !!v || "Ubicación del salon es requerido"],
       descriptionRules: [v => !!v || "Descripción del salon es requerida"],
       filerules: [
-        value =>
-          !value ||
-          value.size < 2000000 ||
+        v =>
+          !!v ||
+          v.size < 2000000 ||
           "El tamaño del archivo debe ser menor a 2 MB!"
       ],
       headers: [
@@ -358,6 +375,25 @@ export default {
           });
       }
       return;
+    },
+    EventSubir() {
+      let formData = new FormData();
+      formData.append("file", this.file);
+      axios
+        .post("/import-excel-personas", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(function() {
+          console.log("SUCCESS!!");
+        })
+        .catch(function() {
+          console.log("FAILURE!!");
+        });
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
     }
   }
 };
