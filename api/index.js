@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
+const fileUpload = require('express-fileupload')
 const api = require("./routes");
 // const authToken = require('./middleware/authToken.js')
 const { Nuxt, Builder } = require("nuxt");
@@ -18,6 +19,7 @@ app.use(morgan("dev"));
 //middlewares
 app.use(mongoSanitize());
   app.use(cors());
+  app.use(fileUpload())
   app.use(
     bodyParser.urlencoded({
       extended: true

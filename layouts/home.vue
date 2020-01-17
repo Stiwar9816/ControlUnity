@@ -93,11 +93,11 @@ export default {
           title: "Reservar",
           to: "/reservar"
         },
-        {
-          icon: "fa fa-book",
-          title: "Malla curricular",
-          to: "/malla_curricular"
-        },
+        // {
+        //   icon: "fa fa-book",
+        //   title: "Malla curricular",
+        //   to: "/malla_curricular"
+        // },
         {
           icon: "fa fa-users",
           title: "Usuarios",

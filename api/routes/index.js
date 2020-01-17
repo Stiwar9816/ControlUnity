@@ -8,6 +8,7 @@ const controllersUser = require('../controllers/users')
 const controllersBookings = require('../controllers/booking')
 const controllersRooms = require('../controllers/room')
 const controllersTeachers = require('../controllers/teacher')
+const controllerFile = require('../controllers/file')
 
 // Routes Users crud and login
 router.post('/register', controllersUser.register)
@@ -47,5 +48,8 @@ router.get('/implement/:id', controllersImplements.getOneImplement)
 router.post('/newImplement', controllersImplements.newImplement)
 router.put('/updateImplement/:id', controllersImplements.updateImplement)
 router.delete('/deleteImplement/:id', controllersImplements.deleteImplement)
+
+// Importación de archivos
+router.post('/fileUpload', controllerFile.upload)
 
 module.exports = router;

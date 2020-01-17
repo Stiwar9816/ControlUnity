@@ -50,7 +50,7 @@ module.exports = {
                                 }
                             })
                         }else{
-                             res.status(200).send({
+                             res.status(404).send({
                                 message: 'Contraseña Incorrecta'
                             }) // No Acceso
                         }

@@ -53,8 +53,5 @@ Users.pre('save', function (next) {
 
 
 
-Users.index({
-  cc: 1
-});
 
-module.exports = global.Users = mongoose.model("Users", Users);
+module.exports = global.Users = mongoose.models.Users || mongoose.model("Users", Users);

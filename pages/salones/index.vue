@@ -143,29 +143,8 @@
               hide-details
             ></v-text-field>
           </v-col>
-          <v-spacer />
-          <v-col md="4">
-            <v-file-input
-              :rules="filerules"
-              accept=".XLSX, .CSV"
-              counter
-              show-size
-              small-chips
-              flat
-              prepend-icon="fa fa-folder-open"
-              label="Importar Salones"
-              ref="file"
-              v-on:change="handleFileUpload()"
-            >
-              <template v-slot:selection="{ text }">
-                <v-chip small label color="accent">
-                  {{ text }}
-                </v-chip>
-              </template>
-            </v-file-input>
-          </v-col>
         </v-row>
-        <v-row>
+        <!-- <v-row>
           <v-col align="right">
             <v-btn
               class="mx-2"
@@ -178,7 +157,7 @@
               Subir Archivo<v-icon dark>fa fa-upload </v-icon>
             </v-btn>
           </v-col>
-        </v-row>
+        </v-row> -->
         <v-data-table
           :headers="headers"
           :items="items"
@@ -224,10 +203,14 @@
 
 <script>
 import axios from "~/plugins/axios";
+import XLSX from "xlsx";
 export default {
+  props: { beforeUpload: Function, onSuccess: Function },
   layout: "home",
   data() {
     return {
+      loading: false,
+      excelData:{header:null, results:null},
       edit: false,
       search: "",
       valid: true,
@@ -278,8 +261,7 @@ export default {
   },
   async created() {
     try {
-      const token = sessionStorage.getItem("token");
-      const res = await axios.get(`/api/room/?token=${token}`);
+      const res = await axios.get(`/api/room`);
       this.items = await res.data.Rooms;
     } catch (error) {
       this.snackbar = true;
@@ -376,25 +358,114 @@ export default {
       }
       return;
     },
-    EventSubir() {
-      let formData = new FormData();
-      formData.append("file", this.file);
-      axios
-        .post("/import-excel-personas", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
-        .then(function() {
-          console.log("SUCCESS!!");
-        })
-        .catch(function() {
-          console.log("FAILURE!!");
-        });
+    //Start code Upload
+
+    generateData({ header, results }) {
+      this.excelData.header = header
+      this.excelData.results = results
+      this.onSuccess && this.onSuccess(this.excelData)
     },
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
+    handleDrop(e) {
+      e.stopPropagation()
+      e.preventDefault()
+      if (this.loading) return
+      const files = e.dataTransfer.files
+      if (files.length !== 1) {
+        this.$message.error('Only support uploading one file!')
+        return
+      }
+      const rawFile = files[0] // only use files[0]
+      if (!this.isExcel(rawFile)) {
+        this.$message.error('Only supports upload .xlsx, .xls, .csv suffix files')
+        return false
+      }
+      this.upload(rawFile)
+      e.stopPropagation()
+      e.preventDefault()
+    },
+    handleClick(e) {
+      const files = e.target.files
+      const rawFile = files[0] // only use files[0]
+      if (!rawFile) return
+      this.upload(rawFile)
+    },
+    upload(rawFile) {
+      this.$refs['excel-upload-input'].value = null // fix can't select the same excel
+      if (!this.beforeUpload) {
+        this.readerData(rawFile)
+        return
+      }
+      const before = this.beforeUpload(rawFile)
+      if (before) {
+        this.readerData(rawFile)
+      }
+    },
+    readerData(rawFile) {
+      this.loading = true
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = e => {
+          const data = e.target.result
+          const workbook = XLSX.read(data, { type: 'array' })
+          const firstSheetName = workbook.SheetNames[0]
+          const worksheet = workbook.Sheets[firstSheetName]
+          const header = this.getHeaderRow(worksheet)
+          const results = XLSX.utils.sheet_to_json(worksheet)
+          this.generateData({ header, results })
+          this.loading = false
+          resolve()
+        }
+        reader.readAsArrayBuffer(rawFile)
+      })
+    },
+    getHeaderRow(sheet) {
+      const headers = []
+      const range = XLSX.utils.decode_range(sheet['!ref'])
+      let C
+      const R = range.s.r
+      /* start in the first row */
+      for (C = range.s.c; C <= range.e.c; ++C) { /* walk every column in the range */
+        const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]
+        /* find the cell in the first row */
+        let hdr = 'UNKNOWN ' + C // <-- replace with your desired default
+        if (cell && cell.t) hdr = XLSX.utils.format_cell(cell)
+        headers.push(hdr)
+      }
+      return headers
+    },
+    isExcel(file) {
+      return /\.(xlsx|xls|csv)$/.test(file.name)
     }
+  
+
+    //End code Uploap
+    // EventSubir() {
+    //   let formData = new FormData();
+    //   formData.append('file', this.file);
+    //   axios
+    //     .post("/fileUpload", formData, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data"
+    //       }
+    //     })
+    //     .then(function() {
+    //       console.log("SUCCESS!!");
+    //     })
+    //     .catch(function() {
+    //       console.log("FAILURE!!");
+    //     });
+    // },
+    // handleFileUpload() {
+    //   const file = this.$refs.file.files[0];
+    //   this.file = file
+    //   console.log("MIRA AQUI" +this.file)
+    // }
   }
 };
 </script>
+<style scoped>
+.excel-upload-input{
+  display: none;
+  z-index: -9999;
+}
+</style>

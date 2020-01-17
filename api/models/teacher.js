@@ -9,6 +9,5 @@ const Teachers = new Schema({
   status: ({type:String,  default: 'Activo', enum: ['Activo', 'Inactivo']})
 });
 
-Teachers.index({ cc: 1 });
 
-module.exports = global.Teachers = mongoose.model("Teachers", Teachers);
+module.exports = global.Teachers = mongoose.models.Teachers || mongoose.model("Teachers", Teachers);

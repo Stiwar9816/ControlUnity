@@ -8,6 +8,5 @@ const Rooms = new Schema({
   description: { type: String}
 });
 
-Rooms.index({ name: 1 });
 
-module.exports = global.Rooms = mongoose.model("Rooms", Rooms);
+module.exports = global.Rooms = mongoose.models.Rooms || mongoose.model("Rooms", Rooms);

@@ -16,6 +16,6 @@ const Implements = new Schema(
   { timestamps: true }
 );
 
-Implements.index({ serial: 1 });
+// Implements.index({ serial: 1 });
 
-module.exports = global.Implements = mongoose.model("Implements", Implements);
+module.exports = global.Implements = mongoose.models.Implements || mongoose.model("Implements", Implements);

@@ -13,6 +13,5 @@ const Bookings = new Schema({
     received:({type: Date})
 })
 
-Bookings.index({cc: 1})
 
-module.exports = global.Bookings = mongoose.model('Bookings', Bookings);
+module.exports = global.Bookings = mongoose.models.Bookings || mongoose.model('Bookings', Bookings);
