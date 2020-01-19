@@ -8,6 +8,8 @@ const Mesh = new Schema({
     teacher:({type: String}),
     semester:({type:String}),
     credits:({type:String}),
+    hourStart:({type: String}),
+    hourEnd:({type: String}),
     ht:({type: String}),
     hp:({type: String}),
     htp:({type: String}),
