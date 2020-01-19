@@ -1,5 +1,5 @@
 const Booking = require('../models/booking.js');
-const Implements = require('../models/implements')
+// const Implements = require('../models/implements')
 
 module.exports = {
 

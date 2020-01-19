@@ -109,5 +109,4 @@ a:hover {
 .login {
   margin-left: 420px;
   margin-top: 100px;
-}</style
->>
+}</style>
