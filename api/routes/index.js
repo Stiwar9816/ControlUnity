@@ -7,6 +7,7 @@ const controllersImplements = require('../controllers/implements')
 const controllersUser = require('../controllers/users')
 const controllersBookings = require('../controllers/booking')
 const controllersRooms = require('../controllers/room')
+const controllersMeshs = require('../controllers/mesh')
 const controllersTeachers = require('../controllers/teacher')
 const controllerFile = require('../controllers/file')
 
@@ -34,6 +35,13 @@ router.get('/room/:id', controllersRooms.getOneRoom)
 router.post('/newRoom', controllersRooms.newRoom)
 router.put('/updateRoom/:id', controllersRooms.updateRoom)
 router.delete('/deleteRoom/:id', controllersRooms.deleteRoom)
+
+// Routes Mesh Crud
+router.get('/mesh', controllersMeshs.allMesh)
+router.get('/mesh/:id', controllersMeshs.getOneMesh)
+router.post('/newMesh', controllersMeshs.newMesh)
+router.put('/updateMesh/:id', controllersMeshs.updateMesh)
+router.delete('/deleteMesh/:id', controllersMeshs.deleteMesh)
 
 // Routes Teachers Crud
 router.get('/teacher', controllersTeachers.allTeacher)
