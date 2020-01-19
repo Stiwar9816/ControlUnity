@@ -41,6 +41,11 @@
           >
         </v-card-text>
       </v-card>
+      <!-- Alerta -->
+      <v-snackbar v-model="snackbar" :color="color">
+        {{ text }}
+      </v-snackbar>
+      <!-- End Alerta -->
     </v-flex>
   </v-layout>
 </template>
@@ -56,8 +61,11 @@ export default {
       error: null,
       valid: true,
       show1: false,
+      snackbar: false,
+      text: "",
+      color: "",
       ccRules: [v => !!v || "Cedula de ciudadania es requerida"],
-      passwordRules: [v => !!v || "Contraseña es requerida"],
+      passwordRules: [v => !!v || "Contraseña es requerida"]
     };
   },
   mounted() {
@@ -72,25 +80,29 @@ export default {
     async login() {
       const { cc, password } = this;
       const data = { cc, password };
-      const URL = '/api/login'
-      axios({ method: 'post',
+      const URL = "/api/login";
+      axios({
+        method: "post",
         url: URL,
         headers: {
-          Accept: 'application/json',
-          Content: 'application/json'
+          Accept: "application/json",
+          Content: "application/json"
         },
-        data: data})
+        data: data
+      })
         .then(res => {
-          sessionStorage.setItem('token', res.data.token)
-          this.$router.push('/home')
-          })
-        .catch(err => {
-          alert('Usuario Incorrecto y/o contraseña')
-          // eslint-disable-next-line
-          console.log(err)
+          sessionStorage.setItem("token", res.data.token);
+          this.$router.push("/home");
         })
-    },
-  },
+        .catch(err => {
+          this.snackbar = true;
+          this.color= "error"
+          this.text = "Usuario Incorrecto y/o contraseña";
+          // eslint-disable-next-line
+          console.log(err);
+        });
+    }
+  }
 };
 </script>
 

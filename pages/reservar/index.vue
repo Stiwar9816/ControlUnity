@@ -100,7 +100,7 @@
                 <v-date-picker
                   v-model="date"
                   scrollable
-                  min="2019-12-09"
+                  min="2020-01-17"
                   locale="es"
                   first-day-of-week="1"
                   multiple

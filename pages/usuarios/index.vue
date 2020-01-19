@@ -1,7 +1,9 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-subheader class="subtitle-1">USUARIOS REGISTRADOS</v-subheader>
+      <v-subheader class="subtitle-1"
+        >USUARIOS REGISTRADOS 
+      </v-subheader>
       <v-container>
         <!-- Tabla -->
         <v-row cols="12">
@@ -99,6 +101,7 @@ export default {
       console.log(error);
     }
   },
+
   methods: {
     //Delete User
     deleteUser(id) {
