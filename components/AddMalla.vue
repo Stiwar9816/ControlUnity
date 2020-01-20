@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-cotainer>
+    <v-container>
       <!-- Edit Of Mesh -->
       <v-form
         ref="form"
@@ -17,7 +17,7 @@
               autofocus
               min="0"
               type="text"
-              v-model="editMesh.cod"
+              v-model="editMesh.idMetter"
               :rules="codRules"
               label="Código materia"
               required
@@ -165,7 +165,7 @@
       <v-form
         ref="form"
         v-model="valid"
-        v-on:submit.prevent="NewMesh()"
+        v-on:submit="NewMesh()"
         v-if="!edit"
         lazy-validation
       >
@@ -335,9 +335,10 @@
             :items="items"
             :single-expand="singleExpand"
             :expanded.sync="expanded"
-            item-key="name"
+            item-key="idMetter"
             show-expand
           >
+          <template v-slot:items />
             <template v-slot:expanded-item="{ headers }" v-model="singleExpand">
               <template>
                 <v-layout row wrap pb-2 pt-2 pl-5>
@@ -412,7 +413,7 @@
           </v-data-table>
         </v-card-text>
       </v-card>
-    </v-cotainer>
+    </v-container>
   </div>
 </template>
 
@@ -445,16 +446,15 @@ export default {
           text: "CÓDIGO",
           align: "center",
           sortable: false,
-          value: "calories"
+          value: "idMetter"
         },
-        { text: "ASIGNATURA", value: "name", sortable: false, align: "center" },
-        { text: "SEMESTRE", value: "fat", align: "center", sortable: false },
+        { text: "ASIGNATURA", value: "matter", sortable: false, align: "center" },
+        { text: "SEMESTRE", value: "semester", align: "center", sortable: false },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" },
         { text: "", value: "data-table-expand" }
       ],
       items: [],
       teachers: [],
-      mesh: [],
       semesters: [
         { nivel: "1" },
         { nivel: "2" },
@@ -519,8 +519,8 @@ export default {
     };
   },
   created() {
-    this.getTeacher();
     this.getMesh();
+    this.getTeacher();
   },
   mounted() {
     this.valid = false;
@@ -539,7 +539,21 @@ export default {
           console.log(error);
         });
     },
-      //New Salon
+    getMesh(){
+      axios
+        .get("/api/mesh")
+        .then(res => {
+          this.items = res.data.Mesh;
+          console.log("Mesh",this.items);
+        })
+        .catch(error => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = error.message;
+          console.log(error);
+        });
+    },
+      //New Mesh
     async NewMesh() {
       await axios
         .post(`/api/newMesh/`, {
@@ -556,7 +570,7 @@ export default {
           htp: this.htp
         })
         .then(res => {
-          this.salon;
+          this.mesh;
           this.snackbar = true;
           this.color = "success";
           this.text = "¡Información agregada con exito!";
