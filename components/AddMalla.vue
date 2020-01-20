@@ -6,7 +6,7 @@
         ref="form"
         v-model="valid"
         v-on:submit="editMesh(editMesh)"
-        v-if="edit"
+        v-if="!edit"
         lazy-validation
       >
         <v-row>
@@ -110,7 +110,7 @@
           </v-col>
           <v-col sm="4" md="2">
             <v-select
-              v-model="editMesh.start"
+              v-model="editMesh.hourStart"
               label="Hora de inicio"
               :items="clock"
               item-text="clock"
@@ -122,7 +122,7 @@
           </v-col>
           <v-col sm="4" md="2">
             <v-select
-              v-model="editMesh.end"
+              v-model="editMesh.hourEnd"
               label="Hora de finalización"
               :items="clock"
               item-text="clock"
@@ -166,7 +166,7 @@
         ref="form"
         v-model="valid"
         v-on:submit="NewMesh()"
-        v-if="!edit"
+        v-if="edit"
         lazy-validation
       >
         <v-row>
@@ -339,6 +339,22 @@
             show-expand
           >
           <template v-slot:items />
+           <template slot="item.icon" slot-scope="data">
+            <v-btn
+              icon
+              v-on:click="onlyMesh(data.item._id)"
+              aria-label="edit"
+            >
+              <v-icon small color="edit">fa fa-pencil</v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              v-on:click="deleteMesh(data.item._id)"
+              aria-label="delete"
+            >
+              <v-icon small color="error">fa fa-trash</v-icon>
+            </v-btn>
+          </template>
             <template v-slot:expanded-item="{ headers }" v-model="singleExpand">
               <template>
                 <v-layout row wrap pb-2 pt-2 pl-5>
@@ -348,7 +364,7 @@
                         <p class="subheading">General</p>
                         <span class="font-weight-medium">Docente</span>
                         <br />
-                        <span class="font-weight-medium">Jilmar peña</span>
+                        <span class="font-weight-medium"> {{items.teacher}} </span>
                       </v-card-text>
                     </v-card>
                   </v-flex>
@@ -427,7 +443,7 @@ export default {
       expanded: [],
       editMesh: {},
       singleExpand: true,
-      edit: false,
+      edit: true,
       search: "",
       valid: true,
       idMetter: "",
@@ -544,7 +560,7 @@ export default {
         .get("/api/mesh")
         .then(res => {
           this.items = res.data.Meshs;
-          console.log("Mesh",this.items);
+          console.log("Mesh",this.items.idMetter);
         })
         .catch(error => {
           this.snackbar = true;
@@ -581,6 +597,66 @@ export default {
           this.text = e.message;
           console.log(e);
         });
+    },
+     // Only Mesh (Pasa un solo dato de la tabla para hacer el update)
+    onlyMesh(id) {
+      this.edit = false;
+      axios
+        .get(`/api/mesh/${id}`)
+        .then(res => {
+          this.editMesh = res.data;
+          this.$refs.idMetter.focus();
+        })
+        .catch(e => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = e.message;
+          console.log(e);
+        });
+    },
+     // Edit Mesh
+    editMesh(item) {
+      axios.put(`/api/updateMesh/${item._id}`, item).then(res => {
+        const index = this.items.findIndex(n => n._id === res.data._id);
+        this.items[index].idMetter = res.data.idMetter;
+        this.items[index].matter = res.data.matter;
+        this.items[index].credits = res.data.credits;
+        this.items[index].hourStart = res.data.hourStart;
+        this.items[index].hourEnd = res.data.hourEnd;
+        this.items[index].semester = res.data.semester;
+        this.items[index].teacher = res.data.teacher;
+        this.items[index].dayClass = res.data.dayClass;
+        this.items[index].ht = res.data.ht;
+        this.items[index].hp = res.data.hp;
+        this.items[index].htp = res.data.htp;
+        this.snackbar = true;
+        this.color = "success";
+        this.text = "¡Datos de la asignatura actualizados correctamente!";
+        this.edit = false;
+      });
+    },
+        //Delete Mesh
+    deleteMesh(id) {
+      const response = confirm("Esta seguro de eliminar esta asignatura?");
+      if (response) {
+        axios
+          .delete("/api/deleteMesh/" + id)
+          .then(res => {
+            console.log("Mesh Delete: ", id);
+            this.items.splice(id, 1);
+            this.snackbar = true;
+            this.color = "success";
+            this.text = "¡Asignatura eliminada exitosamente!";
+            this.$router.go();
+          })
+          .catch(e => {
+            this.snackbar = true;
+            this.color = "error";
+            this.text = e.message;
+            console.log("Unable to clear the mesh", e);
+          });
+      }
+      return;
     }
   }
 };
