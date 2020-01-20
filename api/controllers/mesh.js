@@ -10,9 +10,15 @@ module.exports = {
 
     // Created new Mesh
     newMesh: async (req, res, next) => {
-        const newMesh = new Meshs(req.body)
-        const Mesh = await newMesh.save()
-        res.status(200).json({Mesh: Mesh})
+        const {matter, idMetter, dayClass, teacher, semester, hourStart, hourEnd, career, room} = req.body;
+        const cruce = await Meshs.find({})
+        if(!cruce.hourEnd && !cruce.hourStart && !cruce.room){
+            const newMesh = new Meshs(req.body)
+            const Mesh = await newMesh.save()
+            res.status(200).json({Mesh: Mesh})
+        }else{
+            res.status(404).json({message: "Cruce de horarios"})
+        }
     },
 
     // Get one Mesh from id
