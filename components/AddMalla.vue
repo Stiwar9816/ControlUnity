@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-cotainer>
-      <!-- Edit Of Teacher -->
+      <!-- Edit Of Mesh -->
       <v-form
         ref="form"
         v-model="valid"
@@ -74,11 +74,11 @@
           </v-col>
         </v-row>
       </v-form>
-      <!-- Form Of New Teacher -->
+      <!-- Form Of New Mesh -->
       <v-form
         ref="form"
         v-model="valid"
-        v-on:submit="NewTeacher()"
+        v-on:submit.prevent="NewMesh()"
         v-if="!edit"
         lazy-validation
       >
@@ -89,7 +89,7 @@
               autofocus
               min="0"
               type="text"
-              v-model="cod"
+              v-model="idMetter"
               :rules="codRules"
               label="Código materia"
               required
@@ -182,7 +182,7 @@
           </v-col>
           <v-col sm="4" md="2">
             <v-select
-              v-model="start"
+              v-model="hourStart"
               label="Hora de inicio"
               :items="clock"
               item-text="clock"
@@ -194,7 +194,7 @@
           </v-col>
           <v-col sm="4" md="2">
             <v-select
-              v-model="end"
+              v-model="hourEnd"
               label="Hora de finalización"
               :items="clock"
               item-text="clock"
@@ -341,13 +341,16 @@ export default {
       edit: false,
       search: "",
       valid: true,
-      cod: "",
+      idMetter: "",
       matter: "",
       credits: "",
-      start: "",
-      end: "",
+      hourStart: "",
+      hourEnd: "",
       semester: "",
       teacher: "",
+      ht:"",
+      hp:"",
+      htp:"",
       dayClass: [],
       headers: [
         {
@@ -441,6 +444,35 @@ export default {
           this.color = "error";
           this.text = error.message;
           console.log(error);
+        });
+    },
+      //New Salon
+    async NewMesh() {
+      await axios
+        .post(`/api/newMesh/`, {
+          idMetter: this.idMetter,
+          matter: this.matter,
+          credits: this.credits,
+          hourStart: this.hourStart,
+          hourEnd: this.hourEnd,
+          semester: this.semester,
+          teacher: this.teacher,
+          dayClass: this.dayClass,
+          ht: this.ht,
+          hp: this.hp,
+          htp: this.htp
+        })
+        .then(res => {
+          this.salon;
+          this.snackbar = true;
+          this.color = "success";
+          this.text = "¡Información agregada con exito!";
+        })
+        .catch(e => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = e.message;
+          console.log(e);
         });
     }
   }
