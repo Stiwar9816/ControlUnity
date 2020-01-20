@@ -543,7 +543,7 @@ export default {
       axios
         .get("/api/mesh")
         .then(res => {
-          this.items = res.data.Mesh;
+          this.items = res.data.Meshs;
           console.log("Mesh",this.items);
         })
         .catch(error => {
