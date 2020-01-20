@@ -434,15 +434,11 @@ export default {
         .post(`/api/newMesh/`, {
           idMetter: this.idMetter,
           matter: this.matter,
-          credits: this.credits,
           hourStart: this.hourStart,
           hourEnd: this.hourEnd,
           semester: this.semester,
           teacher: this.teacher,
-          dayClass: this.dayClass,
-          ht: this.ht,
-          hp: this.hp,
-          htp: this.htp
+          dayClass: this.dayClass
         })
         .then(res => {
           this.mesh;
@@ -479,15 +475,11 @@ export default {
         const index = this.items.findIndex(n => n._id === res.data._id);
         this.items[index].idMetter = res.data.idMetter;
         this.items[index].matter = res.data.matter;
-        this.items[index].credits = res.data.credits;
         this.items[index].hourStart = res.data.hourStart;
         this.items[index].hourEnd = res.data.hourEnd;
         this.items[index].semester = res.data.semester;
         this.items[index].teacher = res.data.teacher;
         this.items[index].dayClass = res.data.dayClass;
-        this.items[index].ht = res.data.ht;
-        this.items[index].hp = res.data.hp;
-        this.items[index].htp = res.data.htp;
         this.snackbar = true;
         this.color = "success";
         this.text = "¡Datos de la asignatura actualizados correctamente!";
