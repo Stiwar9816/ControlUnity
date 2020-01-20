@@ -5,57 +5,144 @@
       <v-form
         ref="form"
         v-model="valid"
-        v-on:submit="editTeacher(editTeachers)"
+        v-on:submit="editMesh(editMesh)"
         v-if="edit"
         lazy-validation
       >
         <v-row>
           <!-- inputs -->
+          <!-- inputs -->
           <v-col sm="4" md="2">
             <v-text-field
               autofocus
               min="0"
-              type="number"
-              v-model="editTeachers.cod"
+              type="text"
+              v-model="editMesh.cod"
               :rules="codRules"
-              label="Cedula de ciudadania"
+              label="Código materia"
               required
             ></v-text-field>
           </v-col>
           <v-col sm="4" md="3">
             <v-text-field
-              v-model="editTeachers.name"
+              v-model="editMesh.matter"
               :rules="classRules"
-              label="Nombre completo"
+              label="Asginatura"
+              required
+            ></v-text-field>
+          </v-col>
+
+          <v-col sm="12" md="3">
+            <v-autocomplete
+              v-model="editMesh.teacher"
+              :rules="[v => !!v || 'Nombre del docente es requerido']"
+              label="Docente"
+              :items="teachers"
+              item-text="name"
+              item-value="name"
+              flat
+              chips
+              small-chips
+              deletable-chips
+              hide-selected
+              hide-details
+            >
+              <template v-slot:no-data>
+                <v-list-item>
+                  <v-list-item-title>No existe coincidencias</v-list-item-title>
+                </v-list-item>
+              </template>
+            </v-autocomplete>
+          </v-col>
+
+          <v-col sm="4" md="1">
+            <v-text-field
+              v-model="editMesh.ht"
+              label="HT"
+              type="number"
+              min="0"
+              max="100"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col sm="4" md="1">
+            <v-text-field
+              v-model="editMesh.hp"
+              label="HP"
+              type="number"
+              min="0"
+              max="100"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col sm="4" md="1">
+            <v-text-field
+              v-model="editMesh.htp"
+              label="HTP"
+              type="number"
+              min="0"
+              max="100"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col sm="4" md="1">
+            <v-text-field
+              v-model="editMesh.credits"
+              label="Creditos"
+              type="number"
+              min="0"
+              max="20"
               required
             ></v-text-field>
           </v-col>
           <v-col sm="4" md="3">
-            <v-text-field
-              v-model="editTeachers.email"
-              label="Email"
-              type="email"
-              min="1"
-              max="70"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="12" md="2">
             <v-select
-              v-model="editTeachers.status"
-              :rules="statusRules"
-              :items="status"
-              label="Estado"
-            ></v-select>
+              v-model="editMesh.dayClass"
+              label="Dias de clases"
+              :items="dClass"
+              item-text="day"
+              item-value="day"
+              chips
+              flat
+              multiple
+            >
+            </v-select>
           </v-col>
-          <v-col sm="12" md="2">
-            <v-textarea
-              v-model="editTeachers.observation"
-              autoGrow
-              rows="1"
-              row-height="20"
-              label="Observación"
-            ></v-textarea>
+          <v-col sm="4" md="2">
+            <v-select
+              v-model="editMesh.start"
+              label="Hora de inicio"
+              :items="clock"
+              item-text="clock"
+              item-value="clock"
+              chips
+              flat
+            >
+            </v-select>
+          </v-col>
+          <v-col sm="4" md="2">
+            <v-select
+              v-model="editMesh.end"
+              label="Hora de finalización"
+              :items="clock"
+              item-text="clock"
+              item-value="clock"
+              chips
+              flat
+            >
+            </v-select>
+          </v-col>
+          <v-col sm="4" md="2">
+            <v-select
+              v-model="editMesh.semester"
+              label="Semestre"
+              :items="semesters"
+              item-text="nivel"
+              item-value="nivel"
+              chips
+              flat
+            >
+            </v-select>
           </v-col>
         </v-row>
         <v-row>
@@ -337,6 +424,7 @@ export default {
   data() {
     return {
       expanded: [],
+      editMesh: {},
       singleExpand: true,
       edit: false,
       search: "",
@@ -348,6 +436,9 @@ export default {
       end: "",
       semester: "",
       teacher: "",
+      ht: "",
+      hp: "",
+      htp: "",
       dayClass: [],
       headers: [
         {
@@ -363,6 +454,7 @@ export default {
       ],
       items: [],
       teachers: [],
+      mesh: [],
       semesters: [
         { nivel: "1" },
         { nivel: "2" },
@@ -428,6 +520,10 @@ export default {
   },
   created() {
     this.getTeacher();
+    this.getMesh();
+  },
+  mounted() {
+    this.valid = false;
   },
   methods: {
     getTeacher() {
@@ -435,6 +531,19 @@ export default {
         .get("/api/teacher")
         .then(res => {
           this.teachers = res.data.Teachers;
+        })
+        .catch(error => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = error.message;
+          console.log(error);
+        });
+    },
+    getMesh() {
+      axios
+        .get("/api/mesh")
+        .then(res => {
+          this.items = res.data.Mesh;
         })
         .catch(error => {
           this.snackbar = true;
