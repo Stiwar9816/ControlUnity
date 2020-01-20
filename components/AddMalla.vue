@@ -5,12 +5,11 @@
       <v-form
         ref="form"
         v-model="valid"
-        v-on:submit="editMesh(editMesh)"
+        v-on:submit="editMeshs(editMesh)"
         v-if="!edit"
         lazy-validation
       >
         <v-row>
-          <!-- inputs -->
           <!-- inputs -->
           <v-col sm="4" md="2">
             <v-text-field
@@ -54,48 +53,7 @@
               </template>
             </v-autocomplete>
           </v-col>
-
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="editMesh.ht"
-              label="HT"
-              type="number"
-              min="0"
-              max="100"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="editMesh.hp"
-              label="HP"
-              type="number"
-              min="0"
-              max="100"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="editMesh.htp"
-              label="HTP"
-              type="number"
-              min="0"
-              max="100"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="editMesh.credits"
-              label="Creditos"
-              type="number"
-              min="0"
-              max="20"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="3">
+          <v-col sm="4" md="4">
             <v-select
               v-model="editMesh.dayClass"
               label="Dias de clases"
@@ -105,6 +63,7 @@
               chips
               flat
               multiple
+              rounded
             >
             </v-select>
           </v-col>
@@ -155,7 +114,7 @@
             >
               <v-icon dark>fa fa-check</v-icon>Editar
             </v-btn>
-            <v-btn rounded color="error black--text" @click="edit = false">
+            <v-btn rounded color="error black--text" @click="edit = true">
               <v-icon dark>fa fa-ban</v-icon>Cancelar
             </v-btn>
           </v-col>
@@ -213,48 +172,7 @@
               </template>
             </v-autocomplete>
           </v-col>
-
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="ht"
-              label="HT"
-              type="number"
-              min="0"
-              max="100"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="hp"
-              label="HP"
-              type="number"
-              min="0"
-              max="100"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="htp"
-              label="HTP"
-              type="number"
-              min="0"
-              max="100"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="1">
-            <v-text-field
-              v-model="credits"
-              label="Creditos"
-              type="number"
-              min="0"
-              max="20"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="3">
+          <v-col sm="4" md="4">
             <v-select
               v-model="dayClass"
               label="Dias de clases"
@@ -264,6 +182,7 @@
               chips
               flat
               multiple
+              rounded
             >
             </v-select>
           </v-col>
@@ -333,10 +252,9 @@
           <v-data-table
             :headers="headers"
             :items="items"
-            :single-expand="singleExpand"
-            :expanded.sync="expanded"
+            :search="search"
             item-key="idMetter"
-            show-expand
+            class="elevation-1"
           >
           <template v-slot:items />
            <template slot="item.icon" slot-scope="data">
@@ -355,67 +273,6 @@
               <v-icon small color="error">fa fa-trash</v-icon>
             </v-btn>
           </template>
-            <template v-slot:expanded-item="{ headers }" v-model="singleExpand">
-              <template>
-                <v-layout row wrap pb-2 pt-2 pl-5>
-                  <v-flex>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="subheading">General</p>
-                        <span class="font-weight-medium">Docente</span>
-                        <br />
-                        <span class="font-weight-medium"> {{items.teacher}} </span>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-                  <v-flex>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="subheading">Horas</p>
-                        <span class="font-weight-medium">HT: </span>
-                        <span class="font-weight-medium">12</span>
-                        <br />
-                        <span class="font-weight-medium">HP: </span>
-                        <span class="font-weight-medium">12</span>
-                        <br />
-                        <span class="font-weight-medium">HTP: </span>
-                        <span class="font-weight-medium">0</span>
-                        <br />
-                        <span class="font-weight-medium">TOTAL HORAS: </span>
-                        <span class="font-weight-medium">24</span>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-                  <v-flex>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="subheading">Horario</p>
-
-                        <span class="font-weight-medium">Lunes y viernes</span>
-                        <br />
-                        <span class="font-weight-medium">7:30 y viernes</span>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-                  <v-flex>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="subheading">Créditos</p>
-                        <span class="font-weight-medium">3</span>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-
-                  <v-flex right>
-                    <v-card flat>
-                      <v-card-text>
-                        <p class="subheading">Acciones</p>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
-              </template>
-            </template>
             <template v-slot:no-results>
               <span class="font-weight-regular black--text"
                 >No se encontraron coincidencias</span
@@ -465,9 +322,12 @@ export default {
           value: "idMetter"
         },
         { text: "ASIGNATURA", value: "matter", sortable: false, align: "center" },
+        { text: "DOCENTE", value: "teacher", sortable: false, align: "center" },
+        { text: "DÍA(S) DE CLASE", value: "dayClass", sortable: false, align: "center" },
+        { text: "HORA INICIO", value: "hourStart", sortable: false, align: "center" },
+        { text: "HORA FIN", value: "hourEnd", sortable: false, align: "center" },
         { text: "SEMESTRE", value: "semester", align: "center", sortable: false },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" },
-        { text: "", value: "data-table-expand" }
       ],
       items: [],
       teachers: [],
@@ -560,7 +420,6 @@ export default {
         .get("/api/mesh")
         .then(res => {
           this.items = res.data.Meshs;
-          console.log("Mesh",this.items.idMetter);
         })
         .catch(error => {
           this.snackbar = true;
@@ -615,7 +474,7 @@ export default {
         });
     },
      // Edit Mesh
-    editMesh(item) {
+    editMeshs(item) {
       axios.put(`/api/updateMesh/${item._id}`, item).then(res => {
         const index = this.items.findIndex(n => n._id === res.data._id);
         this.items[index].idMetter = res.data.idMetter;
