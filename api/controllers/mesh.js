@@ -11,9 +11,10 @@ module.exports = {
     // Created new Mesh
     newMesh: async (req, res, next) => {
         const {matter, idMetter, dayClass, teacher, semester, hourStart, hourEnd, career, room} = req.body;
-        const cruce = await Meshs.find({})
-        if(!cruce.hourEnd && !cruce.hourStart && !cruce.room){
-            const newMesh = new Meshs(req.body)
+        let data = {hourStart, hourEnd, room, semester}
+        const cruce = await Meshs.find({data})
+        if(!cruce){
+            const newMesh = new Meshs({matter, idMetter, dayClass, teacher, semester, hourStart, hourEnd, career, room})
             const Mesh = await newMesh.save()
             res.status(200).json({Mesh: Mesh})
         }else{
