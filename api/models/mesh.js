@@ -9,7 +9,7 @@ const Mesh = new Schema({
     semester:({type:Number}),
     hourStart:({type: String}),
     hourEnd:({type: String}),
-    career:({type: Array}),
+    career:({type: String}),
     room:({type:String})
 })
 
