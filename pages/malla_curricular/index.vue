@@ -3,7 +3,7 @@
     <v-flex>
       <v-container>
         <v-subheader class="subtitle-1">MALLA CURRICULAR</v-subheader> <br />
-        <div>
+        
           <!-- v-tabs -->
           <v-tabs grow show-arrows>
             <v-tabs-slider color="primary"></v-tabs-slider>
@@ -48,7 +48,7 @@
                         autofocus
                         min="0"
                         type="number"
-                        v-model="editTeachers.cc"
+                        v-model="editTeachers.cod"
                         :rules="codRules"
                         label="Cedula de ciudadania"
                         required
@@ -125,7 +125,7 @@
                         autofocus
                         min="0"
                         type="text"
-                        v-model="cc"
+                        v-model="cod"
                         :rules="codRules"
                         label="Código materia"
                         required
@@ -133,7 +133,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-text-field
-                        v-model="name"
+                        v-model="matter"
                         :rules="classRules"
                         label="Asginatura"
                         required
@@ -167,7 +167,7 @@
 
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="ht"
                         label="HT"
                         type="number"
                         min="0"
@@ -177,7 +177,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="hp"
                         label="HP"
                         type="number"
                         min="0"
@@ -187,7 +187,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="htp"
                         label="HTP"
                         type="number"
                         min="0"
@@ -197,7 +197,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="credits"
                         label="Creditos"
                         type="number"
                         min="0"
@@ -207,7 +207,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-select
-                        v-model="Class"
+                        v-model="dayClass"
                         label="Dias de clases"
                         :items="dClass"
                         item-text="day"
@@ -460,7 +460,7 @@
                         autofocus
                         min="0"
                         type="text"
-                        v-model="cc"
+                        v-model="cod"
                         :rules="codRules"
                         label="Código materia"
                         required
@@ -468,7 +468,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-text-field
-                        v-model="name"
+                        v-model="matter"
                         :rules="classRules"
                         label="Asginatura"
                         required
@@ -502,7 +502,7 @@
 
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="ht"
                         label="HT"
                         type="number"
                         min="0"
@@ -512,7 +512,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="hp"
                         label="HP"
                         type="number"
                         min="0"
@@ -522,7 +522,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="htp"
                         label="HTP"
                         type="number"
                         min="0"
@@ -532,7 +532,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="credits"
                         label="Creditos"
                         type="number"
                         min="0"
@@ -542,7 +542,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-select
-                        v-model="Class"
+                        v-model="dayClass"
                         label="Dias de clases"
                         :items="dClass"
                         item-text="day"
@@ -812,7 +812,7 @@
                         autofocus
                         min="0"
                         type="text"
-                        v-model="cc"
+                        v-model="cod"
                         :rules="codRules"
                         label="Código materia"
                         required
@@ -820,7 +820,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-text-field
-                        v-model="name"
+                        v-model="matter"
                         :rules="classRules"
                         label="Asginatura"
                         required
@@ -854,7 +854,7 @@
 
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="ht"
                         label="HT"
                         type="number"
                         min="0"
@@ -864,7 +864,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="hp"
                         label="HP"
                         type="number"
                         min="0"
@@ -874,7 +874,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="htp"
                         label="HTP"
                         type="number"
                         min="0"
@@ -884,7 +884,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="credits"
                         label="Creditos"
                         type="number"
                         min="0"
@@ -894,7 +894,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-select
-                        v-model="Class"
+                        v-model="dayClass"
                         label="Dias de clases"
                         :items="dClass"
                         item-text="day"
@@ -1148,7 +1148,7 @@
                         autofocus
                         min="0"
                         type="text"
-                        v-model="cc"
+                        v-model="cod"
                         :rules="codRules"
                         label="Código materia"
                         required
@@ -1156,7 +1156,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-text-field
-                        v-model="name"
+                        v-model="matter"
                         :rules="classRules"
                         label="Asginatura"
                         required
@@ -1190,7 +1190,7 @@
 
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="ht"
                         label="HT"
                         type="number"
                         min="0"
@@ -1200,7 +1200,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="hp"
                         label="HP"
                         type="number"
                         min="0"
@@ -1210,7 +1210,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="htp"
                         label="HTP"
                         type="number"
                         min="0"
@@ -1220,7 +1220,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="credits"
                         label="Creditos"
                         type="number"
                         min="0"
@@ -1230,7 +1230,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-select
-                        v-model="Class"
+                        v-model="dayClass"
                         label="Dias de clases"
                         :items="dClass"
                         item-text="day"
@@ -1484,7 +1484,7 @@
                         autofocus
                         min="0"
                         type="text"
-                        v-model="cc"
+                        v-model="cod"
                         :rules="codRules"
                         label="Código materia"
                         required
@@ -1492,7 +1492,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-text-field
-                        v-model="name"
+                        v-model="matter"
                         :rules="classRules"
                         label="Asginatura"
                         required
@@ -1526,7 +1526,7 @@
 
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="ht"
                         label="HT"
                         type="number"
                         min="0"
@@ -1536,7 +1536,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="hp"
                         label="HP"
                         type="number"
                         min="0"
@@ -1546,7 +1546,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="htp"
                         label="HTP"
                         type="number"
                         min="0"
@@ -1556,7 +1556,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="credits"
                         label="Creditos"
                         type="number"
                         min="0"
@@ -1566,7 +1566,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-select
-                        v-model="Class"
+                        v-model="dayClass"
                         label="Dias de clases"
                         :items="dClass"
                         item-text="day"
@@ -1820,7 +1820,7 @@
                         autofocus
                         min="0"
                         type="text"
-                        v-model="cc"
+                        v-model="cod"
                         :rules="codRules"
                         label="Código materia"
                         required
@@ -1828,7 +1828,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-text-field
-                        v-model="name"
+                        v-model="matter"
                         :rules="classRules"
                         label="Asginatura"
                         required
@@ -1862,7 +1862,7 @@
 
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="ht"
                         label="HT"
                         type="number"
                         min="0"
@@ -1872,7 +1872,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="hp"
                         label="HP"
                         type="number"
                         min="0"
@@ -1882,7 +1882,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="htp"
                         label="HTP"
                         type="number"
                         min="0"
@@ -1892,7 +1892,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="credits"
                         label="Creditos"
                         type="number"
                         min="0"
@@ -1902,7 +1902,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-select
-                        v-model="Class"
+                        v-model="dayClass"
                         label="Dias de clases"
                         :items="dClass"
                         item-text="day"
@@ -2156,7 +2156,7 @@
                         autofocus
                         min="0"
                         type="text"
-                        v-model="cc"
+                        v-model="cod"
                         :rules="codRules"
                         label="Código materia"
                         required
@@ -2164,7 +2164,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-text-field
-                        v-model="name"
+                        v-model="matter"
                         :rules="classRules"
                         label="Asginatura"
                         required
@@ -2198,7 +2198,7 @@
 
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="ht"
                         label="HT"
                         type="number"
                         min="0"
@@ -2208,7 +2208,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="hp"
                         label="HP"
                         type="number"
                         min="0"
@@ -2218,7 +2218,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="htp"
                         label="HTP"
                         type="number"
                         min="0"
@@ -2228,7 +2228,7 @@
                     </v-col>
                     <v-col sm="4" md="1">
                       <v-text-field
-                        v-model="email"
+                        v-model="credits"
                         label="Creditos"
                         type="number"
                         min="0"
@@ -2238,7 +2238,7 @@
                     </v-col>
                     <v-col sm="4" md="3">
                       <v-select
-                        v-model="Class"
+                        v-model="dayClass"
                         label="Dias de clases"
                         :items="dClass"
                         item-text="day"
@@ -2404,7 +2404,7 @@
           </v-tabs>
 
           <!-- end -->
-        </div>
+        
       </v-container>
     </v-flex>
   </v-layout>
@@ -2421,7 +2421,14 @@ export default {
       edit: false,
       search: "",
       valid: true,
-      Class: [],
+      cod:"",
+      matter:"",
+      credits:"",
+      start:"",
+      end:"",
+      semester:"",
+      teacher:"",
+      dayClass: [],
       headers: [
         {
           text: "CÓDIGO",
