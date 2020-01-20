@@ -1,376 +1,382 @@
 <template>
-  <div>
-    <v-container>
-      <!-- Edit Of Mesh -->
-      <v-form
-        ref="form"
-        v-model="valid"
-        v-on:submit="editMeshs(editMesh)"
-        v-if="!edit"
-        lazy-validation
-      >
-        <v-row>
-          <!-- inputs -->
-          <v-col sm="4" md="2">
-            <v-text-field
-              autofocus
-              min="0"
-              type="text"
-              v-model="editMesh.idMetter"
-              :rules="codRules"
-              label="Código materia"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="3">
-            <v-text-field
-              v-model="editMesh.matter"
-              :rules="classRules"
-              label="Asginatura"
-              required
-            ></v-text-field>
-          </v-col>
+  <v-container>
+    <!-- Edit Of Mesh -->
+    <v-form
+      ref="form"
+      v-model="valid"
+      v-on:submit="editMeshs(editMesh)"
+      v-if="!edit"
+      lazy-validation
+    >
+      <v-row>
+        <!-- inputs -->
+        <v-col sm="4" md="2">
+          <v-text-field
+            autofocus
+            min="0"
+            type="text"
+            v-model="editMesh.idMetter"
+            :rules="codRules"
+            label="Código materia"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col sm="4" md="3">
+          <v-text-field
+            v-model="editMesh.matter"
+            :rules="classRules"
+            label="Asginatura"
+            required
+          ></v-text-field>
+        </v-col>
 
-          <v-col sm="12" md="4">
-            <v-autocomplete
-              v-model="editMesh.teacher"
-              :rules="[v => !!v || 'Nombre del docente es requerido']"
-              label="Docente"
-              :items="teachers"
-              item-text="name"
-              item-value="name"
-              flat
-              chips
-              small-chips
-              deletable-chips
-              hide-selected
-              hide-details
-            >
-              <template v-slot:no-data>
-                <v-list-item>
-                  <v-list-item-title>No existe coincidencias</v-list-item-title>
-                </v-list-item>
-              </template>
-            </v-autocomplete>
-          </v-col>
-           <v-col sm="4" md="3">
-            <v-select
-              v-model="editMesh.careers"
-              label="Carrera"
-              :items="career"
-              item-text="career"
-              item-value="career"
-              chips
-              small-chips
-              flat
-              deletable-chips
-            >
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="3">
-            <v-select
-              v-model="editMesh.dayClass"
-              label="Dias de clases"
-              :items="dClass"
-              item-text="day"
-              item-value="day"
-              chips
-              small-chips
-              flat
-              multiple
-              
-            >
-            </v-select>
-          </v-col>
-            <v-col sm="6" md="2">
-            <v-select
-              v-model="editMesh.room"
-              :rules="[v => !!v || 'Nombre del salon es requerido']"
-              label="Eliga un salon"
-              :items="salons"
-              item-text="name"
-              item-value="name"
-              flat
-              chips
-              small-chips
-              deletable-chips
-              hide-selected
-              hide-details
-            >
-              <template v-slot:no-data>
-                <v-list-item>
-                  <v-list-item-title>No existe coincidencias</v-list-item-title>
-                </v-list-item>
-              </template>
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="2">
-            <v-select
-              v-model="editMesh.hourStart"
-              label="Hora de inicio"
-              :items="clock"
-              item-text="clock"
-              item-value="clock"
-              chips
-              small-chips
-              flat
-            >
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="2">
-            <v-select
-              v-model="editMesh.hourEnd"
-              label="Hora de finalización"
-              :items="clock"
-              item-text="clock"
-              item-value="clock"
-              chips
-              flat
-              small-chips
-            >
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="2">
-            <v-select
-              v-model="editMesh.semester"
-              label="Semestre"
-              :items="semesters"
-              item-text="nivel"
-              item-value="nivel"
-              chips
-              small-chips
-              flat
-            >
-            </v-select>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col align="center">
-            <v-btn
-              rounded
-              color="success black--text mr-2"
-              type="submit"
-              :disabled="!valid"
-            >
-              <v-icon dark>fa fa-check</v-icon>Editar
-            </v-btn>
-            <v-btn rounded color="error black--text" @click="edit = true">
-              <v-icon dark>fa fa-ban</v-icon>Cancelar
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-form>
-      <!-- Form Of New Mesh -->
-      <v-form
-        ref="form"
-        v-model="valid"
-        v-on:submit="NewMesh()"
-        v-if="edit"
-        lazy-validation
-      >
-        <v-row>
-          <!-- inputs -->
-          <v-col sm="4" md="2">
-            <v-text-field
-              autofocus
-              min="0"
-              type="text"
-              v-model="idMetter"
-              :rules="codRules"
-              label="Código materia"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col sm="4" md="3">
-            <v-text-field
-              v-model="matter"
-              :rules="classRules"
-              label="Asginatura"
-              required
-            ></v-text-field>
-          </v-col>
-
-          <v-col sm="12" md="4">
-            <v-autocomplete
-              v-model="teacher"
-              :rules="[v => !!v || 'Nombre del docente es requerido']"
-              label="Docente"
-              :items="teachers"
-              item-text="name"
-              item-value="name"
-              flat
-              chips
-              small-chips
-              deletable-chips
-              hide-selected
-              hide-details
-            >
-              <template v-slot:no-data>
-                <v-list-item>
-                  <v-list-item-title>No existe coincidencias</v-list-item-title>
-                </v-list-item>
-              </template>
-            </v-autocomplete>
-          </v-col>
-          <v-col sm="4" md="3">
-            <v-select
-              v-model="careers"
-              label="Carrera"
-              :items="career"
-              item-text="career"
-              item-value="career"
-              chips
-              small-chips
-              flat
-              deletable-chips
-            >
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="3">
-            <v-select
-              v-model="dayClass"
-              label="Dias de clases"
-              :items="dClass"
-              item-text="day"
-              item-value="day"
-              chips
-              small-chips
-              flat
-              multiple
-              deletable-chips
-            >
-            </v-select>
-          </v-col>
-          <v-col sm="6" md="2">
-            <v-select
-              v-model="room"
-              :rules="[v => !!v || 'Nombre del salon es requerido']"
-              label="Eliga un salon"
-              :items="salons"
-              item-text="name"
-              item-value="name"
-              flat
-              chips
-              small-chips
-              deletable-chips
-              hide-selected
-              hide-details
-            >
-              <template v-slot:no-data>
-                <v-list-item>
-                  <v-list-item-title>No existe coincidencias</v-list-item-title>
-                </v-list-item>
-              </template>
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="2">
-            <v-select
-              v-model="hourStart"
-              label="Hora de inicio"
-              :items="clock"
-              item-text="clock"
-              item-value="clock"
-              chips
-              small-chips
-              deletable-chips
-              flat
-            >
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="2">
-            <v-select
-              v-model="hourEnd"
-              label="Hora de finalización"
-              :items="clock"
-              item-text="clock"
-              item-value="clock"
-              chips
-              deletable-chips
-              small-chips
-              flat
-            >
-            </v-select>
-          </v-col>
-          <v-col sm="4" md="2">
-            <v-select
-              v-model="semester"
-              label="Semestre"
-              :items="semesters"
-              item-text="nivel"
-              item-value="nivel"
-              chips
-              small-chips
-              deletable-chips
-              flat
-            >
-            </v-select>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col align="center">
-            <v-btn
-              rounded
-              color="primary black--text"
-              type="submit"
-              :disabled="!valid"
-            >
-              <v-icon dark>fa fa-plus</v-icon>Agregar
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-form>
-      <v-card flat>
-        <v-card-text>
-          <v-row cols="12">
-            <v-col md="4">
-              <v-text-field
-                prepend-icon="fa fa-search"
-                v-model="search"
-                class="mb-5"
-                label="Buscar Asignatura"
-                hide-details
-              ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            :search="search"
-            item-key="idMetter"
-            class="elevation-1"
+        <v-col sm="12" md="4">
+          <v-autocomplete
+            v-model="editMesh.teacher"
+            :rules="[v => !!v || 'Nombre del docente es requerido']"
+            label="Docente"
+            :items="teachers"
+            item-text="name"
+            item-value="name"
+            flat
+            chips
+            small-chips
+            deletable-chips
+            hide-selected
+            hide-details
           >
-            <template v-slot:items />
-            <template slot="item.icon" slot-scope="data">
-              <v-btn
-                icon
-                v-on:click="onlyMesh(data.item._id)"
-                aria-label="edit"
-              >
-                <v-icon small color="edit">fa fa-pencil</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                v-on:click="deleteMesh(data.item._id)"
-                aria-label="delete"
-              >
-                <v-icon small color="error">fa fa-trash</v-icon>
-              </v-btn>
-            </template>
-            <template v-slot:no-results>
-              <span class="font-weight-regular black--text"
-                >No se encontraron coincidencias</span
-              >
-            </template>
             <template v-slot:no-data>
-              <span class="font-weight-regular black--text"
-                >No hay información registrada</span
-              >
+              <v-list-item>
+                <v-list-item-title>No existe coincidencias</v-list-item-title>
+              </v-list-item>
             </template>
-          </v-data-table>
-        </v-card-text>
-      </v-card>
-    </v-container>
-  </div>
+          </v-autocomplete>
+        </v-col>
+        <v-col sm="4" md="3">
+          <v-select
+            v-model="editMesh.careers"
+            label="Carrera"
+            :items="career"
+            item-text="career"
+            item-value="career"
+            chips
+            small-chips
+            flat
+            deletable-chips
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="3">
+          <v-select
+            v-model="editMesh.dayClass"
+            label="Dias de clases"
+            :items="dClass"
+            item-text="day"
+            item-value="day"
+            chips
+            small-chips
+            flat
+            multiple
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="6" md="2">
+          <v-select
+            v-model="editMesh.room"
+            :rules="[v => !!v || 'Nombre del salon es requerido']"
+            label="Eliga un salon"
+            :items="salons"
+            item-text="name"
+            item-value="name"
+            flat
+            chips
+            small-chips
+            deletable-chips
+            hide-selected
+            hide-details
+          >
+            <template v-slot:no-data>
+              <v-list-item>
+                <v-list-item-title>No existe coincidencias</v-list-item-title>
+              </v-list-item>
+            </template>
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="2">
+          <v-select
+            v-model="editMesh.hourStart"
+            label="Hora de inicio"
+            :items="clock"
+            item-text="clock"
+            item-value="clock"
+            chips
+            small-chips
+            flat
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="2">
+          <v-select
+            v-model="editMesh.hourEnd"
+            label="Hora de finalización"
+            :items="clock"
+            item-text="clock"
+            item-value="clock"
+            chips
+            flat
+            small-chips
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="2">
+          <v-select
+            v-model="editMesh.semester"
+            label="Semestre"
+            :items="semesters"
+            item-text="nivel"
+            item-value="nivel"
+            chips
+            small-chips
+            flat
+          >
+          </v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col align="center">
+          <v-btn
+            rounded
+            color="success black--text mr-2"
+            type="submit"
+            :disabled="!valid"
+          >
+            <v-icon dark>fa fa-check</v-icon>Editar
+          </v-btn>
+          <v-btn rounded color="error black--text" @click="edit = true">
+            <v-icon dark>fa fa-ban</v-icon>Cancelar
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+    <!-- Form Of New Mesh -->
+    <v-form
+      ref="form"
+      v-model="valid"
+      v-on:submit="NewMesh()"
+      v-if="edit"
+      lazy-validation
+    >
+      <v-row>
+        <!-- inputs -->
+        <v-col sm="4" md="2">
+          <v-text-field
+            autofocus
+            min="0"
+            type="text"
+            v-model="idMetter"
+            :rules="codRules"
+            label="Código materia"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col sm="4" md="3">
+          <v-text-field
+            v-model="matter"
+            :rules="classRules"
+            label="Asginatura"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col sm="12" md="4">
+          <v-autocomplete
+            v-model="teacher"
+            :rules="[v => !!v || 'Nombre del docente es requerido']"
+            label="Docente"
+            :items="teachers"
+            item-text="name"
+            item-value="name"
+            flat
+            chips
+            small-chips
+            deletable-chips
+            hide-selected
+            hide-details
+          >
+            <template v-slot:no-data>
+              <v-list-item>
+                <v-list-item-title>No existe coincidencias</v-list-item-title>
+              </v-list-item>
+            </template>
+          </v-autocomplete>
+        </v-col>
+        <v-col sm="4" md="3">
+          <v-select
+            v-model="careers"
+            :rules="[v => !!v || 'Carrera o programa de la asignatura']"
+            label="Carrera"
+            :items="career"
+            item-text="career"
+            item-value="career"
+            chips
+            small-chips
+            flat
+            deletable-chips
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="3">
+          <v-select
+            v-model="dayClass"
+            label="Dias de clases"
+            :rules="[v => !!v || 'Ingrese los dias que se dictaran las clases']"
+            :items="dClass"
+            item-text="day"
+            item-value="day"
+            chips
+            small-chips
+            flat
+            multiple
+            deletable-chips
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="6" md="2">
+          <v-select
+            v-model="room"
+            :rules="[v => !!v || 'Nombre del salon es requerido']"
+            label="Eliga un salon"
+            :items="salons"
+            item-text="name"
+            item-value="name"
+            flat
+            chips
+            small-chips
+            deletable-chips
+            hide-selected
+            hide-details
+          >
+            <template v-slot:no-data>
+              <v-list-item>
+                <v-list-item-title>No existe coincidencias</v-list-item-title>
+              </v-list-item>
+            </template>
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="2">
+          <v-select
+            v-model="hourStart"
+            :rules="[v => !!v || 'Hora de inicio de la clase']"
+            label="Hora de inicio"
+            :items="clock"
+            item-text="clock"
+            item-value="clock"
+            chips
+            small-chips
+            deletable-chips
+            flat
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="2">
+          <v-select
+            v-model="hourEnd"
+            :rules="[v => !!v || 'Hora de finalización de la clase']"
+            label="Hora de finalización"
+            :items="clock"
+            item-text="clock"
+            item-value="clock"
+            chips
+            deletable-chips
+            small-chips
+            flat
+          >
+          </v-select>
+        </v-col>
+        <v-col sm="4" md="2">
+          <v-select
+            v-model="semester"
+            :rules="[v => !!v || 'Semestre de la asignatura']"
+            label="Semestre"
+            :items="semesters"
+            item-text="nivel"
+            item-value="nivel"
+            chips
+            small-chips
+            deletable-chips
+            flat
+          >
+          </v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col align="center">
+          <v-btn
+            rounded
+            color="primary black--text"
+            type="submit"
+            :disabled="!valid"
+          >
+            <v-icon dark>fa fa-plus</v-icon>Agregar
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+    <v-card flat>
+      <v-card-text>
+        <v-row cols="12">
+          <v-col md="4">
+            <v-text-field
+              prepend-icon="fa fa-search"
+              v-model="search"
+              class="mb-5"
+              label="Buscar Asignatura"
+              hide-details
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-data-table
+          :headers="headers"
+          :items="items"
+          :search="search"
+          item-key="idMetter"
+          :items-per-page="10"
+          :sort-by="['career']"
+          :sort-desc="[true]"
+          class="elevation-1"
+        >
+          <template v-slot:items />
+          <template slot="item.icon" slot-scope="data">
+            <v-btn icon v-on:click="onlyMesh(data.item._id)" aria-label="edit">
+              <v-icon small color="edit">fa fa-pencil</v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              v-on:click="deleteMesh(data.item._id)"
+              aria-label="delete"
+            >
+              <v-icon small color="error">fa fa-trash</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:no-results>
+            <span class="font-weight-regular black--text"
+              >No se encontraron coincidencias</span
+            >
+          </template>
+          <template v-slot:no-data>
+            <span class="font-weight-regular black--text"
+              >No hay información registrada</span
+            >
+          </template>
+        </v-data-table>
+        <!-- Alerta -->
+        <v-snackbar v-model="snackbar" :color="color">
+          {{ text }}
+        </v-snackbar>
+        <!-- End Alerta -->
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -387,6 +393,9 @@ export default {
       edit: true,
       search: "",
       valid: true,
+      snackbar: false,
+      text: "",
+      color: "",
       idMetter: "",
       matter: "",
       room: "",
@@ -509,10 +518,7 @@ export default {
         { career: "Administración de empresa" }
       ],
       codRules: [v => !!v || "Codigo de la materia es requerida"],
-      classRules: [
-        v => !!v || "Estado del implemento es requerido",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
-      ]
+      classRules: [v => !!v || "Nombre de la asignatura es requerido"]
     };
   },
   created() {
@@ -597,7 +603,7 @@ export default {
         .get(`/api/mesh/${id}`)
         .then(res => {
           this.editMesh = res.data;
-          this.$refs.idMetter.focus();
+          // this.$refs.matter.focus();
         })
         .catch(e => {
           this.snackbar = true;
