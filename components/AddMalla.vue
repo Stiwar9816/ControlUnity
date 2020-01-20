@@ -31,7 +31,7 @@
             ></v-text-field>
           </v-col>
 
-          <v-col sm="12" md="3">
+          <v-col sm="12" md="4">
             <v-autocomplete
               v-model="editMesh.teacher"
               :rules="[v => !!v || 'Nombre del docente es requerido']"
@@ -53,7 +53,21 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col sm="4" md="4">
+           <v-col sm="4" md="3">
+            <v-select
+              v-model="editMesh.careers"
+              label="Carrera"
+              :items="career"
+              item-text="career"
+              item-value="career"
+              chips
+              small-chips
+              flat
+              deletable-chips
+            >
+            </v-select>
+          </v-col>
+          <v-col sm="4" md="3">
             <v-select
               v-model="editMesh.dayClass"
               label="Dias de clases"
@@ -61,10 +75,33 @@
               item-text="day"
               item-value="day"
               chips
+              small-chips
               flat
               multiple
-              rounded
+              
             >
+            </v-select>
+          </v-col>
+            <v-col sm="6" md="2">
+            <v-select
+              v-model="editMesh.room"
+              :rules="[v => !!v || 'Nombre del salon es requerido']"
+              label="Eliga un salon"
+              :items="salons"
+              item-text="name"
+              item-value="name"
+              flat
+              chips
+              small-chips
+              deletable-chips
+              hide-selected
+              hide-details
+            >
+              <template v-slot:no-data>
+                <v-list-item>
+                  <v-list-item-title>No existe coincidencias</v-list-item-title>
+                </v-list-item>
+              </template>
             </v-select>
           </v-col>
           <v-col sm="4" md="2">
@@ -75,6 +112,7 @@
               item-text="clock"
               item-value="clock"
               chips
+              small-chips
               flat
             >
             </v-select>
@@ -88,6 +126,7 @@
               item-value="clock"
               chips
               flat
+              small-chips
             >
             </v-select>
           </v-col>
@@ -99,6 +138,7 @@
               item-text="nivel"
               item-value="nivel"
               chips
+              small-chips
               flat
             >
             </v-select>
@@ -150,7 +190,7 @@
             ></v-text-field>
           </v-col>
 
-          <v-col sm="12" md="3">
+          <v-col sm="12" md="4">
             <v-autocomplete
               v-model="teacher"
               :rules="[v => !!v || 'Nombre del docente es requerido']"
@@ -172,7 +212,21 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col sm="4" md="4">
+          <v-col sm="4" md="3">
+            <v-select
+              v-model="careers"
+              label="Carrera"
+              :items="career"
+              item-text="career"
+              item-value="career"
+              chips
+              small-chips
+              flat
+              deletable-chips
+            >
+            </v-select>
+          </v-col>
+          <v-col sm="4" md="3">
             <v-select
               v-model="dayClass"
               label="Dias de clases"
@@ -180,10 +234,33 @@
               item-text="day"
               item-value="day"
               chips
+              small-chips
               flat
               multiple
-              rounded
+              deletable-chips
             >
+            </v-select>
+          </v-col>
+          <v-col sm="6" md="2">
+            <v-select
+              v-model="room"
+              :rules="[v => !!v || 'Nombre del salon es requerido']"
+              label="Eliga un salon"
+              :items="salons"
+              item-text="name"
+              item-value="name"
+              flat
+              chips
+              small-chips
+              deletable-chips
+              hide-selected
+              hide-details
+            >
+              <template v-slot:no-data>
+                <v-list-item>
+                  <v-list-item-title>No existe coincidencias</v-list-item-title>
+                </v-list-item>
+              </template>
             </v-select>
           </v-col>
           <v-col sm="4" md="2">
@@ -194,6 +271,8 @@
               item-text="clock"
               item-value="clock"
               chips
+              small-chips
+              deletable-chips
               flat
             >
             </v-select>
@@ -206,6 +285,8 @@
               item-text="clock"
               item-value="clock"
               chips
+              deletable-chips
+              small-chips
               flat
             >
             </v-select>
@@ -218,6 +299,8 @@
               item-text="nivel"
               item-value="nivel"
               chips
+              small-chips
+              deletable-chips
               flat
             >
             </v-select>
@@ -256,23 +339,23 @@
             item-key="idMetter"
             class="elevation-1"
           >
-          <template v-slot:items />
-           <template slot="item.icon" slot-scope="data">
-            <v-btn
-              icon
-              v-on:click="onlyMesh(data.item._id)"
-              aria-label="edit"
-            >
-              <v-icon small color="edit">fa fa-pencil</v-icon>
-            </v-btn>
-            <v-btn
-              icon
-              v-on:click="deleteMesh(data.item._id)"
-              aria-label="delete"
-            >
-              <v-icon small color="error">fa fa-trash</v-icon>
-            </v-btn>
-          </template>
+            <template v-slot:items />
+            <template slot="item.icon" slot-scope="data">
+              <v-btn
+                icon
+                v-on:click="onlyMesh(data.item._id)"
+                aria-label="edit"
+              >
+                <v-icon small color="edit">fa fa-pencil</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                v-on:click="deleteMesh(data.item._id)"
+                aria-label="delete"
+              >
+                <v-icon small color="error">fa fa-trash</v-icon>
+              </v-btn>
+            </template>
             <template v-slot:no-results>
               <span class="font-weight-regular black--text"
                 >No se encontraron coincidencias</span
@@ -299,21 +382,23 @@ export default {
     return {
       expanded: [],
       editMesh: {},
+      salons: [],
       singleExpand: true,
       edit: true,
       search: "",
       valid: true,
       idMetter: "",
       matter: "",
-      credits: "",
+      room: "",
       hourStart: "",
       hourEnd: "",
       semester: "",
       teacher: "",
-      ht:"",
-      hp:"",
-      htp:"",
+      ht: "",
+      hp: "",
+      htp: "",
       dayClass: [],
+      careers: [],
       headers: [
         {
           text: "CÓDIGO",
@@ -321,13 +406,40 @@ export default {
           sortable: false,
           value: "idMetter"
         },
-        { text: "ASIGNATURA", value: "matter", sortable: false, align: "center" },
+        {
+          text: "ASIGNATURA",
+          value: "matter",
+          sortable: false,
+          align: "center"
+        },
+        { text: "CARRERA", value: "career", sortable: false, align: "center" },
         { text: "DOCENTE", value: "teacher", sortable: false, align: "center" },
-        { text: "DÍA(S) DE CLASE", value: "dayClass", sortable: false, align: "center" },
-        { text: "HORA INICIO", value: "hourStart", sortable: false, align: "center" },
-        { text: "HORA FIN", value: "hourEnd", sortable: false, align: "center" },
-        { text: "SEMESTRE", value: "semester", align: "center", sortable: false },
-        { text: "ACCIONES", align: "center", sortable: false, value: "icon" },
+        { text: "SALON", value: "room", sortable: false, align: "center" },
+        {
+          text: "DÍA(S) DE CLASE",
+          value: "dayClass",
+          sortable: false,
+          align: "center"
+        },
+        {
+          text: "HORA INICIO",
+          value: "hourStart",
+          sortable: false,
+          align: "center"
+        },
+        {
+          text: "HORA FIN",
+          value: "hourEnd",
+          sortable: false,
+          align: "center"
+        },
+        {
+          text: "SEMESTRE",
+          value: "semester",
+          align: "center",
+          sortable: false
+        },
+        { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
       items: [],
       teachers: [],
@@ -387,6 +499,15 @@ export default {
         { clock: "21:30" },
         { clock: "22:00" }
       ],
+      career: [
+        { career: "Ingenieria sistemas" },
+        { career: "Ingeniera industrial" },
+        { career: "Psicología" },
+        { career: "Derecho" },
+        { career: "Trabajo Social" },
+        { career: "Antropología" },
+        { career: "Administración de empresa" }
+      ],
       codRules: [v => !!v || "Codigo de la materia es requerida"],
       classRules: [
         v => !!v || "Estado del implemento es requerido",
@@ -397,11 +518,25 @@ export default {
   created() {
     this.getMesh();
     this.getTeacher();
+    this.getSalon();
   },
   mounted() {
     this.valid = false;
   },
   methods: {
+    getSalon() {
+      axios
+        .get("api/room")
+        .then(res => {
+          this.salons = res.data.Rooms;
+        })
+        .catch(error => {
+          this.snackbar = true;
+          this.color = "error";
+          this.text = error.message;
+          console.log(error);
+        });
+    },
     getTeacher() {
       axios
         .get("/api/teacher")
@@ -415,7 +550,7 @@ export default {
           console.log(error);
         });
     },
-    getMesh(){
+    getMesh() {
       axios
         .get("/api/mesh")
         .then(res => {
@@ -428,7 +563,7 @@ export default {
           console.log(error);
         });
     },
-      //New Mesh
+    //New Mesh
     async NewMesh() {
       await axios
         .post(`/api/newMesh/`, {
@@ -438,7 +573,9 @@ export default {
           hourEnd: this.hourEnd,
           semester: this.semester,
           teacher: this.teacher,
-          dayClass: this.dayClass
+          dayClass: this.dayClass,
+          career: this.careers,
+          room: this.room
         })
         .then(res => {
           this.mesh;
@@ -453,7 +590,7 @@ export default {
           console.log(e);
         });
     },
-     // Only Mesh (Pasa un solo dato de la tabla para hacer el update)
+    // Only Mesh (Pasa un solo dato de la tabla para hacer el update)
     onlyMesh(id) {
       this.edit = false;
       axios
@@ -469,7 +606,7 @@ export default {
           console.log(e);
         });
     },
-     // Edit Mesh
+    // Edit Mesh
     editMeshs(item) {
       axios.put(`/api/updateMesh/${item._id}`, item).then(res => {
         const index = this.items.findIndex(n => n._id === res.data._id);
@@ -480,13 +617,15 @@ export default {
         this.items[index].semester = res.data.semester;
         this.items[index].teacher = res.data.teacher;
         this.items[index].dayClass = res.data.dayClass;
+        this.items[index].room = res.data.room;
+        this.items[index].career = res.data.career;
         this.snackbar = true;
         this.color = "success";
         this.text = "¡Datos de la asignatura actualizados correctamente!";
         this.edit = false;
       });
     },
-        //Delete Mesh
+    //Delete Mesh
     deleteMesh(id) {
       const response = confirm("Esta seguro de eliminar esta asignatura?");
       if (response) {
