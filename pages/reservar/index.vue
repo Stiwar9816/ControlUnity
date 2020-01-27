@@ -254,12 +254,8 @@
 
 <script>
 import axios from "~/plugins/axios";
-import cardRoom from "~/components/cardRoom.vue";
 export default {
   layout: "home",
-  components: {
-    cardRoom
-  },
   data() {
     return {
       search: "",
