@@ -2,12 +2,13 @@
   <v-layout>
     <v-flex>
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
-
       <v-container>
+        <!-- Formulario de reservas -->
         <v-form
           ref="form"
           v-on:submit="newBooking()"
           v-model="valid"
+          v-if="!edit"
           lazy-validation
         >
           <v-row>
@@ -185,6 +186,18 @@
           </v-row>
           <!-- End Boton reservar -->
         </v-form>
+        <!-- End Formulario de reservas -->
+
+        <!-- cards de salones -->
+        <v-form ref="form" v-if="edit" lazy-validation>
+          <v-row>
+            <v-col>
+              <cardRoom/>
+            </v-col>
+          </v-row>
+        </v-form>
+        <!-- end cards de salones -->
+
         <!-- Alerta -->
         <v-snackbar v-model="snackbar" :color="color">
           {{ text }}
@@ -197,12 +210,16 @@
 
 <script>
 import axios from "~/plugins/axios";
-
+import cardRoom from "~/components/cardRoom.vue";
 export default {
   layout: "home",
+  components: {
+    cardRoom
+  },
   data() {
     return {
       search: "",
+      edit: true,
       date: [],
       cc: "",
       name: "",
