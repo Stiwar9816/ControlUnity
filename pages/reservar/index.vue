@@ -183,6 +183,17 @@
             >
               <v-icon dark>fa fa-plus</v-icon>Agregar
             </v-btn>
+            </v-row>
+          <v-row justify="center">
+            <v-btn
+              class="mb-3"
+              rounded
+              color="primary black--text"
+              id="btn-reservar"
+              @click="edit = true"
+            >
+              Cancelar
+            </v-btn>
           </v-row>
           <!-- End Boton reservar -->
         </v-form>
@@ -192,7 +203,40 @@
         <v-form ref="form" v-if="edit" lazy-validation>
           <v-row>
             <v-col>
-              <cardRoom/>
+              <v-item-group>
+                <v-container>
+                  <v-row>
+                    <v-col
+                      v-for="(item, i) in salons"
+                      :key="i"
+                      cols="12"
+                      md="3" 
+                      sm="4"
+                    >
+                      <v-item>
+                        <v-card class="mx-auto" max-width="300" id="cards">
+                          <v-card-text>
+                            <p class="display-1 text--primary text-center mt-3">
+                              {{ item.name }}
+                            </p>
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-btn
+                              text
+                              block
+                              class="mb-3"
+                              id="btn-reservar"
+                              @click="edit = false"
+                            >
+                              Reservar
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-item>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-item-group>
             </v-col>
           </v-row>
         </v-form>
