@@ -173,28 +173,28 @@
           <!-- boton reservar -->
           <v-row justify="center">
             <v-btn
+              class="mb-4 mr-4"
+              rounded
+              color="error black--text"
+              id="btn-reservar"
+              @click="edit = true"
+            ><v-icon dark>fa fa-ban</v-icon>
+              Cancelar
+            </v-btn>
+            <v-btn
               rounded
               color="primary black--text"
               type="submit"
               :disabled="!valid"
               @click="validate"
               aria-label="New booking"
-              class="mt-5"
+              class="mb-4"
             >
               <v-icon dark>fa fa-plus</v-icon>Agregar
             </v-btn>
             </v-row>
-          <v-row justify="center">
-            <v-btn
-              class="mb-3"
-              rounded
-              color="primary black--text"
-              id="btn-reservar"
-              @click="edit = true"
-            >
-              Cancelar
-            </v-btn>
-          </v-row>
+          
+          
           <!-- End Boton reservar -->
         </v-form>
         <!-- End Formulario de reservas -->
