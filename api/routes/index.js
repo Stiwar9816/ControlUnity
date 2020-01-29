@@ -57,7 +57,5 @@ router.post('/newImplement', controllersImplements.newImplement)
 router.put('/updateImplement/:id', controllersImplements.updateImplement)
 router.delete('/deleteImplement/:id', controllersImplements.deleteImplement)
 
-// Importación de archivos
-router.post('/fileUpload', controllerFile.upload)
 
 module.exports = router;
