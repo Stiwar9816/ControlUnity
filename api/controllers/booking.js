@@ -11,14 +11,14 @@ module.exports = {
 
     // Created new Booking
     newBooking: async (req, res, next) => {
-        const {cc, name,event, room, implement, date,start,end, received} = req.body
-        let parse = end.toString()
+        const {cc, name,event, room, implement, date,Hstart,Hend, received} = req.body;
+        let parse = Hend;
         const cruce = await Booking.findOne({end:parse});
         console.log('Hola aqui esta el cruce ####' +cruce);
             if(cruce && room){ 
                 res.status(404).json({message:"Cruce de horarios"})
             }else{
-                const newBooking = new Booking({cc, name,event, room, implement, date,start,end, received})
+                const newBooking = new Booking({cc, name,event, room, implement, date,Hstart,Hend, received})
                 const Bookings = await newBooking.save()
                 res.status(200).json(Bookings)
             }

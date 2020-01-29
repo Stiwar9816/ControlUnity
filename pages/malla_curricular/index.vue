@@ -58,7 +58,7 @@
                 @click:event="showEvent"
                 @click:more="viewDay"
                 @click:date="viewDay"
-                @change="updateRange"
+               
               ></v-calendar>
               <v-menu
                 v-model="selectedOpen"
@@ -476,10 +476,10 @@ export default {
       });
     }
   },
-  mounted() {
-    this.$refs.calendar.checkChange();
-    this.valid = false;
-  },
+  // mounted() {
+  //   this.$refs.calendar.checkChange();
+  //   this.valid = false;
+  // },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
@@ -520,8 +520,8 @@ export default {
           event: this.event,
           room: this.room,
           date: this.date,
-          start: this.start,
-          end: this.end,
+          Hstart: this.Hstart,
+          Hend: this.Hend,
           implement: this.implement
         })
         .then(res => {
