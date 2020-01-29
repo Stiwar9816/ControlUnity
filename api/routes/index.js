@@ -9,7 +9,6 @@ const controllersBookings = require('../controllers/booking')
 const controllersRooms = require('../controllers/room')
 const controllersMeshs = require('../controllers/mesh')
 const controllersTeachers = require('../controllers/teacher')
-const controllerFile = require('../controllers/file')
 
 // Routes Users crud and login
 router.post('/register', controllersUser.register)

@@ -7,6 +7,7 @@ const _be1b6fae = () => interopDefault(import('../pages/configuraciones/index.vu
 const _7a4de5be = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
 const _3b1a3adb = () => interopDefault(import('../pages/implementos/index.vue' /* webpackChunkName: "pages/implementos/index" */))
 const _5c631cf0 = () => interopDefault(import('../pages/malla_curricular/index.vue' /* webpackChunkName: "pages/malla_curricular/index" */))
+const _50601818 = () => interopDefault(import('../pages/new/index.vue' /* webpackChunkName: "pages/new/index" */))
 const _a34ee84c = () => interopDefault(import('../pages/profesores/index.vue' /* webpackChunkName: "pages/profesores/index" */))
 const _83fa3816 = () => interopDefault(import('../pages/registro/index.vue' /* webpackChunkName: "pages/registro/index" */))
 const _207601bc = () => interopDefault(import('../pages/reservar/index.vue' /* webpackChunkName: "pages/reservar/index" */))
@@ -39,6 +40,10 @@ export const routerOptions = {
       path: "/malla_curricular",
       component: _5c631cf0,
       name: "malla_curricular"
+    }, {
+      path: "/new",
+      component: _50601818,
+      name: "new"
     }, {
       path: "/profesores",
       component: _a34ee84c,
