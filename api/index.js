@@ -3,9 +3,10 @@ const consola = require("consola");
 const path = require("path");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
-const fileUpload = require('express-fileupload')
+const fileUpload = require("express-fileupload");
 const api = require("./routes");
 // const authToken = require('./middleware/authToken.js')
 const { Nuxt, Builder } = require("nuxt");
@@ -18,18 +19,26 @@ app.use(morgan("dev"));
 
 //middlewares
 app.use(mongoSanitize());
-  app.use(cors());
-  app.use(fileUpload())
-  app.use(
-    bodyParser.urlencoded({
-      extended: true
-    })
-    );
-    app.use(bodyParser.json());
-    // app.use(authToken);
-    app.use('/api',api);
+app.use(cors());
+app.use(fileUpload());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+app.use(bodyParser.json());
+// app.use(authToken);
+// Sessions to create req.session
+app.use(
+  session({
+    secret: "super-secret-key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 }
+  })
+);
+app.use("/api", api);
 // app.use(auth);
-
 
 // Import and Set Nuxt.js options
 const config = require("../nuxt.config.js");
@@ -51,8 +60,8 @@ async function start() {
 
   // Give nuxt middleware to express
   // Import API routes
-  
-    app.use(nuxt.render);
+
+  app.use(nuxt.render);
   // Static files
   app.use(express.static(path.join(__dirname, "../static/")));
 

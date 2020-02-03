@@ -78,6 +78,7 @@
 <script>
 export default {
   layout: "home",
+  middleware: 'auth',
   data() {
     return {
       valid: true,
