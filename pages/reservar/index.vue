@@ -4,197 +4,73 @@
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
       <v-container>
         <!-- Formulario de reservas -->
-        <v-form
-          ref="form"
-          v-on:submit="newBooking()"
-          v-model="valid"
-          v-if="!edit"
-          lazy-validation
-        >
+        <v-form ref="form" v-on:submit.prevent="newBooking" v-model="valid" v-if="!edit" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="2">
-              <v-text-field
-                v-model="cc"
-                :rules="ccRules"
-                autofocus
-                label="C.C"
-                type="number"
-                min="0"
-                required
-              ></v-text-field>
+              <v-text-field v-model="cc" :rules="ccRules" autofocus label="C.C" type="number" min="0" required></v-text-field>
             </v-col>
             <v-col sm="4" md="5">
-              <v-text-field
-                v-model="name"
-                :rules="nameRules"
-                type="text"
-                pattern="[A-Za-z\s]"
-                maxlength="45"
-                label="Nombre de la persona responsable"
-                required
-              ></v-text-field>
+              <v-text-field v-model="name" :rules="nameRules" type="text" pattern="[A-Za-z\s]" maxlength="45" label="Nombre de la persona responsable" required></v-text-field>
             </v-col>
             <v-col sm="4" md="5">
-              <v-text-field
-                v-model="event"
-                :rules="eventRules"
-                label="Materia o evento"
-                required
-              ></v-text-field>
+              <v-text-field v-model="event" :rules="eventRules" label="Materia o evento" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col sm="6" md="2">
-              <v-select
-                v-model="room"
-                label="Capacidad salon"
-                :items="salons"
-                item-text="capacity"
-                item-value="name"
-                flat
-                chips
-                small-chips
-                readonly
-              ></v-select>
+              <v-select v-model="room" label="Capacidad salon" :items="salons" item-text="capacity" item-value="name" flat chips small-chips readonly></v-select>
             </v-col>
             <v-col sm="6" md="2">
-              <v-autocomplete
-                v-model="room"
-                :rules="[v => !!v || 'Nombre del salon es requerido']"
-                label="Eliga un salon"
-                :items="salons"
-                item-text="name"
-                item-value="name"
-                flat
-                chips
-                small-chips
-                deletable-chips
-                hide-selected
-                hide-details
-              >
+              <v-autocomplete v-model="room" :rules="[v => !!v || 'Nombre del salon es requerido']" label="Eliga un salon" :items="salons" item-text="name" item-value="name" flat chips small-chips deletable-chips hide-selected hide-details>
                 <template v-slot:no-data>
                   <v-list-item>
-                    <v-list-item-title
-                      >No existe coincidencias</v-list-item-title
-                    >
+                    <v-list-item-title>No existe coincidencias</v-list-item-title>
                   </v-list-item>
                 </template>
               </v-autocomplete>
             </v-col>
             <!-- DatePicker -->
             <v-col sm="4" md="4">
-              <v-dialog
-                ref="dialog"
-                v-model="DateModal"
-                :return-value.sync="date"
-                width="290px"
-              >
+              <v-dialog ref="dialog" v-model="DateModal" :return-value.sync="date" width="290px">
                 <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="date"
-                    label="Fecha de reserva"
-                    v-on="on"
-                    flat
-                  ></v-text-field>
+                  <v-text-field v-model="date" label="Fecha de reserva" v-on="on" flat></v-text-field>
                 </template>
-                <v-date-picker
-                  v-model="date"
-                  scrollable
-                  min="2020-01-17"
-                  locale="es"
-                  first-day-of-week="1"
-                  multiple
-                >
+                <v-date-picker v-model="date" scrollable min="2020-01-17" locale="es" first-day-of-week="1" multiple>
                   <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="DateModal = false"
-                    >Cancelar</v-btn
-                  >
-                  <v-btn text color="primary" @click="$refs.dialog.save(date)"
-                    >OK</v-btn
-                  >
+                  <v-btn text color="primary" @click="DateModal = false">Cancelar</v-btn>
+                  <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
                 </v-date-picker>
               </v-dialog>
             </v-col>
             <!-- End DatePicker -->
             <!-- Implementos -->
             <v-col sm="6" md="4">
-              <v-combobox
-                v-model="implement"
-                :items="implements"
-                item-text="name"
-                item-value="name"
-                label="Eliga los implementos necesarios"
-                chips
-                small-chips
-                deletable-chips
-                multiple
-                hide-selected
-                hide-details
-                clearable
-                flat
-                rounded
-              >
+              <v-combobox v-model="implement" :items="implements" item-text="name" item-value="name" label="Eliga los implementos necesarios" chips small-chips deletable-chips multiple hide-selected hide-details clearable flat rounded>
                 <template v-slot:no-data>
                   <v-list-item>
-                    <v-list-item-title
-                      >No hay información registrada</v-list-item-title
-                    >
+                    <v-list-item-title>No hay información registrada</v-list-item-title>
                   </v-list-item>
                 </template>
               </v-combobox>
             </v-col>
             <!-- End implementos -->
             <v-col sm="4" md="3">
-              <v-select
-                v-model="start"
-                label="Hora de inicio"
-                :items="clock"
-                item-text="clock"
-                item-value="clock"
-                chips
-                flat
-              >
-              </v-select>
+              <v-select v-model="start" label="Hora de inicio" :items="clock" item-text="clock" item-value="clock" chips flat> </v-select>
             </v-col>
             <v-col sm="4" md="3">
-              <v-select
-                v-model="end"
-                label="Hora de finalización"
-                :items="clock"
-                item-text="clock"
-                item-value="clock"
-                chips
-                flat
-              >
-              </v-select>
+              <v-select v-model="end" label="Hora de finalización" :items="clock" item-text="clock" item-value="clock" chips flat> </v-select>
             </v-col>
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
-            <v-btn
-              class="mb-4 mr-4"
-              rounded
-              color="error black--text"
-              id="btn-reservar"
-              @click="edit = true"
-            ><v-icon dark>fa fa-ban</v-icon>
+            <v-btn class="mb-4 mr-4" rounded color="error black--text" id="btn-reservar" @click="edit = true"
+              ><v-icon dark>fa fa-ban</v-icon>
               Cancelar
             </v-btn>
-            <v-btn
-              rounded
-              color="primary black--text"
-              type="submit"
-              :disabled="!valid"
-              @click="validate"
-              aria-label="New booking"
-              class="mb-4"
-            >
-              <v-icon dark>fa fa-plus</v-icon>Agregar
-            </v-btn>
-            </v-row>
-          
-          
+            <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="validate" aria-label="New booking" class="mb-4"> <v-icon dark>fa fa-plus</v-icon>Agregar </v-btn>
+          </v-row>
+
           <!-- End Boton reservar -->
         </v-form>
         <!-- End Formulario de reservas -->
@@ -206,13 +82,7 @@
               <v-item-group>
                 <v-container>
                   <v-row>
-                    <v-col
-                      v-for="(item, i) in salons"
-                      :key="i"
-                      cols="12"
-                      md="3" 
-                      sm="4"
-                    >
+                    <v-col v-for="(item, i) in salons" :key="i" cols="12" md="3" sm="4">
                       <v-item>
                         <v-card class="mx-auto" max-width="300" id="cards">
                           <v-card-text>
@@ -221,13 +91,7 @@
                             </p>
                           </v-card-text>
                           <v-card-actions>
-                            <v-btn
-                              text
-                              block
-                              class="mb-3"
-                              id="btn-reservar"
-                              @click="edit = false"
-                            >
+                            <v-btn text block class="mb-3" id="btn-reservar" @click="edit = false">
                               Reservar
                             </v-btn>
                           </v-card-actions>
@@ -269,21 +133,19 @@ export default {
       implement: "",
       DateModal: false,
       valid: true,
-      start: "",
-      end: "",
+      schedules: [
+        {
+          start: "",
+          end: ""
+        }
+      ],
       snackbar: false,
       text: "",
       color: "",
       //Validaciones de campos
       ccRules: [v => !!v || "Cedula de ciudadania del usuario es requerida"],
-      nameRules: [
-        v => !!v || "Nombre del usuario es requerido",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
-      ],
-      eventRules: [
-        v => !!v || "Nombre de la materia o evento es requerido",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
-      ],
+      nameRules: [v => !!v || "Nombre del usuario es requerido", v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"],
+      eventRules: [v => !!v || "Nombre de la materia o evento es requerido", v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"],
       dateRules: [v => !!v || "Fecha de la reserva es requerida"],
       timeRules: [v => !!v || "Hora de la reserva es requerida"],
       // Headers de la tabla
@@ -323,6 +185,7 @@ export default {
         { clock: "17:00" },
         { clock: "17:30" },
         { clock: "18:00" },
+        { clock: "18:07" },
         { clock: "18:30" },
         { clock: "19:00" },
         { clock: "19:30" },
@@ -342,6 +205,14 @@ export default {
     this.valid = false;
   },
   methods: {
+    mapStringToDate(date, time = "") {
+      const result = date;
+      const [hour, minute] = time.split(":");
+      console.log({ time, hour, minute });
+      result.setHours(Number(hour));
+      result.setMinutes(Number(minute));
+      return result;
+    },
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -352,6 +223,7 @@ export default {
         .get("api/room")
         .then(res => {
           this.salons = res.data.Rooms;
+          debugger;
         })
         .catch(error => {
           this.snackbar = true;
@@ -373,7 +245,14 @@ export default {
           console.log(error);
         });
     },
-    newBooking() {
+    calculeSchedule() {
+      const start = this.mapStringToDate(new Date(this.date[0]), this.start);
+      const end = this.mapStringToDate(new Date(this.date[0]), this.end);
+      return [{ start, end }];
+    },
+    newBooking(e) {
+      this.schedules = this.calculeSchedule();
+      debugger;
       axios
         .post("api/newBooking", {
           cc: this.cc,
@@ -381,8 +260,7 @@ export default {
           event: this.event,
           room: this.room,
           date: this.date,
-          start: this.start,
-          end: this.end,
+          schedules: this.schedules,
           implement: this.implement
         })
         .then(res => {

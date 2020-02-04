@@ -114,7 +114,7 @@
                         <!-- Formulario de reservas -->
                         <v-form
                           ref="form"
-                          v-on:submit="newBooking()"
+                          v-on:submit.prevent="newBooking"
                           v-model="valid"
                           lazy-validation
                         >
@@ -263,7 +263,7 @@
                             <!-- End implementos -->
                             <v-col sm="4" md="6">
                               <v-select
-                                v-model="Hstart"
+                                v-model="start"
                                 label="Hora de inicio"
                                 :items="clock"
                                 item-text="clock"
@@ -275,7 +275,7 @@
                             </v-col>
                             <v-col sm="4" md="6">
                               <v-select
-                                v-model="Hend"
+                                v-model="end"
                                 label="Hora de finalización"
                                 :items="clock"
                                 item-text="clock"
@@ -349,8 +349,10 @@ export default {
       implement: "",
       DateModal: false,
       valid: true,
-      Hstart: "",
-      Hend: "",
+      scheludes:[{
+      start: "",
+      end: "",
+      }],
       snackbar: false,
       text: "",
       color: "",
@@ -429,8 +431,8 @@ export default {
       events: [
         {
           name: "event 7",
-          start: "2020-01-28 22:00",
-          end: "2020-01-30 23:00",
+          start: "2020-02-01 22:00",
+          end: "2020-02-30 23:00",
           color: "#4285F4"
         }
       ]
@@ -481,6 +483,14 @@ export default {
   //   this.valid = false;
   // },
   methods: {
+            mapStringToDate(date, time = "") {
+      const result = date;
+      const [hour, minute] = time.split(":");
+      console.log({ time, hour, minute });
+      result.setHours(Number(hour));
+      result.setMinutes(Number(minute));
+      return result;
+    },
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -512,7 +522,14 @@ export default {
           console.log(error);
         });
     },
-    newBooking() {
+    calculeSchedule() {
+      const start = this.mapStringToDate(new Date(this.date[0]), this.start);
+      const end = this.mapStringToDate(new Date(this.date[0]), this.end);
+     return [{start, end}];
+    },
+    newBooking(e) {
+      this.scheludes = this.calculeSchedule();
+      debugger;
       axios
         .post("api/newBooking", {
           cc: this.cc,
@@ -520,17 +537,18 @@ export default {
           event: this.event,
           room: this.room,
           date: this.date,
-          Hstart: this.Hstart,
-          Hend: this.Hend,
+          scheludes: this.scheludes,
           implement: this.implement
         })
         .then(res => {
+          debugger
           this.bookings = res.data.bookings;
           this.snackbar = true;
           this.color = "success";
           this.text = "¡Su solicitud de reserva se realizo correctamente!";
         })
         .catch(e => {
+          debugger
           this.snackbar = true;
           this.color = "error";
           this.text = e.message;

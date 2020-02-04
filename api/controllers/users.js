@@ -9,7 +9,6 @@ module.exports = {
 
     // Register, login, logout and forgot users 
 
-    // Register user add one token unique
     register: async (req, res, next) => {
         const {cc, name, email, password} = req.body;
       const ccUser = await Users.findOne({cc:cc})

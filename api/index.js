@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const fileUpload = require('express-fileupload')
+require("./utils");
 const api = require("./routes");
 // const authToken = require('./middleware/authToken.js')
 const { Nuxt, Builder } = require("nuxt");
