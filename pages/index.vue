@@ -35,11 +35,6 @@
             >
           </v-card-actions>
         </v-form>
-        <v-card-text class="text-center">
-          <n-link to="/registro"
-            >¿No tiene una cuenta? - ¡Registrate Aqui!</n-link
-          >
-        </v-card-text>
       </v-card>
       <!-- Alerta -->
       <v-snackbar v-model="snackbar" :color="color">
@@ -121,4 +116,5 @@ a:hover {
 .login {
   margin-left: 420px;
   margin-top: 100px;
+  padding-bottom: 15px;
 }</style>

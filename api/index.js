@@ -3,10 +3,8 @@ const consola = require("consola");
 const path = require("path");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const session = require("express-session");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
-const fileUpload = require('express-fileupload')
 require("./utils");
 const api = require("./routes");
 // const authToken = require('./middleware/authToken.js')
@@ -21,7 +19,6 @@ app.use(morgan("dev"));
 //middlewares
 app.use(mongoSanitize());
 app.use(cors());
-app.use(fileUpload());
 app.use(
   bodyParser.urlencoded({
     extended: true
