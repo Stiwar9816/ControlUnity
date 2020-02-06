@@ -400,7 +400,7 @@ export default {
       { clock: "22:00" }
     ],
     focus: "",
-    today: "2020-01-29",
+    today: new Date(),
     type: "month",
     typeToLabel: {
       month: "Mes",
@@ -547,8 +547,8 @@ export default {
           debugger
           this.snackbar = true;
           this.color = "error";
-          this.text = e.message;
-          console.log(e);
+          this.text = e.response.data.message;
+          console.log({e});
         });
     },
     viewDay({ date }) {

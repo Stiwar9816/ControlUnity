@@ -6,7 +6,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit="login()"
+          v-on:submit.prevent="login()"
           lazy-validation
         >
           <v-card-text>

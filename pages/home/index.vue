@@ -30,7 +30,7 @@
             <v-btn
               icon
               aria-label="check"
-              v-on:click="deleteBooking(data.item._id)"
+             @click.prevent="deleteBooking(data.item._id)"
             >
               <v-icon small color="green" small>fa fa-check-square-o</v-icon>
             </v-btn>
@@ -144,14 +144,14 @@ export default {
           this.snackbar = true;
           this.color = "success";
           this.text = "¡Elementos devueltos con exito!";
-          this.$router.go();
-          console.log("Booking Delete: ", id);
+          // this.$router.go();
+          console.log("Booking Delete: ", {id});
         })
         .catch(e => {
           this.snackbar = true;
           this.color = "error";
-          this.text = e.message;
-          console.log("Unable to clear the booking", e);
+          this.text = e.response.data.message;
+          console.log("Unable to clear the booking", {e});
         });
     }
     return;
