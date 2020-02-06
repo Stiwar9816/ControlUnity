@@ -74,7 +74,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit="NewRoom()"
+          v-on:submit.prevent="NewRoom()"
           v-if="!edit"
           lazy-validation
         >
@@ -191,7 +191,6 @@
 import axios from "~/plugins/axios";
 export default {
   layout: "home",
-  middleware: 'auth',
   data() {
     return {
       loading: false,
@@ -270,13 +269,14 @@ export default {
           this.salon;
           this.snackbar = true;
           this.color = "success";
+          console.log({res})
           this.text = "¡Salon agregado con exito!";
         })
         .catch(e => {
           this.snackbar = true;
           this.color = "error";
-          this.text = e.message;
-          console.log(e);
+          this.text = "¡Elemento ya existente!";
+          console.log({e});
         });
     },
     onlyRoom(id) {

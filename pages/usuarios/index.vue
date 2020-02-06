@@ -59,7 +59,6 @@
 import axios from "~/plugins/axios";
 export default {
   layout: "home",
-  // middleware: 'auth',
   data() {
     return {
       search: "",
@@ -93,8 +92,8 @@ export default {
   },
   async created() {
     try {
-      const token = sessionStorage.getItem("token");
-      const res = await axios.get(`/api/user?token=${token}`);
+      // const token = sessionStorage.getItem("token");
+      const res = await axios.get(`/api/user`);
       this.items = await res.data.users;
     } catch (error) {
       this.snackbar = true;
@@ -109,20 +108,20 @@ export default {
       const response = confirm("Esta seguro de eliminar este usuario?");
       if (response) {
         axios
-          .delete("/api/deleteUser/" + id)
+          .delete(`/api/deleteUser/${id}`)
           .then(res => {
             console.log("User Delete: ", id);
             this.items.splice(id, 1);
             this.snackbar = true;
             this.color = "success";
-            this.text = "¡Usuario eliminado con exito!";
+            this.text = res.data.message;
             this.$router.go();
           })
           .catch(e => {
             this.snackbar = true;
             this.color = "error";
-            this.text = e.message;
-            console.log("Unable to clear the user", e);
+            this.text = e.response.data.message;
+            console.log("Unable to clear the user", {e});
           });
       }
       return;

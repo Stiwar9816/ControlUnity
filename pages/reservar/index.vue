@@ -120,7 +120,6 @@
 import axios from "~/plugins/axios";
 export default {
   layout: "home",
-  middleware: 'auth',
   data() {
     return {
       search: "",

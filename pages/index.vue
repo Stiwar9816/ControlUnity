@@ -6,7 +6,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit.prevent="login()"
+          v-on:submit="login()"
           lazy-validation
         >
           <v-card-text>
@@ -97,9 +97,9 @@ export default {
         .catch(err => {
           this.snackbar = true;
           this.color= "error"
-          this.text = "Usuario Incorrecto y/o contraseña";
+          this.text = err.response.data.message
           // eslint-disable-next-line
-          console.log(err);
+          console.log({err});
         });
     }
   }

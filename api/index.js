@@ -30,14 +30,6 @@ app.use(
 app.use(bodyParser.json());
 // app.use(authToken);
 // Sessions to create req.session
-app.use(
-  session({
-    secret: "super-secret-key",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 60000 }
-  })
-);
 app.use("/api", api);
 // app.use(auth);
 

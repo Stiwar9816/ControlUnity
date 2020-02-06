@@ -106,8 +106,8 @@ export default {
         .catch(err => {
           this.snackbar = true;
           this.color = "error"
-          this.text = err.message;
-          console.log(err);
+          this.text = err.response.data.message;
+          console.log({err});
         });
     }
   }
