@@ -16,9 +16,9 @@ router.post('/login', controllersUser.login)
 router.get('/logout', controllersUser.logout)
 // router.get('/forgot', controllersUser.forgot)
 router.get('/user', controllersUser.allUser)
-router.get('/user/:id',auth, controllersUser.getOneUser)
-router.put('/updateUser/:id',auth, controllersUser.updateUser)
-router.delete('/deleteUser/:id',auth, controllersUser.deleteUser)
+router.get('/user/:id', controllersUser.getOneUser)
+router.put('/updateUser/:id', controllersUser.updateUser)
+router.delete('/deleteUser/:id',controllersUser.deleteUser)
 
 // Routes Bookings Crud
 router.get('/booking', controllersBookings.allBooking)

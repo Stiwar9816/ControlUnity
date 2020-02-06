@@ -207,7 +207,6 @@ export default {
   layout: "home",
   data() {
     return {
-      edit: false,
       search: "",
       valid: true,
       edit: false,
