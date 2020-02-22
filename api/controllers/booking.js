@@ -1,4 +1,6 @@
 const Booking = require('../models/Bookings');
+const surePromise = require('../utils/surePromise');
+const resolveResponse = require('../utils/resolveResponse');
 // const Implements = require('../models/implements')
 
 function mapStringToDate(time = "") {
@@ -26,27 +28,11 @@ module.exports = {
 
   // Created new Booking
   newBooking: async (req, res, next) => {
-    const {
-      cc,
-      name,
-      event,
-      room,
-      implement,
-      schedules = [],
-      received
-    } = req.body;
-
-    const newBooking = new Booking({
-      cc,
-      name,
-      event,
-      room,
-      implement,
-      schedules,
-      received
-    })
-    const Bookings = await newBooking.save();
-    res.status(200).json(Bookings);
+   const {body = { }} = req
+   const {ok, result, error} = await surePromise(Bookings.create(body))
+   if(ok) return res.json(result)
+   console.log({error})
+   return resolveResponse({res,error}) 
     /*
     const cruce = await Booking.findOne({
         end: parse

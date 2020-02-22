@@ -32,7 +32,7 @@
               aria-label="check"
              @click.prevent="deleteBooking(data.item._id)"
             >
-              <v-icon small color="green" small>fa fa-check-square-o</v-icon>
+              <v-icon small color="green">fa fa-check-square-o</v-icon>
             </v-btn>
             <v-snackbar v-model="snackbar" :timeout="timeout">
               {{ text }}

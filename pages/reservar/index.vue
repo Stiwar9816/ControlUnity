@@ -124,7 +124,7 @@ export default {
     return {
       search: "",
       edit: true,
-      date: [],
+      date: "",
       cc: "",
       name: "",
       event: "",

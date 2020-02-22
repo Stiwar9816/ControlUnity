@@ -27,7 +27,7 @@ module.exports = {
         let password = req.body.password;
         Users.findOne({cc})
             .then(user => {
-                if (!user) return res.status(404).send({
+                if (!user) return res.status(402).send({
                     message: "Usuario Incorrecto"
                 });
                 // debugger
@@ -49,7 +49,7 @@ module.exports = {
                                 }
                             })
                         }else{
-                             res.status(404).send({
+                             res.status(402).send({
                                 message: 'Contraseña Incorrecta'
                             }) // No Acceso
                         }
