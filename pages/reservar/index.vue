@@ -30,20 +30,20 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <!-- DatePicker -->
-            <v-col sm="4" md="4">
-              <v-dialog ref="dialog" v-model="DateModal" :return-value.sync="date" width="290px">
-                <template v-slot:activator="{ on }">
-                  <v-text-field v-model="date" label="Fecha de reserva" v-on="on" flat></v-text-field>
-                </template>
-                <v-date-picker v-model="date" scrollable min="2020-01-17" locale="es" first-day-of-week="1" multiple>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="DateModal = false">Cancelar</v-btn>
-                  <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
-                </v-date-picker>
-              </v-dialog>
+            <!-- DateTimePicker Start -->
+            <v-col sm="6" md="2">
+             <v-datetime-picker label="Fecha y hora de inicio" v-model="schedules.start" required clearText="Cancelar" okText="Confirmar"> </v-datetime-picker>
+             
             </v-col>
-            <!-- End DatePicker -->
+            
+            <!-- End DateTimePicker Start -->
+
+            <!-- DateTimePickerEnd -->
+            <v-col sm="6" md="2">
+              <v-datetime-picker label="Fecha y hora final" v-model="schedules.end" required clearText="Cancelar" okText="Confirmar"> </v-datetime-picker>
+            </v-col>
+            <!-- End DateTimePickerEnd -->
+
             <!-- Implementos -->
             <v-col sm="6" md="4">
               <v-combobox v-model="implement" :items="implements" item-text="name" item-value="name" label="Eliga los implementos necesarios" chips small-chips deletable-chips multiple hide-selected hide-details clearable flat rounded>
@@ -55,20 +55,14 @@
               </v-combobox>
             </v-col>
             <!-- End implementos -->
-            <v-col sm="4" md="3">
-              <v-select v-model="start" label="Hora de inicio" :items="clock" item-text="clock" item-value="clock" chips flat> </v-select>
-            </v-col>
-            <v-col sm="4" md="3">
-              <v-select v-model="end" label="Hora de finalización" :items="clock" item-text="clock" item-value="clock" chips flat> </v-select>
-            </v-col>
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
             <v-btn class="mb-4 mr-4" rounded color="error black--text" id="btn-reservar" @click="edit = true"
-              ><v-icon dark>fa fa-ban</v-icon>
+              ><v-icon dark class="mr-1">fa fa-ban</v-icon>
               Cancelar
             </v-btn>
-            <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" @click="validate" aria-label="New booking" class="mb-4"> <v-icon dark>fa fa-plus</v-icon>Agregar </v-btn>
+            <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" aria-label="New booking" class="mb-4"> <v-icon dark class="mr-1">fa fa-plus</v-icon>Agregar </v-btn>
           </v-row>
 
           <!-- End Boton reservar -->
@@ -124,14 +118,12 @@ export default {
     return {
       search: "",
       edit: true,
-      date: "",
       cc: "",
       name: "",
       event: "",
       capacity: "",
       room: "",
       implement: "",
-      DateModal: false,
       valid: true,
       schedules: [
         {
@@ -159,42 +151,6 @@ export default {
       salons: [],
       implements: [],
       bookings: [],
-      clock: [
-        { clock: "06:00" },
-        { clock: "06:30" },
-        { clock: "07:00" },
-        { clock: "07:30" },
-        { clock: "08:00" },
-        { clock: "08:30" },
-        { clock: "09:00" },
-        { clock: "09:30" },
-        { clock: "10:00" },
-        { clock: "10:30" },
-        { clock: "11:00" },
-        { clock: "11:30" },
-        { clock: "12:00" },
-        { clock: "12:30" },
-        { clock: "13:00" },
-        { clock: "13:30" },
-        { clock: "14:00" },
-        { clock: "14:30" },
-        { clock: "15:00" },
-        { clock: "15:30" },
-        { clock: "16:00" },
-        { clock: "16:30" },
-        { clock: "17:00" },
-        { clock: "17:30" },
-        { clock: "18:00" },
-        { clock: "18:07" },
-        { clock: "18:30" },
-        { clock: "19:00" },
-        { clock: "19:30" },
-        { clock: "20:00" },
-        { clock: "20:30" },
-        { clock: "21:00" },
-        { clock: "21:30" },
-        { clock: "22:00" }
-      ]
     };
   },
   created() {
@@ -252,14 +208,13 @@ export default {
     },
     newBooking(e) {
       this.schedules = this.calculeSchedule();
-      debugger;
+      // debugger;
       axios
         .post("api/newBooking", {
           cc: this.cc,
           name: this.name,
           event: this.event,
           room: this.room,
-          date: this.date,
           schedules: this.schedules,
           implement: this.implement
         })
