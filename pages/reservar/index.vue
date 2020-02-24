@@ -32,10 +32,10 @@
             </v-col>
             <!-- DateTimePicker Start -->
             <v-col sm="6" md="2">
-             <v-datetime-picker label="Fecha y hora de inicio" v-model="schedules.start" required clearText="Cancelar" okText="Confirmar"> </v-datetime-picker>
+             <v-datetime-picker label="Fecha y hora de inicio" v-model="schedules.start" required clearText="Cancelar"  okText="Confirmar"> </v-datetime-picker>
              
             </v-col>
-            
+             
             <!-- End DateTimePicker Start -->
 
             <!-- DateTimePickerEnd -->
@@ -125,12 +125,12 @@ export default {
       room: "",
       implement: "",
       valid: true,
-      schedules: [
+      schedules: 
         {
           start: "",
           end: ""
         }
-      ],
+      ,
       snackbar: false,
       text: "",
       color: "",
@@ -161,14 +161,14 @@ export default {
     this.valid = false;
   },
   methods: {
-    mapStringToDate(date, time = "") {
-      const result = date;
-      const [hour, minute] = time.split(":");
-      console.log({ time, hour, minute });
-      result.setHours(Number(hour));
-      result.setMinutes(Number(minute));
-      return result;
-    },
+    // mapStringToDate(date, time = "") {
+    //   const result = date;
+    //   const [hour, minute] = time.split(":");
+    //   console.log({ time, hour, minute });
+    //   result.setHours(Number(hour));
+    //   result.setMinutes(Number(minute));
+    //   return result;
+    // },
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -179,7 +179,6 @@ export default {
         .get("api/room")
         .then(res => {
           this.salons = res.data.Rooms;
-          debugger;
         })
         .catch(error => {
           this.snackbar = true;
@@ -201,14 +200,15 @@ export default {
           console.log(error);
         });
     },
-    calculeSchedule() {
-      const start = this.mapStringToDate(new Date(this.date[0]), this.start);
-      const end = this.mapStringToDate(new Date(this.date[0]), this.end);
-      return [{ start, end }];
-    },
+    // calculeSchedule() {
+      //   const start = this.mapStringToDate(new Date(this.date[0]), this.start);
+    //   const end = this.mapStringToDate(new Date(this.date[0]), this.end);
+    //   return [{ start, end }];
+    // },
     newBooking(e) {
-      this.schedules = this.calculeSchedule();
+      // this.schedules = this.calculeSchedule();
       // debugger;
+          debugger;
       axios
         .post("api/newBooking", {
           cc: this.cc,
@@ -227,9 +227,10 @@ export default {
         .catch(e => {
           this.snackbar = true;
           this.color = "error";
-          this.text = e.message;
-          console.log(e);
+          this.text = e.response.statusText;
+          console.log({e});
         });
+        debugger;
     }
   }
 };

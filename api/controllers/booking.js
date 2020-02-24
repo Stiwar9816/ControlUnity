@@ -3,18 +3,18 @@ const surePromise = require('../utils/surePromise');
 const resolveResponse = require('../utils/resolveResponse');
 // const Implements = require('../models/implements')
 
-function mapStringToDate(time = "") {
-  const result = createDate(new Date());
-  const [hour, minute] = time.split(":");
-  console.log({
-    time,
-    hour,
-    minute
-  });
-  result.setHours(Number(hour));
-  result.setMinutes(Number(minute));
-  return result;
-}
+// function mapStringToDate(time = "") {
+//   const result = createDate(new Date());
+//   const [hour, minute] = time.split(":");
+//   console.log({
+//     time,
+//     hour,
+//     minute
+//   });
+//   result.setHours(Number(hour));
+//   result.setMinutes(Number(minute));
+//   return result;
+// }
 
 module.exports = {
 
@@ -29,6 +29,7 @@ module.exports = {
   // Created new Booking
   newBooking: async (req, res, next) => {
    const {body = { }} = req
+  //  console.log({req})
    const {ok, result, error} = await surePromise(Bookings.create(body))
    if(ok) return res.json(result)
    console.log({error})
