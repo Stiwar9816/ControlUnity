@@ -1,6 +1,7 @@
 const Booking = require('../models/Bookings');
 const surePromise = require('../utils/surePromise');
 const resolveResponse = require('../utils/resolveResponse');
+// const create = require('../models/Bookings/create')
 // const Implements = require('../models/implements')
 
 // function mapStringToDate(time = "") {
@@ -30,7 +31,7 @@ module.exports = {
   newBooking: async (req, res, next) => {
    const {body = { }} = req
   //  console.log({req})
-   const {ok, result, error} = await surePromise(Bookings.create(body))
+   const {ok, result, error} = await surePromise(Booking.createBooking(body))
    if(ok) return res.json(result)
    console.log({error})
    return resolveResponse({res,error}) 

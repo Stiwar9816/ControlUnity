@@ -329,8 +329,8 @@ export default {
           .catch(e => {
             this.snackbar = true;
             this.color = "error";
-            this.text = e.message;
-            console.log("Unable to clear the room", e);
+            this.text = e.response.data.message;
+            console.log("Unable to clear the room", {e});
           });
       }
       return;

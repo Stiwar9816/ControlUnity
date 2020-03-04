@@ -30,7 +30,7 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <!-- DateTimePicker Start -->
+            <!-- DateT(imePicker Start) -->
             <v-col sm="6" md="2">
              <v-datetime-picker label="Fecha y hora de inicio" v-model="schedules.start" required clearText="Cancelar"  okText="Confirmar"> </v-datetime-picker>
              
@@ -125,12 +125,7 @@ export default {
       room: "",
       implement: "",
       valid: true,
-      schedules: 
-        {
-          start: "",
-          end: ""
-        }
-      ,
+      schedules: {start: "", end: ""},
       snackbar: false,
       text: "",
       color: "",
@@ -201,23 +196,24 @@ export default {
         });
     },
     // calculeSchedule() {
-      //   const start = this.mapStringToDate(new Date(this.date[0]), this.start);
-    //   const end = this.mapStringToDate(new Date(this.date[0]), this.end);
-    //   return [{ start, end }];
+    // (    const start) = this.mapStringToDate(new Date(date[(0]), this.start));
+    //   const end = this.mapStringToDate(new Date(date[0]), this.end);
+    //   (return [{ start), end }];
     // },
     newBooking(e) {
       // this.schedules = this.calculeSchedule();
       // debugger;
-          debugger;
-      axios
-        .post("api/newBooking", {
+      let payload ={
           cc: this.cc,
           name: this.name,
           event: this.event,
           room: this.room,
           schedules: this.schedules,
           implement: this.implement
-        })
+        }
+          debugger;
+      axios
+        .post("api/newBooking", payload)
         .then(res => {
           this.bookings = res.data.bookings;
           this.snackbar = true;

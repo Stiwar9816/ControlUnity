@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const checkExpire = require('./checkExpire');
 const cross = require('./cross');
-const create = require('./create');
+const createBooking = require('./createBooking');
 
 const {
   Schema
@@ -53,16 +53,16 @@ const Bookings = new Schema({
 
 Bookings.statics.checkExpire = checkExpire;
 Bookings.statics.cross = cross;
-Bookings.statics.createBooking = create;
+Bookings.statics.createBooking = createBooking;
 const model = global.Bookings = mongoose.models.Bookings || mongoose.model('Bookings', Bookings);
 
 // model.createBooking({
 //   cc: "11234456",
 //   name: "Jhon Palacios",
 //   event: "Fisica II",
-//   room: "Labortio-Sistema I",
+//   room: "101",
 //   implement: "UIB-VIDPRO001",
-//   schedules: [{start: "2020-02-22T14:30:03.095Z", end: "2020-02-22T15:00:03.095Z"}]
+//   schedules: [{start: "2020-02-26T01:00:00.000Z", end: "2020-02-26T01:30:00.000Z"}]
 // }
 // ).then(result => {
 // console.log({result})

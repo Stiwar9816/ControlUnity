@@ -2,7 +2,7 @@ const validator = require('../../utils/validator')
 const exceptions = require('../../utils/exceptions')
 
 
-async function  cross(start, end, room) {
+async function cross(start, end, room) {
     const isStartValidate = validator.validDate.validator(start)
     const isEndValidate = validator.validDate.validator(end)
     const isRoomValidate = validator.validText.validator(room)
