@@ -30,16 +30,10 @@
             <v-btn
               icon
               aria-label="check"
-             @click.prevent="deleteBooking(data.item._id)"
+             v-on:click="deleteBooking(data.item._id)"
             >
               <v-icon small color="green">fa fa-check-square-o</v-icon>
             </v-btn>
-            <v-snackbar v-model="snackbar" :timeout="timeout">
-              {{ text }}
-              <v-btn color="blue" text @click="snackbar = false">
-                Close
-              </v-btn>
-            </v-snackbar>
           </template>
           <template v-slot:no-results>
             <span class="font-weight-regular black--text"
@@ -99,22 +93,16 @@ export default {
           value: "event"
         },
         {
-          text: "FECHA DE LA RESERVA",
+          text: "FECHA INICIO RESERVA",
           align: "center",
           sortable: false,
-          value: "date"
+          value: "schedules[0].start"
         },
-        {
-          text: "HORA DE INICIO",
+         {
+          text: "FECHA FINAL RESERVA",
           align: "center",
           sortable: false,
-          value: "start"
-        },
-        {
-          text: "HORA DE SALIDA",
-          align: "center",
-          sortable: false,
-          value: "end"
+          value: "schedules[0].end"
         },
         { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
       ],
@@ -129,7 +117,6 @@ export default {
       this.snackbar = true;
       this.color = "error";
       this.text = error.message;
-      console.log(error);
     }
   },
   //Delete Salon
@@ -144,14 +131,12 @@ export default {
           this.snackbar = true;
           this.color = "success";
           this.text = "¡Elementos devueltos con exito!";
-          // this.$router.go();
-          console.log("Booking Delete: ", {id});
+          this.$router.go();
         })
         .catch(e => {
           this.snackbar = true;
           this.color = "error";
           this.text = e.response.data.message;
-          console.log("Unable to clear the booking", {e});
         });
     }
     return;

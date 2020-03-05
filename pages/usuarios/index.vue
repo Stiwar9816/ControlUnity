@@ -145,7 +145,7 @@ export default {
       this.items = await res.data.users;
     } catch (error) {
       this.snackbar = true;
-      this.text = error.message;
+      this.text = error.response.statusText;
       console.log(error);
     }
   },

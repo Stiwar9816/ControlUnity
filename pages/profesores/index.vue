@@ -160,7 +160,6 @@
           :sort-desc="[false]"
           :search="search"
           class="elevation-1"
-          calculate-widths="true"
           locale="es"
         >
           <template v-slot:items />
