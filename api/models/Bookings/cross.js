@@ -31,19 +31,10 @@ async function cross(start, end, room) {
         ]
       }
     }]).count("count").then((result) => {
+      if (result.length === 0) return Promise.resolve(true);
       const [{ count }] = result;
-      console.log("Promesa: ", result)
-      console.log("Cuantos hay: ", count)
-      debugger
-      if (isCross = count === "null" || "undefined"){
-        return Promise.resolve(true);
-      }else{
-        const isCross = count > 0;
-        console.log("Valor se count es mayor que cero:", isCross)
-        debugger
-        return Promise.reject({...exceptions.DATE_CROSS}) 
-      }
-      
+      const isCross = count > 0;
+      if (isCross) return Promise.reject({...exceptions.DATE_CROSS}) 
     }).catch((error) => Promise.reject(error))
 
 }

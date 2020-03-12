@@ -56,19 +56,19 @@ Bookings.statics.cross = cross;
 Bookings.statics.createBooking = createBooking;
 const model = global.Bookings = mongoose.models.Bookings || mongoose.model('Bookings', Bookings);
 
- model.createBooking({
-   cc: "11234456",
-   name: "Jhon Palacios",
-   event: "Fisica II",
-   room: "102",
-   implement: "UIB-VIDPRO001",
-   schedules: [{start: "2020-02-26T18:00:00.000Z", end: "2020-02-26T18:30:00.000Z"}]
- }
- ).then(result => {
- console.log({result})
- }).catch(err=>{
-   console.log({err})
- })
+//  model.createBooking({
+//    cc: "11234456",
+//    name: "Jhon Palacios",
+//    event: "Fisica II",
+//    room: "102",
+//    implement: "UIB-VIDPRO001",
+//    schedules: [{start: "2020-02-26T19:00:00.000Z", end: "2020-02-26T20:30:00.000Z"}]
+//  }
+//  ).then(result => {
+//  console.log({result})
+//  }).catch(err=>{
+//    console.log({err})
+//  })
 
 
 // model.cross(new Date("2020-02-22T13:30:03.095Z"), new Date("2020-02-22T16:00:03.095Z")).then(() => {
