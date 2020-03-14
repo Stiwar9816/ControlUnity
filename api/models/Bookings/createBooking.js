@@ -4,7 +4,7 @@ const surePromise = require('../../utils/surePromise');
 // const Bookings = require('./index')
 
 async function createBooking(data = {}) {
-  const { schedules = [],cc,name,event,room} = data;
+  const { schedules = [],cc,name,event,room, implement = []} = data;
   const isCcValidate = validator.validCC.validator(cc)
   const isNameValidate = validator.validName.validator(name)
   const isEventValidate = validator.validText.validator(event)  
@@ -27,9 +27,9 @@ async function createBooking(data = {}) {
     return Promise.reject({...exceptions.INVALID_FIELD, details:'room'})
   }
   debugger
-  // if(!isImplementValidate){
-  //   return Promise.reject({...exceptions.INVALID_FIELD, details:'implement'})
-  // }
+  if(!Array.isArray(implement)){
+    return Promise.reject({...exceptions.INVALID_FIELD, details:'implement'})
+  }
   // debugger
 
   if (!Array.isArray(schedules)) {

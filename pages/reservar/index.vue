@@ -124,7 +124,7 @@ export default {
       room: "",
       implement: "",
       valid: true,
-      schedules: [{ start: "", end: "" }],
+      schedules: { start: "", end: "" },
       snackbar: false,
       text: "",
       color: "",
@@ -153,12 +153,12 @@ export default {
   },
   mounted() {
     this.valid = false;
-    try {
-    this.newBooking();
+    // try {
+    // this.newBooking();
       
-    } catch (error) {
-      console.log({error})
-    }
+    // } catch (error) {
+    //   console.log({error})
+    // }
   },
   methods: {
     // mapStringToDate(date, time = "") {
@@ -206,60 +206,60 @@ export default {
     //   (return [{ start), end }];
     // },
     newBooking(e) {
-       window.createBooking = (data = {}) => {
-       const BASE = "http://localhost:3000/api";
-       const url = `${BASE}/newBooking`;
-       debugger;
-       return fetch(url, {
-         method: "POST",
-         body: JSON.stringify(data),
-         headers: {
-           Accept: "application/json",
-           Content: "application/json"
+    //    window.createBooking = (data = {}) => {
+    //    const BASE = "http://localhost:3000/api";
+    //    const url = `${BASE}/newBooking`;
+    //    debugger;
+    //    return fetch(url, {
+    //      method: "POST",
+    //      body: JSON.stringify(data),
+    //      headers: {
+    //        Accept: "application/json",
+    //        Content: "application/json"
+    //      }
+    //    })
+    //      .then(res => {
+    //        if (res.status !== 200) return Promise.reject(res);
+    //        return res.json();
+    //      })
+    //      .then(res => {
+    //        console.log(res.data.bookings);
+    //        this.bookings = res.data.bookings;
+    //        this.snackbar = true;
+    //        this.color = "success";
+    //        this.text = "¡Su solicitud de reserva se realizo correctamente!";
+    //      })
+    //      .catch(e => {
+    //        console.log({e});
+    //      });
+    //    debugger;
+    //  };
+      // this.schedules = this.calculeSchedule();
+      // debugger;
+       let payload = {
+           cc: this.cc,
+           name: this.name,
+           event: this.event,
+           room: this.room,
+           schedules: [this.schedules],
+           implement: this.implement
          }
-       })
+           debugger;
+       axios
+         .post("api/newBooking", payload)
          .then(res => {
-           if (res.status !== 200) return Promise.reject(res);
-           return res.json();
-         })
-         .then(res => {
-           console.log(res.data.bookings);
            this.bookings = res.data.bookings;
            this.snackbar = true;
            this.color = "success";
            this.text = "¡Su solicitud de reserva se realizo correctamente!";
          })
          .catch(e => {
+           this.snackbar = true;
+           this.color = "error";
+           this.text = e.response.data.massage
            console.log({e});
          });
-       debugger;
-     };
-      // this.schedules = this.calculeSchedule();
-      // debugger;
-      //  let payload = {
-      //      cc: this.cc,
-      //      name: this.name,
-      //      event: this.event,
-      //      room: this.room,
-      //      schedules: this.schedules,
-      //      implement: this.implement
-      //    }
-      //      debugger;
-      //  axios
-      //    .post("api/newBooking", payload)
-      //    .then(res => {
-      //      this.bookings = res.data.bookings;
-      //      this.snackbar = true;
-      //      this.color = "success";
-      //      this.text = "¡Su solicitud de reserva se realizo correctamente!";
-      //    })
-      //    .catch(e => {
-      //      this.snackbar = true;
-      //      this.color = "error";
-      //      this.text = e.response.statusText;
-      //      console.log({e});
-      //    });
-      //    debugger;
+         debugger;
     }
   }
 };
