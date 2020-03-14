@@ -4,7 +4,7 @@
       <v-subheader class="subtitle-1">CREAR RESERVA</v-subheader>
       <v-container>
         <!-- Formulario de reservas -->
-        <v-form ref="form" v-on:submit.prevent="newBooking()" v-model="valid" v-if="!edit" lazy-validation>
+        <v-form ref="form" v-on:submit="newBooking()" v-model="valid" v-if="!edit" lazy-validation>
           <v-row>
             <!-- inputs -->
             <v-col sm="4" md="2">
@@ -110,7 +110,6 @@
 
 <script>
 import axios from "~/plugins/axios";
-import { token } from "morgan";
 export default {
   layout: "home",
   data() {
@@ -153,22 +152,8 @@ export default {
   },
   mounted() {
     this.valid = false;
-    // try {
-    // this.newBooking();
-      
-    // } catch (error) {
-    //   console.log({error})
-    // }
   },
   methods: {
-    // mapStringToDate(date, time = "") {
-    //   const result = date;
-    //   const [hour, minute] = time.split(":");
-    //   console.log({ time, hour, minute });
-    //   result.setHours(Number(hour));
-    //   result.setMinutes(Number(minute));
-    //   return result;
-    // },
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -200,42 +185,7 @@ export default {
           console.log(error);
         });
     },
-    // calculeSchedule() {
-    // (    const start) = this.mapStringToDate(new Date(date[(0]), this.start));
-    //   const end = this.mapStringToDate(new Date(date[0]), this.end);
-    //   (return [{ start), end }];
-    // },
     newBooking(e) {
-    //    window.createBooking = (data = {}) => {
-    //    const BASE = "http://localhost:3000/api";
-    //    const url = `${BASE}/newBooking`;
-    //    debugger;
-    //    return fetch(url, {
-    //      method: "POST",
-    //      body: JSON.stringify(data),
-    //      headers: {
-    //        Accept: "application/json",
-    //        Content: "application/json"
-    //      }
-    //    })
-    //      .then(res => {
-    //        if (res.status !== 200) return Promise.reject(res);
-    //        return res.json();
-    //      })
-    //      .then(res => {
-    //        console.log(res.data.bookings);
-    //        this.bookings = res.data.bookings;
-    //        this.snackbar = true;
-    //        this.color = "success";
-    //        this.text = "¡Su solicitud de reserva se realizo correctamente!";
-    //      })
-    //      .catch(e => {
-    //        console.log({e});
-    //      });
-    //    debugger;
-    //  };
-      // this.schedules = this.calculeSchedule();
-      // debugger;
        let payload = {
            cc: this.cc,
            name: this.name,
@@ -244,7 +194,6 @@ export default {
            schedules: [this.schedules],
            implement: this.implement
          }
-           debugger;
        axios
          .post("api/newBooking", payload)
          .then(res => {
@@ -259,7 +208,6 @@ export default {
            this.text = e.response.data.massage
            console.log({e});
          });
-         debugger;
     }
   }
 };
