@@ -1,14 +1,14 @@
 module.exports={
     INVALID_FIELD : {
-        message: "invalid field",
+        message: "Campo invalido",
         code: "invalidField"
     },
     DATE_CROSS:{
-        massage: "cross schedules",
+        massage: "Cruce de horarios",
         code: "invalidDateCross"
     },
     INVALID_TYPE:{
-        message:"invalid type",
+        message:"Invalid type",
         code: "invalidTypes"
     },
     SERVER_ERROR:{
