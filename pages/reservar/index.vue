@@ -19,9 +19,6 @@
           </v-row>
           <v-row>
             <v-col sm="6" md="2">
-              <v-select v-model="room" label="Capacidad salon" :items="salons" item-text="capacity" item-value="name" flat chips small-chips readonly></v-select>
-            </v-col>
-            <v-col sm="6" md="2">
               <v-autocomplete v-model="room" :rules="[v => !!v || 'Nombre del salon es requerido']" label="Eliga un salon" :items="salons" item-text="name" item-value="name" flat chips small-chips deletable-chips hide-selected hide-details>
                 <template v-slot:no-data>
                   <v-list-item>
@@ -29,6 +26,9 @@
                   </v-list-item>
                 </template>
               </v-autocomplete>
+            </v-col>
+            <v-col sm="6" md="2">
+              <v-select v-model="room" label="Capacidad salon" :items="salons" item-text="capacity" item-value="name" flat chips small-chips readonly></v-select>
             </v-col>
             <!-- DateT(imePicker Start) -->
             <v-col sm="6" md="2">
@@ -78,7 +78,7 @@
                       <v-item>
                         <v-card class="mx-auto" max-width="300">
                           <v-card-text>
-                            <p class="display-1 text--primary text-center mt-3">
+                            <p class="title text--primary text-center mt-3">
                               {{ item.name }}
                             </p>
                           </v-card-text>

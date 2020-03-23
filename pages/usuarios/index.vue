@@ -16,7 +16,7 @@
               <v-text-field v-model="editUsers.email" :rules="emailRules" label="Correo electronico" type="email" required></v-text-field>
             </v-col>
             <v-col sm="12" md="3">
-              <v-select v-model="editUsers.role" :rules="roleRules" :items="roles" label="Estado"></v-select>
+              <v-select v-model="editUsers.role" :rules="roleRules" :items="roles" label="Cargo"></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -44,7 +44,7 @@
               <v-text-field v-model="password" :rules="passRules" :append-icon="show1 ? 'fa fa-eye' : 'fa fa-eye-slash'" :type="show1 ? 'text' : 'password'" @click:append="show1 = !show1" label="Contraseña" required></v-text-field>
             </v-col>
             <v-col sm="12" md="2">
-              <v-select v-model="role" :rules="roleRules" :items="roles" label="Estado"></v-select>
+              <v-select v-model="role" :rules="roleRules" :items="roles" label="Cargo"></v-select>
             </v-col>
           </v-row>
           <v-row justify="center">
