@@ -68,7 +68,7 @@
         <!-- End Formulario de reservas -->
 
         <!-- cards de salones -->
-        <v-form ref="form" v-if="edit" lazy-validation>
+        <!-- <v-form ref="form" v-if="edit" lazy-validation>
           <v-row>
             <v-col>
               <v-item-group>
@@ -95,7 +95,7 @@
               </v-item-group>
             </v-col>
           </v-row>
-        </v-form>
+        </v-form> -->
         <!-- end cards de salones -->
 
         <!-- Alerta -->
@@ -115,7 +115,7 @@ export default {
   data() {
     return {
       search: "",
-      edit: true,
+      edit: false,
       cc: "",
       name: "",
       event: "",
