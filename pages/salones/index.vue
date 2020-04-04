@@ -3,17 +3,19 @@
     <v-flex>
       <v-subheader class="subtitle-1">SALONES REGISTRADOS</v-subheader>
       <v-container>
+        <v-switch inset v-model="switch1" label="Mostrar Formulario"></v-switch>
         <!-- Edit Of Room -->
         <v-form
           ref="form"
           v-model="valid"
           v-on:submit="editRoom(editRooms)"
           v-if="edit"
+          v-show="switch1"
           lazy-validation
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="2" md="3">
               <v-text-field
                 v-model="editRooms.name"
                 :rules="salonRules"
@@ -22,7 +24,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="2" md="2">
               <v-text-field
                 v-model="editRooms.location"
                 :rules="locationRules"
@@ -30,7 +32,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="2" md="2">
               <v-text-field
                 v-model="editRooms.capacity"
                 :rules="capacityRules"
@@ -42,7 +44,7 @@
                 id="capacity"
               ></v-text-field>
             </v-col>
-            <v-col sm="12" md="5">
+            <v-col cols="12" sm="6" md="5">
               <v-textarea
                 v-model="editRooms.description"
                 :rules="descriptionRules"
@@ -76,11 +78,12 @@
           v-model="valid"
           v-on:submit.prevent="NewRoom()"
           v-if="!edit"
+          v-show="switch1"
           lazy-validation
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="3" md="3">
               <v-text-field
                 autofocus
                 v-model="name"
@@ -89,7 +92,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="2" md="2">
               <v-text-field
                 v-model="location"
                 :rules="locationRules"
@@ -97,7 +100,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="2" md="2">
               <v-text-field
                 v-model="capacity"
                 :rules="capacityRules"
@@ -108,7 +111,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="12" md="5">
+            <v-col cols="12" sm="5" md="5">
               <v-textarea
                 v-model="description"
                 :rules="descriptionRules"
@@ -134,7 +137,7 @@
         </v-form>
         <!-- Tabla -->
         <v-row cols="12">
-          <v-col md="4">
+          <v-col md="4" sm="6">
             <v-text-field
               prepend-icon="fa fa-search"
               v-model="search"
@@ -195,6 +198,7 @@ export default {
     return {
       loading: false,
       edit: false,
+      switch1:true,
       search: "",
       valid: true,
       edit: false,

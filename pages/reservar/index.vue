@@ -7,18 +7,18 @@
         <v-form ref="form" v-on:submit="newBooking()" v-model="valid" v-if="!edit" lazy-validation>
           <v-row>
             <!-- inputs -->
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field v-model="cc" :rules="ccRules" autofocus label="C.C" type="number" min="0" required></v-text-field>
             </v-col>
-            <v-col sm="4" md="5">
+            <v-col cols="12" sm="5" md="5">
               <v-text-field v-model="name" :rules="nameRules" type="text" pattern="[A-Za-z\s]" maxlength="45" label="Nombre de la persona responsable" required></v-text-field>
             </v-col>
-            <v-col sm="4" md="5">
+            <v-col cols="12" sm="4" md="5">
               <v-text-field v-model="event" :rules="eventRules" label="Materia o evento" required></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col sm="6" md="2">
+            <v-col cols="12" sm="4" md="2">
               <v-autocomplete v-model="room" :rules="[v => !!v || 'Nombre del salon es requerido']" label="Eliga un salon" :items="salons" item-text="name" item-value="name" flat chips small-chips deletable-chips hide-selected hide-details>
                 <template v-slot:no-data>
                   <v-list-item>
@@ -27,24 +27,24 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <v-col sm="6" md="2">
-              <v-select v-model="room" label="Capacidad salon" :items="salons" item-text="capacity" item-value="name" flat chips small-chips readonly></v-select>
+            <v-col cols="12" sm="2" md="2">
+              <v-select v-model="room" label="Capacidad" :items="salons" item-text="capacity" item-value="name" flat chips small-chips readonly></v-select>
             </v-col>
             <!-- DateT(imePicker Start) -->
-            <v-col sm="6" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-datetime-picker label="Fecha y hora de inicio" v-model="schedules.start" required clearText="Cancelar" okText="Confirmar"> </v-datetime-picker>
             </v-col>
             <!-- End DateTimePicker Start -->
 
             <!-- DateTimePickerEnd -->
-            <v-col sm="6" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-datetime-picker label="Fecha y hora final" v-model="schedules.end" required clearText="Cancelar" okText="Confirmar"> </v-datetime-picker>
             </v-col>
             <!-- End DateTimePickerEnd -->
 
             <!-- Implementos -->
-            <v-col sm="6" md="4">
-              <v-combobox v-model="implement" :items="implements" item-text="name" item-value="name" label="Eliga los implementos necesarios" chips small-chips deletable-chips multiple hide-selected hide-details clearable flat rounded>
+            <v-col cols="12" sm="12" md="4">
+              <v-combobox v-model="implement" :items="implements" item-text="name" item-value="name" label="Eliga los implementos necesarios" chips small-chips deletable-chips multiple hide-selected hide-details clearable flat>
                 <template v-slot:no-data>
                   <v-list-item>
                     <v-list-item-title>No hay información registrada</v-list-item-title>
@@ -56,11 +56,12 @@
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
-            <v-btn class="mb-4 mr-4" rounded color="error black--text" id="btn-reservar" @click="edit = true"
+            <!-- <v-btn class="mb-4 mr-4" rounded color="error black--text" id="btn-reservar" @click="edit = true"
               ><v-icon dark class="mr-1">fa fa-ban</v-icon>
               Cancelar
-            </v-btn>
-            <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" aria-label="New booking" class="mb-4"> <v-icon dark class="mr-1">fa fa-plus</v-icon>Agregar </v-btn>
+            </v-btn> -->
+            
+            <v-btn rounded color="primary black--text" type="submit" :disabled="!valid" aria-label="New booking" class="mb-4 mt-2"> <v-icon dark class="mr-1">fa fa-plus</v-icon>Agregar </v-btn>
           </v-row>
 
           <!-- End Boton reservar -->

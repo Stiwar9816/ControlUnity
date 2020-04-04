@@ -3,19 +3,21 @@
     <v-flex>
       <v-subheader class="subtitle-1">IMPLEMENTOS REGISTRADOS</v-subheader>
       <v-container>
+        <v-switch inset v-model="switch1" label="Mostrar Formulario"></v-switch>
         <!-- Editar Datos de implemento -->
         <v-form
           ref="form"
           v-model="valid"
           v-on:submit="editImplement(editImplements)"
           v-if="!edit"
+          v-show ="switch1"
           lazy-validation
           novalidate
           aria-autocomplete="off"
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="5" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 ref="serial"
                 v-model="editImplements.serial"
@@ -24,7 +26,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="7" md="3">
+            <v-col cols="12" sm="4" md="3">
               <v-text-field
                 v-model="editImplements.name"
                 :rules="implementRules"
@@ -32,7 +34,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="5" md="3">
               <v-text-field
                 v-model="editImplements.mark"
                 :rules="markRules"
@@ -40,7 +42,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="editImplements.type"
                 :rules="typeRules"
@@ -48,7 +50,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="editImplements.model"
                 :rules="modelRules"
@@ -56,9 +58,7 @@
                 required
               ></v-text-field>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col sm="4" md="2">
+             <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="editImplements.location"
                 :rules="locationRules"
@@ -66,7 +66,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="5" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="editImplements.user"
                 :rules="userRules"
@@ -74,7 +74,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="3" md="3">
+            <v-col cols="12" sm="4" md="3">
               <v-text-field
                 v-model="editImplements.state"
                 :rules="stateRules"
@@ -82,7 +82,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="12" md="5">
+            <v-col cols="12" sm="8" md="5">
               <v-textarea
                 v-model="editImplements.description"
                 autoGrow
@@ -115,13 +115,14 @@
           v-model="valid"
           v-on:submit="NewImplement()"
           v-if="edit"
+          v-show="switch1"
           lazy-validation
           novalidate
           aria-autocomplete="off"
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="5" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 autofocus
                 v-model="serial"
@@ -130,7 +131,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="7" md="3">
+            <v-col cols="12" sm="4" md="3">
               <v-text-field
                 v-model="name"
                 :rules="implementRules"
@@ -138,7 +139,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="5" md="3">
               <v-text-field
                 v-model="mark"
                 :rules="markRules"
@@ -146,7 +147,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="type"
                 :rules="typeRules"
@@ -154,7 +155,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="model"
                 :rules="modelRules"
@@ -162,9 +163,7 @@
                 required
               ></v-text-field>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="location"
                 :rules="locationRules"
@@ -172,7 +171,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="5" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="user"
                 :rules="userRules"
@@ -180,7 +179,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="3" md="3">
+            <v-col cols="12" sm="4" md="3">
               <v-text-field
                 v-model="state"
                 :rules="stateRules"
@@ -188,7 +187,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="12" md="5">
+            <v-col cols="12" sm="8" md="5">
               <v-textarea
                 v-model="description"
                 autoGrow
@@ -199,6 +198,7 @@
               ></v-textarea>
             </v-col>
           </v-row>
+         
           <v-row>
             <v-col align="center">
               <v-btn
@@ -214,7 +214,7 @@
         </v-form>
         <!-- Tabla -->
         <v-row cols="12">
-          <v-col md="4">
+          <v-col md="4" sm="6">
             <v-text-field
               prepend-icon="fa fa-search"
               v-model="search"
@@ -279,6 +279,7 @@ export default {
     return {
       search: "",
       valid: true,
+      switch1: true,
       edit: true,
       serial: "",
       name: "",

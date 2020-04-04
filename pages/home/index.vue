@@ -4,7 +4,7 @@
       <v-container>
         <!-- Tabla devoluciones -->
         <v-row cols="12">
-          <v-col md="4">
+          <v-col md="4" sm="6">
             <v-subheader class="subtitle-1">DEVOLUCIONES PENDIENTES</v-subheader>
             <v-text-field prepend-icon="fa fa-search" v-model="search" class="mt-4 mb-5" label="Buscar" hide-details></v-text-field>
           </v-col>
