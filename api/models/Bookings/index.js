@@ -8,47 +8,13 @@ const {
 } = mongoose;
 
 const Bookings = new Schema({
-  cc: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  event: ({
-    type: String,
-    required: true
-  }),
-  room: {
-    type: String,
-    required: true
-  },
-  implement: {
-    type: Array
-  },
-  date: {
-    type: Date
-  },
-  start: {
-    type: Date
-  },
-  end: {
-    type: Date
-  },
-  createdAt: {
-    type: Date,
-    default: createDate(new Date())
-  },
-  expired: {
-    type: Boolean,
-    default: false
-  },
-  schedules: [{
-    end:{type:Date, required:true},
-    start:{type:Date, required:true}
-  }]
+  cc: { type: String, required: true,unique: true },
+  name: { type: String, required: true },
+  event: ({ type: String, required: true }),
+  room: { type: String, required: true },
+  implement: { type: Array },
+  createdAt: { type: Date, default: createDate(new Date()) },
+  schedules: [{ end:{type:Date, required:true}, start:{type:Date, required:true} }]
 });
 
 Bookings.statics.checkExpire = checkExpire;

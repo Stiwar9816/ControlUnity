@@ -3,17 +3,19 @@
     <v-flex>
       <v-subheader class="subtitle-1">LISTADO DE PROFESORES</v-subheader>
       <v-container>
+        <v-switch inset v-model="switch1" label="Mostrar Formulario"></v-switch>
         <!-- Edit Of Teacher -->
         <v-form
           ref="form"
           v-model="valid"
           v-on:submit="editTeacher(editTeachers)"
           v-if="edit"
+          v-show = "switch1"
           lazy-validation
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 autofocus
                 min="0"
@@ -24,7 +26,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="5" md="3">
               <v-text-field
                 v-model="editTeachers.name"
                 :rules="nameRules"
@@ -32,7 +34,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="4" md="3">
               <v-text-field
                 v-model="editTeachers.email"
                 :rules="emailRules"
@@ -43,7 +45,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="12" md="2">
+            <v-col cols="12" sm="2" md="2">
               <v-select
                 v-model="editTeachers.status"
                 :rules="statusRules"
@@ -51,7 +53,7 @@
                 label="Estado"
               ></v-select>
             </v-col>
-            <v-col sm="12" md="2">
+            <v-col cols="12" sm="10" md="2">
               <v-textarea
                 v-model="editTeachers.observation"
                 autoGrow
@@ -78,16 +80,18 @@
           </v-row>
         </v-form>
         <!-- Form Of New Teacher -->
+          
         <v-form
           ref="form"
           v-model="valid"
           v-on:submit="NewTeacher()"
           v-if="!edit"
+          v-show = "switch1" 
           lazy-validation
         >
           <v-row>
             <!-- inputs -->
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="6" md="2">
               <v-text-field
                 autofocus
                 min="0"
@@ -98,7 +102,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="6" md="3">
               <v-text-field
                 v-model="name"
                 :rules="nameRules"
@@ -106,7 +110,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="6" md="3">
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -117,7 +121,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col sm="12" md="4">
+            <v-col cols="12" sm="6" md="4">
               <v-textarea
                 v-model="observation"
                 autoGrow
@@ -142,7 +146,7 @@
         </v-form>
         <!-- Tabla -->
         <v-row cols="12">
-          <v-col md="4">
+          <v-col md="4" sm="6">
             <v-text-field
               prepend-icon="fa fa-search"
               v-model="search"
@@ -208,6 +212,7 @@ export default {
     return {
       search: "",
       valid: true,
+      switch1: true,
       edit: false,
       name: "",
       cc: "",

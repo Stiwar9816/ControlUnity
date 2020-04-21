@@ -3,3 +3,5 @@ node_modules
 README.md
 yarn.lock
 LICENSE
+yarn-error.log
+package-lock.json

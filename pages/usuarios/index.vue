@@ -3,19 +3,20 @@
     <v-flex>
       <v-subheader class="subtitle-1">USUARIOS REGISTRADOS </v-subheader>
       <v-container>
+        <v-switch inset v-model="switch1" label="Mostrar Formulario"></v-switch>
         <!-- edit user -->
-        <v-form v-on:submit="editUser(editUsers)" v-if="edit" ref="form" v-model="valid" lazy-validation>
+        <v-form v-on:submit="editUser(editUsers)" v-if="edit" ref="form" v-model="valid" v-show="switch1" lazy-validation>
           <v-row>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="2" md="3">
               <v-text-field v-model="editUsers.cc" :rules="ccRules" autofocus label="C.C" type="number" min="0" required></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="5" md="3">
               <v-text-field v-model="editUsers.name" :rules="nameRules" label="Nombre completo" required></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="5" md="3">
               <v-text-field v-model="editUsers.email" :rules="emailRules" label="Correo electronico" type="email" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="3">
+            <v-col cols="12" sm="12" md="3">
               <v-select v-model="editUsers.role" :rules="roleRules" :items="roles" label="Cargo"></v-select>
             </v-col>
           </v-row>
@@ -29,21 +30,21 @@
         <!-- edit user -->
 
         <!-- new user -->
-        <v-form v-on:submit="registro()" v-if="!edit" ref="form" v-model="valid" lazy-validation>
+        <v-form v-on:submit="registro()" v-if="!edit" v-show="switch1" ref="form" v-model="valid" lazy-validation>
           <v-row>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="2" md="2">
               <v-text-field v-model="cc" :rules="ccRules" autofocus label="C.C" type="number" min="0" required></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="5" md="3">
               <v-text-field v-model="name" :rules="nameRules" label="Nombre completo" required></v-text-field>
             </v-col>
-            <v-col sm="4" md="3">
+            <v-col cols="12" sm="5" md="3">
               <v-text-field v-model="email" :rules="emailRules" label="Correo electronico" type="email" required></v-text-field>
             </v-col>
-            <v-col sm="4" md="2">
+            <v-col cols="12" sm="6" md="2">
               <v-text-field v-model="password" :rules="passRules" :append-icon="show1 ? 'fa fa-eye' : 'fa fa-eye-slash'" :type="show1 ? 'text' : 'password'" @click:append="show1 = !show1" label="Contraseña" required></v-text-field>
             </v-col>
-            <v-col sm="12" md="2">
+            <v-col cols="12" sm="6" md="2">
               <v-select v-model="role" :rules="roleRules" :items="roles" label="Cargo"></v-select>
             </v-col>
           </v-row>
@@ -54,7 +55,7 @@
         <!-- End new user -->
         <!-- Tabla -->
         <v-row cols="12">
-          <v-col md="4">
+          <v-col md="4" sm="6">
             <v-text-field prepend-icon="fa fa-search" v-model="search" class="mt-4 mb-5" label="Buscar usuarios" hide-details></v-text-field>
           </v-col>
         </v-row>
@@ -93,6 +94,7 @@ export default {
     return {
       search: "",
       edit: false,
+      switch1:true,
       snackbar: false,
       text: "",
       color: "",
