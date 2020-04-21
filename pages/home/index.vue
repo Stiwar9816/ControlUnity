@@ -62,7 +62,7 @@ export default {
           text: "NOMBRE SALON",
           align: "center",
           value: "room",
-          sortable: false
+          sortable: true
         },
         {
           text: "MATERIA O EVENTO",
@@ -73,7 +73,7 @@ export default {
         {
           text: "FECHA INICIO RESERVA",
           align: "center",
-          sortable: false,
+          sortable: true,
           value: "schedules[0].start"
         },
         {
