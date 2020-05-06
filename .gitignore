@@ -1,5 +1,5 @@
 node_modules
-.nuxt
+# .nuxt
 README.md
 yarn.lock
 LICENSE
