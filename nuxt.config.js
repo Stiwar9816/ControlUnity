@@ -7,7 +7,7 @@ export default {
    */
   head: {
     titleTemplate: 'Control Unity | Sistema de gestión de aulas e implementos',
-    title: process.env.npm_package_name || '',
+    title: 'Control Unity',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
