@@ -17,9 +17,7 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
    ** Customize the progress-bar color
@@ -36,7 +34,14 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxtjs/vuetify'],
+  buildModules: ['@nuxtjs/vuetify', '@nuxtjs/pwa'],
+
+  pwa: {
+    manifest: {
+      name: 'Control Unity',
+      lang: 'es'
+    }
+  },
   /*
    ** Nuxt.js modules
    */
@@ -82,6 +87,6 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    transpile: ["datetime"]
+    transpile: ['datetime']
   }
 }
