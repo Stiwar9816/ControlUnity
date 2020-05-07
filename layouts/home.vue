@@ -9,7 +9,17 @@
       app
     >
       <v-list-item>
-        <v-img src="/logo.png" class="logo" alt="Logo-uniclaretiana"></v-img>
+        <v-img
+          v-if="miniVariant === false"
+          src="/logo.png"
+          class="logo"
+          alt="Logo-uniclaretiana"
+        ></v-img>
+        <v-img
+          v-else
+          src="/logo-principal.png"
+          alt="logo-uniclaretiana"
+        ></v-img>
       </v-list-item>
       <v-divider></v-divider>
       <v-list>
@@ -42,10 +52,17 @@
       </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" color="appbar" fixed app flat>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" aria-label="Action menu">
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+        aria-label="Action menu"
+      >
         <v-icon>mdi-dots-horizontal</v-icon>
       </v-app-bar-nav-icon>
-      <v-btn aria-label="Action navigation" icon @click.stop="miniVariant = !miniVariant">
+      <v-btn
+        aria-label="Action navigation"
+        icon
+        @click.stop="miniVariant = !miniVariant"
+      >
         <v-icon>mdi-{{ `menu-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
@@ -66,52 +83,48 @@ export default {
       drawer: true,
       fixed: false,
       miniVariant: true,
-      title: "CONTROL UNITY",
+      title: 'CONTROL UNITY',
       items: [
         {
-          icon: "mdi-home",
-          title: "Inicio",
-          to: "/home"
+          icon: 'mdi-home',
+          title: 'Inicio',
+          to: '/home'
         },
         {
-          icon: "mdi-account-tie",
-          title: "Profesores",
-          to: "/profesores"
+          icon: 'mdi-account-tie',
+          title: 'Profesores',
+          to: '/profesores'
         },
         {
-          icon: "mdi-google-classroom",
-          title: "Salones",
-          to: "/salones"
+          icon: 'mdi-google-classroom',
+          title: 'Salones',
+          to: '/salones'
         },
         {
-          icon: "mdi-archive",
-          title: "Implementos",
-          to: "/implementos"
+          icon: 'mdi-archive',
+          title: 'Implementos',
+          to: '/implementos'
         },
         {
-          icon: "mdi-calendar-month",
-          title: "Reservar",
-          to: "/reservar"
+          icon: 'mdi-calendar-month',
+          title: 'Reservar',
+          to: '/reservar'
         },
         {
-          icon: "mdi-account-group",
-          title: "Usuarios",
-          to: "/usuarios"
+          icon: 'mdi-account-group',
+          title: 'Usuarios',
+          to: '/usuarios'
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
-
 
 <style scoped>
 a,
 span {
   text-decoration: none;
   color: black;
-}
-#logo {
-  text-align: left;
 }
 </style>
