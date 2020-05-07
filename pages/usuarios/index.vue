@@ -22,8 +22,8 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <v-btn rounded color="error black--text" class="mr-2" @click="edit = false"> <v-icon dark>fa fa-ban</v-icon>Cancelar </v-btn>
-              <v-btn rounded color="success black--text" type="submit" :disabled="!valid"> <v-icon dark>fa fa-check</v-icon>Editar </v-btn>
+              <v-btn rounded color="error black--text" class="mr-2" @click="edit = false"> <v-icon dark>mdi-cancel</v-icon>Cancelar </v-btn>
+              <v-btn rounded color="success black--text" type="submit" :disabled="!valid"> <v-icon dark>mdi-checkbox-marked-circle-outline</v-icon>Editar </v-btn>
             </v-col>
           </v-row>
         </v-form>
@@ -56,17 +56,17 @@
         <!-- Tabla -->
         <v-row cols="12">
           <v-col md="4" sm="6">
-            <v-text-field prepend-icon="fa fa-search" v-model="search" class="mt-4 mb-5" label="Buscar usuarios" hide-details></v-text-field>
+            <v-text-field prepend-icon="mdi-magnify" v-model="search" class="mt-4 mb-5" label="Buscar usuarios" hide-details></v-text-field>
           </v-col>
         </v-row>
         <v-data-table :headers="headers" :items="items" :items-per-page="5" :search="search" class="elevation-1">
           <template slot="items" slot-scope="data"></template>
           <template slot="item.icon" slot-scope="data">
             <v-btn icon v-on:click="onlyUser(data.item._id)" aria-label="edit">
-              <v-icon small color="edit">fa fa-pencil</v-icon>
+              <v-icon small color="edit">mdi-circle-edit-outline</v-icon>
             </v-btn>
             <v-btn icon v-on:click="deleteUser(data.item._id)" aria-label="delete">
-              <v-icon color="error" small>fa fa-trash</v-icon>
+              <v-icon color="error" small>mdi-delete</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import axios from "~/plugins/axios";
+// import axios from "~/plugins/axios";
 export default {
   layout: "home",
   data() {

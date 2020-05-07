@@ -1,51 +1,53 @@
-const colors = require("vuetify/es5/util/colors").default;
-module.exports = {
-  mode: "universal",
+import colors from 'vuetify/es5/util/colors'
+
+export default {
+  mode: 'universal',
   /*
    ** Headers of the page
    */
   head: {
-    title: "Control Unity | Sistema de gestión de aulas e implementos",
+    titleTemplate: 'Control Unity | Sistema de gestión de aulas e implementos',
+    title: process.env.npm_package_name || '',
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        hid: "description",
-        name: "description",
-        content: process.env.npm_package_description || ""
+        hid: 'description',
+        name: 'description',
+        content: process.env.npm_package_description || ''
       }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Montserrat&display=auto"
-      }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      // {
+      //   rel: 'stylesheet',
+      //   href: 'https://fonts.googleapis.com/css?family=Montserrat&display=auto'
+      // }
     ]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: { color: '#fff' },
   /*
    ** Global CSS
    */
-  css: ["@assets/css/main.css"],
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["~/plugins/datetime.js"],
+  plugins: ['~/plugins/datetime.js'],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ['@nuxtjs/vuetify'],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
-    "@nuxtjs/font-awesome"
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa'
   ],
   /*
    ** Axios module configuration
@@ -57,6 +59,7 @@ module.exports = {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
+    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
       themes: {
@@ -75,12 +78,6 @@ module.exports = {
       }
     }
   },
-  serverMiddleware: [
-    // Will register redirect-ssl npm package
-    "redirect-ssl",
-    // Will register file from project api directory to handle /api/* requires
-    "~/api/index.js"
-  ],
   /*
    ** Build configuration
    */
@@ -91,4 +88,4 @@ module.exports = {
     extend(config, ctx) {},
     transpile: ["datetime"]
   }
-};
+}

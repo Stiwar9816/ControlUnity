@@ -36,17 +36,17 @@
             <v-icon dark>fa fa-wrench</v-icon>
           </v-btn> -->
           <v-btn rounded text color="error" to="/" aria-label="Action menu">
-            <v-icon dark>fa fa-power-off</v-icon>
+            <v-icon dark>mdi-power</v-icon>
           </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" color="appbar" fixed app flat>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" aria-label="Action menu">
-        <v-icon>fa fa-bars</v-icon>
+        <v-icon>mdi-dots-horizontal</v-icon>
       </v-app-bar-nav-icon>
       <v-btn aria-label="Action navigation" icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>fa-{{ `angle-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+        <v-icon>mdi-{{ `menu-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
     </v-app-bar>
@@ -69,32 +69,32 @@ export default {
       title: "CONTROL UNITY",
       items: [
         {
-          icon: "fa fa-home",
+          icon: "mdi-home",
           title: "Inicio",
           to: "/home"
         },
         {
-          icon: "fa fa-user",
+          icon: "mdi-account-tie",
           title: "Profesores",
           to: "/profesores"
         },
         {
-          icon: "fa fa-graduation-cap",
+          icon: "mdi-google-classroom",
           title: "Salones",
           to: "/salones"
         },
         {
-          icon: "fa fa-archive",
+          icon: "mdi-archive",
           title: "Implementos",
           to: "/implementos"
         },
         {
-          icon: "fa fa-calendar",
+          icon: "mdi-calendar-month",
           title: "Reservar",
           to: "/reservar"
         },
         {
-          icon: "fa fa-users",
+          icon: "mdi-account-group",
           title: "Usuarios",
           to: "/usuarios"
         }

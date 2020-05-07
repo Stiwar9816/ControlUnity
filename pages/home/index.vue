@@ -6,7 +6,7 @@
         <v-row cols="12">
           <v-col md="4" sm="6">
             <v-subheader class="subtitle-1">DEVOLUCIONES PENDIENTES</v-subheader>
-            <v-text-field prepend-icon="fa fa-search" v-model="search" class="mt-4 mb-5" label="Buscar" hide-details></v-text-field>
+            <v-text-field prepend-icon="mdi-magnify" v-model="search" class="mt-4 mb-5" label="Buscar" hide-details></v-text-field>
           </v-col>
         </v-row>
 
@@ -14,7 +14,7 @@
           <template v-slot:items />
           <template slot="item.icon" slot-scope="data">
             <v-btn icon aria-label="check" v-on:click="deleteBooking(data.item._id)">
-              <v-icon small color="green">fa fa-check-square-o</v-icon>
+              <v-icon small color="green">mdi-checkbox-marked-circle-outline</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import axios from "~/plugins/axios";
+// import axios from "~/plugins/axios";
 export default {
   layout: "home",
   data() {
@@ -44,7 +44,6 @@ export default {
       snackbar: false,
       text: "",
       color: "",
-      timeout: 3000,
       headers: [
         {
           text: "RESPONSABLE",
