@@ -8,6 +8,7 @@ import NuxtError from '../layouts/error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
+import { createStore } from './store.js'
 
 /* Plugins */
 
@@ -49,13 +50,22 @@ const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearC
 async function createApp (ssrContext) {
   const router = await createRouter(ssrContext)
 
+  const store = createStore(ssrContext)
+  // Add this.$router into store actions/mutations
+  store.$router = router
+
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  const registerModule = store.registerModule
+  store.registerModule = (path, rawModule, options) => registerModule.call(store, path, rawModule, Object.assign({ preserveState: process.client }, options))
+
   // Create Root instance
 
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"titleTemplate":"Control Unity | Sistema de gestión de aulas e implementos","title":"control_unity","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"Control Unity"},{"hid":"author","name":"author","content":"Stiwar Asprilla &amp; Jhon E. Palacios"},{"hid":"theme-color","name":"theme-color","content":"#fff"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"Control Unity"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"Control Unity"},{"hid":"og:description","name":"og:description","property":"og:description","content":"Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.83c586fb.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64.453947.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512.453947.png","sizes":"512x512"}],"style":[],"script":[],"htmlAttrs":{"lang":"es"}},
+    head: {"titleTemplate":"Control Unity | Sistema de gestión de aulas e implementos","title":"Control Unity | Sistema de gestión de aulas e implementos","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"Control Unity"},{"hid":"author","name":"author","content":"Stiwar Asprilla &amp; Jhon E. Palacios"},{"hid":"theme-color","name":"theme-color","content":"#fff"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"Control Unity"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"Control Unity"},{"hid":"og:description","name":"og:description","property":"og:description","content":"Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.91356a64.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64.453947.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512.453947.png","sizes":"512x512"}],"style":[],"script":[],"htmlAttrs":{"lang":"es"}},
 
+    store,
     router,
     nuxt: {
       defaultTransition,
@@ -100,6 +110,9 @@ async function createApp (ssrContext) {
     ...App
   }
 
+  // Make app available into store via this.app
+  store.app = app
+
   const next = ssrContext ? ssrContext.next : location => app.router.push(location)
   // Resolve route
   let route
@@ -112,6 +125,7 @@ async function createApp (ssrContext) {
 
   // Set context to app.context
   await setContext(app, {
+    store,
     route,
     next,
     error: app.nuxt.error.bind(app),
@@ -134,6 +148,9 @@ async function createApp (ssrContext) {
     // Add into app
     app[key] = value
 
+    // Add into store
+    store[key] = app[key]
+
     // Check if plugin not already installed
     const installKey = '__nuxt_' + key + '_installed__'
     if (Vue[installKey]) {
@@ -150,6 +167,13 @@ async function createApp (ssrContext) {
         })
       }
     })
+  }
+
+  if (process.client) {
+    // Replace store state before plugins execution
+    if (window.__NUXT__ && window.__NUXT__.state) {
+      store.replaceState(window.__NUXT__.state)
+    }
   }
 
   // Plugin execution
@@ -192,6 +216,7 @@ async function createApp (ssrContext) {
   }
 
   return {
+    store,
     app,
     router
   }

@@ -1,4 +1,3 @@
-// THIS FILE SHOULD NOT BE VERSION CONTROLLED
 importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/workbox-sw.js')
 
 // --------------------------------------------------
