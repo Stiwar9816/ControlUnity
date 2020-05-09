@@ -60,7 +60,7 @@ const { host, port } = nuxt.options.server;
   app.use(express.static(path.join(__dirname, "../static/")));
 
   // Listen the server
-  app.listen(port, host);
+  app.listen(port =process.env.PORT , host= process.env.HOST);
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true
