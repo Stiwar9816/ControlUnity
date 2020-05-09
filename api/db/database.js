@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.set('debug', true);
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect('mongodb+srv://JhonE:pa55word123@cluster0-hstd5.mongodb.net/test?retryWrites=true&w=majority', {
         useFindAndModify: false,
         useCreateIndex: true,
         useUnifiedTopology: true,

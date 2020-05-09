@@ -1,6 +1,6 @@
-import colors from 'vuetify/es5/util/colors'
+const colors = require("vuetify/es5/util/colors").default;
 
-export default {
+module.exports = {
   mode: 'universal',
   /*
    ** Headers of the page
@@ -60,7 +60,7 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+     customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
       themes: {
