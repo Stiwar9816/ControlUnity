@@ -70,7 +70,7 @@ module.exports = {
     //Destroy token deleting acess to pages 
     logout: async (req, res, next) => {
         req.logout()
-        res.redirect('http://localhost:3000')
+        res.redirect(`http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`)
     },
 
     // Crud from User

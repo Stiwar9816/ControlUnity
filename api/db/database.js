@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.set('debug', true);
-mongoose.connect('mongodb://localhost:27017/controlUnity', {
+mongoose.connect(process.env.MONGODB_URI, {
         useFindAndModify: false,
         useCreateIndex: true,
         useUnifiedTopology: true,
