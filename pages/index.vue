@@ -75,7 +75,7 @@ export default {
     async login() {
       const { cc, password } = this;
       const data = { cc, password };
-      const URL = "/api/login";
+      const URL = "/login";
       axios({
         method: "post",
         url: URL,
