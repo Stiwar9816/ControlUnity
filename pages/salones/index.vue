@@ -64,10 +64,10 @@
                 type="submit"
                 :disabled="!valid"
               >
-                <v-icon dark>fa fa-check</v-icon>Editar
+                <v-icon dark>mdi-checkbox-marked-circle-outline</v-icon>Editar
               </v-btn>
               <v-btn rounded color="error black--text" @click="edit = false">
-                <v-icon dark>fa fa-ban</v-icon>Cancelar
+                <v-icon dark>mdi-cancel</v-icon>Cancelar
               </v-btn>
             </v-col>
           </v-row>
@@ -139,7 +139,7 @@
         <v-row cols="12">
           <v-col md="4" sm="6">
             <v-text-field
-              prepend-icon="fa fa-search"
+              prepend-icon="mdi-magnify"
               v-model="search"
               class="mb-5"
               label="Buscar Salon"
@@ -159,14 +159,14 @@
           <template v-slot:items />
           <template slot="item.icon" slot-scope="data">
             <v-btn icon v-on:click="onlyRoom(data.item._id)" aria-label="edit">
-              <v-icon small color="edit">fa fa-pencil</v-icon>
+              <v-icon small color="edit">mdi-circle-edit-outline</v-icon>
             </v-btn>
             <v-btn
               icon
               v-on:click="deleteRoom(data.item._id)"
               aria-label="delete"
             >
-              <v-icon small color="error">fa fa-trash</v-icon>
+              <v-icon small color="error">mdi-cancel</v-icon>
             </v-btn>
           </template>
           <template v-slot:no-results>
