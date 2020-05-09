@@ -21,7 +21,7 @@
             <v-text-field
               v-model="password"
               :rules="passwordRules"
-              :append-icon="show1 ? 'fa fa-eye' : 'fa fa-eye-slash'"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show1 ? 'text' : 'password'"
               @click:append="show1 = !show1"
               counter
