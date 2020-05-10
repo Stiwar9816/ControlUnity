@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import axios from '@nuxtjs/axios';
+import axios from 'axios';
 export default {
   // layout:"",
   data() {

@@ -14,15 +14,15 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#EEEEEE' },
   /*
    ** Global CSS
    */
@@ -38,9 +38,13 @@ export default {
 
   pwa: {
     manifest: {
-      name: 'Control Unity',
-      lang: 'es'
-    }
+      name: 'Control Unity | Sistema de gestión de aulas e implementos',
+      short_name: 'Control Unity',
+      background_color:'#EEEEEE',
+      theme_color:'#EEEEEE',
+      lang: 'es',
+      display: 'minimal-ui',
+    },
   },
   /*
    ** Nuxt.js modules
@@ -48,7 +52,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ],
   /*
    ** Axios module configuration
@@ -74,16 +78,16 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
-          edit: colors.lightBlue.darken3
-        }
-      }
-    }
+          edit: colors.lightBlue.darken3,
+        },
+      },
+    },
   },
   serverMiddleware: [
     // Will register redirect-ssl npm package
     'redirect-ssl',
     // Will register file from project api directory to handle /api/* requires
-    '~/api/index.js'
+    '~/api/index.js',
   ],
   /*
    ** Build configuration
@@ -93,6 +97,6 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    transpile: ['datetime']
-  }
+    transpile: ['datetime'],
+  },
 }

@@ -1,4 +1,4 @@
- import * as axios from '@nuxtjs/axios'
+ import * as axios from 'axios'
 
 let options = {}
 if (process.server) {
