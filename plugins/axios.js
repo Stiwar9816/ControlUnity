@@ -2,7 +2,7 @@
 
 let options = {}
 if (process.server) {
-  options.baseURL = `http://${process.env.MONGODB_URI || 'localhost'}:${process.env.PORT || 3000}`
+  options.baseURL = 'mongodb+srv://JhonE:pa55word123@cluster0-hstd5.mongodb.net/test?retryWrites=true&w=majority'
 }
 
 export default axios.create(options)
