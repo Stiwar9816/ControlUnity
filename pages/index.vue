@@ -76,7 +76,7 @@ export default {
       const { cc, password } = this;
       const data = { cc, password };
       const URL = "/api/login";
-      this.$axios({
+      axios({
         method: "POST",
         url: URL,
         headers: {
@@ -92,7 +92,7 @@ export default {
         .catch(err => {
           this.snackbar = true;
           this.color= "error"
-          this.text = err.response.data.message
+          this.text = err.response
           // eslint-disable-next-line
           console.log({err});
         });
