@@ -75,7 +75,7 @@ export default {
     async login() {
       const { cc, password } = this;
       const data = { cc, password };
-      const URL = "/api/login";
+      const URL = "/login";
       axios({
         method: "POST",
         url: URL,
@@ -87,12 +87,12 @@ export default {
       })
         .then(res => {
           sessionStorage.setItem("token", res.data.token);
-          this.$router.push("/api/home");
+          this.$router.push("/home");
         })
         .catch(err => {
           this.snackbar = true;
           this.color= "error"
-          this.text = err.response
+          this.text = err.response.data.message
           // eslint-disable-next-line
           console.log({err});
         });
