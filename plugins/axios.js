@@ -1,4 +1,4 @@
- import * as axios from 'axios'
+ import axios from 'axios'
 
 let options = {}
 if (process.server) {

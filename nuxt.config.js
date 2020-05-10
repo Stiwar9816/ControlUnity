@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/datetime.js'],
+  plugins: ['~/plugins/datetime.js','~/plugins/axios.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -42,6 +42,7 @@ export default {
       short_name: 'Control Unity',
       background_color:'#EEEEEE',
       theme_color:'#EEEEEE',
+      start_url:'/',
       lang: 'es',
       display: 'minimal-ui',
     },
@@ -97,6 +98,6 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    transpile: ['datetime'],
+    transpile: ['datetime','axios'],
   },
 }
