@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'plugins/axios';
 export default {
   // layout:"",
   data() {
@@ -75,9 +75,9 @@ export default {
     async login() {
       const { cc, password } = this;
       const data = { cc, password };
-      const URL = "/login";
-      axios({
-        method: "post",
+      const URL = "/api/login";
+      this.$axios({
+        method: "POST",
         url: URL,
         headers: {
           Accept: "application/json",
@@ -87,7 +87,7 @@ export default {
       })
         .then(res => {
           sessionStorage.setItem("token", res.data.token);
-          this.$router.push("/home");
+          this.$router.push("/api/home");
         })
         .catch(err => {
           this.snackbar = true;
