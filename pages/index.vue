@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
   // layout:"",
   data() {
@@ -77,7 +77,7 @@ export default {
       const data = { cc, password };
       const URL =`http://${process.env.HOST}:${process.env.PORT}/login`;
       axios({
-        method: "post",
+        method: "POST",
         url: URL,
         headers: {
           Accept: "application/json",
