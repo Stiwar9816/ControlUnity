@@ -75,7 +75,7 @@ export default {
     async login() {
       const { cc, password } = this;
       const data = { cc, password };
-      const URL = "https://control-unity.herokuapp.com/login";
+      const URL = "/login";
       axios({
         method: "post",
         url: URL,
@@ -87,7 +87,7 @@ export default {
       })
         .then(res => {
           sessionStorage.setItem("token", res.data.token);
-          this.$router.push("https://control-unity.herokuapp.com/home");
+          this.$router.push("/home");
         })
         .catch(err => {
           this.snackbar = true;

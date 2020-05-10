@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/datetime.js','~/plugins/axios.js'],
+  plugins: ['~/plugins/datetime.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -98,6 +98,6 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    transpile: ['datetime','axios'],
+    transpile: ['datetime'],
   },
 }
