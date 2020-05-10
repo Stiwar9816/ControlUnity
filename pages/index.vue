@@ -75,7 +75,7 @@ export default {
     async login() {
       const { cc, password } = this;
       const data = { cc, password };
-      const URL = "/login";
+      const URL =`http://${process.env.HOST}:${process.env.PORT}/login`;
       axios({
         method: "post",
         url: URL,
