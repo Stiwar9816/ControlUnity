@@ -1,5 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
-
 export default {
   mode: 'universal',
   /*
@@ -19,7 +17,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // { rel: 'preconnect', href: 'https://control-unity-api.herokuapp.com' },
+      { rel: 'preconnect', href: 'https://control-unity-api.herokuapp.com' },
       {rel: 'preload', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'},
       {rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap'}
     ]
@@ -69,21 +67,20 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
       themes: {
         light: {
-          primary: colors.amber.accent3,
-          secondary: colors.grey.lighten1,
-          accent: colors.grey.darken2,
-          info: colors.grey.darken4,
-          footer: colors.grey.lighten5,
-          appbar: colors.grey.lighten3,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-          edit: colors.lightBlue.darken3
+          primary: '#FFC400',
+          secondary: '#BDBDBD',
+          accent: '#616161',
+          info: '#212121',
+          footer: '#FAFAFA',
+          appbar: '#EEEEEE',
+          warning: '#FFC107',
+          error: '#DD2C00',
+          success: '#00E676',
+          edit: '#0277BD'
         }
       }
     }

@@ -29,7 +29,4 @@ workbox.precaching.cleanupOutdatedCaches()
 
 // Register route handlers for runtimeCaching
 workbox.routing.registerRoute(new RegExp('/_nuxt/'), new workbox.strategies.CacheFirst ({}), 'GET')
-workbox.routing.registerRoute(new RegExp('/dist'), new workbox.strategies.CacheFirst ({}), 'GET')
-workbox.routing.registerRoute(new RegExp('https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'), new workbox.strategies.CacheFirst ({}), 'GET')
-workbox.routing.registerRoute(new RegExp('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap'), new workbox.strategies.CacheFirst ({}), 'GET')
 workbox.routing.registerRoute(new RegExp('/'), new workbox.strategies.NetworkFirst ({}), 'GET')

@@ -271,9 +271,8 @@ export default {
   },
   async created() {
     try {
-      const token = sessionStorage.getItem('token')
       const res = await axios.get(
-        `https://control-unity-api.herokuapp.com/api/teacher/?token=${token}`
+        `https://control-unity-api.herokuapp.com/api/teacher`
       )
       this.items = await res.data.Teachers
     } catch (error) {
