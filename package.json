@@ -10,7 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "test": "jest",
-    "heroku-postbuild": "nuxt generate"
+    "heroku-postbuild": "yarn generate"
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.0.0-0",
