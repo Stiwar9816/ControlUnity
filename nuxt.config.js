@@ -17,7 +17,12 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'dns-prefecth', href: 'https://control-unity-api.herokuapp.com' },
+      {rel: 'preload', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'},
+      {rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap'}
+    ]
   },
   /*
    ** Customize the progress-bar color
