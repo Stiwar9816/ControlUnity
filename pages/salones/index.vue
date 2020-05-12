@@ -318,7 +318,7 @@ export default {
       const response = confirm("Esta seguro de eliminar este salon?");
       if (response) {
         axios
-          .delete("api/deleteRoom/" + id)
+          .delete("https://control-unity-api.herokuapp.com/api/deleteRoom/" + id)
           .then(res => {
             const index = this.items.findIndex(
               item => item._id === res.data._id
