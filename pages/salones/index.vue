@@ -76,7 +76,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          v-on:submit.prevent="NewRoom()"
+          v-on:submit="NewRoom()"
           v-if="!edit"
           v-show="switch1"
           lazy-validation
@@ -263,7 +263,7 @@ export default {
     //New Salon
     async NewRoom() {
       await axios
-        .post(`https://control-unity-api.herokuapp.com/api/newRoom/`, {
+        .post(`https://control-unity-api.herokuapp.com/api/newRoom`, {
           name: this.name,
           location: this.location,
           capacity: this.capacity,

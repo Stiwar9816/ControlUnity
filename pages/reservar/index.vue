@@ -112,7 +112,7 @@
             <v-col cols="12" sm="12" md="4">
               <v-combobox
                 v-model="implement"
-                :items="implements"
+                :items="Implements"
                 item-text="name"
                 item-value="name"
                 label="Eliga los implementos necesarios"
@@ -138,11 +138,6 @@
           </v-row>
           <!-- boton reservar -->
           <v-row justify="center">
-            <!-- <v-btn class="mb-4 mr-4" rounded color="error black--text" id="btn-reservar" @click="edit = true"
-              ><v-icon dark class="mr-1">fa fa-ban</v-icon>
-              Cancelar
-            </v-btn> -->
-
             <v-btn
               rounded
               color="primary black--text"
@@ -154,42 +149,9 @@
               <v-icon dark class="mr-1">fa fa-plus</v-icon>Agregar
             </v-btn>
           </v-row>
-
           <!-- End Boton reservar -->
         </v-form>
         <!-- End Formulario de reservas -->
-
-        <!-- cards de salones -->
-        <!-- <v-form ref="form" v-if="edit" lazy-validation>
-          <v-row>
-            <v-col>
-              <v-item-group>
-                <v-container>
-                  <v-row>
-                    <v-col v-for="(item, i) in salons" :key="i" cols="12" md="3" sm="4">
-                      <v-item>
-                        <v-card class="mx-auto" max-width="300">
-                          <v-card-text>
-                            <p class="title text--primary text-center mt-3">
-                              {{ item.name }}
-                            </p>
-                          </v-card-text>
-                          <v-card-actions>
-                            <v-btn text block class="mb-3" id="btn-reservar" @click="edit = false">
-                              Reservar
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-item>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-item-group>
-            </v-col>
-          </v-row>
-        </v-form> -->
-        <!-- end cards de salones -->
-
         <!-- Alerta -->
         <v-snackbar v-model="snackbar" :color="color">
           {{ text }}
@@ -240,7 +202,7 @@ export default {
         { text: 'ACCIONES', align: 'center', sortable: false }
       ],
       salons: [],
-      implements: [],
+      Implements: [],
       bookings: []
     }
   },
@@ -274,7 +236,7 @@ export default {
       axios
         .get('https://control-unity-api.herokuapp.com/api/implement')
         .then(res => {
-          this.implements = res.data.implement
+          this.Implements = res.data.implement
         })
         .catch(error => {
           this.snackbar = true

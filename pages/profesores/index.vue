@@ -295,7 +295,7 @@ export default {
     //New Salon
     async NewTeacher() {
       await axios
-        .post(`https://control-unity-api.herokuapp.com/api/newTeacher/`, {
+        .post(`https://control-unity-api.herokuapp.com/api/newTeacher`, {
           cc: this.cc,
           name: this.name,
           email: this.email,

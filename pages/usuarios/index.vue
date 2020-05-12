@@ -162,7 +162,7 @@
           :search="search"
           class="elevation-1"
         >
-          <template slot="items" slot-scope="data"></template>
+          <template v-slot:items />
           <template slot="item.icon" slot-scope="data">
             <v-btn icon v-on:click="onlyUser(data.item._id)" aria-label="edit">
               <v-icon small color="edit">mdi-circle-edit-outline</v-icon>
