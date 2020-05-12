@@ -10,7 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "test": "jest",
-    "postinstall": "nuxt build"
+    "postinstall": "yarn generate"
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.0.0-0",
