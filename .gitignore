@@ -82,7 +82,7 @@ dist
 .idea
 
 # Service worker
-sw.*
+
 
 # macOS
 .DS_Store
