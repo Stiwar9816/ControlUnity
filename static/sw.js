@@ -21,9 +21,10 @@ workbox.precaching.cleanupOutdatedCaches()
 // Precaches
   // Cache Google Fonts with a stale-while-revalidate strategy, with
   // a maximum number of entries.
-  registerRoute(
+  workbox.routing.registerRoute(
     ({url}) => url.origin === 'https://fonts.googleapis.com' ||
-               url.origin === 'https://fonts.gstatic.com',
+               url.origin === 'https://fonts.gstatic.com' ||
+               url.origin === 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap',
     new StaleWhileRevalidate({
       cacheName: 'google-fonts',
       plugins: [
@@ -32,15 +33,25 @@ workbox.precaching.cleanupOutdatedCaches()
     }),
   );
 
+  workbox.routing.registerRoute(
+    ({url}) => url.origin === 'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css',
+    new StaleWhileRevalidate({
+      cacheName: 'mdi-icons',
+      plugins: [
+        new ExpirationPlugin({maxEntries: 20}),
+      ],
+    }),
+  );
+
   //Css And JS
-  registerRoute(
+  workbox.routing.registerRoute(
     ({request}) => request.destination === 'script' ||
                    request.destination === 'style',
     new StaleWhileRevalidate()
   );
 
   //Images
-  registerRoute(
+  workbox.routing.registerRoute(
     ({request}) => request.destination === 'image',
     new CacheFirst({
       cacheName: 'images',
