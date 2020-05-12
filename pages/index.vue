@@ -46,7 +46,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 export default {
   // layout:"",
   data() {
@@ -75,7 +75,7 @@ export default {
     async login() {
       const { cc, password } = this;
       const data = { cc, password };
-      const URL = "/api/login";
+      const URL = "https://control-unity-api.herokuapp.com/api/login";
       axios({
         method: "post",
         url: URL,

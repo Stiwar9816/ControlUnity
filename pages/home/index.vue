@@ -34,7 +34,7 @@
 </template>
 
 <script>
-// import axios from "~/plugins/axios";
+ import axios from "axios";
 export default {
   layout: "home",
   data() {
@@ -85,52 +85,52 @@ export default {
       items: []
     };
   },
-  // async created() {
-  //   try {
-  //     const res = await axios.get(`/api/booking`);
-  //     this.items = await this.mapBookings(res.data.Bookings);
-  //   } catch (error) {
-  //     this.snackbar = true;
-  //     this.color = "error";
-  //     this.text = error.message;
-  //   }
-  // },
-  // methods: {
-  //   mapBookings(items) {
-  //     for (let item of items) {
-  //       const haveSchedules = item.schedules && item.schedules.length;
-  //       if (haveSchedules) {
-  //         item.schedules = item.schedules.map(schedule => {
-  //           schedule.start = new Date(schedule.start).toLocaleString("es-CO", { timeZone: "America/Bogota" });
-  //           schedule.end = new Date(schedule.end).toLocaleString("es-CO", { timeZone: "America/Bogota" });
-  //           return schedule;
-  //         });
-  //       }
-  //     }
-  //     return items;
-  //   },
-  //   //Delete Salon
-  //   deleteBooking(id) {
-  //     const response = confirm("Ya fueron devueltos los implementos prestados?");
-  //     if (response) {
-  //       axios
-  //         .delete(`api/deleteBooking/${id}`)
-  //         .then(res => {
-  //           const index = this.items.findIndex(item => item._id === res.data._id);
-  //           this.items.splice(index, 1);
-  //           this.snackbar = true;
-  //           this.color = "success";
-  //           this.text = "¡Elementos devueltos con exito!";
-  //           this.$router.go();
-  //         })
-  //         .catch(e => {
-  //           this.snackbar = true;
-  //           this.color = "error";
-  //           this.text = e.response.data.message;
-  //         });
-  //     }
-  //     return;
-  //   }
-  // }
+   async created() {
+     try {
+       const res = await axios.get(`https://control-unity-api.herokuapp.com/api/booking`);
+       this.items = await this.mapBookings(res.data.Bookings);
+     } catch (error) {
+       this.snackbar = true;
+       this.color = "error";
+       this.text = error.message;
+     }
+   },
+   methods: {
+     mapBookings(items) {
+       for (let item of items) {
+         const haveSchedules = item.schedules && item.schedules.length;
+         if (haveSchedules) {
+           item.schedules = item.schedules.map(schedule => {
+             schedule.start = new Date(schedule.start).toLocaleString("es-CO", { timeZone: "America/Bogota" });
+             schedule.end = new Date(schedule.end).toLocaleString("es-CO", { timeZone: "America/Bogota" });
+             return schedule;
+           });
+         }
+       }
+       return items;
+     },
+    //  Delete Salon
+     deleteBooking(id) {
+       const response = confirm("Ya fueron devueltos los implementos prestados?");
+       if (response) {
+         axios
+           .delete(`https://control-unity-api.herokuapp.com/api/deleteBooking/${id}`)
+           .then(res => {
+             const index = this.items.findIndex(item => item._id === res.data._id);
+             this.items.splice(index, 1);
+             this.snackbar = true;
+             this.color = "success";
+             this.text = "¡Elementos devueltos con exito!";
+             this.$router.go();
+           })
+           .catch(e => {
+             this.snackbar = true;
+             this.color = "error";
+             this.text = e.response.data.message;
+           });
+       }
+       return;
+     }
+   }
 };
 </script>

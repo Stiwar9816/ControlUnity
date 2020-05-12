@@ -59,7 +59,7 @@
 </template>
 
 <script>
-// import axios from "~/plugins/axios";
+import axios from "axios";
 
 export default {
   data() {
@@ -94,7 +94,7 @@ export default {
   methods: {
     async registro() {
       await axios
-        .post("api/register", {
+        .post("https://control-unity-api.herokuapp.com/api/register", {
           cc: this.cc,
           name: this.name,
           email: this.email,

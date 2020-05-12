@@ -191,7 +191,7 @@
 </template>
 
 <script>
-// import axios from "~/plugins/axios";
+import axios from "axios";
 export default {
   layout: "home",
   data() {
@@ -241,7 +241,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get(`/api/room`);
+      const res = await axios.get(`https://control-unity-api.herokuapp.com/api/room`);
       this.items = await res.data.Rooms;
     } catch (error) {
       this.snackbar = true;
@@ -263,7 +263,7 @@ export default {
     //New Salon
     async NewRoom() {
       await axios
-        .post(`/api/newRoom/`, {
+        .post(`https://control-unity-api.herokuapp.com/api/newRoom/`, {
           name: this.name,
           location: this.location,
           capacity: this.capacity,
@@ -287,7 +287,7 @@ export default {
       this.edit = true;
       console.log(id);
       axios
-        .get(`api/room/${id}`)
+        .get(`https://control-unity-api.herokuapp.com/api/room/${id}`)
         .then(res => {
           this.editRooms = res.data;
           this.$refs.name.focus();
@@ -300,7 +300,7 @@ export default {
         });
     },
     editRoom(item) {
-      axios.put(`api/updateRoom/${item._id}`, item).then(res => {
+      axios.put(`https://control-unity-api.herokuapp.com/api/updateRoom/${item._id}`, item).then(res => {
         const index = this.items.findIndex(n => n._id === res.data._id);
         this.items[index].name = res.data.name;
         this.items[index].location = res.data.location;

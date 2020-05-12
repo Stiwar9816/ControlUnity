@@ -10,7 +10,7 @@
           v-model="valid"
           v-on:submit="editImplement(editImplements)"
           v-if="!edit"
-          v-show ="switch1"
+          v-show="switch1"
           lazy-validation
           novalidate
           aria-autocomplete="off"
@@ -58,7 +58,7 @@
                 required
               ></v-text-field>
             </v-col>
-             <v-col cols="12" sm="3" md="2">
+            <v-col cols="12" sm="3" md="2">
               <v-text-field
                 v-model="editImplements.location"
                 :rules="locationRules"
@@ -101,7 +101,8 @@
                 type="submit"
                 :disabled="!valid"
               >
-                <v-icon dark>mdi-checkbox-marked-circle-outline</v-icon>Confirmar
+                <v-icon dark>mdi-checkbox-marked-circle-outline</v-icon
+                >Confirmar
               </v-btn>
               <v-btn rounded color="error black--text" @click="edit = true">
                 <v-icon dark>mdi-cancel</v-icon>Cancelar
@@ -198,7 +199,7 @@
               ></v-textarea>
             </v-col>
           </v-row>
-         
+
           <v-row>
             <v-col align="center">
               <v-btn
@@ -272,105 +273,107 @@
 </template>
 
 <script>
-// import axios from "~/plugins/axios";
+import axios from "axios";
 export default {
-  layout: "home",
+  layout: 'home',
   data() {
     return {
-      search: "",
+      search: '',
       valid: true,
       switch1: true,
       edit: true,
-      serial: "",
-      name: "",
-      mark: "",
-      type: "",
-      model: "",
-      location: "",
-      user: "",
-      description: "",
-      state: "",
+      serial: '',
+      name: '',
+      mark: '',
+      type: '',
+      model: '',
+      location: '',
+      user: '',
+      description: '',
+      state: '',
       snackbar: false,
-      text: "",
-      color: "",
-      serailRules: [v => !!v || "Serial del implemento es requerido"],
-      implementRules: [v => !!v || "Nombre del implemento es requerido"],
+      text: '',
+      color: '',
+      serailRules: [v => !!v || 'Serial del implemento es requerido'],
+      implementRules: [v => !!v || 'Nombre del implemento es requerido'],
       markRules: [
-        v => !!v || "Marca del implemento es requerida",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+        v => !!v || 'Marca del implemento es requerida',
+        v => /[a-zA-Z]+$/.test(v) || 'Este campo no admite numeros'
       ],
       typeRules: [
-        v => !!v || "Tipo de implemento es requerido",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+        v => !!v || 'Tipo de implemento es requerido',
+        v => /[a-zA-Z]+$/.test(v) || 'Este campo no admite numeros'
       ],
-      modelRules: [v => !!v || "Modelo del implemento es requerido"],
+      modelRules: [v => !!v || 'Modelo del implemento es requerido'],
       locationRules: [
-        v => !!v || "Ubicación del implemento es requerido",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+        v => !!v || 'Ubicación del implemento es requerido',
+        v => /[a-zA-Z]+$/.test(v) || 'Este campo no admite numeros'
       ],
       userRules: [
-        v => !!v || "Usuario responsable del implemento es requerido",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+        v => !!v || 'Usuario responsable del implemento es requerido',
+        v => /[a-zA-Z]+$/.test(v) || 'Este campo no admite numeros'
       ],
       stateRules: [
-        v => !!v || "Estado del implemento es requerido",
-        v => /[a-zA-Z]+$/.test(v) || "Este campo no admite numeros"
+        v => !!v || 'Estado del implemento es requerido',
+        v => /[a-zA-Z]+$/.test(v) || 'Este campo no admite numeros'
       ],
       headers: [
-        { text: "SERIAL", align: "center", sortable: false, value: "serial" },
-        { text: "IMPLEMENTO", align: "center", value: "name", sortable: false },
-        { text: "MARCA", align: "center", value: "mark", sortable: false },
-        { text: "TIPO", align: "center", value: "type", sortable: true },
-        { text: "MODELO", align: "center", value: "model", sortable: false },
+        { text: 'SERIAL', align: 'center', sortable: false, value: 'serial' },
+        { text: 'IMPLEMENTO', align: 'center', value: 'name', sortable: false },
+        { text: 'MARCA', align: 'center', value: 'mark', sortable: false },
+        { text: 'TIPO', align: 'center', value: 'type', sortable: true },
+        { text: 'MODELO', align: 'center', value: 'model', sortable: false },
         {
-          text: "UBICACIÓN",
-          align: "center",
-          value: "location",
+          text: 'UBICACIÓN',
+          align: 'center',
+          value: 'location',
           sortable: false
         },
         {
-          text: "RESPONSABLE",
-          align: "center",
-          value: "user",
+          text: 'RESPONSABLE',
+          align: 'center',
+          value: 'user',
           sortable: false
         },
         {
-          text: "DESCRIPCIÓN",
-          align: "center",
+          text: 'DESCRIPCIÓN',
+          align: 'center',
           sortable: false,
-          value: "description"
+          value: 'description'
         },
-        { text: "ESTADO", align: "center", value: "state" },
-        { text: "ACCIONES", align: "center", sortable: false, value: "icon" }
+        { text: 'ESTADO', align: 'center', value: 'state' },
+        { text: 'ACCIONES', align: 'center', sortable: false, value: 'icon' }
       ],
       items: [],
       editImplements: {}
-    };
+    }
   },
   async created() {
     try {
-      const res = await axios.get(`/api/implement`);
-      this.items = await res.data.implement;
+      const res = await axios.get(
+        `https://control-unity-api.herokuapp.com/api/implement`
+      )
+      this.items = await res.data.implement
     } catch (error) {
-      this.snackbar = true;
-      this.color = "error";
-      this.text = error.message;
-      console.log(error);
+      this.snackbar = true
+      this.color = 'error'
+      this.text = error.message
+      console.log(error)
     }
   },
   mounted() {
-    this.valid = false;
+    this.valid = false
   },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.snackbar = true;
+        this.snackbar = true
       }
     },
     //Add New Salon
     async NewImplement() {
       axios
-        .post("/api/newImplement", {
+        .post('https://control-unity-api.herokuapp.com/api/newImplement', {
           serial: this.serial,
           name: this.name,
           mark: this.mark,
@@ -382,76 +385,83 @@ export default {
           state: this.state
         })
         .then(res => {
-          this.snackbar = true;
-          this.color = "success";
-          this.text = "¡Nuevo implemento agregado con exito!";
-          this.implement;
+          this.snackbar = true
+          this.color = 'success'
+          this.text = '¡Nuevo implemento agregado con exito!'
+          this.implement
         })
         .catch(e => {
-          this.snackbar = true;
-          this.color = "error";
-          this.text = e.message;
-          console.log(e);
-        });
+          this.snackbar = true
+          this.color = 'error'
+          this.text = e.message
+          console.log(e)
+        })
     },
     // Only Implement (Pasa un solo dato de la tabla para hacer el update)
     onlyImplement(id) {
-      this.edit = false;
+      this.edit = false
       axios
-        .get(`/api/implement/${id}`)
+        .get(`https://control-unity-api.herokuapp.com/api/implement/${id}`)
         .then(res => {
-          this.editImplements = res.data;
-          this.$refs.serial.focus();
+          this.editImplements = res.data
+          this.$refs.serial.focus()
         })
         .catch(e => {
-          this.snackbar = true;
-          this.color = "error";
-          this.text = e.message;
-          console.log(e);
-        });
+          this.snackbar = true
+          this.color = 'error'
+          this.text = e.message
+          console.log(e)
+        })
     },
     // Edit Implement
     editImplement(item) {
-      axios.put(`/api/updateImplement/${item._id}`, item).then(res => {
-        const index = this.items.findIndex(n => n._id === res.data._id);
-        this.items[index].serial = res.data.serial;
-        this.items[index].name = res.data.name;
-        this.items[index].mark = res.data.mark;
-        this.items[index].type = res.data.type;
-        this.items[index].model = res.data.model;
-        this.items[index].location = res.data.location;
-        this.items[index].user = res.data.user;
-        this.items[index].description = res.data.description;
-        this.items[index].state = res.data.state;
-        this.snackbar = true;
-        this.color = "success";
-        this.text = "¡Datos del implemento actualizados correctamente!";
-        this.edit = false;
-      });
+      axios
+        .put(
+          `https://control-unity-api.herokuapp.com/api/updateImplement/${item._id}`,
+          item
+        )
+        .then(res => {
+          const index = this.items.findIndex(n => n._id === res.data._id)
+          this.items[index].serial = res.data.serial
+          this.items[index].name = res.data.name
+          this.items[index].mark = res.data.mark
+          this.items[index].type = res.data.type
+          this.items[index].model = res.data.model
+          this.items[index].location = res.data.location
+          this.items[index].user = res.data.user
+          this.items[index].description = res.data.description
+          this.items[index].state = res.data.state
+          this.snackbar = true
+          this.color = 'success'
+          this.text = '¡Datos del implemento actualizados correctamente!'
+          this.edit = false
+        })
     },
     //Delete Implement
     deleteImplement(id) {
-      const response = confirm("Esta seguro de eliminar este implemento?");
+      const response = confirm('Esta seguro de eliminar este implemento?')
       if (response) {
         axios
-          .delete("/api/deleteImplement/" + id)
+          .delete(
+            'https://control-unity-api.herokuapp.com/api/deleteImplement/' + id
+          )
           .then(res => {
-            console.log("Implement Delete: ", id);
-            this.items.splice(id, 1);
-            this.snackbar = true;
-            this.color = "success";
-            this.text = "¡Implemento eliminado exitosamente!";
-            this.$router.go();
+            console.log('Implement Delete: ', id)
+            this.items.splice(id, 1)
+            this.snackbar = true
+            this.color = 'success'
+            this.text = '¡Implemento eliminado exitosamente!'
+            this.$router.go()
           })
           .catch(e => {
-            this.snackbar = true;
-            this.color = "error";
-            this.text = e.message;
-            console.log("Unable to clear the implement", e);
-          });
+            this.snackbar = true
+            this.color = 'error'
+            this.text = e.message
+            console.log('Unable to clear the implement', e)
+          })
       }
-      return;
+      return
     }
   }
-};
+}
 </script>
