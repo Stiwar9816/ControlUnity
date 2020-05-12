@@ -22,7 +22,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: 'appbar' },
+  loading: { color: '#EEEEEE' },
   /*
    ** Global CSS
    */
@@ -38,8 +38,13 @@ export default {
 
   pwa: {
     manifest: {
-      name: 'Control Unity',
-      lang: 'es'
+      name: 'Control Unity | Sistema de gestión de aulas e implementos',
+      short_name: 'Control Unity',
+      background_color: '#EEEEEE',
+      theme_color: '#EEEEEE',
+      start_url: '/',
+      lang: 'es',
+      display: 'minimal-ui'
     }
   },
   /*
