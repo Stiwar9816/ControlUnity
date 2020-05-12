@@ -18,8 +18,16 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'preconnect', href: 'https://control-unity-api.herokuapp.com' },
-      {rel: 'preload', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'},
-      {rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap'}
+      {
+        rel: 'preconnect',
+        href:
+          'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'
+      },
+      {
+        rel: 'preconnect',
+        href:
+          'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap'
+      }
     ]
   },
   /*
