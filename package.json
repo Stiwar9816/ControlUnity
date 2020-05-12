@@ -9,12 +9,13 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "nuxt build"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/toast": "^3.3.0",
+    "axios": "^0.19.2",
     "nuxt": "^2.0.0",
     "vuetify-datetime-picker": "^2.1.1"
   },
