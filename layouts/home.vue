@@ -82,7 +82,7 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
-      miniVariant: false,
+      miniVariant: true,
       title: 'CONTROL UNITY',
       items: [
         {

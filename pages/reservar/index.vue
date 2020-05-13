@@ -59,7 +59,6 @@
                 deletable-chips
                 hide-selected
                 hide-details
-                required
               >
                 <template v-slot:no-data>
                   <v-list-item>
