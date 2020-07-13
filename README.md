@@ -18,7 +18,8 @@ El aplicativo web **Control Unity** esta construido a base de frameworks javascr
 #### [Node.JS](#node.js)
 Node.js es un entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
 
-> [Descargar Node.Js para sistemas basados en  Windows o Mac](https://nodejs.org/es/download/)
+> [Descargar Node.Js para sistemas basados en Windows o Mac](https://nodejs.org/es/download/)
+
 > [Descargar Node.JS para distribuciones linux](https://nodejs.org/es/download/package-manager/)
 
 Node.JS trae consigo instaladores de dependecias **Npm** y **Yarn** con los que podemos instalar dependencias necesarias para ejecutar correctamente el proyecto y con los cuales podemos instalar dependencias adicionales de llegar a requerirlas
@@ -26,6 +27,7 @@ Node.JS trae consigo instaladores de dependecias **Npm** y **Yarn** con los que 
 Para verificar si Node.JS quedo instalado correctamente podmeos ingresar el siguiente comando en consola:
 
 ``` bash
+# verificar si tenemos node instalado globlamente
 node -v o node --version 
 ```
 
@@ -54,8 +56,9 @@ Vue CLI requiere [Node.js](https://nodejs.org/es/) versión 8.9 o superior (se r
 
 Para instalar el nuevo paquete, use uno de los siguientes comandos. Necesita privilegios de administrador para ejecutarlos a menos que se haya instalado npm en su sistema a través de un administrador de versiones de Node.js 
 
-```
+``` bash
 npm install -g @vue/cli
+O 
 yarn global add @vue/cli
 ```
 Después de la instalación, tendrá acceso al vuebinario en su línea de comando. Puede verificar que esté instalado correctamente simplemente ejecutando vue, lo que debería presentarle un mensaje de ayuda con una lista de todos los comandos disponibles.
@@ -79,15 +82,14 @@ Nuxt es un marco diseñado para darle una arquitectura sólida siguiendo las pau
 #### [Comandos para ejecutar el proyecto](#comandos-para-ejecutar-el-proyecto)
 
 Instalar dependencias del proyecto:
-
-> $ npm install ó $ npm -i
+``` bash
+$ npm install ó $ npm -i
+```
+``` bash
 $ yarn install ó $ yarn i
+```
 
-Comando para ejecutar el backend:
-> $ npm run dev
-$ yarn dev
-
-Comando para ejecutar el frontend:
+Comandos para ejecutar el proyecto:
 ``` bash
 # servidor local con hot reload en localhost:3000
 $ yarn dev
