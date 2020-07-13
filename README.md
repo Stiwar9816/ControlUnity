@@ -2,6 +2,8 @@
 
 Control unity es un aplicativo web el cual tiene la finalidad de agilizar los préstamos de aulas educativas e implementos que proporciona la UNICLARETIANA sede Quibdó.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e3e53083-42e1-4740-9f26-33f43ba31b44/deploy-status)](https://app.netlify.com/sites/controlunity/deploys)
+
 ### [Tabla de contenido](#tabla-de-contenido)
 1. [Entorno de ejecución](#entorno-de-ejecución)
 1. [Comandos para ejecutar el proyecto](#comandos-para-ejecutar-el-proyecto)
