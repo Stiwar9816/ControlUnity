@@ -1,0 +1,31 @@
+{
+  "name": "controlunity",
+  "version": "1.0.0",
+  "description": "Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana",
+  "author": "Stiwar Asprilla &amp; Jhon E. Palacios",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/toast": "^3.3.0",
+    "axios": "^0.19.2",
+    "nuxt": "^2.0.0",
+    "vuetify-datetime-picker": "^2.1.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-jest": "^24.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^24.1.0",
+    "prettier": "^1.19.1",
+    "vue-jest": "^4.0.0-0"
+  }
+}
