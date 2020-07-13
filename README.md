@@ -13,11 +13,11 @@ Control unity es un aplicativo web el cual tiene la finalidad de agilizar los pr
 
 El aplicativo web **Control Unity** esta construido a base de frameworks javascript, para poder ejecutar todo sin problemas debes de tener ciertas dependencias instaladas globalmente:
 
-1. [Node.JS](#node.js)
-2. [MongoDB](mongodb)
+1. [NodeJS](#nodejs)
+2. [MongoDB](#mongodb)
 3. [VueJS](#vuejs)
 
-#### [Node.JS](#node.js)
+#### [NodeJS](#nodejs)
 
 Node.js es un entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación JavaScript, asíncrono, con E/S de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
 
@@ -34,7 +34,7 @@ Para verificar si Node.JS quedo instalado correctamente podmeos ingresar el sigu
 node -v o node --version
 ```
 
-#### [MongoDB](mongodb)
+#### [MongoDB](#mongodb)
 
 MongoDB es una base de datos distribuida, basada en documentos y de uso general que ha sido diseñada para desarrolladores de aplicaciones modernas y para la era de la nube. Ninguna otra ofrece un nivel de productividad de uso tan alto.
 
