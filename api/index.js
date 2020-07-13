@@ -5,10 +5,11 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
+require('dotenv').config()
 require("./utils");
 const api = require("./routes");
 // const authToken = require('./middleware/authToken.js')
-const { Nuxt, Builder } = require("nuxt");
+// const { Nuxt, Builder } = require("nuxt");
 // const auth = require("./config/auth");
 // Start of aplication
 const app = express();
@@ -31,44 +32,44 @@ app.use("/api", api);
 // app.use(auth);
 
 // Import and Set Nuxt.js options
-const config = require("../nuxt.config.js");
-config.dev = process.env.NODE_ENV !== "production";
+// const config = require("../nuxt.config.js");
+// config.dev = process.env.NODE_ENV !== "production";
 
-async function start() {
+// async function start() {
 
   
-  // Init Nuxt.js
-const nuxt = new Nuxt(config);
+//   // Init Nuxt.js
+// const nuxt = new Nuxt(config);
 
 
 
-const { host, port } = nuxt.options.server;
+// const { host, port } = nuxt.options.server;
 
-  // Build only in dev mode
-  if (config.dev) {
-    const builder = new Builder(nuxt);
-    await builder.build();
-  } else {
-    await nuxt.ready();
-  }
+//   // Build only in dev mode
+//   if (config.dev) {
+//     const builder = new Builder(nuxt);
+//     await builder.build();
+//   } else {
+//     await nuxt.ready();
+//   }
 
-  // Give nuxt middleware to express
-  // Import API routes
+//   // Give nuxt middleware to express
+//   // Import API routes
 
-  app.use(nuxt.render);
-  // Static files
-  app.use(express.static(path.join(__dirname, "../static/")));
+// }
+// app.use(nuxt.render);
+// Static files
+app.use(express.static(path.join(__dirname, "../static/")));
 
-  // Listen the server
-  app.listen(port =process.env.PORT , host= process.env.HOST);
-  consola.ready({
-    message: `Server listening on http://${host}:${port}`,
-    badge: true
-  });
-}
-start();
+// Listen the server
+app.listen(process.env.PORT || 4000);
+consola.ready({
+  message: `Server listening on ${process.env.HOTS || 'localhost'}:${process.env.PORT || '4000'}`,
+  badge: true
+});
+// start();
 // Export API from are reading for serverMiddleware
-module.exports = {
-  path: "/api",
-  handler: app
-};
+// module.exports = {
+//   path: "/api",
+//   handler: app
+// };

@@ -1,0 +1,33 @@
+{
+  "name": "api_control",
+  "description": "Aplicativo web para la administracion y gestion de reservas de aulas e implementos educativos para la uniclaretiana",
+  "author": "Stiwar Asprilla &amp; Jhon E. Palacios",
+  "license": "ISC",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon api/index.js --watch api",
+    "start": "cross-env NODE_ENV=production node api/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "consola": "^2.12.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^1.3.2",
+    "express-promise-router": "^3.0.3",
+    "express-session": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.11",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "prettier": "^1.19.1",
+    "script-loader": "^0.7.2"
+  }
+}
