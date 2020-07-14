@@ -17,6 +17,14 @@ $ npm run start
 $ yarn start
 ```
 
+### Documentación de la API REST
+
+Aquí podra encontrar la descripción de cada una de las peticiones con las que cuenta el sistema y al ruta a la puede puede acceder a ellas por otra parte también podra agregar y testear nuevas rutas para evitar hacer cambios en producción, si el funcionamiento es el adecuado puede hacer luego la integración con el frontend y hacer push a master para reflejar los nuevos cambios.
+
+> Se recomienda leer la documentación sobre como usar postman primero para poder hacer cambios [Docs postman](https://learning.postman.com/docs/publishing-your-api/documenting-your-api/)
+
+[Control Unity API REST - Postman](https://explore.postman.com/templates/10664/controlunity)
+
 #### Demo del proyecto
 
 [Control Unity | Sistema de gestión de implementos y/o aulas educativas](https://controlunity.netlify.app/ "Ir a control unity")
